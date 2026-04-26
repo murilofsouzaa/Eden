@@ -37,7 +37,7 @@ export function Header(){
     }
 
     return (
-        <div className="fixed z-101 w-full bg-white border-b-2 border-b-black/10">
+        <div className="sticky top-0 z-101 w-full bg-white border-b-2 border-b-black/10">
             <div className="flex flex-col m-0 p-0">
                 <div className="bg-gray-200 p-2 text-center">{labels[currentIndex]}</div>
                 <nav className="flex flex-col justify-center items-center m-4 

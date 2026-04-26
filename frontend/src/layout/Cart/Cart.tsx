@@ -2,12 +2,10 @@ import type {Product} from '../../context/ProductContext';
 import {X} from 'lucide-react';
 
 type CartProps = {
-    readonly products: Product[];
     readonly onClose: () => void;
 };
 
-export function Cart({ products, onClose}: CartProps) {
-    const hasProducts = products && products.length > 0;
+export function Cart({onClose}: CartProps) {
 
     return (
         <div className="cart-div fixed z-10 bottom-0 right-7 h-[70%] w-[90%] rounded-xl bg-white shadow-lg overflow-scroll 
