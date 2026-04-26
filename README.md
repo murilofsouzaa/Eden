@@ -42,8 +42,7 @@ I'm developing this project to learn concepts such as: Domain Drive Desing, Desi
 **Dependencies**
 - `axios`
 - `lucide-react`
-- `react`
-- `react-dom`
+- `react-router`
 - `react-feather`
 
 **Dev Dependencies**
