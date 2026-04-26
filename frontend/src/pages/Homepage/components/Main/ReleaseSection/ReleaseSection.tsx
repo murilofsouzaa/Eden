@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import { ChevronLeft, ChevronRight } from 'react-feather';
 import type { MutableRefObject } from 'react';
 import type {Product} from '../../../../../context/ProductContext';
@@ -37,13 +38,15 @@ export function ReleaseSection({
                             <div key={product.id} data-slide="true">
                                 {variantToShow && variantToShow?.stock > 0 && (
                                     <div className="shrink-0 w-64 sm:w-72 md:w-80">
-                                        <button type="button">
-                                            <img
-                                                src={`/${product.imageUrl}`}
-                                                alt={product.title}
-                                                className="product-image-catalog object-cover w-full h-96 lg:h-144"
-                                            />
-                                        </button>
+                                        <Link to={`/product/${product.id}`}>
+                                            <button type="button" className="hover:cursor-pointer">
+                                                <img
+                                                    src={`/${product.imageUrl}`}
+                                                    alt={product.title}
+                                                    className="product-image-catalog object-cover w-full h-96 lg:h-144"
+                                                />
+                                            </button>
+                                        </Link>
 
                                         <p className="mt-6 text-md">{product.title}</p>
                                         <p className="mb-3 mt-1 text-sm text-black/70">{`${product.description.slice(0,40)}...`}</p>

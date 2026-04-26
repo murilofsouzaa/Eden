@@ -1,10 +1,15 @@
+import {Routes, Route} from 'react-router-dom'
 import './App.css'
-import Home  from './pages/Homepage/Homepage.tsx';
+import Homepage  from './pages/Homepage/Homepage.tsx';
+import ProductDetail from './pages/ProductDetail/ProductDetails'
 function App() {
 
   return (
     <>
-      <Home></Home>
+      <Routes>
+        <Route path="/" element={<Homepage></Homepage>}></Route>
+        <Route path="/product/:id" element={<ProductDetail></ProductDetail>}></Route>
+      </Routes>
     </>
   )
 }

@@ -10,8 +10,6 @@ import  ulfMeier from '../../../public/models/mahtla-preto-branco.jpg'
 
 export default function Home() {
     const products = useProducts();
-    //Não colocar products na dependência pois o axios.get vai retornar um novo array na memória, o que a dependência
-    //considera como mudança, então entraria em um loop de requests
     
     const slideImages = [blackWhiteSmoke, freepikBlackWhite, ulfMeier];
     
