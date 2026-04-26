@@ -1,10 +1,9 @@
-import type {Product} from '../../../context/ProductContext';
+import type {Product} from '../../context/ProductContext';
 import {X} from 'lucide-react';
 
 type CartProps = {
     readonly products: Product[];
     readonly onClose: () => void;
-    isOpen: boolean;
 };
 
 export function Cart({ products, onClose}: CartProps) {

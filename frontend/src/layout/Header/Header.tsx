@@ -1,17 +1,11 @@
 import {useState, useEffect} from 'react';
 import './Header.css';
-import {Cart} from './Cart/Cart';
+import {Cart} from '../Cart/Cart';
 import logoHeader from '../../../public/logo/logo.png';
 import userIcon from '../../../public/icons/user.png';
 import shoppingBag from '../../../public/icons/shopping-bag.png';
-import textLogo from '../../../public/logo/text.png';
 import hamburgerIcon from '../../../public/icons/hamburguer.png';
 import SearchInput from './SearchInput/SearchInput'
-import type { Product } from '../../context/ProductContext';
-
-type HeaderProps = {
-    readonly products: Product[];
-};
 
 const labels : string[] = [
     "FRETE GRÁTIS ACIMA DE R$299,90",
@@ -19,7 +13,7 @@ const labels : string[] = [
     "PARCELE ATÉ 12x NO CARTÃO"
 ];
 
-export function Header({ products }: HeaderProps){
+export function Header(){
     
     const [currentIndex, setCurrentIndex] = useState(0);
     const [active, setActive] = useState(false);
@@ -75,7 +69,7 @@ export function Header({ products }: HeaderProps){
             </div>
             <div className="">
                 {active === true && (
-                    <Cart products={products} onClose={() => setActive(false)}/>
+                    <Cart onClose={() => setActive(false)}/>
                 )}
             </div>
         </div>
