@@ -4,9 +4,9 @@ import { api } from '../services/api';
 
 export type ProductVariant = {
     id: number;
-    title:string
     price: number;
     defaultVariant: boolean;
+    category: string;
     gender: string,
     stock: number
     description:string

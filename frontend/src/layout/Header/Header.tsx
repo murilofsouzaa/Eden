@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom'
 import './Header.css';
 import {Cart} from '../Cart/Cart';
 import logoHeader from '../../../public/logo/logo.png';
@@ -50,7 +51,7 @@ export function Header(){
                         <li><a href="#">Explorar</a></li>
                     </ul>
                     
-                    <img src={ logoHeader} alt="eden-logo-heaeder" className="hidden lg:inline lg:w-13 lg:h-13" />
+                    <Link to="/"><img src={ logoHeader} alt="eden-logo-heaeder" className="hidden lg:inline lg:w-13 lg:h-13" /></Link>
                     <div className="flex items-center justify-center gap-5 lg:flex lg:justify-center lg:items-center lg:gap-10">
                         <img src={hamburgerIcon} className="w-8 h-8 lg:hidden"></img>
                         <SearchInput 

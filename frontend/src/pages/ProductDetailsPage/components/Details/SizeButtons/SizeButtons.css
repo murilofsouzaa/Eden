@@ -1,0 +1,14 @@
+.size-button{
+    background-color: rgb(255, 255, 255);
+    font-family: "Source Serif 4";
+    width: 50px;
+    border-radius: 2px;
+    padding: 5px;
+    color:rgb(0, 0, 0);
+}
+
+.size-button:hover{
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
