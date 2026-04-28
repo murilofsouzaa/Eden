@@ -30,7 +30,7 @@ const ProductDetails = () => {
                             <img
                                 src={`/${selectedProduct.imageUrl}`}
                                 alt={selectedProduct.title}
-                                className="lg:w-auto lg:h-260 lg:object-cover"
+                                className="lg:w-auto lg:h-200 lg:object-cover"
                                 />
                         </div>
                     </div>
