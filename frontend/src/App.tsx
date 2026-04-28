@@ -3,13 +3,18 @@ import {useEffect} from 'react'
 import './App.css'
 import Homepage  from './pages/Homepage/Homepage.tsx';
 import ProductDetail from './pages/ProductDetailsPage/DetailsMainpage.tsx'
+
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
 function App() {
 
   const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0,0)
-  }, [location.pathname]);
+  }, [location]);
 
 
   return (

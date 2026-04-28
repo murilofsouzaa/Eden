@@ -52,6 +52,9 @@ const ProductDetails = () => {
                         <div className="mt-5">
                             <SizeButtons selectedSize={selectedSize} handleSizeClick={handleSizeClick}></SizeButtons>
                         </div>
+                        <div>
+                            <button>Adicionar ao Carrinho</button>
+                        </div>
                     </div>
                 </div>
             ) : (

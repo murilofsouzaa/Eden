@@ -7,15 +7,15 @@ export type SizeButtonsProps={
 
 const SizeButtons = ({selectedSize="P", handleSizeClick}:SizeButtonsProps) => {
 
-    const sizes = ["P", "PP", "M", "G", "GG", "XGG", "XGGG"]
+    const sizes = ["P", "M", "G", "GG", "XGG", "XGGG"]
 
     return ( 
-        <div>
+        <div className="border-t-1 border-t-[#a5a5a59e] py-5">
             <label className="font-bold text-md">Tamanho: {selectedSize}</label>
-            <div className="flex flex-row justify-center items-center gap-4 border p-2 mt-2 w-full">
+            <div className="flex gap-4 p-2 mt-2 w-full">
                 {sizes.map((size) => (
                     <button key={size} 
-                        className={`font-mono size-button ${size === selectedSize ? 'active' : ''}`}
+                        className={` flex justify-center items-center font-mono size-button  ${size === selectedSize ? 'active' : ''}`}
                         value={selectedSize}
                         onClick={() => handleSizeClick(size)}
                         >
