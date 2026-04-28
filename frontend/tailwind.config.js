@@ -8,11 +8,13 @@ export default defineConfig({
   theme: {
     extend: {
       fontFamily: {
-        archivo: ['"Archivo Black"', 'sans-serif'],
-        bebas: ['"Bebas Neue"', 'sans-serif'],
-        geologica: ['"Geologica"', 'sans-serif'],
         montserrat: ['"Montserrat"', 'sans-serif'],
-        roboto: ['"Roboto"', 'sans-serif'],
+        sans: ['"Montserrat"', 'sans-serif'],
+        mono: ['"Montserrat"', 'sans-serif'],
+        archivo: ['"Montserrat"', 'sans-serif'],
+        bebas: ['"Montserrat"', 'sans-serif'],
+        geologica: ['"Montserrat"', 'sans-serif'],
+        roboto: ['"Montserrat"', 'sans-serif'],
       },
     },
   },

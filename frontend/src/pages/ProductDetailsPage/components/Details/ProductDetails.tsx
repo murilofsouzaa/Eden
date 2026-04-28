@@ -1,4 +1,5 @@
 import {useParams} from 'react-router-dom';
+import  '../../../../index.css'
 import {useState} from 'react'
 import useProducts from '../../../../../hooks/useProducts'
 import './ProductDetails.css'
@@ -35,12 +36,12 @@ const ProductDetails = () => {
                         </div>
                     </div>
                     <div className="flex flex-col mt-6 mx-18">
-                        <h1 className="font-bold text-lg lg:text-xl ">{selectedProduct.title}</h1>
+                        <h1 className="text-lg lg:text-xl ">{selectedProduct.title}</h1>
                         <label className="text-black/60">{defaultVariant.category.charAt(0).toUpperCase() + defaultVariant.category.slice(1)}</label>
                         {defaultVariant?.price !== undefined && (
                         <label className="mt-4 text-2xl font-bold">R$ {defaultVariant.price.toFixed(2)}</label>
                         )}
-                        <label className="mono text-[15px] flex gap-2 mt-1">
+                        <label className="text-[15px] flex gap-2 mt-1">
                             <span className="text-black/70">
                                 <div className="flex justify-center items-center">
                                     <CreditCard className="h-5 w-auto"/>
@@ -53,7 +54,7 @@ const ProductDetails = () => {
                             <SizeButtons selectedSize={selectedSize} handleSizeClick={handleSizeClick}></SizeButtons>
                         </div>
                         <div>
-                            <button>Adicionar ao Carrinho</button>
+                            <button className="bg-black text-white text-sm font-bold p-4 w-100 hover:cursor-pointer">Adicionar ao Carrinho</button>
                         </div>
                     </div>
                 </div>
