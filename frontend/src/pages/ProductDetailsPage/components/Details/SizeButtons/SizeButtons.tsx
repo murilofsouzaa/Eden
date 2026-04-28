@@ -11,7 +11,7 @@ const SizeButtons = ({selectedSize="P", handleSizeClick}:SizeButtonsProps) => {
 
     return ( 
         <div className="font-sans border-t border-t-[#a5a5a59e] py-5">
-            <label className=" font-bold text-md">Tamanho: {selectedSize}</label>
+            <label className=" font-semibold text-md">Tamanho: {selectedSize}</label>
             <div className="flex gap-4 p-2 mt-2 w-full">
                 {sizes.map((size) => (
                     <button key={size} 

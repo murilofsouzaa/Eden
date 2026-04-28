@@ -53,11 +53,16 @@ const ProductDetails = () => {
                         <div className="mt-5">
                             <SizeButtons selectedSize={selectedSize} handleSizeClick={handleSizeClick}></SizeButtons>
                         </div>
-                        <div>
-                            <button className="bg-black text-white text-sm font-bold p-4 w-100 hover:cursor-pointer">Adicionar ao Carrinho</button>
+                        <button className="bg-black text-white text-sm font-bold p-4 w-100 hover:cursor-pointer">Adicionar ao Carrinho</button>
+                        <p className="mt-4 text-sm">Frete grátis nas compras acima de R$299</p>
+                        <div className="mt-5 py-4 border-t border-t-[#acacac98] ">
+                            <label className="text-md font-semibold">Descrição:</label>
+                            <p className="mt-2 text-sm">{selectedProduct?.description}</p>
                         </div>
                     </div>
+                    <p className="mt-10 row-start-2 col-start-2 text-center p-5 text-2xl border-t border-t-[#acacac98]  ">LEVE MAIS, PAGUE MENOS</p>
                 </div>
+                
             ) : (
                 <p>Produto não encotrado.</p>
             )}
