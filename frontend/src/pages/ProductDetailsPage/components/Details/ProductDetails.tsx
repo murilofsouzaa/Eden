@@ -25,17 +25,20 @@ const ProductDetails = () => {
     return (
         <>
             {selectedProduct ? (
-                <div className="grid grid-cols-3 col-start-2 p-5 lg:flex-row">
+                <div className="lg:grid lg:grid-cols-3 lg:col-start-2 lg:p-5 lg:flex-row">
                     <div className="col-start-2">
-                        <div className="">
+                        <div className="flex justify-center items-center">
                             <img
                                 src={`/${selectedProduct.imageUrl}`}
                                 alt={selectedProduct.title}
-                                className="lg:w-auto lg:h-200 lg:object-cover"
+                                className="
+                                sm-auto sm:h-200 
+                                md:w-auto md:h-140
+                                lg:w-auto lg:h-200 lg:object-cover"
                                 />
                         </div>
                     </div>
-                    <div className="flex flex-col mt-6 mx-18">
+                    <div className="flex flex-col justify-center items-center mt-6 mx-4 lg:justify-baseline lg:items-start lg:mx-18">
                         <h1 className="text-lg lg:text-xl ">{selectedProduct.title}</h1>
                         <label className="text-black/60">{defaultVariant.category.charAt(0).toUpperCase() + defaultVariant.category.slice(1)}</label>
                         {defaultVariant?.price !== undefined && (
@@ -49,7 +52,9 @@ const ProductDetails = () => {
                             </span>
                             <span className="text-black/70">Em até</span> <span className="font-bold">12x</span><span className="text-black/70"> de</span> <span className="font-bold">R${((defaultVariant?.price)/12).toFixed(2)}</span>
                         </label>
-                        <span className="text-center bg-green-200 text-green-700 text-sm mt-5 py-2 px-2 rounded-2xl w-[64%]">%10 de cashback na próxima compra</span>
+                        <span className="text-center bg-green-200 text-green-700 text-sm mt-5 py-2 px-2 rounded-2xl 
+                        md:w-full lg:w-[64%]"
+                        >%10 de cashback na próxima compra</span>
                         <div className="mt-5">
                             <SizeButtons selectedSize={selectedSize} handleSizeClick={handleSizeClick}></SizeButtons>
                         </div>
