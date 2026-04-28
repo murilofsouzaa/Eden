@@ -8,10 +8,10 @@ import shoppingBag from '../../../public/icons/shopping-bag.png';
 import hamburgerIcon from '../../../public/icons/hamburguer.png';
 import SearchInput from './SearchInput/SearchInput'
 
-const labels : string[] = [
-    "FRETE GRÁTIS ACIMA DE R$299,90",
-    "COMPRE SEM MEDO, A PRIMEIRA TROCA É GRÁTIS",
-    "PARCELE ATÉ 12x NO CARTÃO"
+const labels : React.ReactNode[] = [
+    <label key={1} className="text-sm"><span className="font-bold">FRETE GRÁTIS</span> EM COMPRAS ACIMA DE R$299</label>,
+    <label key={2} className="text-sm">COMPRE SEM MEDO, A PRIMEIRA TROCA É GRÁTIS</label>,
+    <label key={3} className="text-sm">PARCELE ATÉ 12x NO CARTÃO</label>
 ];
 
 export function Header(){
@@ -23,13 +23,13 @@ export function Header(){
     useEffect(() => {
         //retorna um ID para o clearInterval
     const interval = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % labels.length);
+        setCurrentIndex((prev) => (prev + 1) % labels?.length);
     }, 3000);
 
     return () => {
         clearInterval(interval); //precisa ser liberado para não rodar quando o usuário trocar de paǵina
     };                          //precisa de um ID
-}, [labels.length]);
+}, []);
     // para i = 1
     // 1 + 0 % 3 -> 1 % 3 = 1, pois 1/3 o quociente fica 0 e o resto será 1
 
@@ -40,7 +40,7 @@ export function Header(){
     return (
         <div className="sticky top-0 z-101 w-full bg-white border-b-2 border-b-black/10">
             <div className="flex flex-col m-0 p-0">
-                <div className="bg-gray-200 p-2 text-center">{labels[currentIndex]}</div>
+                <div className="bg-gray-200 p-3 text-center">{labels[currentIndex]}</div>
                 <nav className="flex flex-col justify-center items-center m-4 
                     lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-4 lg:m-4 lg:p">
                     <ul className="hidden 
