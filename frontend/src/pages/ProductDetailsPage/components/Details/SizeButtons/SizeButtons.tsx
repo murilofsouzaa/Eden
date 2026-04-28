@@ -1,15 +1,13 @@
-import {useState} from 'react';
 import './SizeButtons.css'
 
 export type SizeButtonsProps={
     selectedSize:string;
-    setSelectedSize: (size:string) => void;
+    handleSizeClick: (size:string) => void;
 }
 
-const SizeButtons = ({selectedSize, setSelectedSize}:SizeButtonsProps) => {
+const SizeButtons = ({selectedSize="P", handleSizeClick}:SizeButtonsProps) => {
 
     const sizes = ["P", "PP", "M", "G", "GG", "XGG", "XGGG"]
-
 
     return ( 
         <div>
@@ -17,9 +15,9 @@ const SizeButtons = ({selectedSize, setSelectedSize}:SizeButtonsProps) => {
             <div className="flex flex-row justify-center items-center gap-4 border p-2 mt-2 w-full">
                 {sizes.map((size) => (
                     <button key={size} 
-                        className={`font-mono size-button`}
+                        className={`font-mono size-button ${size === selectedSize ? 'active' : ''}`}
                         value={selectedSize}
-                        onClick={() => setSelectedSize(size)}
+                        onClick={() => handleSizeClick(size)}
                         >
                         <p className="">{size}</p>
                     </button>

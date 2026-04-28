@@ -8,8 +8,7 @@ import {CreditCard} from 'lucide-react'
 
 const ProductDetails = () => {
 
-        const [activatedSize, setActivatedSize] = useState<boolean>(true);
-        const [selectedSize, setSelectedSize] = useState<string>("P");
+    const [selectedSize, setSelectedSize] = useState<string>("P");
 
         const {id} = useParams();
         const products = useProducts();
@@ -19,6 +18,9 @@ const ProductDetails = () => {
         const defaultVariant = selectedProductVariants
             .find((product:ProductVariant) => product?.defaultVariant) ?? selectedProductVariants[0]
 
+            const handleSizeClick = (size:string) => {
+                setSelectedSize(size)
+            }
     return (
         <>
             {selectedProduct ? (
@@ -48,7 +50,7 @@ const ProductDetails = () => {
                         </label>
                         <span className="text-center bg-green-200 text-green-700 text-sm mt-5 py-2 px-2 rounded-2xl w-[64%]">%10 de cashback na próxima compra</span>
                         <div className="mt-5">
-                            <SizeButtons selectedSize={selectedSize} setSelectedSize={setSelectedSize}></SizeButtons>
+                            <SizeButtons selectedSize={selectedSize} handleSizeClick={handleSizeClick}></SizeButtons>
                         </div>
                     </div>
                 </div>

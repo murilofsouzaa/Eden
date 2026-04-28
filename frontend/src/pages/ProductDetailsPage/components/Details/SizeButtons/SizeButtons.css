@@ -6,6 +6,10 @@
     color:rgb(0, 0, 0);
 }
 
+.size-button.active{
+    background-color: black;
+    color: white;
+}
 .size-button:hover{
     background-color: black;
     color: white;
