@@ -7,7 +7,6 @@ import blackWhiteSmoke from '../../../public/models/smoke-bar.jpg'
 import freepikBlackWhite from '../../../public/models/blackwhhite-freepik.jpg'
 import  ulfMeier from '../../../public/models/mahtla-preto-branco.jpg'
 
-
 export default function Home() {
     const products = useProducts();
     
@@ -15,7 +14,7 @@ export default function Home() {
     
     return(
         <>
-            <Header products={products} />
+            <Header/>
             <Slider images={slideImages} />
             <Main products={products} />
             <Footer />

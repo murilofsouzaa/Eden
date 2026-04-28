@@ -7,7 +7,7 @@ import {Footer} from '../../layout/Footer/Footer'
 const ProductDetail = () => {
 
     return ( 
-        <div className="">
+        <div className="w-full h-full">
             <Header></Header>
             <ProductDetails></ProductDetails>
             <Footer></Footer>
