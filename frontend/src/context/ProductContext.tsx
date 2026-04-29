@@ -6,6 +6,7 @@ export type ProductVariant = {
     id: number;
     price: number;
     defaultVariant: boolean;
+    size: string;
     category: string;
     gender: string,
     stock: number

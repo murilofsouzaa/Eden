@@ -5,8 +5,8 @@ import useProducts from '../../../../../hooks/useProducts'
 import './ProductDetails.css'
 import SizeButtons from './SizeButtons/SizeButtons'
 import type {Product, ProductVariant} from '../../../../context/ProductContext'
-import {ChevronDown, ChevronUp} from 'lucide-react'
 import {CreditCard} from 'lucide-react'
+import Description from './Description/Description'
 
 const ProductDetails = () => {
 
@@ -51,7 +51,7 @@ const ProductDetails = () => {
                     </div>
                     <div className="flex flex-col justify-center items-center mt-6 p-5 lg:justify-baseline lg:items-start lg:mx-18">
                         <h1 className="text-lg lg:text-xl ">{selectedProduct.title}</h1>
-                        <label className="text-black/60">{defaultVariant.category.charAt(0).toUpperCase() + defaultVariant.category.slice(1).replace("_", " ")}</label>
+                        <label className="text-black/60">{defaultVariant.category.charAt(0).toUpperCase() + defaultVariant.category.slice(1)}</label>
                         {defaultVariant?.price !== undefined && (
                         <label className="mt-4 text-2xl font-bold">R$ {defaultVariant.price.toFixed(2)}</label>
                         )}
@@ -80,25 +80,9 @@ const ProductDetails = () => {
                             {isOutOfStock ? 'Sem estoque' : 'Adicionar ao Carrinho'}
                         </button>
                         <p className="mt-4 text-sm">Frete grátis nas compras acima de R$299</p>
-                        <div className="mt-5 py-4 border-t border-t-[#acacac98] w-full ">
-                            <div className="flex flex-col justify-between">
-                                <div onClick={handleActiveClick} className="flex flex-row justify-between mb-2 hover:cursor-pointer">
-                                    <label className=" text-md font-semibold">Descrição</label>
-                                    {active ? (
-                                            <button className="hover:cursor-pointer" onClick={handleActiveClick}>
-                                                <ChevronUp></ChevronUp>
-                                            </button>
-                                    ) : (
-                                        <button onClick={handleActiveClick}>
-                                            <ChevronDown className="hover:cursor-pointer"></ChevronDown>
-                                        </button>                                )
-                                    }
-                                </div>
-                                {active && (
-                                    <p className="mt-2 text-sm">{selectedProduct?.description}</p>
-                                )}
-                            </div>
-                        </div>
+                        
+                        <Description active={active} handleActiveClick={handleActiveClick} selectedProduct={selectedProduct}></Description>
+
                     </div>
                     <div className="mt-10 row-start-2 col-start-2 ">
                         <p className="text-center p-5 text-2xl border-t border-t-[#acacac98]  ">LEVE MAIS, PAGUE MENOS</p>
