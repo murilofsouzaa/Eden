@@ -7,6 +7,8 @@ import SizeButtons from './SizeButtons/SizeButtons'
 import type {Product, ProductVariant} from '../../../../context/ProductContext'
 import {CreditCard} from 'lucide-react'
 import Description from './Description/Description'
+import AddToCartButton from './AddToCartBtn/AddToCartButton'
+import PromotionsGreenLabel from './PromotionsGreenLabel/PromotionsGreenLabel'
 
 const ProductDetails = () => {
 
@@ -71,27 +73,18 @@ const ProductDetails = () => {
                         <div className="mt-5">
                             <SizeButtons selectedSize={selectedSize} handleSizeClick={handleSizeClick}></SizeButtons>
                         </div>
-                        <button
-                            className={`text-white text-sm font-bold p-4 w-100 hover:cursor-pointer ${
-                                isOutOfStock ? 'bg-red-600 hover:bg-red-700' : 'bg-black'
-                            }`}
-                            disabled={isOutOfStock}
-                        >
-                            {isOutOfStock ? 'Sem estoque' : 'Adicionar ao Carrinho'}
-                        </button>
+
+                        <AddToCartButton isOutOfStock={isOutOfStock}></AddToCartButton>
+
                         <p className="mt-4 text-sm">Frete grátis nas compras acima de R$299</p>
                         
                         <Description active={active} handleActiveClick={handleActiveClick} selectedProduct={selectedProduct}></Description>
-
+                        
                     </div>
-                    <div className="mt-10 row-start-2 col-start-2 ">
-                        <p className="text-center p-5 text-2xl border-t border-t-[#acacac98]  ">LEVE MAIS, PAGUE MENOS</p>
-                        <div className="flex justify-center items-center gap-5"> 
-                         <span className="bg-green-200 text-green-700 text-sm font-semibold py-2 px-4 rounded-md">3 por R$199</span>
-                            <span className="bg-green-200 text-green-700 text-sm font-semibold py-2 px-4 rounded-md">4 por R$259</span>
-                            <span className="bg-green-200 text-green-700 text-sm font-semibold py-2 px-4 rounded-md">5 por R$299,90</span>
-                        </div>
+                    <div className="mt-10 row-start-2 col-start-2">
+                        <PromotionsGreenLabel></PromotionsGreenLabel>
                     </div>
+                    
 
                 </div>
                 
