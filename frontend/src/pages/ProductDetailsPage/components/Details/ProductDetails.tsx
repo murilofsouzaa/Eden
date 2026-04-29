@@ -18,6 +18,10 @@ const ProductDetails = () => {
         const selectedProductVariants = selectedProduct?.variants ?? [];
         const defaultVariant = selectedProductVariants
             .find((product:ProductVariant) => product?.defaultVariant) ?? selectedProductVariants[0]
+        const selectedVariant =
+            selectedProductVariants.find((variant: ProductVariant) => variant.size === selectedSize) ??
+            defaultVariant
+        const isOutOfStock = (selectedVariant?.stock ?? 0) === 0
 
             const handleSizeClick = (size:string) => {
                 setSelectedSize(size)
@@ -25,7 +29,7 @@ const ProductDetails = () => {
     return (
         <>
             {selectedProduct ? (
-                <div className="lg:grid lg:grid-cols-3 lg:col-start-2 lg:p-5 lg:flex-row">
+                <div className="overflow-x-hidden p-5 lg:grid lg:grid-cols-3 lg:col-start-2 lg:p-5 lg:flex-row">
                     <div className="col-start-2">
                         <div className="flex justify-center items-center">
                             <img
@@ -38,7 +42,7 @@ const ProductDetails = () => {
                                 />
                         </div>
                     </div>
-                    <div className="flex flex-col justify-center items-center mt-6 mx-4 lg:justify-baseline lg:items-start lg:mx-18">
+                    <div className="flex flex-col justify-center items-center mt-6 p-5 lg:justify-baseline lg:items-start lg:mx-18">
                         <h1 className="text-lg lg:text-xl ">{selectedProduct.title}</h1>
                         <label className="text-black/60">{defaultVariant.category.charAt(0).toUpperCase() + defaultVariant.category.slice(1)}</label>
                         {defaultVariant?.price !== undefined && (
@@ -52,20 +56,37 @@ const ProductDetails = () => {
                             </span>
                             <span className="text-black/70">Em até</span> <span className="font-bold">12x</span><span className="text-black/70"> de</span> <span className="font-bold">R${((defaultVariant?.price)/12).toFixed(2)}</span>
                         </label>
-                        <span className="text-center bg-green-200 text-green-700 text-sm mt-5 py-2 px-2 rounded-2xl 
-                        md:w-full lg:w-[64%]"
-                        >%10 de cashback na próxima compra</span>
+                        <div className="w-75 mt-5 ">
+                            <span className="text-center bg-green-200 text-green-700 text-sm py-2 px-4 rounded-2xl
+                            md:w-full lg:w-full"
+                            >%10 de cashback na próxima compra</span>
+                        </div>
                         <div className="mt-5">
                             <SizeButtons selectedSize={selectedSize} handleSizeClick={handleSizeClick}></SizeButtons>
                         </div>
-                        <button className="bg-black text-white text-sm font-bold p-4 w-100 hover:cursor-pointer">Adicionar ao Carrinho</button>
+                        <button
+                            className={`text-white text-sm font-bold p-4 w-100 hover:cursor-pointer ${
+                                isOutOfStock ? 'bg-red-600 hover:bg-red-700' : 'bg-black'
+                            }`}
+                            disabled={isOutOfStock}
+                        >
+                            {isOutOfStock ? 'Sem estoque' : 'Adicionar ao Carrinho'}
+                        </button>
                         <p className="mt-4 text-sm">Frete grátis nas compras acima de R$299</p>
                         <div className="mt-5 py-4 border-t border-t-[#acacac98] ">
-                            <label className="text-md font-semibold">Descrição:</label>
+                            <div className="text-md font-semibold">Descrição:</div>
                             <p className="mt-2 text-sm">{selectedProduct?.description}</p>
                         </div>
                     </div>
-                    <p className="mt-10 row-start-2 col-start-2 text-center p-5 text-2xl border-t border-t-[#acacac98]  ">LEVE MAIS, PAGUE MENOS</p>
+                    <div className="mt-10 row-start-2 col-start-2 ">
+                        <p className="text-center p-5 text-2xl border-t border-t-[#acacac98]  ">LEVE MAIS, PAGUE MENOS</p>
+                        <div className="flex justify-center items-center gap-5"> 
+                         <span className="bg-green-200 text-green-700 text-sm font-semibold py-2 px-4 rounded-md">3 por R$199</span>
+                            <span className="bg-green-200 text-green-700 text-sm font-semibold py-2 px-4 rounded-md">4 por R$259</span>
+                            <span className="bg-green-200 text-green-700 text-sm font-semibold py-2 px-4 rounded-md">5 por R$299,90</span>
+                        </div>
+                    </div>
+
                 </div>
                 
             ) : (

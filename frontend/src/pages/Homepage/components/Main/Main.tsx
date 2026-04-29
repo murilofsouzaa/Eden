@@ -14,14 +14,14 @@ export function Main({ products }: MainProps) {
 
     const [currentIndex, setCurrentIndex] = useState(0);
     // Guardamos métricas da vitrine para deslocar exatamente um produto por clique
-    const [slideWidth, setSlideWidth] = useState(0);
-    const [viewportWidth, setViewportWidth] = useState(0);
-    const trackRef = useRef<HTMLDivElement | null>(null);
-    const viewportRef = useRef<HTMLDivElement | null>(null);
-
-    const displayedProducts = products.slice(0, 7);
-    const totalItems = displayedProducts.length;
-
+    
+        const [slideWidth, setSlideWidth] = useState(0);
+        const [viewportWidth, setViewportWidth] = useState(0);
+        const trackRef = useRef<HTMLDivElement | null>(null);
+        const viewportRef = useRef<HTMLDivElement | null>(null);
+    
+        const displayedProducts = products.slice(0, 7);
+        const totalItems = displayedProducts.length;
     const next = () => {
         if (totalItems === 0) return;
         setCurrentIndex((currentIndex) => Math.min(currentIndex + 1, maxIndex));

@@ -37,7 +37,7 @@ export function ReleaseSection({
                         return (
                             <div key={product.id} data-slide="true">
                                 {variantToShow && variantToShow?.stock > 0 && (
-                                    <div className="shrink-0 w-64 sm:w-72 md:w-80">
+                                    <div className="flex flex-col justify-start items-start shrink-0 w-64 sm:w-72 md:w-80">
                                         <Link to={`/product/${product.id}`}>
                                             <button type="button" className="hover:cursor-pointer">
                                                 <img
@@ -48,11 +48,10 @@ export function ReleaseSection({
                                             </button>
                                         </Link>
 
-                                        <p className="mt-6 text-md">{product.title}</p>
-                                        <p className="mb-3 mt-1 text-sm text-black/70">{`${product.description.slice(0,40)}...`}</p>
-                                        {variantToShow?.price !== undefined && variantToShow?.price !== null && (
-                                            <p className="text-md font-bold">R$ {variantToShow.price.toFixed(2)}</p>
-                                        )}
+                                            <p className="mt-2 text-md">{product.title}</p>
+                                            {variantToShow?.price !== undefined && variantToShow?.price !== null && (
+                                                <p className="text-md font-bold">R$ {variantToShow.price.toFixed(2)}</p>
+                                            )}
                                     </div>
                                 )}
                             </div>
