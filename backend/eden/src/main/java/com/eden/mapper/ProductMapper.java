@@ -18,16 +18,19 @@ public class ProductMapper {
                 product.getId(),
                 product.getTitle(),
                 product.getDescription(),
-        primaryVariant.map(variant -> variant.getGender().name()).orElse(null),
-        primaryVariant.map(variant -> variant.getCategory().name()).orElse(null),
+                product.getModeling(),
+                product.getWeight(),
+                product.getMaterial(),
+                primaryVariant.map(variant -> variant.getGender().name()).orElse(null),
+                primaryVariant.map(variant -> variant.getCategory().name()).orElse(null),
         product.getImageUrl(),
                 buildGallery(product),
                 product.getCreatedAt(),
                 product.getUpdatedAt(),
-        product.getVariants()
-            .stream()
-            .map(ProductMapper::toVariantResponse)
-            .toList()
+                product.getVariants()
+                    .stream()
+                    .map(ProductMapper::toVariantResponse)
+                    .toList()
                 );
 
                 //Pega os dados básicos, pega dados da variante, constrói a galeria, pega URL, constrói a galeria,

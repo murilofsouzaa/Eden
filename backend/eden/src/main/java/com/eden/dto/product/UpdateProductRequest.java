@@ -6,6 +6,9 @@ public record UpdateProductRequest(
         String title,
         String description,
         String imageUrl,
+        String modeling,
+        String weight,
+        String material,
         List<String> gallery,
         List<ProductVariantRequest> variants
 ) {}

@@ -29,6 +29,12 @@ public class Product {
     private String description;
     @Column(name = "image_url")
     private String imageUrl;
+    @Column
+    private String modeling;
+    @Column
+    private String weight;
+    @Column
+    private String material;
     @Column(nullable = false)
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -59,7 +65,7 @@ public class Product {
     }
 
     public void setId(Long id){
-        this.id = id;;
+        this.id = id;
     }
 
     public String getTitle() {
@@ -100,6 +106,30 @@ public class Product {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getModeling() {
+        return modeling;
+    }
+
+    public void setModeling(String modeling) {
+        this.modeling = modeling;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
     }
 
     public Set<ProductVariant> getVariants() {

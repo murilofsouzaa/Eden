@@ -5,7 +5,6 @@ export type DescriptionProps={
     active:boolean;
     handleActiveClick: () => void;
     selectedProduct:Product;
-
 }
 
 const Description = ({active, handleActiveClick, selectedProduct}:DescriptionProps) => {
@@ -27,17 +26,16 @@ const Description = ({active, handleActiveClick, selectedProduct}:DescriptionPro
 
                 <div className={`
                 grid transition-[grid-template-rows,opacity] duration-300 ease-in-out
-                ${active ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}
-                `}>
-                <div className="overflow-hidden">
-                    <p className="mt-2 text-sm text-gray-700">
-                    {selectedProduct?.description}
-                    </p>
-                </div>
+                ${active ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+                    <div className="overflow-hidden">
+                        <p className="mt-2 text-sm text-gray-700">
+                        {selectedProduct?.description}
+                        </p>
+                    </div>
                 </div>
             </div>
     </div>
      );
 }
- 
+
 export default Description;

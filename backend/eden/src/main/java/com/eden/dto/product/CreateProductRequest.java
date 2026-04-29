@@ -15,6 +15,9 @@ public record CreateProductRequest(
         @NotBlank
         String description,
         String imageUrl,
+        String modeling,
+        String weight,
+        String material,
         List<String> gallery,
         @NotNull
         ProductCategories category,

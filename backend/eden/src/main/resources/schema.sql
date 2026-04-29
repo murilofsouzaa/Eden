@@ -40,6 +40,9 @@ CREATE TABLE product (
 	title       VARCHAR(180)    NOT NULL,
 	description TEXT,
 	image_url   TEXT,
+	modeling    TEXT,
+	weight      TEXT,
+	material    TEXT,
 	created_at  TIMESTAMP       NOT NULL DEFAULT NOW(),
 	updated_at  TIMESTAMP,
 	CONSTRAINT product_title_unique UNIQUE (title)

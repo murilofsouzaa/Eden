@@ -12,6 +12,9 @@ public record ProductResponse(
         String title,
         @NotNull
         String description,
+        String modeling,
+        String weight,
+        String material,
         String gender,
         String category,
         String imageUrl,

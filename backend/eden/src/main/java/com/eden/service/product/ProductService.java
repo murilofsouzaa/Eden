@@ -47,6 +47,9 @@ public class ProductService <T>{
         product.setTitle(request.title());
         product.setDescription(request.description());
         product.setImageUrl(request.imageUrl());
+        product.setModeling(request.modeling());
+        product.setWeight(request.weight());
+        product.setMaterial(request.material());
 
         applyGallery(product, request.imageUrl(), request.gallery());
         request.variants().forEach(variantRequest -> product.addVariant(toVariantEntity(variantRequest)));
@@ -68,6 +71,15 @@ public class ProductService <T>{
         }
         if (request.imageUrl() != null) {
             product.setImageUrl(request.imageUrl());
+        }
+        if (request.modeling() != null) {
+            product.setModeling(request.modeling());
+        }
+        if (request.weight() != null) {
+            product.setWeight(request.weight());
+        }
+        if (request.material() != null) {
+            product.setMaterial(request.material());
         }
 
         if (request.gallery() != null || request.imageUrl() != null) {
