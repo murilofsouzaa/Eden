@@ -3,7 +3,7 @@ import  '../../../../index.css'
 import {useState} from 'react'
 import useProducts from '../../../../../hooks/useProducts'
 import './Info.css'
-import SizeButtons from '../SizeButtons/SizeButtons'
+import SizeButtons from './components/SizeButtons/SizeButtons'
 import type {Product, ProductVariant} from '../../../../context/ProductContext'
 import {CreditCard} from 'lucide-react'
 import Description from './components/Description/Description'
@@ -49,7 +49,7 @@ const Info = () => {
                     </div>
                     <div className="flex flex-col justify-center items-center mt-6 p-5 lg:justify-baseline lg:items-start lg:mx-18">
                         <h1 className="text-lg lg:text-xl ">{selectedProduct.title}</h1>
-                        <label className="text-black/60">{defaultVariant.category.charAt(0).toUpperCase() + defaultVariant.category.slice(1)}</label>
+                        <label className="text-black/60">{defaultVariant.category.charAt(0).toUpperCase() + defaultVariant.category.slice(1).replace("_", " ")}</label>
                         {defaultVariant?.price !== undefined && (
                         <label className="mt-4 text-2xl font-bold">R$ {defaultVariant.price.toFixed(2)}</label>
                         )}

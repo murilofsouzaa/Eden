@@ -74,10 +74,32 @@ INSERT INTO product (title, description, image_url, created_at, updated_at) VALU
 	('Prada Hydrate Bottle', 'Garrafa térmica em alumínio escovado com tampa rosqueável.',
 	 'acessories/prada-water-bottle.jpeg', TIMESTAMP '2025-07-22 15:15:00', NULL);
 
-UPDATE product
-SET modeling = 'Oversized',
-    weight = '190g/m²',
-    material = '96% Algodão e 4% elastano';
+-- Update each product with unique characteristics
+UPDATE product SET modeling = 'Fitted', weight = '185g/m²', material = '88% Poliéster, 12% Elastano' WHERE title = 'Gymshark Black Compression Tee';
+UPDATE product SET modeling = 'Oversized', weight = '320g/m²', material = '85% Algodão, 15% Poliéster' WHERE title = 'Gymshark Blue Oversized Hoodie';
+UPDATE product SET modeling = 'Fitted', weight = '240g/m²', material = '92% Algodão, 8% Elastano' WHERE title = 'White Performance Joggers';
+UPDATE product SET modeling = 'Regular', weight = '180g/m²', material = '100% Poliéster' WHERE title = 'Lima Flex Training Shorts';
+UPDATE product SET modeling = 'Fitted', weight = '190g/m²', material = '87% Poliéster, 13% Elastano' WHERE title = 'Black Long Compression Shirt';
+UPDATE product SET modeling = 'Fitted', weight = '195g/m²', material = '90% Poliéster, 10% Elastano' WHERE title = 'Onyx Compression Long Tee';
+UPDATE product SET modeling = 'Fitted', weight = '188g/m²', material = '86% Poliéster, 14% Elastano' WHERE title = 'Carbon Compression Performance Tee';
+UPDATE product SET modeling = 'Fitted', weight = '192g/m²', material = '89% Poliéster, 11% Elastano' WHERE title = 'Elite Compression Pro Top';
+UPDATE product SET modeling = 'Oversized', weight = '250g/m²', material = '100% Algodão' WHERE title = 'Gymshark Black Oversized Tee';
+UPDATE product SET modeling = 'Regular', weight = '175g/m²', material = '98% Poliéster, 2% Elastano' WHERE title = 'Shadow Pro Training Shorts';
+UPDATE product SET modeling = 'Oversized', weight = '260g/m²', material = '95% Algodão, 5% Poliéster' WHERE title = 'Gymshark Green Oversized Tee';
+UPDATE product SET modeling = 'Fitted', weight = '210g/m²', material = '91% Nylon, 9% Elastano' WHERE title = 'Plum Seamless Performance Tee';
+UPDATE product SET modeling = 'Regular', weight = '170g/m²', material = '100% Poliéster' WHERE title = 'Arctic Court Shorts';
+UPDATE product SET modeling = 'Fitted', weight = '245g/m²', material = '93% Algodão, 7% Elastano' WHERE title = 'White Performance Joggers Front View';
+UPDATE product SET modeling = 'Fitted', weight = '215g/m²', material = '88% Nylon, 12% Elastano' WHERE title = 'Emerald Seamless Legging';
+UPDATE product SET modeling = 'Oversized', weight = '270g/m²', material = '100% Algodão Orgânico' WHERE title = 'Cloudy Oversized Tee';
+UPDATE product SET modeling = 'Fitted', weight = '220g/m²', material = '82% Nylon, 18% Elastano' WHERE title = 'Black Sculpt Seamless Set';
+UPDATE product SET modeling = 'Fitted', weight = '235g/m²', material = '87% Poliéster, 13% Elastano' WHERE title = 'Crimson Wine Pants (Back)';
+UPDATE product SET modeling = 'Fitted', weight = '205g/m²', material = '85% Nylon, 15% Elastano' WHERE title = 'Midnight Sculpt Legging';
+UPDATE product SET modeling = 'Fitted', weight = '218g/m²', material = '89% Nylon, 11% Elastano' WHERE title = 'Blue Ocean Motion Legging';
+UPDATE product SET modeling = 'Fitted', weight = '225g/m²', material = '84% Nylon, 16% Elastano' WHERE title = 'Grey Studio Seamless Set';
+UPDATE product SET modeling = 'Fitted', weight = '238g/m²', material = '90% Poliéster, 10% Elastano' WHERE title = 'Red Wine Performance Pants';
+UPDATE product SET modeling = 'Fitted', weight = '228g/m²', material = '80% Nylon, 20% Elastano' WHERE title = 'Brown Lounge Seamless Set';
+UPDATE product SET modeling = 'Oversized', weight = '280g/m²', material = '100% Algodão' WHERE title = 'Black Oversized City Tee';
+UPDATE product SET modeling = 'One Size', weight = '450g', material = 'Alumínio Anodizado' WHERE title = 'Prada Hydrate Bottle';
 
 -- Single default variant per product (can be expanded later)
 INSERT INTO product_variant (product_id, sku, color, size, price, stock, category, gender, status, is_default) VALUES
