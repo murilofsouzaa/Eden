@@ -19,7 +19,7 @@ function App() {
 
         const interval = setInterval(() => {
             setCurrentIndex((prev) => (prev + 1) % titles.length)
-        }, 1000);
+        }, 2000);
     
         return () =>{
             clearInterval(interval);

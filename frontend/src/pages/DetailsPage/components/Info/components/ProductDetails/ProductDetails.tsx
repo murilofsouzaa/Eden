@@ -15,7 +15,7 @@ const ProductDetails = ({selectedProduct}:ProductDetailsProps) => {
         }
 
     return ( 
-        <div className="w-full mt-5 py-4 border-t border-t-[#acacac98]">
+        <div className="w-full p-4 border-t border-t-[#acacac98]">
             <div onClick={handleActiveClick} className="flex justify-between mb-2 cursor-pointer">
                 <label className="font-semibold cursor-pointer">Detalhes do Produto</label>
                 <div className="text-gray-600">

@@ -6,9 +6,9 @@ type SearchInputProps = {
 
 const SearchInput = ({handleShoppingBagClick}:SearchInputProps) => {
     return ( 
-        <div className="search-input flex justify-center items-center border-b p-2 w-[64%]">
-            <form>
-                <input type="search" placeholder="Buscar" className="focus:outline-0" />
+        <div className="flex flex-row-reverse justify-end md:w-80 lg:w-110 border-b p-2">
+            <form className="">
+                <input type="search" placeholder="Buscar" className=" focus:outline-0" />
             </form>
             <button onClick={handleShoppingBagClick} className="cursor-pointer">
                 <img src={searchIcon} className="w-auto h-6"></img>

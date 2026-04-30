@@ -54,8 +54,11 @@ export function Header(){
                     <Link to="/"><img src={ logoHeader} alt="eden-logo-heaeder" className="hidden lg:inline lg:w-13 lg:h-13" /></Link>
                     <div className="flex items-center justify-center gap-5 lg:flex lg:justify-center lg:items-center lg:gap-10">
                         <img src={hamburgerIcon} className="w-8 h-8 lg:hidden"></img>
-                        <SearchInput
-                            handleShoppingBagClick={handleShoppingBagClick}/>
+
+                        <div>
+                            <SearchInput handleShoppingBagClick={handleShoppingBagClick}/>
+                        </div>
+
                         <div className="flex gap-5 w-[100%]">
                             <a href="#" className="hover:translate-y-[-10px] ease-in-out duration-300 py-5">
                                 <img src={userIcon} alt="user-icon" className="h-6 w-auto object-contain"></img>

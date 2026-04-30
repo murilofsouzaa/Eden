@@ -15,10 +15,10 @@ const Description = ({selectedProduct}:DescriptionProps) => {
         }
     
     return ( 
-        <div className="mt-5 py-4 border-t border-t-[#acacac98] w-full">
+        <div className="mt-5 p-4     border-t border-t-[#acacac98] w-full">
             <div className="flex flex-col">
                 <div 
-                    className="flex flex-row justify-between mb-2 cursor-pointer select-none"
+                    className="flex flex-row justify-between cursor-pointer select-none"
                     onClick={handleActiveClick}
                     >
                     <label className="text-md font-semibold cursor-pointer">Descrição</label>
@@ -32,7 +32,7 @@ const Description = ({selectedProduct}:DescriptionProps) => {
 
                 <div className={`
                 grid transition-[grid-template-rows,opacity] duration-300 ease-in-out
-                ${active ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+                ${active ? 'grid-rows-[1fr] opacity-100' : ' grid-rows-[0fr] opacity-0'}`}>
                     <div className="overflow-hidden">
                         <p className="mt-2 text-sm text-gray-700">
                         {selectedProduct?.description}
