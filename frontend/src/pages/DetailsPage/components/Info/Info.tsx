@@ -2,18 +2,18 @@ import {useParams} from 'react-router-dom';
 import  '../../../../index.css'
 import {useState} from 'react'
 import useProducts from '../../../../../hooks/useProducts'
-import './ProductDetails.css'
-import SizeButtons from './SizeButtons/SizeButtons'
+import './Info.css'
+import SizeButtons from '../SizeButtons/SizeButtons'
 import type {Product, ProductVariant} from '../../../../context/ProductContext'
 import {CreditCard} from 'lucide-react'
-import Description from './Description/Description'
-import AddToCartButton from './AddToCartBtn/AddToCartButton'
-import PromotionsGreenLabel from './PromotionsGreenLabel/PromotionsGreenLabel'
+import Description from './components/Description/Description'
+import AddToCartButton from './components/AddToCartBtn/AddToCartButton'
+import PromotionsGreenLabel from './components/PromotionsGreenLabel/PromotionsGreenLabel'
+import ProductDetails from './components/ProductDetails/ProductDetails'
 
-const ProductDetails = () => {
+const Info = () => {
 
     const [selectedSize, setSelectedSize] = useState<string>("P");
-    const [active, setActive] = useState(false);
 
         const {id} = useParams();
         const products = useProducts();
@@ -29,10 +29,6 @@ const ProductDetails = () => {
 
         const handleSizeClick = (size:string) => {
             setSelectedSize(size)
-        }
-
-        const handleActiveClick = () =>{
-            setActive((prev) => !prev)
         }
 
     return (
@@ -78,8 +74,9 @@ const ProductDetails = () => {
 
                         <p className="mt-4 text-sm">Frete grátis nas compras acima de R$299</p>
                         
-                        <Description active={active} handleActiveClick={handleActiveClick} selectedProduct={selectedProduct}></Description>
-                        
+                        <Description selectedProduct={selectedProduct}></Description>
+                        <ProductDetails selectedProduct={selectedProduct}></ProductDetails>
+
                     </div>
                     <div className="mt-10 row-start-2 col-start-2">
                         <PromotionsGreenLabel></PromotionsGreenLabel>
@@ -95,4 +92,4 @@ const ProductDetails = () => {
     )
 }
  
-export default ProductDetails;
+export default Info;

@@ -2,7 +2,7 @@ import {Routes, Route, useLocation} from 'react-router-dom'
 import {useEffect} from 'react'
 import './App.css'
 import Homepage  from './pages/Homepage/Homepage.tsx';
-import ProductDetail from './pages/ProductDetailsPage/DetailsMainpage.tsx'
+import ProductDetail from './pages/DetailsPage/DetailsPage.tsx'
 
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';

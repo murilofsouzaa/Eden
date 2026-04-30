@@ -17,6 +17,9 @@ export type Product = {
     id: number;
     title: string;
     description: string;
+    material:string;
+    modeling:string;
+    weight:string;
     imageUrl: string;
     variants: ProductVariant[];
 };
