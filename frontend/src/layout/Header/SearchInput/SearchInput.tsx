@@ -6,7 +6,7 @@ type SearchInputProps = {
 
 const SearchInput = ({handleShoppingBagClick}:SearchInputProps) => {
     return ( 
-        <div className="flex flex-row-reverse justify-end md:w-80 lg:w-110 border-b p-2">
+        <div className="flex flex-row-reverse justify-end gap-2 md:w-70 lg:w-80 xl:w-110 border-b p-2">
             <form className="">
                 <input type="search" placeholder="Buscar" className=" focus:outline-0" />
             </form>
