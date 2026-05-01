@@ -20,6 +20,8 @@ export type Product = {
     material:string;
     modeling:string;
     weight:string;
+    discountPercentage:number;
+    bundleId:number
     imageUrl: string;
     variants: ProductVariant[];
 };

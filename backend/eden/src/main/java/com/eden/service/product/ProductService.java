@@ -179,6 +179,7 @@ public class ProductService <T>{
         return ProductMapper.toResponseList(orderedProducts);
     }
 
+
     private void validateCreateRequest(CreateProductRequest request) {
         if (request.title() == null || request.title().isBlank()) {
             throw new IllegalArgumentException("Title cannot be null or blank");
