@@ -72,7 +72,47 @@ INSERT INTO product (title, description, image_url, created_at, updated_at) VALU
 	('Black Oversized City Tee', 'Camiseta oversized feminina preta com logo discreto e ombro deslocado.',
 	 'clothes/women/gymshark-woman-oversized-black.jpeg', TIMESTAMP '2025-08-28 16:15:00', NULL),
 	('Prada Hydrate Bottle', 'Garrafa térmica em alumínio escovado com tampa rosqueável.',
-	 'acessories/prada-water-bottle.jpeg', TIMESTAMP '2025-07-22 15:15:00', NULL);
+	 'acessories/prada-water-bottle.jpeg', TIMESTAMP '2025-07-22 15:15:00', NULL),
+	('Gym King Energy Linear Vest Black', 'Regata esportiva preta com recortes lineares e ajuste respirável.',
+	 'clothes/men/30-04-26-Gym-King-Energy-Linear-Vest-Black.jpeg', TIMESTAMP '2026-04-30 08:00:00', NULL),
+	('Gymshark Shark Hoodie Black', 'Moletom preto com capuz e visual streetwear para treino e uso casual.',
+	 'clothes/men/30-04-26-Gymshark-Shark-Hoodie - Black.jpeg', TIMESTAMP '2026-04-30 08:10:00', NULL),
+	('Gymshark Shark Hoodie White', 'Moletom branco com capuz, toque macio e caimento confortável.',
+	 'clothes/men/30-04-26-Gymshark-Shark-Hoodie-white-man Black.jpeg', TIMESTAMP '2026-04-30 08:20:00', NULL),
+	('Vital Collection Seamless Leggings Men', 'Legging masculina seamless com compressão leve e acabamento liso.',
+	 'clothes/men/30-04-26-Man''s-Vital Collection-Seamless-Leggings.jpeg', TIMESTAMP '2026-04-30 08:30:00', NULL),
+	('Mens Gym Tops and T Shirts Collection', 'Coleção de tops e camisetas masculinas com foco em performance.',
+	 'clothes/men/30-04-26-Men''s-Gym-Tops-&-T-Shirts.jpeg', TIMESTAMP '2026-04-30 08:40:00', NULL),
+	('Oxy Mass Muscle Black Tee', 'Camiseta preta com visual musculação e tecido de alta elasticidade.',
+	 'clothes/men/30-04-26-Oxy-Mass-Muscle-Black.jpeg', TIMESTAMP '2026-04-30 08:50:00', NULL),
+	('Gymshark Sports Fitness Releases', 'Imagem de lançamento com destaque para roupas esportivas e fitness.',
+	 'clothes/men/30-04-26-The-Latest Sports-and Fitness-Clothing-Releases-with-Gymshark.jpeg', TIMESTAMP '2026-04-30 09:00:00', NULL),
+	('Lifting Collection For Men Front View', 'Vista frontal de coleção de treino masculino com ajuste atlético.',
+	 'clothes/men/30-04-26-front(1)-Lifting-Collection-For-Men.jpeg', TIMESTAMP '2026-04-30 09:10:00', NULL),
+	('All Green Workout Outfits For Men', 'Conjunto masculino verde para treino com visual monocromático.',
+	 'clothes/men/30-04-26All-Green-Workout-Outfits-For-Men.jpeg', TIMESTAMP '2026-04-30 09:20:00', NULL),
+	('Conjunto Fitness Preto', 'Conjunto feminino preto com visual minimalista e ajuste confortável.',
+	 'clothes/women/30-04-26(conjunto-1-preto.)jpeg', TIMESTAMP '2026-04-30 09:30:00', NULL),
+	('Conjunto Fitness Rosa', 'Conjunto feminino rosa em duas peças com toque macio e elasticidade.',
+	 'clothes/women/30-04-26(conjunto-1-rosa)-2-peças Conjunto-Ajuste Regular-Tecido-Absorvente-de-Umidade_Canelado-Gola-Redonda_Básico_Azul Marinho + -Conjunto-de-Roupas Esportivas-Sem Costura_Fitness_Yoga.jpeg', TIMESTAMP '2026-04-30 09:40:00', NULL),
+	('Hyperflex 2 Cropped Tee Sky Blue', 'Camiseta cropped azul sky com modelagem leve para treino.',
+	 'clothes/women/30-04-26(conjunto-2-azul)-Hyperflex-2-Cropped-Tee-Sky Blue.jpeg', TIMESTAMP '2026-04-30 09:50:00', NULL),
+	('Hyperflex 2 Shorts Charcoal', 'Shorts charcoal com tecido flexível e cintura anatômica.',
+	 'clothes/women/30-04-26(conjunto-2-cinza)-Hyperflex-2-Shorts-Charcoal.jpeg', TIMESTAMP '2026-04-30 10:00:00', NULL),
+	('Gymshark Everyday Seamless Crop Tank Navy', 'Top cropped seamless azul-marinho com acabamento sem costura.',
+	 'clothes/women/30-04-26-Gymshark-Everyday-Seamless-Crop-Tank-Navy.jpeg', TIMESTAMP '2026-04-30 10:10:00', NULL),
+	('Gymshark Fraction Crop Tank Black', 'Top cropped preto com caimento extra ajustado e visual moderno.',
+	 'clothes/women/30-04-26-Gymshark-Fraction-Crop-Tank-Black - Extra-Extra-Large.jpeg', TIMESTAMP '2026-04-30 10:20:00', NULL),
+	('Pink Gym Sets and Workout Sets', 'Coleção de conjuntos rosa para academia e treino funcional.',
+	 'clothes/women/30-04-26-Pink-Gym-Sets-&-Workout-Sets.jpeg', TIMESTAMP '2026-04-30 10:30:00', NULL),
+	('Black Light Blue Seamless Set', 'Conjunto seamless preto com detalhes azul-claros para treino.',
+	 'clothes/women/30-04-26-black-light-blue.jpeg', TIMESTAMP '2026-04-30 10:40:00', NULL),
+	('White Training Shoes Feminine', 'Tênis branco feminino para treino com visual clean e leveza.',
+	 'clothes/women/30-04-26female-shoes-white.jpeg', TIMESTAMP '2026-04-30 10:50:00', NULL),
+	('Vital Long Sleeve Cut Out Top Black Marl', 'Top de manga longa preto mescla com recortes e estilo atlético.',
+	 'clothes/women/30-40-26-Gymshark-Vital-Long-Sleeve-Cut-Out-Top-Black Marl.jpeg', TIMESTAMP '2026-04-30 11:00:00', NULL),
+	('Gymshark Sports Top 30-04-26', 'Top esportivo feminino com suporte médio e tecido respirável.',
+	 'clothes/women/sports-top-gymshark-30-04-26.jpeg', TIMESTAMP '2026-04-30 11:10:00', NULL);
 
 -- Update each product with unique characteristics
 UPDATE product SET modeling = 'Fitted', weight = '185g/m²', material = '88% Poliéster, 12% Elastano' WHERE title = 'Gymshark Black Compression Tee';
@@ -100,6 +140,26 @@ UPDATE product SET modeling = 'Fitted', weight = '238g/m²', material = '90% Pol
 UPDATE product SET modeling = 'Fitted', weight = '228g/m²', material = '80% Nylon, 20% Elastano' WHERE title = 'Brown Lounge Seamless Set';
 UPDATE product SET modeling = 'Oversized', weight = '280g/m²', material = '100% Algodão' WHERE title = 'Black Oversized City Tee';
 UPDATE product SET modeling = 'One Size', weight = '450g', material = 'Alumínio Anodizado' WHERE title = 'Prada Hydrate Bottle';
+UPDATE product SET modeling = 'Regular', weight = '165g/m²', material = '86% Poliéster, 14% Elastano' WHERE title = 'Gym King Energy Linear Vest Black';
+UPDATE product SET modeling = 'Oversized', weight = '315g/m²', material = '84% Algodão, 16% Poliéster' WHERE title = 'Gymshark Shark Hoodie Black';
+UPDATE product SET modeling = 'Oversized', weight = '315g/m²', material = '84% Algodão, 16% Poliéster' WHERE title = 'Gymshark Shark Hoodie White';
+UPDATE product SET modeling = 'Compression', weight = '200g/m²', material = '88% Poliéster, 12% Elastano' WHERE title = 'Vital Collection Seamless Leggings Men';
+UPDATE product SET modeling = 'Regular', weight = '175g/m²', material = '95% Algodão, 5% Elastano' WHERE title = 'Mens Gym Tops and T Shirts Collection';
+UPDATE product SET modeling = 'Fitted', weight = '190g/m²', material = '90% Poliéster, 10% Elastano' WHERE title = 'Oxy Mass Muscle Black Tee';
+UPDATE product SET modeling = 'Regular', weight = '180g/m²', material = '92% Algodão, 8% Elastano' WHERE title = 'Gymshark Sports Fitness Releases';
+UPDATE product SET modeling = 'Fitted', weight = '185g/m²', material = '88% Poliéster, 12% Elastano' WHERE title = 'Lifting Collection For Men Front View';
+UPDATE product SET modeling = 'Set', weight = '240g/m²', material = '85% Poliéster, 15% Elastano' WHERE title = 'All Green Workout Outfits For Men';
+UPDATE product SET modeling = 'Set', weight = '220g/m²', material = '82% Poliéster, 18% Elastano' WHERE title = 'Conjunto Fitness Preto';
+UPDATE product SET modeling = 'Set', weight = '220g/m²', material = '82% Poliéster, 18% Elastano' WHERE title = 'Conjunto Fitness Rosa';
+UPDATE product SET modeling = 'Fitted', weight = '190g/m²', material = '90% Nylon, 10% Elastano' WHERE title = 'Hyperflex 2 Cropped Tee Sky Blue';
+UPDATE product SET modeling = 'Regular', weight = '175g/m²', material = '92% Nylon, 8% Elastano' WHERE title = 'Hyperflex 2 Shorts Charcoal';
+UPDATE product SET modeling = 'Fitted', weight = '195g/m²', material = '89% Poliéster, 11% Elastano' WHERE title = 'Gymshark Everyday Seamless Crop Tank Navy';
+UPDATE product SET modeling = 'Fitted', weight = '195g/m²', material = '89% Poliéster, 11% Elastano' WHERE title = 'Gymshark Fraction Crop Tank Black';
+UPDATE product SET modeling = 'Set', weight = '225g/m²', material = '84% Poliéster, 16% Elastano' WHERE title = 'Pink Gym Sets and Workout Sets';
+UPDATE product SET modeling = 'Set', weight = '230g/m²', material = '86% Nylon, 14% Elastano' WHERE title = 'Black Light Blue Seamless Set';
+UPDATE product SET modeling = 'One Size', weight = '310g', material = 'Mesh Técnico, EVA e Borracha' WHERE title = 'White Training Shoes Feminine';
+UPDATE product SET modeling = 'Fitted', weight = '205g/m²', material = '87% Nylon, 13% Elastano' WHERE title = 'Vital Long Sleeve Cut Out Top Black Marl';
+UPDATE product SET modeling = 'Fitted', weight = '200g/m²', material = '88% Poliéster, 12% Elastano' WHERE title = 'Gymshark Sports Top 30-04-26';
 
 -- Single default variant per product (can be expanded later)
 INSERT INTO product_variant (product_id, sku, color, size, price, stock, category, gender, status, is_default) VALUES
@@ -129,7 +189,27 @@ INSERT INTO product_variant (product_id, sku, color, size, price, stock, categor
 	((SELECT id FROM product WHERE title = 'Red Wine Performance Pants'), 'SKU-0023', 'RED', 'S', 239.00, 19, 'PANTS', 'FEMININE', 'AVAILABLE', TRUE),
 	((SELECT id FROM product WHERE title = 'Brown Lounge Seamless Set'), 'SKU-0024', 'BROWN', 'S', 329.00, 21, 'SET', 'FEMININE', 'AVAILABLE', TRUE),
 	((SELECT id FROM product WHERE title = 'Black Oversized City Tee'), 'SKU-0025', 'BLACK', 'S', 209.00, 28, 'SHIRTS', 'FEMININE', 'AVAILABLE', TRUE),
-	((SELECT id FROM product WHERE title = 'Prada Hydrate Bottle'), 'SKU-0026', 'STEEL', 'ONE', 129.00, 55, 'WATER_BOTTLE', 'UNISSEX', 'AVAILABLE', TRUE);
+	((SELECT id FROM product WHERE title = 'Prada Hydrate Bottle'), 'SKU-0026', 'STEEL', 'ONE', 129.00, 55, 'WATER_BOTTLE', 'UNISSEX', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Gym King Energy Linear Vest Black'), 'SKU-0027', 'BLACK', 'M', 139.90, 26, 'REGATTA', 'MASCULINE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Gymshark Shark Hoodie Black'), 'SKU-0028', 'BLACK', 'M', 299.90, 16, 'SWEATSHIRTS', 'MASCULINE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Gymshark Shark Hoodie White'), 'SKU-0029', 'WHITE', 'M', 299.90, 14, 'SWEATSHIRTS', 'MASCULINE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Vital Collection Seamless Leggings Men'), 'SKU-0030', 'BLACK', 'M', 219.90, 20, 'LEGGING', 'MASCULINE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Mens Gym Tops and T Shirts Collection'), 'SKU-0031', 'BLACK', 'M', 159.90, 24, 'T_SHIRTS', 'MASCULINE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Oxy Mass Muscle Black Tee'), 'SKU-0032', 'BLACK', 'M', 149.90, 29, 'T_SHIRTS', 'MASCULINE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Gymshark Sports Fitness Releases'), 'SKU-0033', 'MULTI', 'U', 99.90, 12, 'SHIRTS', 'MASCULINE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Lifting Collection For Men Front View'), 'SKU-0034', 'BLACK', 'M', 169.90, 22, 'SHIRTS', 'MASCULINE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'All Green Workout Outfits For Men'), 'SKU-0035', 'GREEN', 'M', 259.90, 18, 'SET', 'MASCULINE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Conjunto Fitness Preto'), 'SKU-0036', 'BLACK', 'S', 279.90, 31, 'SET', 'FEMININE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Conjunto Fitness Rosa'), 'SKU-0037', 'PINK', 'S', 279.90, 27, 'SET', 'FEMININE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Hyperflex 2 Cropped Tee Sky Blue'), 'SKU-0038', 'SKY_BLUE', 'S', 159.90, 33, 'SHIRTS', 'FEMININE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Hyperflex 2 Shorts Charcoal'), 'SKU-0039', 'CHARCOAL', 'S', 139.90, 35, 'SHORTS', 'FEMININE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Gymshark Everyday Seamless Crop Tank Navy'), 'SKU-0040', 'NAVY', 'S', 149.90, 30, 'T_SHIRTS', 'FEMININE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Gymshark Fraction Crop Tank Black'), 'SKU-0041', 'BLACK', 'S', 149.90, 28, 'T_SHIRTS', 'FEMININE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Pink Gym Sets and Workout Sets'), 'SKU-0042', 'PINK', 'S', 289.90, 25, 'SET', 'FEMININE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Black Light Blue Seamless Set'), 'SKU-0043', 'BLACK', 'S', 299.90, 21, 'SET', 'FEMININE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'White Training Shoes Feminine'), 'SKU-0044', 'WHITE', '37', 249.90, 19, 'SHOES', 'FEMININE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Vital Long Sleeve Cut Out Top Black Marl'), 'SKU-0045', 'BLACK MARL', 'S', 179.90, 23, 'SHIRTS', 'FEMININE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Gymshark Sports Top 30-04-26'), 'SKU-0046', 'BLACK', 'S', 159.90, 34, 'T_SHIRTS', 'FEMININE', 'AVAILABLE', TRUE);
 
 -- Mirror product main thumbnail into the gallery table
 INSERT INTO product_image (product_id, url, is_main)

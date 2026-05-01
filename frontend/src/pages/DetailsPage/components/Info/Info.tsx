@@ -41,9 +41,9 @@ const Info = () => {
                                 src={`/${selectedProduct.imageUrl}`}
                                 alt={selectedProduct.title}
                                 className="
-                                sm-auto sm:h-200 
+                                sm-auto sm:h-180 
                                 md:w-auto md:h-140
-                                lg:w-auto lg:h-200 lg:object-cover"
+                                lg:w-auto lg:h-190 lg:object-cover"
                                 />
                         </div>
                     </div>
