@@ -35,6 +35,8 @@ public class Product {
     private String weight;
     @Column
     private String material;
+    @Column
+    private int discountPercentage;
     @Column(nullable = false)
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -156,5 +158,13 @@ public class Product {
     public void addImage(ProductImage image) {
         image.setProduct(this);
         this.images.add(image);
+    }
+
+    public int getDiscountPercentage() {
+        return discountPercentage;
+    }
+
+    public void setDiscountPercentage(int discountPercentage) {
+        this.discountPercentage = discountPercentage;
     }
 }

@@ -21,6 +21,7 @@ public class ProductMapper {
                 product.getModeling(),
                 product.getWeight(),
                 product.getMaterial(),
+                product.getDiscountPercentage(),
                 primaryVariant.map(variant -> variant.getGender().name()).orElse(null),
                 primaryVariant.map(variant -> variant.getCategory().name()).orElse(null),
         product.getImageUrl(),

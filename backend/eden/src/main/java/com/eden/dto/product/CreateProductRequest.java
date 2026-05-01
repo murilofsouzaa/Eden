@@ -18,6 +18,7 @@ public record CreateProductRequest(
         String modeling,
         String weight,
         String material,
+        int discountPercentage,
         List<String> gallery,
         @NotNull
         ProductCategories category,

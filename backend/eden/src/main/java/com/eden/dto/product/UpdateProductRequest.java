@@ -9,6 +9,7 @@ public record UpdateProductRequest(
         String modeling,
         String weight,
         String material,
+        int discountPercentage,
         List<String> gallery,
         List<ProductVariantRequest> variants
 ) {}
