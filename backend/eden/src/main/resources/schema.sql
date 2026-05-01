@@ -40,7 +40,7 @@ CREATE TABLE address (
 
 CREATE TABLE sets (
 	id          BIGSERIAL PRIMARY KEY,
-	name        VARCHAR(120) NOT NULL UNIQUE
+	name        VARCHAR(120)
 );
 
 CREATE TABLE product (
@@ -51,20 +51,19 @@ CREATE TABLE product (
 	modeling    TEXT,
 	weight      TEXT,
 	material    TEXT,
-	discount_percentage INTEGER NOT NULL DEFAULT 0 CHECK (discount_percentage >= 0 AND discount_percentage <= 100),
+	discount_percentage INTEGER,
 	set_id      BIGINT REFERENCES sets(id) ON DELETE SET NULL,
 	created_at  TIMESTAMP       NOT NULL DEFAULT NOW(),
-	updated_at  TIMESTAMP,
-	CONSTRAINT product_title_unique UNIQUE (title)
+	updated_at  TIMESTAMP
 );
 
 CREATE TABLE tags (
-	id          SERIAL PRIMARY KEY,
-	name        VARCHAR(80) NOT NULL UNIQUE
+	id          BIGSERIAL PRIMARY KEY,
+	name        VARCHAR(80)
 );
 
 CREATE TABLE product_tags (
-	tag_id      INTEGER NOT NULL REFERENCES tags(id) ON DELETE CASCADE,
+	tag_id      BIGINT  NOT NULL REFERENCES tags(id) ON DELETE CASCADE,
 	product_id  BIGINT  NOT NULL REFERENCES product(id) ON DELETE CASCADE,
 	PRIMARY KEY (tag_id, product_id)
 );

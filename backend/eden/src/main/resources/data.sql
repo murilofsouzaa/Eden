@@ -22,268 +22,105 @@ INSERT INTO order_address (user_id, street, number, neighborhood, city, state, c
 	((SELECT id FROM users WHERE email = 'diego.martins@eden.com'), 'Rua Professor Jesuino Arruda', 45, 'Itaim Bibi', 'São Paulo', 'SP', 'Brasil', '04532-081');
 
 -- Products (image paths reference files inside frontend/public)
-INSERT INTO product (title, description, image_url, created_at, updated_at) VALUES
+INSERT INTO product (title, description, image_url, modeling, weight, material, created_at, updated_at) VALUES
 	('Gymshark Black Compression Tee', 'Camiseta de compressão com tecido respirável para treinos intensos.',
-	 'clothes/men/gymshark-black-compression-shirt-masculine.jpg', TIMESTAMP '2025-12-01 08:00:00', TIMESTAMP '2026-01-05 18:30:00'),
+	 'clothes/men/gymshark-black-compression-shirt-masculine.jpg', 'Fitted', '185g/m²', '88% Poliéster, 12% Elastano', TIMESTAMP '2025-12-01 08:00:00', TIMESTAMP '2026-01-05 18:30:00'),
 	('Gymshark Blue Oversized Hoodie', 'Moletom oversized azul marinho com toque macio e conforto térmico.',
-	 'clothes/men/gymshark-blue-oversized-masculine.jpeg', TIMESTAMP '2025-11-25 11:15:00', NULL),
+	 'clothes/men/gymshark-blue-oversized-masculine.jpeg', 'Oversized', '320g/m²', '85% Algodão, 15% Poliéster', TIMESTAMP '2025-11-25 11:15:00', NULL),
 	('White Performance Joggers', 'Calça jogger branca com ajuste anatômico e bolsos com zíper.',
-	 'clothes/men/white-pants-masculine.jpeg', TIMESTAMP '2025-10-10 09:40:00', TIMESTAMP '2025-12-20 16:20:00'),
+	 'clothes/men/white-pants-masculine.jpeg', 'Fitted', '240g/m²', '92% Algodão, 8% Elastano', TIMESTAMP '2025-10-10 09:40:00', TIMESTAMP '2025-12-20 16:20:00'),
 	('Lima Flex Training Shorts', 'Shorts verde lima com tecido leve e elástico quadridirecional.',
-	 'clothes/men/gymshark-green-shorts-masculine.jpeg', TIMESTAMP '2025-12-05 07:45:00', NULL),
+	 'clothes/men/gymshark-green-shorts-masculine.jpeg', 'Regular', '180g/m²', '100% Poliéster', TIMESTAMP '2025-12-05 07:45:00', NULL),
 	('Black Long Compression Shirt', 'Camiseta longa de compressão com recortes ergonômicos e toque frio.',
-	 'clothes/men/black-long-compressed-shirt-masculine.jpeg', TIMESTAMP '2025-10-28 08:30:00', NULL),
+	 'clothes/men/black-long-compressed-shirt-masculine.jpeg', 'Fitted', '190g/m²', '87% Poliéster, 13% Elastano', TIMESTAMP '2025-10-28 08:30:00', NULL),
 	('Onyx Compression Long Tee', 'Modelo manga longa com suporte muscular gradiente e acabamento fosco.',
-	 'clothes/men/gmyshark-black-long-compression-t-shirt-masculine.jpeg', TIMESTAMP '2025-11-08 09:10:00', NULL),
+	 'clothes/men/gmyshark-black-long-compression-t-shirt-masculine.jpeg', 'Fitted', '195g/m²', '90% Poliéster, 10% Elastano', TIMESTAMP '2025-11-08 09:10:00', NULL),
 	('Carbon Compression Performance Tee', 'Camiseta justa com painel respirável e proteção UV 50.',
-	 'clothes/men/gymshark-black-compression-t-shirt-masculine.jpeg', TIMESTAMP '2025-11-12 07:55:00', NULL),
+	 'clothes/men/gymshark-black-compression-t-shirt-masculine.jpeg', 'Fitted', '188g/m²', '86% Poliéster, 14% Elastano', TIMESTAMP '2025-11-12 07:55:00', NULL),
 	('Elite Compression Pro Top', 'Modelo elite com gola alongada, ajuste progressivo e detalhes refletivos.',
-	 'clothes/men/gymshark-black-long-compression-shit-masculine-elite.jpeg', TIMESTAMP '2025-12-14 06:45:00', TIMESTAMP '2026-01-03 17:00:00'),
+	 'clothes/men/gymshark-black-long-compression-shit-masculine-elite.jpeg', 'Fitted', '192g/m²', '89% Poliéster, 11% Elastano', TIMESTAMP '2025-12-14 06:45:00', TIMESTAMP '2026-01-03 17:00:00'),
 	('Gymshark Black Oversized Tee', 'Camiseta oversized preta com barra alongada e tecido de algodão premium.',
-	 'clothes/men/gymshark-black-oversized-masculine.jpeg', TIMESTAMP '2025-11-02 12:15:00', NULL),
+	 'clothes/men/gymshark-black-oversized-masculine.jpeg', 'Oversized', '250g/m²', '100% Algodão', TIMESTAMP '2025-11-02 12:15:00', NULL),
 	('Shadow Pro Training Shorts', 'Short preto com painéis laterais perfurados e cordão embutido.',
-	 'clothes/men/gymshark-black-short-masculine.jpeg', TIMESTAMP '2025-12-03 09:05:00', NULL),
+	 'clothes/men/gymshark-black-short-masculine.jpeg', 'Regular', '175g/m²', '98% Poliéster, 2% Elastano', TIMESTAMP '2025-12-03 09:05:00', NULL),
 	('Gymshark Green Oversized Tee', 'Camiseta oversized verde com malha de gramatura média.',
-	 'clothes/men/gymshark-green-oversized-masculine.jpeg', TIMESTAMP '2025-11-18 10:25:00', NULL),
+	 'clothes/men/gymshark-green-oversized-masculine.jpeg', 'Oversized', '260g/m²', '95% Algodão, 5% Poliéster', TIMESTAMP '2025-11-18 10:25:00', NULL),
 	('Plum Seamless Performance Tee', 'Camiseta seamless em tom ameixa com textura canelada e ventilação integrada.',
-	 'clothes/men/gymshark-plum-brown-shirt-masculine.jpeg', TIMESTAMP '2025-10-22 08:40:00', NULL),
+	 'clothes/men/gymshark-plum-brown-shirt-masculine.jpeg', 'Fitted', '210g/m²', '91% Nylon, 9% Elastano', TIMESTAMP '2025-10-22 08:40:00', NULL),
 	('Arctic Court Shorts', 'Short branco com barras reforçadas e bolso invisível para chaves.',
-	 'clothes/men/gymshark-white-shorts-masculine.jpeg', TIMESTAMP '2025-12-07 15:10:00', NULL),
+	 'clothes/men/gymshark-white-shorts-masculine.jpeg', 'Regular', '170g/m²', '100% Poliéster', TIMESTAMP '2025-12-07 15:10:00', NULL),
 	('White Performance Joggers Front View', 'Versão frontal dos joggers brancos destacando o ajuste cônico.',
-	 'clothes/men/white-pants-masculine-front.jpeg', TIMESTAMP '2025-10-12 10:05:00', NULL),
+	 'clothes/men/white-pants-masculine-front.jpeg', 'Fitted', '245g/m²', '93% Algodão, 7% Elastano', TIMESTAMP '2025-10-12 10:05:00', NULL),
 	('Emerald Seamless Legging', 'Legging feminina seamless com compressão moderada e acabamento opaco.',
-	 'clothes/women/gymshark-green-legging.jpeg', TIMESTAMP '2025-09-18 13:25:00', TIMESTAMP '2025-12-11 12:10:00'),
+	 'clothes/women/gymshark-green-legging.jpeg', 'Fitted', '215g/m²', '88% Nylon, 12% Elastano', TIMESTAMP '2025-09-18 13:25:00', TIMESTAMP '2025-12-11 12:10:00'),
 	('Cloudy Oversized Tee', 'Camiseta oversized feminina em algodão orgânico e barra desfiada.',
-	 'clothes/women/gymshark-white-oversized-woman.jpeg', TIMESTAMP '2025-08-30 10:05:00', NULL),
+	 'clothes/women/gymshark-white-oversized-woman.jpeg', 'Oversized', '270g/m²', '100% Algodão Orgânico', TIMESTAMP '2025-08-30 10:05:00', NULL),
 	('Black Sculpt Seamless Set', 'Conjunto seamless preto com top suporte médio e legging cintura alta.',
-	 'clothes/women/gymshar-black-set-women.jpeg', TIMESTAMP '2025-09-05 09:50:00', NULL),
+	 'clothes/women/gymshar-black-set-women.jpeg', 'Fitted', '220g/m²', '82% Nylon, 18% Elastano', TIMESTAMP '2025-09-05 09:50:00', NULL),
 	('Crimson Wine Pants (Back)', 'Visão traseira da calça vinho com recortes respiráveis e bolso interno.',
-	 'clothes/women/gymshark,red-wine-pants-women-back.jpeg', TIMESTAMP '2025-09-07 11:00:00', NULL),
+	 'clothes/women/gymshark,red-wine-pants-women-back.jpeg', 'Fitted', '235g/m²', '87% Poliéster, 13% Elastano', TIMESTAMP '2025-09-07 11:00:00', NULL),
 	('Midnight Sculpt Legging', 'Legging preta com compressão localizada e cintura dupla para suporte extra.',
-	 'clothes/women/gymshark-black-legging.jpeg', TIMESTAMP '2025-09-12 08:05:00', NULL),
+	 'clothes/women/gymshark-black-legging.jpeg', 'Fitted', '205g/m²', '85% Nylon, 15% Elastano', TIMESTAMP '2025-09-12 08:05:00', NULL),
 	('Blue Ocean Motion Legging', 'Legging azul oceano com acabamento gelado e recortes ondulados.',
-	 'clothes/women/gymshark-blue-ocean-legging.jpeg', TIMESTAMP '2025-09-14 09:35:00', NULL),
+	 'clothes/women/gymshark-blue-ocean-legging.jpeg', 'Fitted', '218g/m²', '89% Nylon, 11% Elastano', TIMESTAMP '2025-09-14 09:35:00', NULL),
 	('Grey Studio Seamless Set', 'Conjunto cinza com textura jacquard e ventilação estratégica.',
-	 'clothes/women/gymshark-grey-set-women.jpeg', TIMESTAMP '2025-09-20 12:00:00', NULL),
+	 'clothes/women/gymshark-grey-set-women.jpeg', 'Fitted', '225g/m²', '84% Nylon, 16% Elastano', TIMESTAMP '2025-09-20 12:00:00', NULL),
 	('Red Wine Performance Pants', 'Calça vinho com corte fluido e abertura lateral para mobilidade.',
-	 'clothes/women/gymshark-red-wine-pants-women.jpeg', TIMESTAMP '2025-09-22 13:10:00', NULL),
+	 'clothes/women/gymshark-red-wine-pants-women.jpeg', 'Fitted', '238g/m²', '90% Poliéster, 10% Elastano', TIMESTAMP '2025-09-22 13:10:00', NULL),
 	('Brown Lounge Seamless Set', 'Conjunto marrom com malha acetinada e top de decote quadrado.',
-	 'clothes/women/gymshark-set-brown-women.jpeg', TIMESTAMP '2025-09-24 14:25:00', NULL),
+	 'clothes/women/gymshark-set-brown-women.jpeg', 'Fitted', '228g/m²', '80% Nylon, 20% Elastano', TIMESTAMP '2025-09-24 14:25:00', NULL),
 	('Black Oversized City Tee', 'Camiseta oversized feminina preta com logo discreto e ombro deslocado.',
-	 'clothes/women/gymshark-woman-oversized-black.jpeg', TIMESTAMP '2025-08-28 16:15:00', NULL),
+	 'clothes/women/gymshark-woman-oversized-black.jpeg', 'Oversized', '280g/m²', '100% Algodão', TIMESTAMP '2025-08-28 16:15:00', NULL),
 	('Prada Hydrate Bottle', 'Garrafa térmica em alumínio escovado com tampa rosqueável.',
-	 'acessories/prada-water-bottle.jpeg', TIMESTAMP '2025-07-22 15:15:00', NULL),
+	 'acessories/prada-water-bottle.jpeg', 'One Size', '450g', 'Alumínio Anodizado', TIMESTAMP '2025-07-22 15:15:00', NULL),
 	('Gym King Energy Linear Vest Black', 'Regata esportiva preta com recortes lineares e ajuste respirável.',
-	 'clothes/men/30-04-26-Gym-King-Energy-Linear-Vest-Black.jpeg', TIMESTAMP '2026-04-30 08:00:00', NULL),
+	 'clothes/men/30-04-26-Gym-King-Energy-Linear-Vest-Black.jpeg', 'Regular', '165g/m²', '86% Poliéster, 14% Elastano', TIMESTAMP '2026-04-30 08:00:00', NULL),
 	('Gymshark Shark Hoodie Black', 'Moletom preto com capuz e visual streetwear para treino e uso casual.',
-	 'clothes/men/30-04-26-Gymshark-Shark-Hoodie - Black.jpeg', TIMESTAMP '2026-04-30 08:10:00', NULL),
+	 'clothes/men/30-04-26-Gymshark-Shark-Hoodie - Black.jpeg', 'Oversized', '315g/m²', '84% Algodão, 16% Poliéster', TIMESTAMP '2026-04-30 08:10:00', NULL),
 	('Gymshark Shark Hoodie White', 'Moletom branco com capuz, toque macio e caimento confortável.',
-	 'clothes/men/30-04-26-Gymshark-Shark-Hoodie-white-man Black.jpeg', TIMESTAMP '2026-04-30 08:20:00', NULL),
+	 'clothes/men/30-04-26-Gymshark-Shark-Hoodie-white-man Black.jpeg', 'Oversized', '315g/m²', '84% Algodão, 16% Poliéster', TIMESTAMP '2026-04-30 08:20:00', NULL),
 	('Vital Collection Seamless Leggings Men', 'Legging masculina seamless com compressão leve e acabamento liso.',
-	 'clothes/men/30-04-26-Man''s-Vital Collection-Seamless-Leggings.jpeg', TIMESTAMP '2026-04-30 08:30:00', NULL),
+	 'clothes/men/30-04-26-Man''s-Vital Collection-Seamless-Leggings.jpeg', 'Compression', '200g/m²', '88% Poliéster, 12% Elastano', TIMESTAMP '2026-04-30 08:30:00', NULL),
 	('Mens Gym Tops and T Shirts Collection', 'Coleção de tops e camisetas masculinas com foco em performance.',
-	 'clothes/men/30-04-26-Men''s-Gym-Tops-&-T-Shirts.jpeg', TIMESTAMP '2026-04-30 08:40:00', NULL),
+	 'clothes/men/30-04-26-Men''s-Gym-Tops-&-T-Shirts.jpeg', 'Regular', '175g/m²', '95% Algodão, 5% Elastano', TIMESTAMP '2026-04-30 08:40:00', NULL),
 	('Oxy Mass Muscle Black Tee', 'Camiseta preta com visual musculação e tecido de alta elasticidade.',
-	 'clothes/men/30-04-26-Oxy-Mass-Muscle-Black.jpeg', TIMESTAMP '2026-04-30 08:50:00', NULL),
+	 'clothes/men/30-04-26-Oxy-Mass-Muscle-Black.jpeg', 'Fitted', '190g/m²', '90% Poliéster, 10% Elastano', TIMESTAMP '2026-04-30 08:50:00', NULL),
 	('Gymshark Sports Fitness Releases', 'Imagem de lançamento com destaque para roupas esportivas e fitness.',
-	 'clothes/men/30-04-26-The-Latest Sports-and Fitness-Clothing-Releases-with-Gymshark.jpeg', TIMESTAMP '2026-04-30 09:00:00', NULL),
+	 'clothes/men/30-04-26-The-Latest Sports-and Fitness-Clothing-Releases-with-Gymshark.jpeg', 'Regular', '180g/m²', '92% Algodão, 8% Elastano', TIMESTAMP '2026-04-30 09:00:00', NULL),
 	('Lifting Collection For Men Front View', 'Vista frontal de coleção de treino masculino com ajuste atlético.',
-	 'clothes/men/30-04-26-front(1)-Lifting-Collection-For-Men.jpeg', TIMESTAMP '2026-04-30 09:10:00', NULL),
+	 'clothes/men/30-04-26-front(1)-Lifting-Collection-For-Men.jpeg', 'Fitted', '185g/m²', '88% Poliéster, 12% Elastano', TIMESTAMP '2026-04-30 09:10:00', NULL),
 	('All Green Workout Outfits For Men', 'Conjunto masculino verde para treino com visual monocromático.',
-	 'clothes/men/30-04-26All-Green-Workout-Outfits-For-Men.jpeg', TIMESTAMP '2026-04-30 09:20:00', NULL),
+	 'clothes/men/30-04-26All-Green-Workout-Outfits-For-Men.jpeg', 'Set', '240g/m²', '85% Poliéster, 15% Elastano', TIMESTAMP '2026-04-30 09:20:00', NULL),
 	('Conjunto Fitness Preto', 'Conjunto feminino preto com visual minimalista e ajuste confortável.',
-	 'clothes/women/30-04-26(conjunto-1-preto.)jpeg', TIMESTAMP '2026-04-30 09:30:00', NULL),
+	 'clothes/women/30-04-26(conjunto-1-preto.)jpeg', 'Set', '220g/m²', '82% Poliéster, 18% Elastano', TIMESTAMP '2026-04-30 09:30:00', NULL),
 	('Conjunto Fitness Rosa', 'Conjunto feminino rosa em duas peças com toque macio e elasticidade.',
-	 'clothes/women/30-04-26(conjunto-1-rosa)-2-peças Conjunto-Ajuste Regular-Tecido-Absorvente-de-Umidade_Canelado-Gola-Redonda_Básico_Azul Marinho + -Conjunto-de-Roupas Esportivas-Sem Costura_Fitness_Yoga.jpeg', TIMESTAMP '2026-04-30 09:40:00', NULL),
+	 'clothes/women/30-04-26(conjunto-1-rosa)-2-peças Conjunto-Ajuste Regular-Tecido-Absorvente-de-Umidade_Canelado-Gola-Redonda_Básico_Azul Marinho + -Conjunto-de-Roupas Esportivas-Sem Costura_Fitness_Yoga.jpeg', 'Set', '220g/m²', '82% Poliéster, 18% Elastano', TIMESTAMP '2026-04-30 09:40:00', NULL),
 	('Hyperflex 2 Cropped Tee Sky Blue', 'Camiseta cropped azul sky com modelagem leve para treino.',
-	 'clothes/women/30-04-26(conjunto-2-azul)-Hyperflex-2-Cropped-Tee-Sky Blue.jpeg', TIMESTAMP '2026-04-30 09:50:00', NULL),
+	 'clothes/women/30-04-26(conjunto-2-azul)-Hyperflex-2-Cropped-Tee-Sky Blue.jpeg', 'Fitted', '190g/m²', '90% Nylon, 10% Elastano', TIMESTAMP '2026-04-30 09:50:00', NULL),
 	('Hyperflex 2 Shorts Charcoal', 'Shorts charcoal com tecido flexível e cintura anatômica.',
-	 'clothes/women/30-04-26(conjunto-2-cinza)-Hyperflex-2-Shorts-Charcoal.jpeg', TIMESTAMP '2026-04-30 10:00:00', NULL),
+	 'clothes/women/30-04-26(conjunto-2-cinza)-Hyperflex-2-Shorts-Charcoal.jpeg', 'Regular', '175g/m²', '92% Nylon, 8% Elastano', TIMESTAMP '2026-04-30 10:00:00', NULL),
 	('Gymshark Everyday Seamless Crop Tank Navy', 'Top cropped seamless azul-marinho com acabamento sem costura.',
-	 'clothes/women/30-04-26-Gymshark-Everyday-Seamless-Crop-Tank-Navy.jpeg', TIMESTAMP '2026-04-30 10:10:00', NULL),
+	 'clothes/women/30-04-26-Gymshark-Everyday-Seamless-Crop-Tank-Navy.jpeg', 'Fitted', '195g/m²', '89% Poliéster, 11% Elastano', TIMESTAMP '2026-04-30 10:10:00', NULL),
 	('Gymshark Fraction Crop Tank Black', 'Top cropped preto com caimento extra ajustado e visual moderno.',
-	 'clothes/women/30-04-26-Gymshark-Fraction-Crop-Tank-Black - Extra-Extra-Large.jpeg', TIMESTAMP '2026-04-30 10:20:00', NULL),
+	 'clothes/women/30-04-26-Gymshark-Fraction-Crop-Tank-Black - Extra-Extra-Large.jpeg', 'Fitted', '195g/m²', '89% Poliéster, 11% Elastano', TIMESTAMP '2026-04-30 10:20:00', NULL),
 	('Pink Gym Sets and Workout Sets', 'Coleção de conjuntos rosa para academia e treino funcional.',
-	 'clothes/women/30-04-26-Pink-Gym-Sets-&-Workout-Sets.jpeg', TIMESTAMP '2026-04-30 10:30:00', NULL),
+	 'clothes/women/30-04-26-Pink-Gym-Sets-&-Workout-Sets.jpeg', 'Set', '225g/m²', '84% Poliéster, 16% Elastano', TIMESTAMP '2026-04-30 10:30:00', NULL),
 	('Black Light Blue Seamless Set', 'Conjunto seamless preto com detalhes azul-claros para treino.',
-	 'clothes/women/30-04-26-black-light-blue.jpeg', TIMESTAMP '2026-04-30 10:40:00', NULL),
+	 'clothes/women/30-04-26-black-light-blue.jpeg', 'Set', '230g/m²', '86% Nylon, 14% Elastano', TIMESTAMP '2026-04-30 10:40:00', NULL),
 	('White Training Shoes Feminine', 'Tênis branco feminino para treino com visual clean e leveza.',
-	 'clothes/women/30-04-26female-shoes-white.jpeg', TIMESTAMP '2026-04-30 10:50:00', NULL),
+	 'clothes/women/30-04-26female-shoes-white.jpeg', 'One Size', '310g', 'Mesh Técnico, EVA e Borracha', TIMESTAMP '2026-04-30 10:50:00', NULL),
 	('Vital Long Sleeve Cut Out Top Black Marl', 'Top de manga longa preto mescla com recortes e estilo atlético.',
-	 'clothes/women/30-40-26-Gymshark-Vital-Long-Sleeve-Cut-Out-Top-Black Marl.jpeg', TIMESTAMP '2026-04-30 11:00:00', NULL),
+	 'clothes/women/30-40-26-Gymshark-Vital-Long-Sleeve-Cut-Out-Top-Black Marl.jpeg', 'Fitted', '205g/m²', '87% Nylon, 13% Elastano', TIMESTAMP '2026-04-30 11:00:00', NULL),
 	('Gymshark Sports Top 30-04-26', 'Top esportivo feminino com suporte médio e tecido respirável.',
-	 'clothes/women/sports-top-gymshark-30-04-26.jpeg', TIMESTAMP '2026-04-30 11:10:00', NULL),
+	 'clothes/women/sports-top-gymshark-30-04-26.jpeg', 'Fitted', '200g/m²', '88% Poliéster, 12% Elastano', TIMESTAMP '2026-04-30 11:10:00', NULL),
 	('Vuori Viewpoint Muscle Tank Navy', 'Regata Vuori com malha leve e respirável para alta performance.',
-	 'clothes/men/01-05-26-(SET-vuori-set-blue-blackman)Viewpoint Muscle Tank – Navy – Vuori.jpeg', TIMESTAMP '2026-05-01 08:00:00', NULL),
+	 'clothes/men/01-05-26-(SET-vuori-set-blue-blackman)Viewpoint Muscle Tank – Navy – Vuori.jpeg', 'Regular', '165g/m²', '91% Nylon, 9% Elastano', TIMESTAMP '2026-05-01 08:00:00', NULL),
 	('Vuori Viewpoint Muscle Tank Sky Grey', 'Regata Vuori em sky grey com caimento atlético e toque leve.',
-	 'clothes/men/01-05-26-(SET-vuori-set-white-whiteman)-Viewpoint Muscle-Tank–Sky Grey–Tanks–Vuori.jpeg', TIMESTAMP '2026-05-01 08:10:00', NULL),
+	 'clothes/men/01-05-26-(SET-vuori-set-white-whiteman)-Viewpoint Muscle-Tank–Sky Grey–Tanks–Vuori.jpeg', 'Regular', '165g/m²', '91% Nylon, 9% Elastano', TIMESTAMP '2026-05-01 08:10:00', NULL),
 	('Vuori Strato Muscle Tee Chambray Heather', 'Camiseta músculo Vuori em chambray heather com tecido stretch-knit.',
-	 'clothes/men/01-05-26-Strato-Muscle-Tee – Chambray-Heather-Workout-Tank–Vuori.jpeg', TIMESTAMP '2026-05-01 08:20:00', NULL),
+	 'clothes/men/01-05-26-Strato-Muscle-Tee – Chambray-Heather-Workout-Tank–Vuori.jpeg', 'Fitted', '188g/m²', '89% Nylon, 11% Elastano', TIMESTAMP '2026-05-01 08:20:00', NULL),
 	('Black White Workout Set', 'Conjunto masculino preto e branco com visual clean e esportivo.',
-	 'clothes/men/1-05-26-black-white.jpeg', TIMESTAMP '2026-05-01 08:30:00', NULL);
-
--- Update each product with unique characteristics (consolidated with CASE WHEN for performance)
-UPDATE product
-SET modeling = CASE title
-	WHEN 'Gymshark Black Compression Tee' THEN 'Fitted'
-	WHEN 'Gymshark Blue Oversized Hoodie' THEN 'Oversized'
-	WHEN 'White Performance Joggers' THEN 'Fitted'
-	WHEN 'Lima Flex Training Shorts' THEN 'Regular'
-	WHEN 'Black Long Compression Shirt' THEN 'Fitted'
-	WHEN 'Onyx Compression Long Tee' THEN 'Fitted'
-	WHEN 'Carbon Compression Performance Tee' THEN 'Fitted'
-	WHEN 'Elite Compression Pro Top' THEN 'Fitted'
-	WHEN 'Gymshark Black Oversized Tee' THEN 'Oversized'
-	WHEN 'Shadow Pro Training Shorts' THEN 'Regular'
-	WHEN 'Gymshark Green Oversized Tee' THEN 'Oversized'
-	WHEN 'Plum Seamless Performance Tee' THEN 'Fitted'
-	WHEN 'Arctic Court Shorts' THEN 'Regular'
-	WHEN 'White Performance Joggers Front View' THEN 'Fitted'
-	WHEN 'Emerald Seamless Legging' THEN 'Fitted'
-	WHEN 'Cloudy Oversized Tee' THEN 'Oversized'
-	WHEN 'Black Sculpt Seamless Set' THEN 'Fitted'
-	WHEN 'Crimson Wine Pants (Back)' THEN 'Fitted'
-	WHEN 'Midnight Sculpt Legging' THEN 'Fitted'
-	WHEN 'Blue Ocean Motion Legging' THEN 'Fitted'
-	WHEN 'Grey Studio Seamless Set' THEN 'Fitted'
-	WHEN 'Red Wine Performance Pants' THEN 'Fitted'
-	WHEN 'Brown Lounge Seamless Set' THEN 'Fitted'
-	WHEN 'Black Oversized City Tee' THEN 'Oversized'
-	WHEN 'Prada Hydrate Bottle' THEN 'One Size'
-	WHEN 'Gym King Energy Linear Vest Black' THEN 'Regular'
-	WHEN 'Gymshark Shark Hoodie Black' THEN 'Oversized'
-	WHEN 'Gymshark Shark Hoodie White' THEN 'Oversized'
-	WHEN 'Vital Collection Seamless Leggings Men' THEN 'Compression'
-	WHEN 'Mens Gym Tops and T Shirts Collection' THEN 'Regular'
-	WHEN 'Oxy Mass Muscle Black Tee' THEN 'Fitted'
-	WHEN 'Gymshark Sports Fitness Releases' THEN 'Regular'
-	WHEN 'Lifting Collection For Men Front View' THEN 'Fitted'
-	WHEN 'All Green Workout Outfits For Men' THEN 'Set'
-	WHEN 'Conjunto Fitness Preto' THEN 'Set'
-	WHEN 'Conjunto Fitness Rosa' THEN 'Set'
-	WHEN 'Hyperflex 2 Cropped Tee Sky Blue' THEN 'Fitted'
-	WHEN 'Hyperflex 2 Shorts Charcoal' THEN 'Regular'
-	WHEN 'Gymshark Everyday Seamless Crop Tank Navy' THEN 'Fitted'
-	WHEN 'Gymshark Fraction Crop Tank Black' THEN 'Fitted'
-	WHEN 'Pink Gym Sets and Workout Sets' THEN 'Set'
-	WHEN 'Black Light Blue Seamless Set' THEN 'Set'
-	WHEN 'White Training Shoes Feminine' THEN 'One Size'
-	WHEN 'Vital Long Sleeve Cut Out Top Black Marl' THEN 'Fitted'
-	WHEN 'Gymshark Sports Top 30-04-26' THEN 'Fitted'
-END,
-weight = CASE title
-	WHEN 'Gymshark Black Compression Tee' THEN '185g/m²'
-	WHEN 'Gymshark Blue Oversized Hoodie' THEN '320g/m²'
-	WHEN 'White Performance Joggers' THEN '240g/m²'
-	WHEN 'Lima Flex Training Shorts' THEN '180g/m²'
-	WHEN 'Black Long Compression Shirt' THEN '190g/m²'
-	WHEN 'Onyx Compression Long Tee' THEN '195g/m²'
-	WHEN 'Carbon Compression Performance Tee' THEN '188g/m²'
-	WHEN 'Elite Compression Pro Top' THEN '192g/m²'
-	WHEN 'Gymshark Black Oversized Tee' THEN '250g/m²'
-	WHEN 'Shadow Pro Training Shorts' THEN '175g/m²'
-	WHEN 'Gymshark Green Oversized Tee' THEN '260g/m²'
-	WHEN 'Plum Seamless Performance Tee' THEN '210g/m²'
-	WHEN 'Arctic Court Shorts' THEN '170g/m²'
-	WHEN 'White Performance Joggers Front View' THEN '245g/m²'
-	WHEN 'Emerald Seamless Legging' THEN '215g/m²'
-	WHEN 'Cloudy Oversized Tee' THEN '270g/m²'
-	WHEN 'Black Sculpt Seamless Set' THEN '220g/m²'
-	WHEN 'Crimson Wine Pants (Back)' THEN '235g/m²'
-	WHEN 'Midnight Sculpt Legging' THEN '205g/m²'
-	WHEN 'Blue Ocean Motion Legging' THEN '218g/m²'
-	WHEN 'Grey Studio Seamless Set' THEN '225g/m²'
-	WHEN 'Red Wine Performance Pants' THEN '238g/m²'
-	WHEN 'Brown Lounge Seamless Set' THEN '228g/m²'
-	WHEN 'Black Oversized City Tee' THEN '280g/m²'
-	WHEN 'Prada Hydrate Bottle' THEN '450g'
-	WHEN 'Gym King Energy Linear Vest Black' THEN '165g/m²'
-	WHEN 'Gymshark Shark Hoodie Black' THEN '315g/m²'
-	WHEN 'Gymshark Shark Hoodie White' THEN '315g/m²'
-	WHEN 'Vital Collection Seamless Leggings Men' THEN '200g/m²'
-	WHEN 'Mens Gym Tops and T Shirts Collection' THEN '175g/m²'
-	WHEN 'Oxy Mass Muscle Black Tee' THEN '190g/m²'
-	WHEN 'Gymshark Sports Fitness Releases' THEN '180g/m²'
-	WHEN 'Lifting Collection For Men Front View' THEN '185g/m²'
-	WHEN 'All Green Workout Outfits For Men' THEN '240g/m²'
-	WHEN 'Conjunto Fitness Preto' THEN '220g/m²'
-	WHEN 'Conjunto Fitness Rosa' THEN '220g/m²'
-	WHEN 'Hyperflex 2 Cropped Tee Sky Blue' THEN '190g/m²'
-	WHEN 'Hyperflex 2 Shorts Charcoal' THEN '175g/m²'
-	WHEN 'Gymshark Everyday Seamless Crop Tank Navy' THEN '195g/m²'
-	WHEN 'Gymshark Fraction Crop Tank Black' THEN '195g/m²'
-	WHEN 'Pink Gym Sets and Workout Sets' THEN '225g/m²'
-	WHEN 'Black Light Blue Seamless Set' THEN '230g/m²'
-	WHEN 'White Training Shoes Feminine' THEN '310g'
-	WHEN 'Vital Long Sleeve Cut Out Top Black Marl' THEN '205g/m²'
-	WHEN 'Gymshark Sports Top 30-04-26' THEN '200g/m²'
-END,
-material = CASE title
-	WHEN 'Gymshark Black Compression Tee' THEN '88% Poliéster, 12% Elastano'
-	WHEN 'Gymshark Blue Oversized Hoodie' THEN '85% Algodão, 15% Poliéster'
-	WHEN 'White Performance Joggers' THEN '92% Algodão, 8% Elastano'
-	WHEN 'Lima Flex Training Shorts' THEN '100% Poliéster'
-	WHEN 'Black Long Compression Shirt' THEN '87% Poliéster, 13% Elastano'
-	WHEN 'Onyx Compression Long Tee' THEN '90% Poliéster, 10% Elastano'
-	WHEN 'Carbon Compression Performance Tee' THEN '86% Poliéster, 14% Elastano'
-	WHEN 'Elite Compression Pro Top' THEN '89% Poliéster, 11% Elastano'
-	WHEN 'Gymshark Black Oversized Tee' THEN '100% Algodão'
-	WHEN 'Shadow Pro Training Shorts' THEN '98% Poliéster, 2% Elastano'
-	WHEN 'Gymshark Green Oversized Tee' THEN '95% Algodão, 5% Poliéster'
-	WHEN 'Plum Seamless Performance Tee' THEN '91% Nylon, 9% Elastano'
-	WHEN 'Arctic Court Shorts' THEN '100% Poliéster'
-	WHEN 'White Performance Joggers Front View' THEN '93% Algodão, 7% Elastano'
-	WHEN 'Emerald Seamless Legging' THEN '88% Nylon, 12% Elastano'
-	WHEN 'Cloudy Oversized Tee' THEN '100% Algodão Orgânico'
-	WHEN 'Black Sculpt Seamless Set' THEN '82% Nylon, 18% Elastano'
-	WHEN 'Crimson Wine Pants (Back)' THEN '87% Poliéster, 13% Elastano'
-	WHEN 'Midnight Sculpt Legging' THEN '85% Nylon, 15% Elastano'
-	WHEN 'Blue Ocean Motion Legging' THEN '89% Nylon, 11% Elastano'
-	WHEN 'Grey Studio Seamless Set' THEN '84% Nylon, 16% Elastano'
-	WHEN 'Red Wine Performance Pants' THEN '90% Poliéster, 10% Elastano'
-	WHEN 'Brown Lounge Seamless Set' THEN '80% Nylon, 20% Elastano'
-	WHEN 'Black Oversized City Tee' THEN '100% Algodão'
-	WHEN 'Prada Hydrate Bottle' THEN 'Alumínio Anodizado'
-	WHEN 'Gym King Energy Linear Vest Black' THEN '86% Poliéster, 14% Elastano'
-	WHEN 'Gymshark Shark Hoodie Black' THEN '84% Algodão, 16% Poliéster'
-	WHEN 'Gymshark Shark Hoodie White' THEN '84% Algodão, 16% Poliéster'
-	WHEN 'Vital Collection Seamless Leggings Men' THEN '88% Poliéster, 12% Elastano'
-	WHEN 'Mens Gym Tops and T Shirts Collection' THEN '95% Algodão, 5% Elastano'
-	WHEN 'Oxy Mass Muscle Black Tee' THEN '90% Poliéster, 10% Elastano'
-	WHEN 'Gymshark Sports Fitness Releases' THEN '92% Algodão, 8% Elastano'
-	WHEN 'Lifting Collection For Men Front View' THEN '88% Poliéster, 12% Elastano'
-	WHEN 'All Green Workout Outfits For Men' THEN '85% Poliéster, 15% Elastano'
-	WHEN 'Conjunto Fitness Preto' THEN '82% Poliéster, 18% Elastano'
-	WHEN 'Conjunto Fitness Rosa' THEN '82% Poliéster, 18% Elastano'
-	WHEN 'Hyperflex 2 Cropped Tee Sky Blue' THEN '90% Nylon, 10% Elastano'
-	WHEN 'Hyperflex 2 Shorts Charcoal' THEN '92% Nylon, 8% Elastano'
-	WHEN 'Gymshark Everyday Seamless Crop Tank Navy' THEN '89% Poliéster, 11% Elastano'
-	WHEN 'Gymshark Fraction Crop Tank Black' THEN '89% Poliéster, 11% Elastano'
-	WHEN 'Pink Gym Sets and Workout Sets' THEN '84% Poliéster, 16% Elastano'
-	WHEN 'Black Light Blue Seamless Set' THEN '86% Nylon, 14% Elastano'
-	WHEN 'White Training Shoes Feminine' THEN 'Mesh Técnico, EVA e Borracha'
-	WHEN 'Vital Long Sleeve Cut Out Top Black Marl' THEN '87% Nylon, 13% Elastano'
-	WHEN 'Gymshark Sports Top 30-04-26' THEN '88% Poliéster, 12% Elastano'
-END
-WHERE title IN (
-	'Gymshark Black Compression Tee', 'Gymshark Blue Oversized Hoodie', 'White Performance Joggers',
-	'Lima Flex Training Shorts', 'Black Long Compression Shirt', 'Onyx Compression Long Tee',
-	'Carbon Compression Performance Tee', 'Elite Compression Pro Top', 'Gymshark Black Oversized Tee',
-	'Shadow Pro Training Shorts', 'Gymshark Green Oversized Tee', 'Plum Seamless Performance Tee',
-	'Arctic Court Shorts', 'White Performance Joggers Front View', 'Emerald Seamless Legging',
-	'Cloudy Oversized Tee', 'Black Sculpt Seamless Set', 'Crimson Wine Pants (Back)',
-	'Midnight Sculpt Legging', 'Blue Ocean Motion Legging', 'Grey Studio Seamless Set',
-	'Red Wine Performance Pants', 'Brown Lounge Seamless Set', 'Black Oversized City Tee',
-	'Prada Hydrate Bottle', 'Gym King Energy Linear Vest Black', 'Gymshark Shark Hoodie Black',
-	'Gymshark Shark Hoodie White', 'Vital Collection Seamless Leggings Men',
-	'Mens Gym Tops and T Shirts Collection', 'Oxy Mass Muscle Black Tee',
-	'Gymshark Sports Fitness Releases', 'Lifting Collection For Men Front View',
-	'All Green Workout Outfits For Men', 'Conjunto Fitness Preto', 'Conjunto Fitness Rosa',
-	'Hyperflex 2 Cropped Tee Sky Blue', 'Hyperflex 2 Shorts Charcoal',
-	'Gymshark Everyday Seamless Crop Tank Navy', 'Gymshark Fraction Crop Tank Black',
-	'Pink Gym Sets and Workout Sets', 'Black Light Blue Seamless Set', 'White Training Shoes Feminine',
-	'Vital Long Sleeve Cut Out Top Black Marl', 'Gymshark Sports Top 30-04-26'
-);
+	 'clothes/men/1-05-26-black-white.jpeg', 'Set', '200g/m²', '88% Poliéster, 12% Elastano', TIMESTAMP '2026-05-01 08:30:00', NULL);
 
 -- Discount setup: consolidated with CASE WHEN for optimal performance
 UPDATE product
