@@ -122,133 +122,211 @@ INSERT INTO product (title, description, image_url, created_at, updated_at) VALU
 	('Black White Workout Set', 'Conjunto masculino preto e branco com visual clean e esportivo.',
 	 'clothes/men/1-05-26-black-white.jpeg', TIMESTAMP '2026-05-01 08:30:00', NULL);
 
--- Update each product with unique characteristics
-UPDATE product SET modeling = 'Fitted', weight = '185g/m²', material = '88% Poliéster, 12% Elastano' WHERE title = 'Gymshark Black Compression Tee';
-UPDATE product SET modeling = 'Oversized', weight = '320g/m²', material = '85% Algodão, 15% Poliéster' WHERE title = 'Gymshark Blue Oversized Hoodie';
-UPDATE product SET modeling = 'Fitted', weight = '240g/m²', material = '92% Algodão, 8% Elastano' WHERE title = 'White Performance Joggers';
-UPDATE product SET modeling = 'Regular', weight = '180g/m²', material = '100% Poliéster' WHERE title = 'Lima Flex Training Shorts';
-UPDATE product SET modeling = 'Fitted', weight = '190g/m²', material = '87% Poliéster, 13% Elastano' WHERE title = 'Black Long Compression Shirt';
-UPDATE product SET modeling = 'Fitted', weight = '195g/m²', material = '90% Poliéster, 10% Elastano' WHERE title = 'Onyx Compression Long Tee';
-UPDATE product SET modeling = 'Fitted', weight = '188g/m²', material = '86% Poliéster, 14% Elastano' WHERE title = 'Carbon Compression Performance Tee';
-UPDATE product SET modeling = 'Fitted', weight = '192g/m²', material = '89% Poliéster, 11% Elastano' WHERE title = 'Elite Compression Pro Top';
-UPDATE product SET modeling = 'Oversized', weight = '250g/m²', material = '100% Algodão' WHERE title = 'Gymshark Black Oversized Tee';
-UPDATE product SET modeling = 'Regular', weight = '175g/m²', material = '98% Poliéster, 2% Elastano' WHERE title = 'Shadow Pro Training Shorts';
-UPDATE product SET modeling = 'Oversized', weight = '260g/m²', material = '95% Algodão, 5% Poliéster' WHERE title = 'Gymshark Green Oversized Tee';
-UPDATE product SET modeling = 'Fitted', weight = '210g/m²', material = '91% Nylon, 9% Elastano' WHERE title = 'Plum Seamless Performance Tee';
-UPDATE product SET modeling = 'Regular', weight = '170g/m²', material = '100% Poliéster' WHERE title = 'Arctic Court Shorts';
-UPDATE product SET modeling = 'Fitted', weight = '245g/m²', material = '93% Algodão, 7% Elastano' WHERE title = 'White Performance Joggers Front View';
-UPDATE product SET modeling = 'Fitted', weight = '215g/m²', material = '88% Nylon, 12% Elastano' WHERE title = 'Emerald Seamless Legging';
-UPDATE product SET modeling = 'Oversized', weight = '270g/m²', material = '100% Algodão Orgânico' WHERE title = 'Cloudy Oversized Tee';
-UPDATE product SET modeling = 'Fitted', weight = '220g/m²', material = '82% Nylon, 18% Elastano' WHERE title = 'Black Sculpt Seamless Set';
-UPDATE product SET modeling = 'Fitted', weight = '235g/m²', material = '87% Poliéster, 13% Elastano' WHERE title = 'Crimson Wine Pants (Back)';
-UPDATE product SET modeling = 'Fitted', weight = '205g/m²', material = '85% Nylon, 15% Elastano' WHERE title = 'Midnight Sculpt Legging';
-UPDATE product SET modeling = 'Fitted', weight = '218g/m²', material = '89% Nylon, 11% Elastano' WHERE title = 'Blue Ocean Motion Legging';
-UPDATE product SET modeling = 'Fitted', weight = '225g/m²', material = '84% Nylon, 16% Elastano' WHERE title = 'Grey Studio Seamless Set';
-UPDATE product SET modeling = 'Fitted', weight = '238g/m²', material = '90% Poliéster, 10% Elastano' WHERE title = 'Red Wine Performance Pants';
-UPDATE product SET modeling = 'Fitted', weight = '228g/m²', material = '80% Nylon, 20% Elastano' WHERE title = 'Brown Lounge Seamless Set';
-UPDATE product SET modeling = 'Oversized', weight = '280g/m²', material = '100% Algodão' WHERE title = 'Black Oversized City Tee';
-UPDATE product SET modeling = 'One Size', weight = '450g', material = 'Alumínio Anodizado' WHERE title = 'Prada Hydrate Bottle';
-UPDATE product SET modeling = 'Regular', weight = '165g/m²', material = '86% Poliéster, 14% Elastano' WHERE title = 'Gym King Energy Linear Vest Black';
-UPDATE product SET modeling = 'Oversized', weight = '315g/m²', material = '84% Algodão, 16% Poliéster' WHERE title = 'Gymshark Shark Hoodie Black';
-UPDATE product SET modeling = 'Oversized', weight = '315g/m²', material = '84% Algodão, 16% Poliéster' WHERE title = 'Gymshark Shark Hoodie White';
-UPDATE product SET modeling = 'Compression', weight = '200g/m²', material = '88% Poliéster, 12% Elastano' WHERE title = 'Vital Collection Seamless Leggings Men';
-UPDATE product SET modeling = 'Regular', weight = '175g/m²', material = '95% Algodão, 5% Elastano' WHERE title = 'Mens Gym Tops and T Shirts Collection';
-UPDATE product SET modeling = 'Fitted', weight = '190g/m²', material = '90% Poliéster, 10% Elastano' WHERE title = 'Oxy Mass Muscle Black Tee';
-UPDATE product SET modeling = 'Regular', weight = '180g/m²', material = '92% Algodão, 8% Elastano' WHERE title = 'Gymshark Sports Fitness Releases';
-UPDATE product SET modeling = 'Fitted', weight = '185g/m²', material = '88% Poliéster, 12% Elastano' WHERE title = 'Lifting Collection For Men Front View';
-UPDATE product SET modeling = 'Set', weight = '240g/m²', material = '85% Poliéster, 15% Elastano' WHERE title = 'All Green Workout Outfits For Men';
-UPDATE product SET modeling = 'Set', weight = '220g/m²', material = '82% Poliéster, 18% Elastano' WHERE title = 'Conjunto Fitness Preto';
-UPDATE product SET modeling = 'Set', weight = '220g/m²', material = '82% Poliéster, 18% Elastano' WHERE title = 'Conjunto Fitness Rosa';
-UPDATE product SET modeling = 'Fitted', weight = '190g/m²', material = '90% Nylon, 10% Elastano' WHERE title = 'Hyperflex 2 Cropped Tee Sky Blue';
-UPDATE product SET modeling = 'Regular', weight = '175g/m²', material = '92% Nylon, 8% Elastano' WHERE title = 'Hyperflex 2 Shorts Charcoal';
-UPDATE product SET modeling = 'Fitted', weight = '195g/m²', material = '89% Poliéster, 11% Elastano' WHERE title = 'Gymshark Everyday Seamless Crop Tank Navy';
-UPDATE product SET modeling = 'Fitted', weight = '195g/m²', material = '89% Poliéster, 11% Elastano' WHERE title = 'Gymshark Fraction Crop Tank Black';
-UPDATE product SET modeling = 'Set', weight = '225g/m²', material = '84% Poliéster, 16% Elastano' WHERE title = 'Pink Gym Sets and Workout Sets';
-UPDATE product SET modeling = 'Set', weight = '230g/m²', material = '86% Nylon, 14% Elastano' WHERE title = 'Black Light Blue Seamless Set';
-UPDATE product SET modeling = 'One Size', weight = '310g', material = 'Mesh Técnico, EVA e Borracha' WHERE title = 'White Training Shoes Feminine';
-UPDATE product SET modeling = 'Fitted', weight = '205g/m²', material = '87% Nylon, 13% Elastano' WHERE title = 'Vital Long Sleeve Cut Out Top Black Marl';
-UPDATE product SET modeling = 'Fitted', weight = '200g/m²', material = '88% Poliéster, 12% Elastano' WHERE title = 'Gymshark Sports Top 30-04-26';
-
--- Discount setup (new column: discount_percentage)
-UPDATE product SET discount_percentage = 0;
-
+-- Update each product with unique characteristics (consolidated with CASE WHEN for performance)
 UPDATE product
-SET discount_percentage = 10
+SET modeling = CASE title
+	WHEN 'Gymshark Black Compression Tee' THEN 'Fitted'
+	WHEN 'Gymshark Blue Oversized Hoodie' THEN 'Oversized'
+	WHEN 'White Performance Joggers' THEN 'Fitted'
+	WHEN 'Lima Flex Training Shorts' THEN 'Regular'
+	WHEN 'Black Long Compression Shirt' THEN 'Fitted'
+	WHEN 'Onyx Compression Long Tee' THEN 'Fitted'
+	WHEN 'Carbon Compression Performance Tee' THEN 'Fitted'
+	WHEN 'Elite Compression Pro Top' THEN 'Fitted'
+	WHEN 'Gymshark Black Oversized Tee' THEN 'Oversized'
+	WHEN 'Shadow Pro Training Shorts' THEN 'Regular'
+	WHEN 'Gymshark Green Oversized Tee' THEN 'Oversized'
+	WHEN 'Plum Seamless Performance Tee' THEN 'Fitted'
+	WHEN 'Arctic Court Shorts' THEN 'Regular'
+	WHEN 'White Performance Joggers Front View' THEN 'Fitted'
+	WHEN 'Emerald Seamless Legging' THEN 'Fitted'
+	WHEN 'Cloudy Oversized Tee' THEN 'Oversized'
+	WHEN 'Black Sculpt Seamless Set' THEN 'Fitted'
+	WHEN 'Crimson Wine Pants (Back)' THEN 'Fitted'
+	WHEN 'Midnight Sculpt Legging' THEN 'Fitted'
+	WHEN 'Blue Ocean Motion Legging' THEN 'Fitted'
+	WHEN 'Grey Studio Seamless Set' THEN 'Fitted'
+	WHEN 'Red Wine Performance Pants' THEN 'Fitted'
+	WHEN 'Brown Lounge Seamless Set' THEN 'Fitted'
+	WHEN 'Black Oversized City Tee' THEN 'Oversized'
+	WHEN 'Prada Hydrate Bottle' THEN 'One Size'
+	WHEN 'Gym King Energy Linear Vest Black' THEN 'Regular'
+	WHEN 'Gymshark Shark Hoodie Black' THEN 'Oversized'
+	WHEN 'Gymshark Shark Hoodie White' THEN 'Oversized'
+	WHEN 'Vital Collection Seamless Leggings Men' THEN 'Compression'
+	WHEN 'Mens Gym Tops and T Shirts Collection' THEN 'Regular'
+	WHEN 'Oxy Mass Muscle Black Tee' THEN 'Fitted'
+	WHEN 'Gymshark Sports Fitness Releases' THEN 'Regular'
+	WHEN 'Lifting Collection For Men Front View' THEN 'Fitted'
+	WHEN 'All Green Workout Outfits For Men' THEN 'Set'
+	WHEN 'Conjunto Fitness Preto' THEN 'Set'
+	WHEN 'Conjunto Fitness Rosa' THEN 'Set'
+	WHEN 'Hyperflex 2 Cropped Tee Sky Blue' THEN 'Fitted'
+	WHEN 'Hyperflex 2 Shorts Charcoal' THEN 'Regular'
+	WHEN 'Gymshark Everyday Seamless Crop Tank Navy' THEN 'Fitted'
+	WHEN 'Gymshark Fraction Crop Tank Black' THEN 'Fitted'
+	WHEN 'Pink Gym Sets and Workout Sets' THEN 'Set'
+	WHEN 'Black Light Blue Seamless Set' THEN 'Set'
+	WHEN 'White Training Shoes Feminine' THEN 'One Size'
+	WHEN 'Vital Long Sleeve Cut Out Top Black Marl' THEN 'Fitted'
+	WHEN 'Gymshark Sports Top 30-04-26' THEN 'Fitted'
+END,
+weight = CASE title
+	WHEN 'Gymshark Black Compression Tee' THEN '185g/m²'
+	WHEN 'Gymshark Blue Oversized Hoodie' THEN '320g/m²'
+	WHEN 'White Performance Joggers' THEN '240g/m²'
+	WHEN 'Lima Flex Training Shorts' THEN '180g/m²'
+	WHEN 'Black Long Compression Shirt' THEN '190g/m²'
+	WHEN 'Onyx Compression Long Tee' THEN '195g/m²'
+	WHEN 'Carbon Compression Performance Tee' THEN '188g/m²'
+	WHEN 'Elite Compression Pro Top' THEN '192g/m²'
+	WHEN 'Gymshark Black Oversized Tee' THEN '250g/m²'
+	WHEN 'Shadow Pro Training Shorts' THEN '175g/m²'
+	WHEN 'Gymshark Green Oversized Tee' THEN '260g/m²'
+	WHEN 'Plum Seamless Performance Tee' THEN '210g/m²'
+	WHEN 'Arctic Court Shorts' THEN '170g/m²'
+	WHEN 'White Performance Joggers Front View' THEN '245g/m²'
+	WHEN 'Emerald Seamless Legging' THEN '215g/m²'
+	WHEN 'Cloudy Oversized Tee' THEN '270g/m²'
+	WHEN 'Black Sculpt Seamless Set' THEN '220g/m²'
+	WHEN 'Crimson Wine Pants (Back)' THEN '235g/m²'
+	WHEN 'Midnight Sculpt Legging' THEN '205g/m²'
+	WHEN 'Blue Ocean Motion Legging' THEN '218g/m²'
+	WHEN 'Grey Studio Seamless Set' THEN '225g/m²'
+	WHEN 'Red Wine Performance Pants' THEN '238g/m²'
+	WHEN 'Brown Lounge Seamless Set' THEN '228g/m²'
+	WHEN 'Black Oversized City Tee' THEN '280g/m²'
+	WHEN 'Prada Hydrate Bottle' THEN '450g'
+	WHEN 'Gym King Energy Linear Vest Black' THEN '165g/m²'
+	WHEN 'Gymshark Shark Hoodie Black' THEN '315g/m²'
+	WHEN 'Gymshark Shark Hoodie White' THEN '315g/m²'
+	WHEN 'Vital Collection Seamless Leggings Men' THEN '200g/m²'
+	WHEN 'Mens Gym Tops and T Shirts Collection' THEN '175g/m²'
+	WHEN 'Oxy Mass Muscle Black Tee' THEN '190g/m²'
+	WHEN 'Gymshark Sports Fitness Releases' THEN '180g/m²'
+	WHEN 'Lifting Collection For Men Front View' THEN '185g/m²'
+	WHEN 'All Green Workout Outfits For Men' THEN '240g/m²'
+	WHEN 'Conjunto Fitness Preto' THEN '220g/m²'
+	WHEN 'Conjunto Fitness Rosa' THEN '220g/m²'
+	WHEN 'Hyperflex 2 Cropped Tee Sky Blue' THEN '190g/m²'
+	WHEN 'Hyperflex 2 Shorts Charcoal' THEN '175g/m²'
+	WHEN 'Gymshark Everyday Seamless Crop Tank Navy' THEN '195g/m²'
+	WHEN 'Gymshark Fraction Crop Tank Black' THEN '195g/m²'
+	WHEN 'Pink Gym Sets and Workout Sets' THEN '225g/m²'
+	WHEN 'Black Light Blue Seamless Set' THEN '230g/m²'
+	WHEN 'White Training Shoes Feminine' THEN '310g'
+	WHEN 'Vital Long Sleeve Cut Out Top Black Marl' THEN '205g/m²'
+	WHEN 'Gymshark Sports Top 30-04-26' THEN '200g/m²'
+END,
+material = CASE title
+	WHEN 'Gymshark Black Compression Tee' THEN '88% Poliéster, 12% Elastano'
+	WHEN 'Gymshark Blue Oversized Hoodie' THEN '85% Algodão, 15% Poliéster'
+	WHEN 'White Performance Joggers' THEN '92% Algodão, 8% Elastano'
+	WHEN 'Lima Flex Training Shorts' THEN '100% Poliéster'
+	WHEN 'Black Long Compression Shirt' THEN '87% Poliéster, 13% Elastano'
+	WHEN 'Onyx Compression Long Tee' THEN '90% Poliéster, 10% Elastano'
+	WHEN 'Carbon Compression Performance Tee' THEN '86% Poliéster, 14% Elastano'
+	WHEN 'Elite Compression Pro Top' THEN '89% Poliéster, 11% Elastano'
+	WHEN 'Gymshark Black Oversized Tee' THEN '100% Algodão'
+	WHEN 'Shadow Pro Training Shorts' THEN '98% Poliéster, 2% Elastano'
+	WHEN 'Gymshark Green Oversized Tee' THEN '95% Algodão, 5% Poliéster'
+	WHEN 'Plum Seamless Performance Tee' THEN '91% Nylon, 9% Elastano'
+	WHEN 'Arctic Court Shorts' THEN '100% Poliéster'
+	WHEN 'White Performance Joggers Front View' THEN '93% Algodão, 7% Elastano'
+	WHEN 'Emerald Seamless Legging' THEN '88% Nylon, 12% Elastano'
+	WHEN 'Cloudy Oversized Tee' THEN '100% Algodão Orgânico'
+	WHEN 'Black Sculpt Seamless Set' THEN '82% Nylon, 18% Elastano'
+	WHEN 'Crimson Wine Pants (Back)' THEN '87% Poliéster, 13% Elastano'
+	WHEN 'Midnight Sculpt Legging' THEN '85% Nylon, 15% Elastano'
+	WHEN 'Blue Ocean Motion Legging' THEN '89% Nylon, 11% Elastano'
+	WHEN 'Grey Studio Seamless Set' THEN '84% Nylon, 16% Elastano'
+	WHEN 'Red Wine Performance Pants' THEN '90% Poliéster, 10% Elastano'
+	WHEN 'Brown Lounge Seamless Set' THEN '80% Nylon, 20% Elastano'
+	WHEN 'Black Oversized City Tee' THEN '100% Algodão'
+	WHEN 'Prada Hydrate Bottle' THEN 'Alumínio Anodizado'
+	WHEN 'Gym King Energy Linear Vest Black' THEN '86% Poliéster, 14% Elastano'
+	WHEN 'Gymshark Shark Hoodie Black' THEN '84% Algodão, 16% Poliéster'
+	WHEN 'Gymshark Shark Hoodie White' THEN '84% Algodão, 16% Poliéster'
+	WHEN 'Vital Collection Seamless Leggings Men' THEN '88% Poliéster, 12% Elastano'
+	WHEN 'Mens Gym Tops and T Shirts Collection' THEN '95% Algodão, 5% Elastano'
+	WHEN 'Oxy Mass Muscle Black Tee' THEN '90% Poliéster, 10% Elastano'
+	WHEN 'Gymshark Sports Fitness Releases' THEN '92% Algodão, 8% Elastano'
+	WHEN 'Lifting Collection For Men Front View' THEN '88% Poliéster, 12% Elastano'
+	WHEN 'All Green Workout Outfits For Men' THEN '85% Poliéster, 15% Elastano'
+	WHEN 'Conjunto Fitness Preto' THEN '82% Poliéster, 18% Elastano'
+	WHEN 'Conjunto Fitness Rosa' THEN '82% Poliéster, 18% Elastano'
+	WHEN 'Hyperflex 2 Cropped Tee Sky Blue' THEN '90% Nylon, 10% Elastano'
+	WHEN 'Hyperflex 2 Shorts Charcoal' THEN '92% Nylon, 8% Elastano'
+	WHEN 'Gymshark Everyday Seamless Crop Tank Navy' THEN '89% Poliéster, 11% Elastano'
+	WHEN 'Gymshark Fraction Crop Tank Black' THEN '89% Poliéster, 11% Elastano'
+	WHEN 'Pink Gym Sets and Workout Sets' THEN '84% Poliéster, 16% Elastano'
+	WHEN 'Black Light Blue Seamless Set' THEN '86% Nylon, 14% Elastano'
+	WHEN 'White Training Shoes Feminine' THEN 'Mesh Técnico, EVA e Borracha'
+	WHEN 'Vital Long Sleeve Cut Out Top Black Marl' THEN '87% Nylon, 13% Elastano'
+	WHEN 'Gymshark Sports Top 30-04-26' THEN '88% Poliéster, 12% Elastano'
+END
 WHERE title IN (
-	'Gymshark Black Compression Tee',
-	'White Performance Joggers',
-	'Emerald Seamless Legging',
-	'Black Sculpt Seamless Set'
+	'Gymshark Black Compression Tee', 'Gymshark Blue Oversized Hoodie', 'White Performance Joggers',
+	'Lima Flex Training Shorts', 'Black Long Compression Shirt', 'Onyx Compression Long Tee',
+	'Carbon Compression Performance Tee', 'Elite Compression Pro Top', 'Gymshark Black Oversized Tee',
+	'Shadow Pro Training Shorts', 'Gymshark Green Oversized Tee', 'Plum Seamless Performance Tee',
+	'Arctic Court Shorts', 'White Performance Joggers Front View', 'Emerald Seamless Legging',
+	'Cloudy Oversized Tee', 'Black Sculpt Seamless Set', 'Crimson Wine Pants (Back)',
+	'Midnight Sculpt Legging', 'Blue Ocean Motion Legging', 'Grey Studio Seamless Set',
+	'Red Wine Performance Pants', 'Brown Lounge Seamless Set', 'Black Oversized City Tee',
+	'Prada Hydrate Bottle', 'Gym King Energy Linear Vest Black', 'Gymshark Shark Hoodie Black',
+	'Gymshark Shark Hoodie White', 'Vital Collection Seamless Leggings Men',
+	'Mens Gym Tops and T Shirts Collection', 'Oxy Mass Muscle Black Tee',
+	'Gymshark Sports Fitness Releases', 'Lifting Collection For Men Front View',
+	'All Green Workout Outfits For Men', 'Conjunto Fitness Preto', 'Conjunto Fitness Rosa',
+	'Hyperflex 2 Cropped Tee Sky Blue', 'Hyperflex 2 Shorts Charcoal',
+	'Gymshark Everyday Seamless Crop Tank Navy', 'Gymshark Fraction Crop Tank Black',
+	'Pink Gym Sets and Workout Sets', 'Black Light Blue Seamless Set', 'White Training Shoes Feminine',
+	'Vital Long Sleeve Cut Out Top Black Marl', 'Gymshark Sports Top 30-04-26'
 );
 
+-- Discount setup: consolidated with CASE WHEN for optimal performance
 UPDATE product
-SET discount_percentage = 20
-WHERE title IN (
-	'Gymshark Shark Hoodie Black',
-	'Gymshark Shark Hoodie White',
-	'Conjunto Fitness Preto',
-	'Conjunto Fitness Rosa',
-	'Pink Gym Sets and Workout Sets'
+SET discount_percentage = CASE 
+	WHEN title IN ('Gymshark Black Compression Tee', 'White Performance Joggers', 'Emerald Seamless Legging', 'Black Sculpt Seamless Set') THEN 10
+	WHEN title IN ('Gymshark Shark Hoodie Black', 'Gymshark Shark Hoodie White', 'Conjunto Fitness Preto', 'Conjunto Fitness Rosa', 'Pink Gym Sets and Workout Sets') THEN 20
+	WHEN title IN ('Gymshark Sports Top 30-04-26', 'Gymshark Everyday Seamless Crop Tank Navy', 'Gymshark Fraction Crop Tank Black') THEN 25
+	WHEN (image_url LIKE '%30-04-26%' OR image_url LIKE '%30-40-26%' OR image_url LIKE '%01-05-26%' OR image_url LIKE '%1-05-26%') THEN 15
+	ELSE 0
+END
+WHERE discount_percentage IS NULL OR discount_percentage = 0 OR (
+	image_url LIKE '%30-04-26%' OR image_url LIKE '%30-40-26%' OR image_url LIKE '%01-05-26%' OR image_url LIKE '%1-05-26%'
 );
 
+-- Apply GREATEST to preserve any higher manually set discounts (second pass for recent image groups)
 UPDATE product
-SET discount_percentage = 25
-WHERE title IN (
-	'Gymshark Sports Top 30-04-26',
-	'Gymshark Everyday Seamless Crop Tank Navy',
-	'Gymshark Fraction Crop Tank Black'
-);
+SET discount_percentage = GREATEST(discount_percentage, 15)
+WHERE (image_url LIKE '%30-04-26%' OR image_url LIKE '%30-40-26%' OR image_url LIKE '%01-05-26%' OR image_url LIKE '%1-05-26%')
+  AND discount_percentage < 15;
 
--- Ensure all products that belong to the recent image groups have at least a baseline discount
--- (use GREATEST to preserve any higher, manually set discounts)
-UPDATE product
-SET discount_percentage = GREATEST(COALESCE(discount_percentage, 0), 15)
-WHERE image_url LIKE '%30-04-26%'
-   OR image_url LIKE '%30-40-26%';
-
-UPDATE product
-SET discount_percentage = GREATEST(COALESCE(discount_percentage, 0), 15)
-WHERE image_url LIKE '%01-05-26%'
-   OR image_url LIKE '%1-05-26%';
-
--- Tags and product_tags setup
+-- Tags and product_tags setup with consolidated inserts
 INSERT INTO tags (name) VALUES
 	('DISCOUNT'),
 	('EVENTUAL_DISCOUNT'),
 	('NEW_ARRIVAL_30_04_26'),
 	('FEATURED');
 
+-- Insert tags in bulk with UNION for efficiency
 INSERT INTO product_tags (tag_id, product_id)
 SELECT t.id, p.id
 FROM tags t
-JOIN product p ON p.discount_percentage > 0
-WHERE t.name = 'DISCOUNT';
-
-INSERT INTO product_tags (tag_id, product_id)
-SELECT t.id, p.id
-FROM tags t
-JOIN product p ON (p.image_url LIKE '%30-04-26%' OR p.image_url LIKE '%30-40-26%')
-WHERE t.name = 'NEW_ARRIVAL_30_04_26';
-
-INSERT INTO product_tags (tag_id, product_id)
-SELECT t.id, p.id
-FROM tags t
-JOIN product p ON (p.image_url LIKE '%30-04-26%' OR p.image_url LIKE '%30-40-26%')
-WHERE t.name = 'EVENTUAL_DISCOUNT'
-  AND p.discount_percentage > 0;
-
-INSERT INTO product_tags (tag_id, product_id)
-SELECT t.id, p.id
-FROM tags t
-JOIN product p ON p.title IN (
-	'Gymshark Black Compression Tee',
-	'Gymshark Blue Oversized Hoodie',
-	'Gymshark Shark Hoodie Black',
-	'Conjunto Fitness Preto'
+JOIN product p ON (
+	CASE t.name
+		WHEN 'DISCOUNT' THEN p.discount_percentage > 0
+		WHEN 'NEW_ARRIVAL_30_04_26' THEN (p.image_url LIKE '%30-04-26%' OR p.image_url LIKE '%30-40-26%')
+		WHEN 'EVENTUAL_DISCOUNT' THEN (p.image_url LIKE '%30-04-26%' OR p.image_url LIKE '%30-40-26%') AND p.discount_percentage > 0
+		WHEN 'FEATURED' THEN p.title IN ('Gymshark Black Compression Tee', 'Gymshark Blue Oversized Hoodie', 'Gymshark Shark Hoodie Black', 'Conjunto Fitness Preto')
+		ELSE FALSE
+	END
 )
-WHERE t.name = 'FEATURED';
+ON CONFLICT DO NOTHING;
 
--- Bundle setup
+-- Bundle setup and mapping with consolidated CASE WHEN for performance
 INSERT INTO sets (name) VALUES
 	('Vuori Navy Set'),
 	('Vuori Sky Grey Set'),
@@ -260,41 +338,20 @@ INSERT INTO sets (name) VALUES
 	('01-05-26 Women Set');
 
 UPDATE product
-SET set_id = (SELECT id FROM sets WHERE name = 'Vuori Navy Set')
-WHERE title = 'Vuori Viewpoint Muscle Tank Navy';
-
-UPDATE product
-SET set_id = (SELECT id FROM sets WHERE name = 'Vuori Sky Grey Set')
-WHERE title = 'Vuori Viewpoint Muscle Tank Sky Grey';
-
-UPDATE product
-SET set_id = (SELECT id FROM sets WHERE name = 'Vuori Chambray Set')
-WHERE title = 'Vuori Strato Muscle Tee Chambray Heather';
-
-UPDATE product
-SET set_id = (SELECT id FROM sets WHERE name = 'Black White Set')
-WHERE title = 'Black White Workout Set';
-
--- Map products to new "30-04-26" and "01-05-26" bundles by image filename patterns
-UPDATE product
-SET set_id = (SELECT id FROM sets WHERE name = '30-04-26 Men Set')
-WHERE image_url LIKE '%30-04-26%'
-	AND image_url LIKE '%men%';
-
-UPDATE product
-SET set_id = (SELECT id FROM sets WHERE name = '30-04-26 Women Set')
-WHERE image_url LIKE '%30-04-26%'
-	AND (image_url LIKE '%women%' OR image_url LIKE '%female%');
-
-UPDATE product
-SET set_id = (SELECT id FROM sets WHERE name = '01-05-26 Men Set')
-WHERE image_url LIKE '%01-05-26%'
-	AND image_url LIKE '%men%';
-
-UPDATE product
-SET set_id = (SELECT id FROM sets WHERE name = '01-05-26 Women Set')
-WHERE image_url LIKE '%01-05-26%'
-	AND (image_url LIKE '%women%' OR image_url LIKE '%female%');
+SET set_id = CASE 
+	WHEN title = 'Vuori Viewpoint Muscle Tank Navy' THEN (SELECT id FROM sets WHERE name = 'Vuori Navy Set')
+	WHEN title = 'Vuori Viewpoint Muscle Tank Sky Grey' THEN (SELECT id FROM sets WHERE name = 'Vuori Sky Grey Set')
+	WHEN title = 'Vuori Strato Muscle Tee Chambray Heather' THEN (SELECT id FROM sets WHERE name = 'Vuori Chambray Set')
+	WHEN title = 'Black White Workout Set' THEN (SELECT id FROM sets WHERE name = 'Black White Set')
+	WHEN (image_url LIKE '%30-04-26%' AND image_url LIKE '%men%') THEN (SELECT id FROM sets WHERE name = '30-04-26 Men Set')
+	WHEN (image_url LIKE '%30-04-26%' AND (image_url LIKE '%women%' OR image_url LIKE '%female%')) THEN (SELECT id FROM sets WHERE name = '30-04-26 Women Set')
+	WHEN (image_url LIKE '%01-05-26%' AND image_url LIKE '%men%') THEN (SELECT id FROM sets WHERE name = '01-05-26 Men Set')
+	WHEN (image_url LIKE '%01-05-26%' AND (image_url LIKE '%women%' OR image_url LIKE '%female%')) THEN (SELECT id FROM sets WHERE name = '01-05-26 Women Set')
+	ELSE set_id
+END
+WHERE title IN ('Vuori Viewpoint Muscle Tank Navy', 'Vuori Viewpoint Muscle Tank Sky Grey', 'Vuori Strato Muscle Tee Chambray Heather', 'Black White Workout Set')
+   OR image_url LIKE '%30-04-26%'
+   OR image_url LIKE '%01-05-26%';
 
 -- Single default variant per product (can be expanded later)
 INSERT INTO product_variant (product_id, sku, color, size, price, stock, category, gender, status, is_default) VALUES
