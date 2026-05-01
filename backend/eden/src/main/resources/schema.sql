@@ -5,6 +5,8 @@ DROP TABLE IF EXISTS orders CASCADE;
 DROP TABLE IF EXISTS order_address CASCADE;
 DROP TABLE IF EXISTS shopping_cart_item CASCADE;
 DROP TABLE IF EXISTS shopping_cart CASCADE;
+DROP TABLE IF EXISTS product_tags CASCADE;
+DROP TABLE IF EXISTS tags CASCADE;
 DROP TABLE IF EXISTS product_image CASCADE;
 DROP TABLE IF EXISTS product_variant CASCADE;
 DROP TABLE IF EXISTS address CASCADE;
@@ -43,9 +45,21 @@ CREATE TABLE product (
 	modeling    TEXT,
 	weight      TEXT,
 	material    TEXT,
+	discount_percentage INTEGER NOT NULL DEFAULT 0 CHECK (discount_percentage >= 0 AND discount_percentage <= 100),
 	created_at  TIMESTAMP       NOT NULL DEFAULT NOW(),
 	updated_at  TIMESTAMP,
 	CONSTRAINT product_title_unique UNIQUE (title)
+);
+
+CREATE TABLE tags (
+	id          SERIAL PRIMARY KEY,
+	name        VARCHAR(80) NOT NULL UNIQUE
+);
+
+CREATE TABLE product_tags (
+	tag_id      INTEGER NOT NULL REFERENCES tags(id) ON DELETE CASCADE,
+	product_id  BIGINT  NOT NULL REFERENCES product(id) ON DELETE CASCADE,
+	PRIMARY KEY (tag_id, product_id)
 );
 
 CREATE TABLE product_variant (

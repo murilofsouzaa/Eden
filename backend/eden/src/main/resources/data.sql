@@ -161,6 +161,73 @@ UPDATE product SET modeling = 'One Size', weight = '310g', material = 'Mesh Téc
 UPDATE product SET modeling = 'Fitted', weight = '205g/m²', material = '87% Nylon, 13% Elastano' WHERE title = 'Vital Long Sleeve Cut Out Top Black Marl';
 UPDATE product SET modeling = 'Fitted', weight = '200g/m²', material = '88% Poliéster, 12% Elastano' WHERE title = 'Gymshark Sports Top 30-04-26';
 
+-- Discount setup (new column: discount_percentage)
+UPDATE product SET discount_percentage = 0;
+
+UPDATE product
+SET discount_percentage = 10
+WHERE title IN (
+	'Gymshark Black Compression Tee',
+	'White Performance Joggers',
+	'Emerald Seamless Legging',
+	'Black Sculpt Seamless Set'
+);
+
+UPDATE product
+SET discount_percentage = 20
+WHERE title IN (
+	'Gymshark Shark Hoodie Black',
+	'Gymshark Shark Hoodie White',
+	'Conjunto Fitness Preto',
+	'Conjunto Fitness Rosa',
+	'Pink Gym Sets and Workout Sets'
+);
+
+UPDATE product
+SET discount_percentage = 25
+WHERE title IN (
+	'Gymshark Sports Top 30-04-26',
+	'Gymshark Everyday Seamless Crop Tank Navy',
+	'Gymshark Fraction Crop Tank Black'
+);
+
+-- Tags and product_tags setup
+INSERT INTO tags (name) VALUES
+	('DISCOUNT'),
+	('EVENTUAL_DISCOUNT'),
+	('NEW_ARRIVAL_30_04_26'),
+	('FEATURED');
+
+INSERT INTO product_tags (tag_id, product_id)
+SELECT t.id, p.id
+FROM tags t
+JOIN product p ON p.discount_percentage > 0
+WHERE t.name = 'DISCOUNT';
+
+INSERT INTO product_tags (tag_id, product_id)
+SELECT t.id, p.id
+FROM tags t
+JOIN product p ON (p.image_url LIKE '%30-04-26%' OR p.image_url LIKE '%30-40-26%')
+WHERE t.name = 'NEW_ARRIVAL_30_04_26';
+
+INSERT INTO product_tags (tag_id, product_id)
+SELECT t.id, p.id
+FROM tags t
+JOIN product p ON (p.image_url LIKE '%30-04-26%' OR p.image_url LIKE '%30-40-26%')
+WHERE t.name = 'EVENTUAL_DISCOUNT'
+  AND p.discount_percentage > 0;
+
+INSERT INTO product_tags (tag_id, product_id)
+SELECT t.id, p.id
+FROM tags t
+JOIN product p ON p.title IN (
+	'Gymshark Black Compression Tee',
+	'Gymshark Blue Oversized Hoodie',
+	'Gymshark Shark Hoodie Black',
+	'Conjunto Fitness Preto'
+)
+WHERE t.name = 'FEATURED';
+
 -- Single default variant per product (can be expanded later)
 INSERT INTO product_variant (product_id, sku, color, size, price, stock, category, gender, status, is_default) VALUES
 	((SELECT id FROM product WHERE title = 'Gymshark Black Compression Tee'), 'SKU-0001', 'BLACK', 'M', 149.90, 35, 'T_SHIRTS', 'MASCULINE', 'AVAILABLE', TRUE),

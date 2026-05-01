@@ -11,6 +11,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -48,6 +51,14 @@ public class Product {
     //Usado em relacionamentos OneToMany para dizer quem é o dono da relação
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<ProductImage> images = new LinkedHashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "product_tags",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private Set<Tags> tags = new LinkedHashSet<>();
 
     public Product(){}
 
@@ -158,6 +169,18 @@ public class Product {
     public void addImage(ProductImage image) {
         image.setProduct(this);
         this.images.add(image);
+    }
+
+    public Set<Tags> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tags> tags) {
+        this.tags = tags;
+    }
+
+    public void addTag(Tags tag) {
+        this.tags.add(tag);
     }
 
     public int getDiscountPercentage() {
