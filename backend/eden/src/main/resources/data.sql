@@ -112,7 +112,15 @@ INSERT INTO product (title, description, image_url, created_at, updated_at) VALU
 	('Vital Long Sleeve Cut Out Top Black Marl', 'Top de manga longa preto mescla com recortes e estilo atlético.',
 	 'clothes/women/30-40-26-Gymshark-Vital-Long-Sleeve-Cut-Out-Top-Black Marl.jpeg', TIMESTAMP '2026-04-30 11:00:00', NULL),
 	('Gymshark Sports Top 30-04-26', 'Top esportivo feminino com suporte médio e tecido respirável.',
-	 'clothes/women/sports-top-gymshark-30-04-26.jpeg', TIMESTAMP '2026-04-30 11:10:00', NULL);
+	 'clothes/women/sports-top-gymshark-30-04-26.jpeg', TIMESTAMP '2026-04-30 11:10:00', NULL),
+	('Vuori Viewpoint Muscle Tank Navy', 'Regata Vuori com malha leve e respirável para alta performance.',
+	 'clothes/men/01-05-26-(SET-vuori-set-blue-blackman)Viewpoint Muscle Tank – Navy – Vuori.jpeg', TIMESTAMP '2026-05-01 08:00:00', NULL),
+	('Vuori Viewpoint Muscle Tank Sky Grey', 'Regata Vuori em sky grey com caimento atlético e toque leve.',
+	 'clothes/men/01-05-26-(SET-vuori-set-white-whiteman)-Viewpoint Muscle-Tank–Sky Grey–Tanks–Vuori.jpeg', TIMESTAMP '2026-05-01 08:10:00', NULL),
+	('Vuori Strato Muscle Tee Chambray Heather', 'Camiseta músculo Vuori em chambray heather com tecido stretch-knit.',
+	 'clothes/men/01-05-26-Strato-Muscle-Tee – Chambray-Heather-Workout-Tank–Vuori.jpeg', TIMESTAMP '2026-05-01 08:20:00', NULL),
+	('Black White Workout Set', 'Conjunto masculino preto e branco com visual clean e esportivo.',
+	 'clothes/men/1-05-26-black-white.jpeg', TIMESTAMP '2026-05-01 08:30:00', NULL);
 
 -- Update each product with unique characteristics
 UPDATE product SET modeling = 'Fitted', weight = '185g/m²', material = '88% Poliéster, 12% Elastano' WHERE title = 'Gymshark Black Compression Tee';
@@ -228,6 +236,29 @@ JOIN product p ON p.title IN (
 )
 WHERE t.name = 'FEATURED';
 
+-- Bundle setup
+INSERT INTO sets (name) VALUES
+	('Vuori Navy Set'),
+	('Vuori Sky Grey Set'),
+	('Vuori Chambray Set'),
+	('Black White Set');
+
+UPDATE product
+SET set_id = (SELECT id FROM sets WHERE name = 'Vuori Navy Set')
+WHERE title = 'Vuori Viewpoint Muscle Tank Navy';
+
+UPDATE product
+SET set_id = (SELECT id FROM sets WHERE name = 'Vuori Sky Grey Set')
+WHERE title = 'Vuori Viewpoint Muscle Tank Sky Grey';
+
+UPDATE product
+SET set_id = (SELECT id FROM sets WHERE name = 'Vuori Chambray Set')
+WHERE title = 'Vuori Strato Muscle Tee Chambray Heather';
+
+UPDATE product
+SET set_id = (SELECT id FROM sets WHERE name = 'Black White Set')
+WHERE title = 'Black White Workout Set';
+
 -- Single default variant per product (can be expanded later)
 INSERT INTO product_variant (product_id, sku, color, size, price, stock, category, gender, status, is_default) VALUES
 	((SELECT id FROM product WHERE title = 'Gymshark Black Compression Tee'), 'SKU-0001', 'BLACK', 'M', 149.90, 35, 'T_SHIRTS', 'MASCULINE', 'AVAILABLE', TRUE),
@@ -276,11 +307,20 @@ INSERT INTO product_variant (product_id, sku, color, size, price, stock, categor
 	((SELECT id FROM product WHERE title = 'Black Light Blue Seamless Set'), 'SKU-0043', 'BLACK', 'S', 299.90, 21, 'SET', 'FEMININE', 'AVAILABLE', TRUE),
 	((SELECT id FROM product WHERE title = 'White Training Shoes Feminine'), 'SKU-0044', 'WHITE', '37', 249.90, 19, 'SHOES', 'FEMININE', 'AVAILABLE', TRUE),
 	((SELECT id FROM product WHERE title = 'Vital Long Sleeve Cut Out Top Black Marl'), 'SKU-0045', 'BLACK MARL', 'S', 179.90, 23, 'SHIRTS', 'FEMININE', 'AVAILABLE', TRUE),
-	((SELECT id FROM product WHERE title = 'Gymshark Sports Top 30-04-26'), 'SKU-0046', 'BLACK', 'S', 159.90, 34, 'T_SHIRTS', 'FEMININE', 'AVAILABLE', TRUE);
+	((SELECT id FROM product WHERE title = 'Gymshark Sports Top 30-04-26'), 'SKU-0046', 'BLACK', 'S', 159.90, 34, 'T_SHIRTS', 'FEMININE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Vuori Viewpoint Muscle Tank Navy'), 'SKU-0047', 'NAVY', 'M', 169.90, 26, 'REGATTA', 'MASCULINE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Vuori Viewpoint Muscle Tank Sky Grey'), 'SKU-0048', 'GREY', 'M', 169.90, 24, 'REGATTA', 'MASCULINE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Vuori Strato Muscle Tee Chambray Heather'), 'SKU-0049', 'CHAMBRAY', 'M', 159.90, 20, 'T_SHIRTS', 'MASCULINE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Black White Workout Set'), 'SKU-0050', 'BLACK_WHITE', 'M', 189.90, 18, 'SET', 'MASCULINE', 'AVAILABLE', TRUE);
 
 -- Mirror product main thumbnail into the gallery table
 INSERT INTO product_image (product_id, url, is_main)
 SELECT id, image_url, TRUE FROM product;
+
+INSERT INTO product_image (product_id, url, is_main) VALUES
+	((SELECT id FROM product WHERE title = 'Vuori Viewpoint Muscle Tank Navy'), 'clothes/men/01-05-26-(SET-vuori-set-blue-blackman)Built to perform in the heat, the Viewpoint Muscle Tank is made with our lightweight, stretch-knit mesh_ Shop this men''s Navy shirt from Vuori.jpeg', FALSE),
+	((SELECT id FROM product WHERE title = 'Vuori Viewpoint Muscle Tank Navy'), 'clothes/men/01-05-26-(SET-vuori-set-blue-blackman)Viewpoint-Muscle-Tank–-Navy–Vuori.jpeg', FALSE),
+	((SELECT id FROM product WHERE title = 'Vuori Viewpoint Muscle Tank Sky Grey'), 'clothes/men/01-05-26-(SET-vuori-set-white-whiteman)Viewpoint Muscle Tank–Sky-Grey–Tanks–Vuori.jpeg', FALSE);
 
 -- Shopping carts
 INSERT INTO shopping_cart (user_id, status, created_at) VALUES

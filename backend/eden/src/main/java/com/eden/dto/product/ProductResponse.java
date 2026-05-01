@@ -16,6 +16,7 @@ public record ProductResponse(
         String weight,
         String material,
         int discountPercentage,
+        Long bundleId,
         String gender,
         String category,
         String imageUrl,

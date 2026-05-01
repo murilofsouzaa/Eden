@@ -10,6 +10,7 @@ public record UpdateProductRequest(
         String weight,
         String material,
         int discountPercentage,
+        Long bundleId,
         List<String> gallery,
         List<ProductVariantRequest> variants
 ) {}

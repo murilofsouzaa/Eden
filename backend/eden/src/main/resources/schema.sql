@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS product_image CASCADE;
 DROP TABLE IF EXISTS product_variant CASCADE;
 DROP TABLE IF EXISTS address CASCADE;
 DROP TABLE IF EXISTS product CASCADE;
+DROP TABLE IF EXISTS sets CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE users (
@@ -37,6 +38,11 @@ CREATE TABLE address (
 	zip_code      VARCHAR(12)     NOT NULL
 );
 
+CREATE TABLE sets (
+	id          BIGSERIAL PRIMARY KEY,
+	name        VARCHAR(120) NOT NULL UNIQUE
+);
+
 CREATE TABLE product (
 	id          BIGSERIAL PRIMARY KEY,
 	title       VARCHAR(180)    NOT NULL,
@@ -46,6 +52,7 @@ CREATE TABLE product (
 	weight      TEXT,
 	material    TEXT,
 	discount_percentage INTEGER NOT NULL DEFAULT 0 CHECK (discount_percentage >= 0 AND discount_percentage <= 100),
+	set_id      BIGINT REFERENCES sets(id) ON DELETE SET NULL,
 	created_at  TIMESTAMP       NOT NULL DEFAULT NOW(),
 	updated_at  TIMESTAMP,
 	CONSTRAINT product_title_unique UNIQUE (title)

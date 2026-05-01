@@ -19,6 +19,7 @@ public record CreateProductRequest(
         String weight,
         String material,
         int discountPercentage,
+        Long bundleId,
         List<String> gallery,
         @NotNull
         ProductCategories category,
