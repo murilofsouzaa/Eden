@@ -199,6 +199,18 @@ WHERE title IN (
 	'Gymshark Fraction Crop Tank Black'
 );
 
+-- Ensure all products that belong to the recent image groups have at least a baseline discount
+-- (use GREATEST to preserve any higher, manually set discounts)
+UPDATE product
+SET discount_percentage = GREATEST(COALESCE(discount_percentage, 0), 15)
+WHERE image_url LIKE '%30-04-26%'
+   OR image_url LIKE '%30-40-26%';
+
+UPDATE product
+SET discount_percentage = GREATEST(COALESCE(discount_percentage, 0), 15)
+WHERE image_url LIKE '%01-05-26%'
+   OR image_url LIKE '%1-05-26%';
+
 -- Tags and product_tags setup
 INSERT INTO tags (name) VALUES
 	('DISCOUNT'),
@@ -241,7 +253,11 @@ INSERT INTO sets (name) VALUES
 	('Vuori Navy Set'),
 	('Vuori Sky Grey Set'),
 	('Vuori Chambray Set'),
-	('Black White Set');
+	('Black White Set'),
+	('30-04-26 Men Set'),
+	('30-04-26 Women Set'),
+	('01-05-26 Men Set'),
+	('01-05-26 Women Set');
 
 UPDATE product
 SET set_id = (SELECT id FROM sets WHERE name = 'Vuori Navy Set')
@@ -258,6 +274,27 @@ WHERE title = 'Vuori Strato Muscle Tee Chambray Heather';
 UPDATE product
 SET set_id = (SELECT id FROM sets WHERE name = 'Black White Set')
 WHERE title = 'Black White Workout Set';
+
+-- Map products to new "30-04-26" and "01-05-26" bundles by image filename patterns
+UPDATE product
+SET set_id = (SELECT id FROM sets WHERE name = '30-04-26 Men Set')
+WHERE image_url LIKE '%30-04-26%'
+	AND image_url LIKE '%men%';
+
+UPDATE product
+SET set_id = (SELECT id FROM sets WHERE name = '30-04-26 Women Set')
+WHERE image_url LIKE '%30-04-26%'
+	AND (image_url LIKE '%women%' OR image_url LIKE '%female%');
+
+UPDATE product
+SET set_id = (SELECT id FROM sets WHERE name = '01-05-26 Men Set')
+WHERE image_url LIKE '%01-05-26%'
+	AND image_url LIKE '%men%';
+
+UPDATE product
+SET set_id = (SELECT id FROM sets WHERE name = '01-05-26 Women Set')
+WHERE image_url LIKE '%01-05-26%'
+	AND (image_url LIKE '%women%' OR image_url LIKE '%female%');
 
 -- Single default variant per product (can be expanded later)
 INSERT INTO product_variant (product_id, sku, color, size, price, stock, category, gender, status, is_default) VALUES
