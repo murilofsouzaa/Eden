@@ -122,6 +122,25 @@ INSERT INTO product (title, description, image_url, modeling, weight, material, 
 	('Black White Workout Set', 'Conjunto masculino preto e branco com visual clean e esportivo.',
 	 'clothes/men/1-05-26-black-white.jpeg', 'Set', '200g/m²', '88% Poliéster, 12% Elastano', TIMESTAMP '2026-05-01 08:30:00', NULL);
 
+-- New products from 01-05-26-(BUNDLE-KORE-VUORI)
+INSERT INTO product (title, description, image_url, modeling, weight, material, created_at, updated_at) VALUES
+	('Vuori Viewpoint Muscle Tank Navy KORE', 'Regata Vuori navy da coleção KORE com malha leve e respirável.',
+	 'clothes/men/01-05-26-(BUNDLE-KORE-VUORI)Built to perform in the heat, the Viewpoint Muscle Tank is made with our lightweight, stretch-knit mesh_ Shop this men''s Navy shirt from Vuori.jpeg', 'Regular', '165g/m²', '91% Nylon, 9% Elastano', TIMESTAMP '2026-05-01 11:20:00', NULL),
+	('Vuori Viewpoint Muscle Tank Sky Grey KORE', 'Regata Vuori sky grey da coleção KORE com caimento atlético.',
+	 'clothes/men/01-05-26-(BUNDLE-KORE-VUORI)-Viewpoint Muscle-Tank–Sky Grey–Tanks–Vuori.jpeg', 'Regular', '165g/m²', '91% Nylon, 9% Elastano', TIMESTAMP '2026-05-01 11:25:00', NULL),
+	('Vuori Strato Muscle Tee Chambray KORE', 'Camiseta muscle Vuori chambray da coleção KORE com tecido stretch-knit.',
+	 'clothes/men/01-05-26-(BUNDLE-KORE-VUORI)-Strato-Muscle-Tee – Chambray-Heather-Workout-Tank–Vuori.jpeg', 'Fitted', '188g/m²', '89% Nylon, 11% Elastano', TIMESTAMP '2026-05-01 11:30:00', NULL),
+	('Vuori Course Shorts Unlined 5 Ink KORE', 'Shorts Vuori KORE sem forro com 5" e foco em mobilidade.',
+	 'clothes/men/01-05-26-(BUNDLE-KORE-VUORI)-Vuori Course Shorts Unlined 5_ _ Ink _ Medium.jpeg', 'Regular', '170g/m²', '90% Poliéster, 10% Elastano', TIMESTAMP '2026-05-01 11:35:00', NULL),
+	('Vuori AllTheFeels Legging Lake KORE', 'Legging AllTheFeels KORE em tom Lake com cintura alta.',
+	 'clothes/women/01-05-26-(BUNDLE-KORE-VUORI)Vuori AllTheFeels™ Legging – Lake High-Rise Leggings – Vuori.jpeg', 'Fitted', '210g/m²', '86% Nylon, 14% Elastano', TIMESTAMP '2026-05-01 11:40:00', NULL),
+	('Vuori Favorite Styles by Kaia Gerber KORE', 'Seleção feminina KORE inspirada em looks de treino e lifestyle.',
+	 'clothes/women/01-05-26-(BUNDLE-KORE-VUORI)-by Kaia Gerber_ Favorite Styles, Workout Clothes & Outfits _ Vuori.jpeg', 'Regular', '220g/m²', '88% Poliéster, 12% Elastano', TIMESTAMP '2026-05-01 11:45:00', NULL),
+	('Vuori AllTheFeels Legging Blue Coast KORE', 'Legging AllTheFeels KORE Blue Coast com toque macio e compressão leve.',
+	 'clothes/women/01-05-26-(BUNDLE-KORE-VUORI)-Vuori AllTheFeels™ Legging _ Blue Coast _ XXL.jpeg', 'Fitted', '210g/m²', '86% Nylon, 14% Elastano', TIMESTAMP '2026-05-01 11:50:00', NULL),
+	('Vuori Clean Elevation Legging Midnight Heather KORE', 'Legging Clean Elevation KORE em Midnight Heather para treino e uso diário.',
+	 'clothes/women/01-05-26-(BUNDLE-KORE-VUORI)-Vuori Clean Elevation Legging _ Midnight Heather _ XL.jpeg', 'Fitted', '215g/m²', '85% Nylon, 15% Elastano', TIMESTAMP '2026-05-01 11:55:00', NULL);
+
 -- Discount setup: consolidated with CASE WHEN for optimal performance
 UPDATE product
 SET discount_percentage = CASE 
@@ -172,10 +191,12 @@ INSERT INTO sets (name) VALUES
 	('30-04-26 Men Set'),
 	('30-04-26 Women Set'),
 	('01-05-26 Men Set'),
-	('01-05-26 Women Set');
+	('01-05-26 Women Set'),
+	('KORE');
 
 UPDATE product
 SET set_id = CASE 
+	WHEN image_url LIKE '%01-05-26-(BUNDLE-KORE-VUORI)%' THEN (SELECT id FROM sets WHERE name = 'KORE')
 	WHEN title = 'Vuori Viewpoint Muscle Tank Navy' THEN (SELECT id FROM sets WHERE name = 'Vuori Navy Set')
 	WHEN title = 'Vuori Viewpoint Muscle Tank Sky Grey' THEN (SELECT id FROM sets WHERE name = 'Vuori Sky Grey Set')
 	WHEN title = 'Vuori Strato Muscle Tee Chambray Heather' THEN (SELECT id FROM sets WHERE name = 'Vuori Chambray Set')
@@ -188,7 +209,8 @@ SET set_id = CASE
 END
 WHERE title IN ('Vuori Viewpoint Muscle Tank Navy', 'Vuori Viewpoint Muscle Tank Sky Grey', 'Vuori Strato Muscle Tee Chambray Heather', 'Black White Workout Set')
    OR image_url LIKE '%30-04-26%'
-   OR image_url LIKE '%01-05-26%';
+	OR image_url LIKE '%01-05-26%'
+	OR image_url LIKE '%01-05-26-(BUNDLE-KORE-VUORI)%';
 
 -- Single default variant per product (can be expanded later)
 INSERT INTO product_variant (product_id, sku, color, size, price, stock, category, gender, status, is_default) VALUES
@@ -242,7 +264,15 @@ INSERT INTO product_variant (product_id, sku, color, size, price, stock, categor
 	((SELECT id FROM product WHERE title = 'Vuori Viewpoint Muscle Tank Navy'), 'SKU-0047', 'NAVY', 'M', 169.90, 26, 'REGATTA', 'MASCULINE', 'AVAILABLE', TRUE),
 	((SELECT id FROM product WHERE title = 'Vuori Viewpoint Muscle Tank Sky Grey'), 'SKU-0048', 'GREY', 'M', 169.90, 24, 'REGATTA', 'MASCULINE', 'AVAILABLE', TRUE),
 	((SELECT id FROM product WHERE title = 'Vuori Strato Muscle Tee Chambray Heather'), 'SKU-0049', 'CHAMBRAY', 'M', 159.90, 20, 'T_SHIRTS', 'MASCULINE', 'AVAILABLE', TRUE),
-	((SELECT id FROM product WHERE title = 'Black White Workout Set'), 'SKU-0050', 'BLACK_WHITE', 'M', 189.90, 18, 'SET', 'MASCULINE', 'AVAILABLE', TRUE);
+	((SELECT id FROM product WHERE title = 'Black White Workout Set'), 'SKU-0050', 'BLACK_WHITE', 'M', 189.90, 18, 'SET', 'MASCULINE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Vuori Viewpoint Muscle Tank Navy KORE'), 'SKU-0051', 'NAVY', 'M', 169.90, 24, 'REGATTA', 'MASCULINE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Vuori Viewpoint Muscle Tank Sky Grey KORE'), 'SKU-0052', 'SKY_GREY', 'M', 169.90, 22, 'REGATTA', 'MASCULINE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Vuori Strato Muscle Tee Chambray KORE'), 'SKU-0053', 'CHAMBRAY', 'M', 159.90, 20, 'T_SHIRTS', 'MASCULINE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Vuori Course Shorts Unlined 5 Ink KORE'), 'SKU-0054', 'INK', 'M', 179.90, 18, 'SHORTS', 'MASCULINE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Vuori AllTheFeels Legging Lake KORE'), 'SKU-0055', 'LAKE', 'M', 259.90, 19, 'LEGGING', 'FEMININE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Vuori Favorite Styles by Kaia Gerber KORE'), 'SKU-0056', 'MULTI', 'M', 229.90, 14, 'SET', 'FEMININE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Vuori AllTheFeels Legging Blue Coast KORE'), 'SKU-0057', 'BLUE_COAST', 'M', 259.90, 17, 'LEGGING', 'FEMININE', 'AVAILABLE', TRUE),
+	((SELECT id FROM product WHERE title = 'Vuori Clean Elevation Legging Midnight Heather KORE'), 'SKU-0058', 'MIDNIGHT_HEATHER', 'M', 269.90, 16, 'LEGGING', 'FEMININE', 'AVAILABLE', TRUE);
 
 -- Mirror product main thumbnail into the gallery table
 INSERT INTO product_image (product_id, url, is_main)
