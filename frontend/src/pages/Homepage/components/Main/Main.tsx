@@ -171,15 +171,6 @@ export function Main({ products }: MainProps) {
             </section>
 
             <section className="mt-20">
-                <CategorySection />
-            </section>
-
-
-            <section className="mt-20 -mx-4 lg:-mx-16">
-                <VideoSection />
-            </section>
-
-            <section className="mt-20">
                 <h2 className="text-2xl font-bold mb-6">Promoções</h2>
                 <Promotion
                     products={promoProducts}
@@ -190,6 +181,16 @@ export function Main({ products }: MainProps) {
                     prev={prevPromo}
                 ></Promotion>
             </section>
+            
+            <section className="mt-20">
+                <CategorySection />
+            </section>
+
+
+            <section className="mt-20 -mx-4 lg:-mx-16">
+                <VideoSection />
+            </section>
+
             
                     
         </div>
