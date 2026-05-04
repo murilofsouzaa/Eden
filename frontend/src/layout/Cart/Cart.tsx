@@ -1,11 +1,16 @@
+import {useState} from 'react'
 import type {Product} from '../../context/ProductContext';
 import {X} from 'lucide-react';
 
 type CartProps = {
+    product: Product;
     readonly onClose: () => void;
 };
 
-export function Cart({onClose}: CartProps) {
+
+export function Cart({onClose, product}: CartProps) {
+
+    const [cartProducts, setCartProducts] = useState<Product[]>([])
 
     return (
         <div className="cart-div fixed z-10 bottom-0 right-7 h-[70%] w-[90%] rounded-xl bg-white shadow-lg overflow-scroll 
@@ -23,8 +28,8 @@ export function Cart({onClose}: CartProps) {
                 </div>
 
                 <div className="">   
-                    {hasProducts ? (
-                        products.map((product:Product) => {
+                    {cartProducts ? (
+                        cartProducts.map((product:Product) => {
                             const variants = product.variants ?? [];
                             const defaultVariant = variants.find((v) => v.defaultVariant) ?? variants[0];
                             return (
