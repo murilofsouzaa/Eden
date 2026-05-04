@@ -4,6 +4,7 @@ import {CategorySection} from './CategorySection/CategorySection';
 import {VideoSection} from './VideoSection/VideoSection';
 import {ReleaseSection} from './NewsSection/NewsSection';
 import {Promotion} from './ModelingSection/ModelingSection'
+import {Newsletter} from './Newsletter/Newsletter'
 import { api } from '../../../../services/api';
 
 import type { Product } from '../../../../context/ProductContext';
@@ -193,6 +194,10 @@ export function Main({ products }: MainProps) {
 
             <section className="mt-20 -mx-4 lg:-mx-16">
                 <VideoSection />
+            </section>
+
+            <section className="overflow-hidden mt-20 flex justify-center items-center">
+                <Newsletter></Newsletter>
             </section>
 
             

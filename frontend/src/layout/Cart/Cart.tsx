@@ -13,11 +13,11 @@ export function Cart({onClose, product}: CartProps) {
     const [cartProducts, setCartProducts] = useState<Product[]>([])
 
     return (
-        <div className="cart-div fixed z-10 bottom-0 right-7 h-[70%] w-[90%] rounded-xl bg-white shadow-lg overflow-scroll 
+        <div className={`cart-div fixed z-10 bottom-0 right-7 h-[70%] w-[90%] rounded-xl bg-white shadow-lg overflow-scroll 
         md:h-full md:w-[45%] md:right-0
         lg:h-full lg:w-[33%] lg:right-0
         xl:h-full xl:w-[30%] xl:right-0
-        2xl:h-full 2xl:2-[23%] 2xl:right-0">
+        2xl:h-full 2xl:2-[23%] 2xl:right-0`}>
                 <div className="flex justify-between items-center w-full p-5 pr-10">
                     <h2 className="inline-flex text-xl font-medium p-4">Seu Carrinho</h2>
                     <div className="inline-flex">

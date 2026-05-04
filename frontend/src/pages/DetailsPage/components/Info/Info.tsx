@@ -25,7 +25,7 @@ const Info = () => {
         const selectedVariant =
             selectedProductVariants.find((variant: ProductVariant) => variant.size === selectedSize) ??
             defaultVariant
-        const isOutOfStock = (selectedVariant?.stock ?? 0) === 0
+        const isOutOfStock = (selectedVariant?.stock ?? 0) === 0;
 
         const handleSizeClick = (size:string) => {
             setSelectedSize(size)
