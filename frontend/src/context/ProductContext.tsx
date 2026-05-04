@@ -21,14 +21,18 @@ export type Product = {
     modeling:string;
     weight:string;
     discountPercentage:number;
-    bundleId:number
+    bundleId:number | null
     imageUrl: string;
     variants: ProductVariant[];
 };
 
 export const ProductContext = createContext<Product[]>([]);
 
-export function ProductProvider({children}:{children: React.ReactNode}){
+type ProductProviderProps = Readonly<{
+    children: React.ReactNode;
+}>;
+
+export function ProductProvider({children}: ProductProviderProps){
 
     //Nessa parte aqui, eu usei :{children: React.ReactNode}, pois o tipo do children é um componente
     //O que esse tipo está dizendo é: o children vai ser um objeto que tenha um children dentro de qualquer tipo

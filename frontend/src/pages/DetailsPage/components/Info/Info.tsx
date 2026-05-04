@@ -51,7 +51,10 @@ const Info = () => {
                         <h1 className="text-lg lg:text-xl ">{selectedProduct.title}</h1>
                         <label className="text-black/60">{defaultVariant.category.charAt(0).toUpperCase() + defaultVariant.category.slice(1).replace("_", " ")}</label>
                         {defaultVariant?.price !== undefined && (
-                        <label className="mt-4 text-2xl font-bold">R$ {defaultVariant.price.toFixed(2)}</label>
+                        <div className="flex flex-col">
+                            <label className="mt-4 text-xl text-black/50 line-through">R$ {defaultVariant.price.toFixed(2)}</label>
+                            <label className="text-2xl text-green-600/90 font-semibold">R$ {((defaultVariant.price) - (selectedProduct.discountPercentage * defaultVariant.price/100)).toFixed(2)}</label>
+                        </div>
                         )}
                         <label className="text-[15px] flex gap-2 mt-1">
                             <span className="text-black/70">

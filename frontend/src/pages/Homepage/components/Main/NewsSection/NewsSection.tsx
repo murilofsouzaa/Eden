@@ -50,7 +50,10 @@ export function ReleaseSection({
 
                                             <p className="mt-2 text-md">{product.title}</p>
                                             {variantToShow?.price !== undefined && variantToShow?.price !== null && (
-                                                <p className="text-md font-bold">R$ {variantToShow.price.toFixed(2)}</p>
+                                                <div>
+                                                    <p className="text-md font-light line-through text-black/60 ">R$ {variantToShow.price.toFixed(2)}</p>
+                                                    <p className="text-md font-semibold text-green-600/80">R$ {( variantToShow.price -  (product.discountPercentage/100) * variantToShow.price).toFixed(2)}</p>
+                                                </div>
                                             )}
                                     </div>
                                 )}
