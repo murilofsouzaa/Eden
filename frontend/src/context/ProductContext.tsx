@@ -24,6 +24,7 @@ export type Product = {
     bundleId:number | null
     imageUrl: string;
     variants: ProductVariant[];
+    tags:string
 };
 
 export const ProductContext = createContext<Product[]>([]);

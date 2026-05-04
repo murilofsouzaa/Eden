@@ -3,6 +3,7 @@ import './Main.css';
 import {CategorySection} from './CategorySection/CategorySection';
 import {VideoSection} from './VideoSection/VideoSection';
 import {ReleaseSection} from './NewsSection/NewsSection';
+import {Promotion} from './Promotion/Promotion'
 import { api } from '../../../../services/api';
 
 import type { Product } from '../../../../context/ProductContext';
@@ -124,10 +125,22 @@ export function Main({ products }: MainProps) {
                 <CategorySection />
             </section>
 
+
             <section className="mt-20 -mx-4 lg:-mx-16">
                 <VideoSection />
             </section>
 
+            <section className="mt-20">
+                <h2 className="text-2xl font-bold mb-6">Promoções</h2>
+                <Promotion
+                    products={products}
+                    translateValue={translateValue}
+                    trackRef={trackRef}
+                    viewportRef={viewportRef}
+                    next={next}
+                    prev={prev}
+                ></Promotion>
+            </section>
             
                     
         </div>
