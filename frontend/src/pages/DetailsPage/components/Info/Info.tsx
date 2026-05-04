@@ -89,7 +89,9 @@ const Info = () => {
                 </div>
                 
             ) : (
-                <p>Produto não encotrado.</p>
+                <div className="flex justify-center items-center p-40">
+                    <p className="text-center text-black/60 text-xl">Produto não encotrado</p>
+                </div>
             )}
         </>
     )

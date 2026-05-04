@@ -3,7 +3,7 @@ import './Main.css';
 import {CategorySection} from './CategorySection/CategorySection';
 import {VideoSection} from './VideoSection/VideoSection';
 import {ReleaseSection} from './NewsSection/NewsSection';
-import {Promotion} from './Promotion/Promotion'
+import {Promotion} from './ModelingSection/ModelingSection'
 import { api } from '../../../../services/api';
 
 import type { Product } from '../../../../context/ProductContext';
@@ -155,6 +155,10 @@ export function Main({ products }: MainProps) {
         };
     }, [updateMetrics, updateMetricsPromo, totalItems, totalItemsPromo]);
 
+    const oversizedProducts = products.filter((product) => product?.modeling === 'Oversized');
+    const displayedOversizedProducts = oversizedProducts.slice(0,7)
+
+
         return(
 		<div className="mx-4 mt-10 mb-10 lg:m-16">
             <h2 className="text-2xl font-bold mb-6">{selectedBundle?.name ?? 'NOVIDADES'}</h2>
@@ -171,9 +175,9 @@ export function Main({ products }: MainProps) {
             </section>
 
             <section className="mt-20">
-                <h2 className="text-2xl font-bold mb-6">Promoções</h2>
+                <h2 className="text-2xl font-bold mb-6">Oversized</h2>
                 <Promotion
-                    products={promoProducts}
+                    products={displayedOversizedProducts}
                     translateValue={translateValuePromo}
                     trackRef={trackRefPromo}
                     viewportRef={viewportRefPromo}
