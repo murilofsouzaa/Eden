@@ -21,13 +21,19 @@ export function Main({ products }: MainProps) {
 
     const [bundles, setBundles] = useState<Bundle[]>([]);
 
+    // Estado e refs para NewsSection
     const [currentIndex, setCurrentIndex] = useState(0);
-    // Guardamos métricas da vitrine para deslocar exatamente um produto por clique
-    
-        const [slideWidth, setSlideWidth] = useState(0);
-        const [viewportWidth, setViewportWidth] = useState(0);
-        const trackRef = useRef<HTMLDivElement | null>(null);
-        const viewportRef = useRef<HTMLDivElement | null>(null);
+    const [slideWidth, setSlideWidth] = useState(0);
+    const [viewportWidth, setViewportWidth] = useState(0);
+    const trackRef = useRef<HTMLDivElement | null>(null);
+    const viewportRef = useRef<HTMLDivElement | null>(null);
+
+    // Estado e refs separados para Promotion
+    const [currentIndexPromo, setCurrentIndexPromo] = useState(0);
+    const [slideWidthPromo, setSlideWidthPromo] = useState(0);
+    const [viewportWidthPromo, setViewportWidthPromo] = useState(0);
+    const trackRefPromo = useRef<HTMLDivElement | null>(null);
+    const viewportRefPromo = useRef<HTMLDivElement | null>(null);
     
     useEffect(() => {
         api.get<Bundle[]>('/api/bundles')
@@ -85,6 +91,29 @@ export function Main({ products }: MainProps) {
     const safeIndex = Math.min(currentIndex, maxIndex);
     const translateValue = -(safeIndex * slideWidth);
 
+    // Cálculos para Promotion
+    const promoProducts = products.filter((product) => (product.discountPercentage ?? 0) > 0).slice(0, 10);
+    const totalItemsPromo = promoProducts.length;
+    
+    const slidesPerViewPromo = useMemo(() => {
+        if (slideWidthPromo === 0 || viewportWidthPromo === 0) return 1;
+        return Math.max(Math.floor(viewportWidthPromo / slideWidthPromo), 1);
+    }, [slideWidthPromo, viewportWidthPromo]);
+
+    const maxIndexPromo = Math.max(totalItemsPromo - slidesPerViewPromo, 0);
+    const safeIndexPromo = Math.min(currentIndexPromo, maxIndexPromo);
+    const translateValuePromo = -(safeIndexPromo * slideWidthPromo);
+
+    const nextPromo = () => {
+        if (totalItemsPromo === 0) return;
+        setCurrentIndexPromo((current) => Math.min(current + 1, maxIndexPromo));
+    };
+
+    const prevPromo = () => {
+        if (totalItemsPromo === 0) return;
+        setCurrentIndexPromo((current) => Math.max(current - 1, 0));
+    };
+
     const updateMetrics = useCallback(() => {
         const track = trackRef.current;
         const viewport = viewportRef.current;
@@ -100,11 +129,31 @@ export function Main({ products }: MainProps) {
         setViewportWidth(viewport.offsetWidth);
     }, []);
 
+    const updateMetricsPromo = useCallback(() => {
+        const track = trackRefPromo.current;
+        const viewport = viewportRefPromo.current;
+        if (!track || !viewport) return;
+
+        const firstSlide = track.querySelector<HTMLElement>('[data-slide="true"]');
+        if (!firstSlide) return;
+
+        const styles = globalThis.getComputedStyle(track);
+        const gapValue = Number.parseFloat(styles.columnGap || styles.gap || '0') || 0;
+
+        setSlideWidthPromo(firstSlide.offsetWidth + gapValue);
+        setViewportWidthPromo(viewport.offsetWidth);
+    }, []);
+
     useEffect(() => {
         updateMetrics();
+        updateMetricsPromo();
         window.addEventListener('resize', updateMetrics);
-        return () => window.removeEventListener('resize', updateMetrics);
-    }, [updateMetrics, totalItems]);
+        window.addEventListener('resize', updateMetricsPromo);
+        return () => {
+            window.removeEventListener('resize', updateMetrics);
+            window.removeEventListener('resize', updateMetricsPromo);
+        };
+    }, [updateMetrics, updateMetricsPromo, totalItems, totalItemsPromo]);
 
         return(
 		<div className="mx-4 mt-10 mb-10 lg:m-16">
@@ -133,12 +182,12 @@ export function Main({ products }: MainProps) {
             <section className="mt-20">
                 <h2 className="text-2xl font-bold mb-6">Promoções</h2>
                 <Promotion
-                    products={products}
-                    translateValue={translateValue}
-                    trackRef={trackRef}
-                    viewportRef={viewportRef}
-                    next={next}
-                    prev={prev}
+                    products={promoProducts}
+                    translateValue={translateValuePromo}
+                    trackRef={trackRefPromo}
+                    viewportRef={viewportRefPromo}
+                    next={nextPromo}
+                    prev={prevPromo}
                 ></Promotion>
             </section>
             

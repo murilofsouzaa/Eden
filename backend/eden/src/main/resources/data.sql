@@ -115,10 +115,6 @@ INSERT INTO product (title, description, image_url, modeling, weight, material, 
 	 'clothes/women/sports-top-gymshark-30-04-26.jpeg', 'Fitted', '200g/m²', '88% Poliéster, 12% Elastano', TIMESTAMP '2026-04-30 11:10:00', NULL),
 	('Vuori Viewpoint Muscle Tank Navy', 'Regata Vuori com malha leve e respirável para alta performance.',
 	 'clothes/men/01-05-26-(SET-vuori-set-blue-blackman)Viewpoint Muscle Tank – Navy – Vuori.jpeg', 'Regular', '165g/m²', '91% Nylon, 9% Elastano', TIMESTAMP '2026-05-01 08:00:00', NULL),
-	('Vuori Viewpoint Muscle Tank Sky Grey', 'Regata Vuori em sky grey com caimento atlético e toque leve.',
-	 'clothes/men/01-05-26-(SET-vuori-set-white-whiteman)-Viewpoint Muscle-Tank–Sky Grey–Tanks–Vuori.jpeg', 'Regular', '165g/m²', '91% Nylon, 9% Elastano', TIMESTAMP '2026-05-01 08:10:00', NULL),
-	('Vuori Strato Muscle Tee Chambray Heather', 'Camiseta músculo Vuori em chambray heather com tecido stretch-knit.',
-	 'clothes/men/01-05-26-Strato-Muscle-Tee – Chambray-Heather-Workout-Tank–Vuori.jpeg', 'Fitted', '188g/m²', '89% Nylon, 11% Elastano', TIMESTAMP '2026-05-01 08:20:00', NULL),
 	('Black White Workout Set', 'Conjunto masculino preto e branco com visual clean e esportivo.',
 	 'clothes/men/1-05-26-black-white.jpeg', 'Set', '200g/m²', '88% Poliéster, 12% Elastano', TIMESTAMP '2026-05-01 08:30:00', NULL);
 
@@ -198,8 +194,6 @@ UPDATE product
 SET set_id = CASE 
 	WHEN image_url LIKE '%01-05-26-(BUNDLE-KORE-VUORI)%' THEN (SELECT id FROM sets WHERE name = 'KORE')
 	WHEN title = 'Vuori Viewpoint Muscle Tank Navy' THEN (SELECT id FROM sets WHERE name = 'Vuori Navy Set')
-	WHEN title = 'Vuori Viewpoint Muscle Tank Sky Grey' THEN (SELECT id FROM sets WHERE name = 'Vuori Sky Grey Set')
-	WHEN title = 'Vuori Strato Muscle Tee Chambray Heather' THEN (SELECT id FROM sets WHERE name = 'Vuori Chambray Set')
 	WHEN title = 'Black White Workout Set' THEN (SELECT id FROM sets WHERE name = 'Black White Set')
 	WHEN (image_url LIKE '%30-04-26%' AND image_url LIKE '%men%') THEN (SELECT id FROM sets WHERE name = '30-04-26 Men Set')
 	WHEN (image_url LIKE '%30-04-26%' AND (image_url LIKE '%women%' OR image_url LIKE '%female%')) THEN (SELECT id FROM sets WHERE name = '30-04-26 Women Set')
@@ -207,7 +201,7 @@ SET set_id = CASE
 	WHEN (image_url LIKE '%01-05-26%' AND (image_url LIKE '%women%' OR image_url LIKE '%female%')) THEN (SELECT id FROM sets WHERE name = '01-05-26 Women Set')
 	ELSE set_id
 END
-WHERE title IN ('Vuori Viewpoint Muscle Tank Navy', 'Vuori Viewpoint Muscle Tank Sky Grey', 'Vuori Strato Muscle Tee Chambray Heather', 'Black White Workout Set')
+WHERE title IN ('Vuori Viewpoint Muscle Tank Navy', 'Black White Workout Set')
    OR image_url LIKE '%30-04-26%'
 	OR image_url LIKE '%01-05-26%'
 	OR image_url LIKE '%01-05-26-(BUNDLE-KORE-VUORI)%';
@@ -262,8 +256,6 @@ INSERT INTO product_variant (product_id, sku, color, size, price, stock, categor
 	((SELECT id FROM product WHERE title = 'Vital Long Sleeve Cut Out Top Black Marl'), 'SKU-0045', 'BLACK MARL', 'S', 179.90, 23, 'SHIRTS', 'FEMININE', 'AVAILABLE', TRUE),
 	((SELECT id FROM product WHERE title = 'Gymshark Sports Top 30-04-26'), 'SKU-0046', 'BLACK', 'S', 159.90, 34, 'T_SHIRTS', 'FEMININE', 'AVAILABLE', TRUE),
 	((SELECT id FROM product WHERE title = 'Vuori Viewpoint Muscle Tank Navy'), 'SKU-0047', 'NAVY', 'M', 169.90, 26, 'REGATTA', 'MASCULINE', 'AVAILABLE', TRUE),
-	((SELECT id FROM product WHERE title = 'Vuori Viewpoint Muscle Tank Sky Grey'), 'SKU-0048', 'GREY', 'M', 169.90, 24, 'REGATTA', 'MASCULINE', 'AVAILABLE', TRUE),
-	((SELECT id FROM product WHERE title = 'Vuori Strato Muscle Tee Chambray Heather'), 'SKU-0049', 'CHAMBRAY', 'M', 159.90, 20, 'T_SHIRTS', 'MASCULINE', 'AVAILABLE', TRUE),
 	((SELECT id FROM product WHERE title = 'Black White Workout Set'), 'SKU-0050', 'BLACK_WHITE', 'M', 189.90, 18, 'SET', 'MASCULINE', 'AVAILABLE', TRUE),
 	((SELECT id FROM product WHERE title = 'Vuori Viewpoint Muscle Tank Navy KORE'), 'SKU-0051', 'NAVY', 'M', 169.90, 24, 'REGATTA', 'MASCULINE', 'AVAILABLE', TRUE),
 	((SELECT id FROM product WHERE title = 'Vuori Viewpoint Muscle Tank Sky Grey KORE'), 'SKU-0052', 'SKY_GREY', 'M', 169.90, 22, 'REGATTA', 'MASCULINE', 'AVAILABLE', TRUE),
@@ -280,8 +272,7 @@ SELECT id, image_url, TRUE FROM product;
 
 INSERT INTO product_image (product_id, url, is_main) VALUES
 	((SELECT id FROM product WHERE title = 'Vuori Viewpoint Muscle Tank Navy'), 'clothes/men/01-05-26-(SET-vuori-set-blue-blackman)Built to perform in the heat, the Viewpoint Muscle Tank is made with our lightweight, stretch-knit mesh_ Shop this men''s Navy shirt from Vuori.jpeg', FALSE),
-	((SELECT id FROM product WHERE title = 'Vuori Viewpoint Muscle Tank Navy'), 'clothes/men/01-05-26-(SET-vuori-set-blue-blackman)Viewpoint-Muscle-Tank–-Navy–Vuori.jpeg', FALSE),
-	((SELECT id FROM product WHERE title = 'Vuori Viewpoint Muscle Tank Sky Grey'), 'clothes/men/01-05-26-(SET-vuori-set-white-whiteman)Viewpoint Muscle Tank–Sky-Grey–Tanks–Vuori.jpeg', FALSE);
+	((SELECT id FROM product WHERE title = 'Vuori Viewpoint Muscle Tank Navy'), 'clothes/men/01-05-26-(SET-vuori-set-blue-blackman)Viewpoint-Muscle-Tank–-Navy–Vuori.jpeg', FALSE);
 
 -- Shopping carts
 INSERT INTO shopping_cart (user_id, status, created_at) VALUES

@@ -20,10 +20,7 @@ export function Promotion({
     prev,
     next,
 }: ReleaseSectionProps) {
-    // Filtra os 10 primeiros produtos com desconto
-    const promoProducts = products
-        .filter((product) => (product.discountPercentage ?? 0) > 0)
-        .slice(0, 10);
+    const promoProducts = products;
     console.log('Promotion - promoProducts:', promoProducts);
     const totalItems = promoProducts.length;
 
