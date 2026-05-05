@@ -5,7 +5,7 @@ import {api} from '../services/api'
 
 export type Cart={
     id:number;
-    userId:number;
+    userId:number
     status:boolean;
 }
 
@@ -18,12 +18,13 @@ export type CartItem={
 }
 
 export type CartContextType = {
-  items: Product[];
-    addItemCart: (newItem: Product, quantity?: number, size?: string) => Promise<void> | void;
-  isOpen:boolean;
-  toggleCart: () => void;
-  totalItems:number;
-  cartPrice:number;
+    cart: Cart | null;
+    items: Product[];
+        addItemCart: (newItem: Product, quantity?: number, size?: string) => Promise<void> | void;
+    isOpen:boolean;
+    toggleCart: () => void;
+    totalItems:number;
+    cartPrice:number;  
     savedSize?: string | null;
 
 }
@@ -64,7 +65,7 @@ export function CartProvider({children}:{readonly children: React.ReactNode}){
 
     
     return ( 
-        <CartContext.Provider value={{items, addItemCart, isOpen, toggleCart, totalItems, cartPrice, savedSize}}>
+        <CartContext.Provider value={{cart ,items, addItemCart, isOpen, toggleCart, totalItems, cartPrice, savedSize}}>
             {children}
         </CartContext.Provider>
      );

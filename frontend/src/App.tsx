@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react'
 import './App.css'
 import Homepage  from './pages/Homepage/Homepage.tsx';
 import ProductDetail from './pages/DetailsPage/DetailsPage.tsx'
+import {useCart} from './context/CartContext'
 
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
@@ -12,6 +13,9 @@ function App() {
 
   const titles = ["Compre AGORA sua oversized!", "Tá barato pô, compra ai"]
   const location = useLocation();
+
+  const cart = useCart();
+  const isOpen = cart.isOpen;
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
     
@@ -30,9 +34,17 @@ function App() {
       document.title=titles[currentIndex]
     }, [currentIndex]);
 
-  useEffect(() => {
-    window.scrollTo(0,0)
-  }, [location]);
+    useEffect(() => {
+      window.scrollTo(0,0)
+    }, [location]);
+
+    useEffect(() => {
+      if(isOpen){
+        document.body.style.overflow="hidden";
+      }else{
+        document.body.style.overflow="unset";
+      }
+    }, [isOpen]);
 
 
   return (
