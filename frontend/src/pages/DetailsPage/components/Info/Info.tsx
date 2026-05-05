@@ -1,6 +1,5 @@
 import {useParams} from 'react-router-dom';
 import  '../../../../index.css'
-import {useState} from 'react'
 import useProducts from '../../../../../hooks/useProducts'
 import './Info.css'
 import SizeButtons from './components/SizeButtons/SizeButtons'
@@ -10,30 +9,31 @@ import Description from './components/Description/Description'
 import AddToCartButton from './components/AddToCartBtn/AddToCartButton'
 import PromotionsGreenLabel from './components/PromotionsGreenLabel/PromotionsGreenLabel'
 import ProductDetails from './components/ProductDetails/ProductDetails'
+import { useState } from 'react'
 
 const Info = () => {
 
-    const [selectedSize, setSelectedSize] = useState<string>("P");
-
+        const [selectedSize, setSelectedSize] = useState<string>("P");
         const {id} = useParams();
         const products = useProducts();
     
-        const selectedProduct = products.find((product:Product) => product.id === Number(id));
+        const selectedProduct = products.find((product:Product) => product.id === Number(id)) as Product | undefined;
         const selectedProductVariants = selectedProduct?.variants ?? [];
-        const defaultVariant = selectedProductVariants
-            .find((product:ProductVariant) => product?.defaultVariant) ?? selectedProductVariants[0]
-        const selectedVariant =
-            selectedProductVariants.find((variant: ProductVariant) => variant.size === selectedSize) ??
-            defaultVariant
-        const isOutOfStock = (selectedVariant?.stock ?? 0) === 0;
 
-        const handleSizeClick = (size:string) => {
-            setSelectedSize(size)
-        }
+        const defaultVariant = selectedProductVariants.length > 0 
+            ? (selectedProductVariants.find((product:ProductVariant) => product?.defaultVariant) ?? selectedProductVariants[0])
+            : undefined;
+        
+        const selectedVariant = defaultVariant ? (
+            selectedProductVariants.find((variant: ProductVariant) => variant.size === selectedSize) ?? defaultVariant
+        ) : undefined;
+        const isOutOfStock = !selectedVariant || (selectedVariant?.stock ?? 0) === 0;
+
+        
 
     return (
         <>
-            {selectedProduct ? (
+            {selectedProduct && defaultVariant ? (
                 <div className="overflow-x-hidden p-5 lg:grid lg:grid-cols-3 lg:col-start-2 lg:p-5 lg:flex-row">
                     <div className="col-start-2">
                         <div className="flex justify-center items-center">
@@ -70,10 +70,10 @@ const Info = () => {
                             >%10 de cashback na próxima compra</span>
                         </div>
                         <div className="mt-5">
-                            <SizeButtons selectedSize={selectedSize} handleSizeClick={handleSizeClick}></SizeButtons>
+                            <SizeButtons selectedSize={selectedSize} handleSizeClick={setSelectedSize}></SizeButtons>
                         </div>
 
-                        <AddToCartButton selectedProduct={selectedProduct} isOutOfStock={isOutOfStock}></AddToCartButton>
+                        <AddToCartButton selectedProduct={selectedProduct} isOutOfStock={isOutOfStock} selectedSize={selectedSize}></AddToCartButton>
 
                         <p className="mt-4 text-sm">Frete grátis nas compras acima de R$299</p>
                         
@@ -90,7 +90,7 @@ const Info = () => {
                 
             ) : (
                 <div className="flex justify-center items-center p-40">
-                    <p className="text-center text-black/60 text-xl">Produto não encotrado</p>
+                    <p className="text-center text-black/60 text-xl">Produto não encontrado ou sem variantes disponíveis</p>
                 </div>
             )}
         </>

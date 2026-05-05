@@ -1,34 +1,70 @@
 /* eslint-disable react-refresh/only-export-components */
-import {createContext, useContext, useState} from 'react'
+import {createContext, useContext, useState, useEffect} from 'react'
 import type {Product}  from '../context/ProductContext'
+import {api} from '../services/api'
+
+export type Cart={
+    id:number;
+    userId:number;
+    status:boolean;
+}
+
+export type CartItem={
+    id:number;
+    userId:number;
+    productId:number;
+    quantity:number;
+    priceAtAddition:number
+}
 
 export type CartContextType = {
   items: Product[];
-  addItemCart: (newItem: Product) => void;
+    addItemCart: (newItem: Product, quantity?: number, size?: string) => Promise<void> | void;
   isOpen:boolean;
   toggleCart: () => void;
   totalItems:number;
+  cartPrice:number;
+    savedSize?: string | null;
+
 }
+
 
 export const CartContext = createContext<CartContextType | undefined>(undefined)
 
 export function CartProvider({children}:{readonly children: React.ReactNode}){
 
-    const [items, setItems ] = useState<Product[]>([])
+    const [cart, setCart] = useState<(Cart | null)>(null)
+    const [items, setItems ] = useState<Product[]>([]);
     const [totalItems, setTotalItems] = useState<number>(0);
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [cartPrice, setCartPrice] = useState<number>(0);
+    const [savedSize, setSavedSize] = useState<string | null>(null);
 
-    const addItemCart = (newItem:Product) =>{
+    useEffect(() => {
+        api.get("/cart")
+        .then((response) =>{
+            setCart(response.data)
+        })
+    }, []);
+
+
+    const addItemCart = (newItem:Product, quantity:number = 1, size?: string) =>{
         setItems((prev) => [... new Set([...prev, newItem])])
-        setTotalItems((prev) => prev + 1)
+        setTotalItems((prev) => prev + quantity)
+        const priceToAdd = newItem.variants && newItem.variants.length > 0 ? newItem.variants[0].price * quantity : 0;
+        setCartPrice((prev) => prev + priceToAdd)
+        if(size){
+            setSavedSize(size);
+        }
     }
 
     const toggleCart = () =>{
        return setIsOpen((prev) => !prev)
     }
+
     
     return ( 
-        <CartContext.Provider value={{items, addItemCart, isOpen, toggleCart, totalItems}}>
+        <CartContext.Provider value={{items, addItemCart, isOpen, toggleCart, totalItems, cartPrice, savedSize}}>
             {children}
         </CartContext.Provider>
      );
