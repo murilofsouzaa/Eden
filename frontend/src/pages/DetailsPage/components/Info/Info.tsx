@@ -73,7 +73,7 @@ const Info = () => {
                             <SizeButtons selectedSize={selectedSize} handleSizeClick={handleSizeClick}></SizeButtons>
                         </div>
 
-                        <AddToCartButton isOutOfStock={isOutOfStock}></AddToCartButton>
+                        <AddToCartButton selectedProduct={selectedProduct} isOutOfStock={isOutOfStock}></AddToCartButton>
 
                         <p className="mt-4 text-sm">Frete grátis nas compras acima de R$299</p>
                         

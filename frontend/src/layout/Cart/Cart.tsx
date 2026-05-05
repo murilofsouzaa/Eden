@@ -1,16 +1,11 @@
-import {useState} from 'react'
 import type {Product} from '../../context/ProductContext';
+import {useCart} from '../../context/CartContext';
 import {X} from 'lucide-react';
 
-type CartProps = {
-    product: Product;
-    readonly onClose: () => void;
-};
+export function Cart() {
 
-
-export function Cart({onClose, product}: CartProps) {
-
-    const [cartProducts, setCartProducts] = useState<Product[]>([])
+    const cart = useCart();
+    const cartProducts = cart.items;
 
     return (
         <div className={`cart-div fixed z-10 bottom-0 right-7 h-[70%] w-[90%] rounded-xl bg-white shadow-lg overflow-scroll 
@@ -21,7 +16,7 @@ export function Cart({onClose, product}: CartProps) {
                 <div className="flex justify-between items-center w-full p-5 pr-10">
                     <h2 className="inline-flex text-xl font-medium p-4">Seu Carrinho</h2>
                     <div className="inline-flex">
-                        <button onClick={onClose} className="hover:cursor-pointer">
+                        <button onClick={cart.toggleCart} className="hover:cursor-pointer">
                             <X></X>
                         </button>
                     </div>
@@ -35,7 +30,7 @@ export function Cart({onClose, product}: CartProps) {
                             return (
                                 <div key={product.id} className="flex p-4">
                                     <img src={`/${product.imageUrl}`} alt={product.title} className="w-auto h-20"/>
-                                    <div >
+                                    <div>
                                         <p className="ml-4 text-[12px] w-[60%]">{product.title}</p>
                                         <p className="font-bold ml-4 mt-3 text-[12px] w-[60%]">R${defaultVariant?.price}</p>
                                     </div>
@@ -51,6 +46,7 @@ export function Cart({onClose, product}: CartProps) {
                    
                 </div>
                 <div className="cart-resume bg-white fixed">
+
                 </div>
         </div>
     );

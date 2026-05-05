@@ -7,6 +7,7 @@ import userIcon from '../../../public/icons/user.png';
 import shoppingBag from '../../../public/icons/shopping-bag.png';
 import hamburgerIcon from '../../../public/icons/hamburguer.png';
 import SearchInput from './SearchInput/SearchInput'
+import {useCart} from '../../context/CartContext'
 
 const labels : React.ReactNode[] = [
     <label key={1} className="text-sm"><span className="font-bold">FRETE GRÁTIS</span> EM COMPRAS ACIMA DE R$299</label>,
@@ -16,9 +17,7 @@ const labels : React.ReactNode[] = [
 
 export function Header(){
     
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [active, setActive] = useState(false);
-    
+    const [currentIndex, setCurrentIndex] = useState(0);    
     
     useEffect(() => {
         //retorna um ID para o clearInterval
@@ -33,9 +32,10 @@ export function Header(){
     // para i = 1
     // 1 + 0 % 3 -> 1 % 3 = 1, pois 1/3 o quociente fica 0 e o resto será 1
 
-    function handleShoppingBagClick(){
-        setActive((prev) => (!prev))
-    }
+    const cart = useCart();
+    const isOpen = cart.isOpen;
+    const cartQuantity = cart.totalItems;
+    const toggleCart = cart.toggleCart;
 
     return (
         <div className="sticky top-0 z-101 bg-white border-b-2 border-b-black/10">
@@ -56,24 +56,27 @@ export function Header(){
                         <img src={hamburgerIcon} className="w-8 h-8 lg:hidden"></img>
 
                         <div>
-                            <SearchInput handleShoppingBagClick={handleShoppingBagClick}/>
+                            <SearchInput/>
                         </div>
 
-                        <div className="flex gap-5 w-[100%]">
-                            <a href="#" className="hover:translate-y-[-10px] ease-in-out duration-300 py-5">
+                        <div className="flex justify-between items-center gap-5 w-[100%]">
+                            <a href="#" className="hover:translate-y-[-10px] ease-in-out duration-300 py-5 w-full">
                                 <img src={userIcon} alt="user-icon" className="h-6 w-auto object-contain"></img>
                             </a>
-                            <button onClick={handleShoppingBagClick} className="cursor-pointer py-5
+                            <button onClick={toggleCart} className="relative cursor-pointer py-5 w-full
                             hover:translate-y-[-10px] ease-in-out duration-300">
                                 <img src={shoppingBag} alt="shopping-bag-icon" className="h-6 w-auto object-contain"></img>
+                                <div className="absolute flex justify-center items-center top-4 left-3 text-[11px] rounded-[50%] w-[18px] h-[18px] p-[10px]  bg-blue-200">
+                                    <span className="">{cartQuantity}</span>
+                                </div>
                             </button>
                         </div>
                     </div>
                 </nav>
             </div>
             <div className="">
-                {active === true && (
-                    <Cart onClose={() => setActive(false)}/>
+                {isOpen && (
+                    <Cart/>
                 )}
             </div>
         </div>
