@@ -1,6 +1,6 @@
 import type {Product} from '../../context/ProductContext';
 import {useCart} from '../../context/CartContext';
-import {X} from 'lucide-react';
+import {X, Trash} from 'lucide-react';
 
 export function Cart() {
 
@@ -12,11 +12,13 @@ export function Cart() {
     return (isOpen ?(
         <div className={`cart-div fixed z-10 bottom-0 right-7 rounded-xl bg-white shadow-lg overflow-y-scroll
         overflow-x-hidden 
+        md:rounded-none lg:rounded-none xl:rounded-none 
         md:h-full md:w-[45%] md:right-0
         lg:h-full lg:w-[33%] lg:right-0
         xl:h-full xl:w-[26%] xl:right-0
         2xl:h-full 2xl:2-[23%] 2xl:right-0`}>
-                <div className="flex justify-between items-center w-full p-5 pr-10">
+
+                <div className="flex justify-between items-center p-5">
                     <h2 className="inline-flex text-xl font-medium p-4">Seu Carrinho</h2>
                     <div className="inline-flex">
                         <button onClick={isOpen} className="hover:cursor-pointer">
@@ -25,33 +27,26 @@ export function Cart() {
                     </div>
                 </div>
 
-                <div className="">   
+                <div className="flex flex-col">   
                     {cartProducts ? (
                         cartProducts.map((product:Product) => {
                             const variants = product.variants ?? [];
                             const defaultVariant = variants.find((v) => v.defaultVariant) ?? variants[0];
                             return (
-                                <div key={product.id} className="flex justify-center items-center p-4">
-                                    <div className="flex flex-row justify-center">
-                                        <img src={`/${product.imageUrl}`} alt={product.title} className="w-auto h-40"/>
-                                        <div className="ml-4">
-                                            <label className="block text-[16px] font-medium w-[60%] mb-2">{product.title}</label>
-                                            <div className="flex justify-center items-center bg-black h-[30px] w-[30px] text-sm text-white p-5 rounded-[50%]">
-                                                <p>{size ?? ''}</p>
-                                            </div>
-
-                                            <div className="flex flex-row">
-                                                <div className="mt-2">
-                                                    <span className={`${product.discountPercentage ? 'text-red-600 line-through' : 'text-black'} font-semibold text-[15px]`}>R${defaultVariant?.price}</span>
-                                                    {product.discountPercentage > 0 && (
-                                                    <span className="font-semibold ml-4 mt-10 text-[16px]">R${defaultVariant?.price - (defaultVariant?.price * (product.discountPercentage/100))}</span>
-                                                    )}
-                                                </div>
-                                            </div>
+                                <div key={product.id} className="flex justify-center items-center border-b w-auto h-60 mx-10 border-b-black/10">
+                                    <img src={`/${product.imageUrl}`} alt={product.title} className="w-24 h-32"/>
+                                    <div className="flex flex-col items-start ml-4 w-full">
+                                        <p className="font-normal text-[16px] font-medium mb-2 w-[80%]">{product.title}</p>
+                                        <p className="text-[16px] text-gray-600 font-medium">{size ?? ''}</p>
+                                        <div className="flex gap-3 mt-2">
+                                            <p className={`${product.discountPercentage ? 'text-red-600 line-through' : 'text-black'} font-semibold text-[16px]`}>R${defaultVariant?.price}</p>
+                                            {product.discountPercentage > 0 && (
+                                            <p className="font-semibold text-[16px]">R${(defaultVariant?.price - (defaultVariant?.price * (product.discountPercentage/100))).toFixed(2)}</p>
+                                            )}
                                         </div>
-                                    </div>
-                                    <div>
-
+                                        <div className="mt-2 p-1 rounded-[50%] bg-gray-200 hover:bg-gray-300 hover:cursor-pointer">
+                                            <Trash className="w-5 h-5 text-gray-700"/>
+                                        </div>
                                     </div>
                                 </div>
                             )

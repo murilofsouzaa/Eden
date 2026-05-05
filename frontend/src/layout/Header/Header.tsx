@@ -42,7 +42,7 @@ export function Header(){
             <div className="flex flex-col m-0 p-0">
                 <div className="bg-gray-200 p-3 text-center">{labels[currentIndex]}</div>
                 <nav className="flex flex-col justify-center items-center m-4 
-                    lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-4 lg:m-4 lg:p">
+                    lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-4 lg:mx-14 lg:my-4 lg:p">
                     <ul className="hidden 
                         lg:visible lg:flex lg:gap-7">
                         <li><a href="#">Mulheres</a></li>

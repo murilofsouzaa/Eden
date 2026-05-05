@@ -36,12 +36,12 @@ function App() {
 
 
   return (
-    <>
+    <div className="">
       <Routes>
         <Route path="/" element={<Homepage></Homepage>}></Route>
         <Route path="/product/:id" element={<ProductDetail></ProductDetail>}></Route>
       </Routes>
-    </>
+    </div>
   )
 }
 
