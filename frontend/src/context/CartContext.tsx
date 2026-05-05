@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import {createContext, useContext, useState, useEffect} from 'react'
 import type {Product}  from '../context/ProductContext'
+import useProduct from './ProductContext'
 import {api} from '../services/api'
 
 export type Cart={
@@ -10,23 +11,22 @@ export type Cart={
 }
 
 export type CartItem={
-    id:number;
-    userId:number;
-    productId:number;
+    key:string;
+    product: Product;
+    size: string;
     quantity:number;
-    priceAtAddition:number
+    unitPrice:number;
 }
 
 export type CartContextType = {
     cart: Cart | null;
-    items: Product[];
+    items: CartItem[];
         addItemCart: (newItem: Product, quantity?: number, size?: string) => Promise<void> | void;
     isOpen:boolean;
     toggleCart: () => void;
     totalItems:number;
     cartPrice:number;  
-    savedSize?: string | null;
-    removeItemFromCart: (product:Product) => void;
+    removeItemFromCart: (item:CartItem) => void;
 
 }
 
@@ -36,11 +36,12 @@ export const CartContext = createContext<CartContextType | undefined>(undefined)
 export function CartProvider({children}:{readonly children: React.ReactNode}){
 
     const [cart, setCart] = useState<(Cart | null)>(null)
-    const [items, setItems ] = useState<Product[]>([]);
+    const [items, setItems ] = useState<CartItem[]>([]);
     const [totalItems, setTotalItems] = useState<number>(0);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [cartPrice, setCartPrice] = useState<number>(0);
-    const [savedSize, setSavedSize] = useState<string | null>(null);
+
+    const { variants } = useProduct({children: null});
 
     useEffect(() => {
         api.get("/cart")
@@ -51,26 +52,57 @@ export function CartProvider({children}:{readonly children: React.ReactNode}){
 
 
     const addItemCart = (newItem:Product, quantity:number = 1, size?: string) =>{
-        setItems((prev) => [... new Set([...prev, newItem])])
-        setTotalItems((prev) => prev + quantity)
-        const priceToAdd = newItem.variants && newItem.variants.length > 0 ? newItem.variants[0].price * quantity : 0;
-        setCartPrice((prev) => prev + priceToAdd)
-        if(size){
-            setSavedSize(size);
-        }
-    }
+        const defaultVariant = newItem.variants.find((variant) => variant.defaultVariant) ?? newItem.variants[0];
+        const selectedSize = size ?? defaultVariant?.size ?? newItem.variants[0]?.size ?? '';
+        const selectedVariant = newItem.variants.find((variant) => variant.size === selectedSize) ?? defaultVariant ?? newItem.variants[0];
+        const unitPrice = selectedVariant ? selectedVariant.price - (selectedVariant.price * (newItem.discountPercentage / 100)) : 0;
 
-    const removeItemFromCart = (product:Product) => {
-        setItems(items.filter((item) => item.id != product.id)) 
+        setItems((prev) => {
+            const existingItemIndex = prev.findIndex((item) => item.product.id === newItem.id && item.size === selectedSize);
+
+            if (existingItemIndex >= 0) {
+                return prev.map((item) => (
+                    item.product.id === newItem.id && item.size === selectedSize
+                        ? {...item, quantity: item.quantity + quantity}
+                        : item
+                ));
+            }
+
+            return [
+                ...prev,
+                {
+                    key: `${newItem.id}-${selectedSize}`,
+                    product: newItem,
+                    size: selectedSize,
+                    quantity,
+                    unitPrice,
+                },
+            ];
+        });
     }
 
     const toggleCart = () =>{
        return setIsOpen((prev) => !prev)
     }
 
+    const removeItemFromCart = (item:CartItem) => {
+        setItems((prev) => prev.filter((currentItem) => currentItem.key !== item.key));
+    }
+
+
+
+    useEffect(() => {
+        const nextTotalItems = items.reduce((acc, item) => acc + item.quantity, 0);
+        const nextCartPrice = items.reduce((acc, item) => acc + (item.unitPrice * item.quantity), 0);
+
+        setTotalItems(nextTotalItems)
+        setCartPrice(nextCartPrice)
+    }, [items]);
+    
     
     return ( 
-        <CartContext.Provider value={{cart ,items, addItemCart, isOpen, toggleCart, totalItems, cartPrice, savedSize, removeItemFromCart}}>
+        <CartContext.Provider value={{cart ,items, addItemCart, isOpen, toggleCart,
+         totalItems, cartPrice, removeItemFromCart}}>
             {children}
         </CartContext.Provider>
      );

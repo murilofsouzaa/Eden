@@ -31,7 +31,6 @@ export type ProductVariant = {
 
 
 type ProductContextType = {
-    find(arg0: (product: Product) => boolean): unknown;
     products: Product[];
     variants: ProductVariant[][];
 };
