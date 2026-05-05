@@ -39,13 +39,24 @@ export function Cart() {
                                         <p className="font-normal text-[16px] font-medium mb-2 w-[80%]">{product.title}</p>
                                         <p className="text-[16px] text-gray-600 font-medium">{size ?? ''}</p>
                                         <div className="flex gap-3 mt-2">
-                                            <p className={`${product.discountPercentage ? 'text-red-600 line-through' : 'text-black'} font-semibold text-[16px]`}>R${defaultVariant?.price}</p>
+                                            {defaultVariant && (
+                                                <p className={`${product.discountPercentage ? 'text-red-600 line-through' : 'text-black font-semibold'} text-[16px]`}>R${defaultVariant?.price.toFixed(2)}</p>
+                                            )}
                                             {product.discountPercentage > 0 && (
                                             <p className="font-semibold text-[16px]">R${(defaultVariant?.price - (defaultVariant?.price * (product.discountPercentage/100))).toFixed(2)}</p>
                                             )}
                                         </div>
-                                        <div className="mt-2 p-1 rounded-[50%] bg-gray-200 hover:bg-gray-300 hover:cursor-pointer">
-                                            <Trash className="w-5 h-5 text-gray-700"/>
+                                        <div>
+                                            <button 
+                                                onClick={() => cart.removeItemFromCart(product)}
+                                                className="mt-2 p-1 rounded-[50%] bg-gray-200 hover:bg-gray-300 hover:cursor-pointer">
+                                                <Trash className="w-5 h-5 text-gray-700"/>
+                                            </button>
+                                            <div>
+                                                <label>-</label>
+                                                <label>{}</label>
+                                                <label>+</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

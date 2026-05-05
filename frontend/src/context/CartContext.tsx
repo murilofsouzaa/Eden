@@ -26,6 +26,7 @@ export type CartContextType = {
     totalItems:number;
     cartPrice:number;  
     savedSize?: string | null;
+    removeItemFromCart: (product:Product) => void;
 
 }
 
@@ -59,13 +60,17 @@ export function CartProvider({children}:{readonly children: React.ReactNode}){
         }
     }
 
+    const removeItemFromCart = (product:Product) => {
+        setItems(items.filter((item) => item.id != product.id)) 
+    }
+
     const toggleCart = () =>{
        return setIsOpen((prev) => !prev)
     }
 
     
     return ( 
-        <CartContext.Provider value={{cart ,items, addItemCart, isOpen, toggleCart, totalItems, cartPrice, savedSize}}>
+        <CartContext.Provider value={{cart ,items, addItemCart, isOpen, toggleCart, totalItems, cartPrice, savedSize, removeItemFromCart}}>
             {children}
         </CartContext.Provider>
      );
