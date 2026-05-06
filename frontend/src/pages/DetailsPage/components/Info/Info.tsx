@@ -51,10 +51,15 @@ const Info = () => {
                         <h1 className="text-lg lg:text-xl ">{selectedProduct.title}</h1>
                         <label className="text-black/60">{defaultVariant.category.charAt(0).toUpperCase() + defaultVariant.category.slice(1).replace("_", " ")}</label>
                         {defaultVariant?.price !== undefined && (
-                        <div className="flex flex-col">
-                            <label className="mt-4 text-xl text-black/50 line-through">R$ {defaultVariant.price.toFixed(2).toString().replace(".", ",")}</label>
+                        <div className="flex flex-col my-4">
+                                {selectedProduct.discountPercentage > 0 && (
+                                    <div className="flex justify-center items-center gap-3">      
+                                        <label className="text-lg text-black/50 line-through">R$ {defaultVariant.price.toFixed(2).toString().replace(".", ",")}</label>
+                                        <label className="bg-black px-2 text-sm font-semibold text-white">R$ {(defaultVariant.price - ((defaultVariant.price) - (selectedProduct.discountPercentage * defaultVariant.price/100))).toFixed(0).toString().replace(".", ",")} OFF</label>
+                                    </div>
+                                )}
                             <label className="text-3xl text-black font-semibold">R$ {((defaultVariant.price) - (selectedProduct.discountPercentage * defaultVariant.price/100)).toFixed(2).toString().replace(".", ",")}</label>
-                        </div>
+                        </div>  
                         )}
                         <label className="text-[15px] flex gap-2 mt-1">
                             <span className="text-black/70">
