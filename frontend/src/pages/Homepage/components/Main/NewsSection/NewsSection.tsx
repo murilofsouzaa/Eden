@@ -2,6 +2,7 @@ import {Link} from 'react-router-dom'
 import { ChevronLeft, ChevronRight } from 'react-feather';
 import type { MutableRefObject } from 'react';
 import type {Product} from '../../../../../context/ProductContext';
+import PriceOffLabel from '../../../../../components/ui/PriceOffLabel'
 
 type ReleaseSectionProps = {
     readonly products: Product[];
@@ -53,9 +54,14 @@ export function ReleaseSection({
                                                 </Link>
                                                     <p className="mt-2 text-md">{product.title}</p>
                                                     {variantToShow?.price !== undefined && variantToShow?.price !== null && (
-                                                        <div>
-                                                            <p className="text-md font-light line-through text-black/60 ">R$ {variantToShow.price.toFixed(2).toString().replace(".", ",")}</p>
-                                                            <p className="text-md font-semibold text-green-600/80">R$ {( variantToShow.price -  (product.discountPercentage/100) * variantToShow.price).toFixed(2).toString().replace(".", ",")}</p>
+                                                        <div className="flex gap-3 justify-center">
+                                                            <div>
+                                                                <p className="text-md font-light line-through text-black/60 ">R$ {variantToShow.price.toFixed(2).toString().replace(".", ",")}</p>
+                                                                <p className="text-md font-semibold text-green-600/80">R$ {( variantToShow.price -  (product.discountPercentage/100) * variantToShow.price).toFixed(2).toString().replace(".", ",")}</p>
+                                                            </div>
+                                                            <div className="">
+                                                                <PriceOffLabel defaultVariant={variantToShow} selectedProduct={product}/>   
+                                                            </div>
                                                         </div>
                                                     )}
                                             </div>

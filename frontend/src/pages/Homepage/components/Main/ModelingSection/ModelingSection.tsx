@@ -2,6 +2,8 @@ import {Link} from 'react-router-dom'
 import { ChevronLeft, ChevronRight } from 'react-feather';
 import type { MutableRefObject } from 'react';
 import type {Product} from '../../../../../context/ProductContext';
+import PriceOffLabel from '../../../../../components/ui/PriceOffLabel'
+
 
 type ReleaseSectionProps = {
     readonly products: Product[];
@@ -51,8 +53,13 @@ export function Promotion({
                                             <p className="mt-2 text-md">{product.title}</p>
                                             {variantToShow?.price != null && (
                                                 <div>
-                                                    <p className="text font-semibold text-black ">R$ {variantToShow.price.toFixed(2).toString().replace(".", ",")}</p>
-                                                </div>
+                                                    {product.discountPercentage > 0 && (
+                                                        <div className="flex justify-center items-center gap-3">
+                                                            <label className="text-lg text-black/50 line-through">R$ {variantToShow.price.toFixed(2).toString().replace(".", ",")}</label>
+                                                            <PriceOffLabel defaultVariant={variantToShow} selectedProduct={product}/>
+                                                        </div>
+                                                    )}
+                                            </div>
                                             )}
                                     </div>
                                 )}

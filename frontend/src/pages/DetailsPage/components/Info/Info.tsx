@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {useParams} from 'react-router-dom';
 import  '../../../../index.css'
 import useProducts from '../../../../../hooks/useProducts'
@@ -9,7 +10,7 @@ import Description from './components/Description/Description'
 import AddToCartButton from './components/AddToCartBtn/AddToCartButton'
 import PromotionsGreenLabel from './components/PromotionsGreenLabel/PromotionsGreenLabel'
 import ProductDetails from './components/ProductDetails/ProductDetails'
-import { useState } from 'react'
+import PriceOffLabel from '../../../../components/ui/PriceOffLabel'
 
 const Info = () => {
 
@@ -57,7 +58,7 @@ const Info = () => {
                                     {selectedProduct.discountPercentage > 0 && (
                                         <div className="flex justify-center items-center gap-3">
                                             <label className="text-lg text-black/50 line-through">R$ {defaultVariant.price.toFixed(2).toString().replace(".", ",")}</label>
-                                            <label className="bg-green-500 px-2 text-[12px] font-semibold text-white">R$ {(defaultVariant.price - ((defaultVariant.price) - (selectedProduct.discountPercentage * defaultVariant.price/100))).toFixed(0).toString().replace(".", ",")} OFF</label>
+                                            <PriceOffLabel defaultVariant={defaultVariant} selectedProduct={selectedProduct}/>
                                         </div>
                                     )}
                                 <label className="text-3xl text-black font-semibold">R$ {((defaultVariant.price) - (selectedProduct.discountPercentage * defaultVariant.price/100)).toFixed(2).toString().replace(".", ",")}</label>
@@ -72,9 +73,9 @@ const Info = () => {
                                 <span className="text-black/70">Em até</span><span className="font-semibold">12x</span><span className="text-black/70">de</span><span className="font-semibold">R${((defaultVariant?.price)/12).toFixed(2)}</span>
                             </label>
                             <div className="w-75 mt-5 ">
-                                <span className="text-center bg-green-200 text-green-700 text-sm py-2 px-4 rounded-2xl
+                                <span className="text-center bg-green-100 text-green-600 text-sm py-2 px-4 rounded-2xl
                                 md:w-full lg:w-full"
-                                >%10 de cashback na próxima compra</span>
+                                >% 10 de cashback na próxima compra</span>
                             </div>
                             <div className="mt-5">
                                 <SizeButtons selectedSize={selectedSize} handleSizeClick={setSelectedSize}></SizeButtons>
