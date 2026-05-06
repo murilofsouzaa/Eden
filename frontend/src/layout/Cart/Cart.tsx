@@ -15,14 +15,15 @@ export function Cart() {
     const panel = isOpen ? (
         <Dialog open={isOpen} onClose={cart.toggleCart}>
             <div className="fixed inset-0 z-10 bg-black/50 backdrop-blur-[0.6px]" />
-            <Dialog.Panel className="fixed right-0 top-0 w-full z-40 h-full">
-                <div className={`cart-div rounded-xl bg-white shadow-lg overflow-y-scroll ml-auto
+            <Dialog.Panel className="fixed bottom-0 right-0 w-full z-40 h-[85vh]
+            cart-div rounded-xl bg-white shadow-lg overflow-y-scroll ml-auto mb-auto
                 overflow-x-hidden
                 md:rounded-none lg:rounded-none xl:rounded-none
-                md:h-full md:w-[45%] md:right-0
-                lg:h-full lg:w-[33%] lg:right-0
-                xl:h-full xl:w-[26%] xl:right-0`}>
-                        <div className="flex justify-between items-center p-5 mt-5">
+                md:h-full md:w-[45%] md:right-0 md:top-0
+                lg:h-full lg:w-[33%] lg:right-0 lg:top-0
+                xl:h-full xl:w-[26%] xl:right-0 xl:top-0">
+                <div className="">
+                        <div className="flex justify-between items-center p-5 mt-5 mr-5">
                             <h2 className="inline-flex text-xl font-medium p-4">Seu Carrinho</h2>
                             <div className="inline-flex">
                                 <button onClick={cart.toggleCart} className="hover:cursor-pointer">
