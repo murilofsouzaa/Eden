@@ -51,7 +51,7 @@ export function Promotion({
                                             <p className="mt-2 text-md">{product.title}</p>
                                             {variantToShow?.price != null && (
                                                 <div>
-                                                    <p className="text font-semibold text-black ">R$ {variantToShow.price.toFixed(2)}</p>
+                                                    <p className="text font-semibold text-black ">R$ {variantToShow.price.toFixed(2).toString().replace(".", ",")}</p>
                                                 </div>
                                             )}
                                     </div>
