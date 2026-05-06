@@ -14,15 +14,14 @@ export function Cart() {
 
     const panel = isOpen ? (
         <Dialog open={isOpen} onClose={cart.toggleCart}>
-            <div className="fixed inset-0 bg-black/40" />
-            <Dialog.Panel className="fixed right-0 top-0 z-20 h-full">
-                <div className={`cart-div rounded-xl bg-white shadow-lg overflow-y-scroll
+            <div className="fixed inset-0 z-10 bg-black/50 backdrop-blur-[0.6px]" />
+            <Dialog.Panel className="fixed right-0 top-0 w-full z-40 h-full">
+                <div className={`cart-div rounded-xl bg-white shadow-lg overflow-y-scroll ml-auto
                 overflow-x-hidden
                 md:rounded-none lg:rounded-none xl:rounded-none
                 md:h-full md:w-[45%] md:right-0
                 lg:h-full lg:w-[33%] lg:right-0
-                xl:h-full xl:w-[26%] xl:right-0
-                2xl:h-full 2xl:w-[23%] 2xl:right-0 h-full`}>
+                xl:h-full xl:w-[26%] xl:right-0`}>
                         <div className="flex justify-between items-center p-5 mt-5">
                             <h2 className="inline-flex text-xl font-medium p-4">Seu Carrinho</h2>
                             <div className="inline-flex">
@@ -38,9 +37,6 @@ export function Cart() {
                                     const discountedUnitPrice = product.discountPercentage > 0
                                         ? unitPrice
                                         : null;
-                                    const originalUnitPrice = product.discountPercentage > 0
-                                        ? product.variants.find((variant) => variant.size === size)?.price ?? unitPrice
-                                        : null;
                                     return (
                                         <div key={item.key} className="flex justify-center items-start border-b w-auto mt-10  h-50 border-b-black/10">
                                             <img src={`/${product.imageUrl}`} alt={product.title} className="w-26 h-34"/>
@@ -48,9 +44,9 @@ export function Cart() {
                                                 <p className="font-normal text-[16px] font-medium mb-2 w-[80%]">{product.title}</p>
                                                 <p className="text-[16px] text-gray-600 font-medium">{size}</p>
                                                 <div className="flex gap-3 mt-2">
-                                                    {originalUnitPrice !== null && (
+                                                    {item.unitPrice !== null && (
                                                         <p className={`${product.discountPercentage ? 'text-red-600 line-through' : 'text-black font-semibold'} text-[16px]`}>
-                                                            R${originalUnitPrice.toFixed(2)}
+                                                            R${item.unitPrice.toFixed(2)}
                                                         </p>
                                                     )}
                                                     {discountedUnitPrice !== null && (

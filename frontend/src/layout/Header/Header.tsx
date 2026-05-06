@@ -38,7 +38,7 @@ export function Header(){
     const toggleCart = cart.toggleCart;
 
     return (
-        <div className="sticky top-0 z-101 bg-white border-b-2 border-b-black/10">
+        <div className="sticky top-0 z-10 bg-white border-b-2 border-b-black/10">
             <div className="flex flex-col m-0 p-0">
                 <div className="bg-gray-200 p-3 text-center">{labels[currentIndex]}</div>
                 <nav className="flex flex-col justify-center items-center m-4 
@@ -73,11 +73,6 @@ export function Header(){
                         </div>
                     </div>
                 </nav>
-            </div>
-            <div className="">
-                {isOpen && (
-                    <Cart/>
-                )}
             </div>
         </div>
     )

@@ -4,6 +4,7 @@ import './App.css'
 import Homepage  from './pages/Homepage/Homepage.tsx';
 import ProductDetail from './pages/DetailsPage/DetailsPage.tsx'
 import {useCart} from './context/CartContext'
+import {Cart} from './layout/Cart/Cart'
 
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
@@ -53,7 +54,13 @@ function App() {
         <Route path="/" element={<Homepage></Homepage>}></Route>
         <Route path="/product/:id" element={<ProductDetail></ProductDetail>}></Route>
       </Routes>
+      <div className="">
+                {isOpen && (
+                    <Cart/>
+                )}
+        </div>
     </div>
+    
   )
 }
 
