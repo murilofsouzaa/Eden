@@ -57,10 +57,12 @@ export function Header(){
                             <SearchInput/>
                         </div>
 
-                        <div className="flex justify-between items-center gap-5 w-[100%]">
-                            <a href="#" className="hover:translate-y-[-10px] ease-in-out duration-300 py-5 w-full">
-                                <img src={userIcon} alt="user-icon" className="h-6 w-auto object-contain"></img>
-                            </a>
+                        <div className="flex justify-between items-center gap-5 w-full">
+                            <Link to="/createUser">
+                                <div className="hover:translate-y-[-10px] ease-in-out duration-300 py-5 w-full hover:cursor-pointer">
+                                    <img src={userIcon} alt="user-icon" className="h-12 w-auto object-contain"></img>
+                                </div>
+                            </Link>
                             <button onClick={toggleCart} className="relative cursor-pointer py-5 w-full
                             hover:translate-y-[-10px] ease-in-out duration-300">
                                 <img src={shoppingBag} alt="shopping-bag-icon" className="h-6 w-auto object-contain"></img>
