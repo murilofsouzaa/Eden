@@ -78,18 +78,24 @@ export function Cart() {
                             )}
                         </div>
                 </div>  
-                <div className="flex flex-col gap-2 p-6 bg-white border-t border-t-gray-300
+                <div className="flex flex-col gap-2 mt-2 bg-white border-t border-t-gray-300
                 w-full">
-                    <div className="flex items-center  gap-4">
-                        <input type="text" name="coupon-code" id="coupon-code" placeholder="Insira o código" className="outline-0 border border-black/40 px-2 py-1.5"/>
+                    <div className="flex items-center gap-4 px-10 py-5">
+                        <input type="text" name="coupon-code" id="coupon-code" placeholder="Insira o código" className="outline-0 border border-black/20 px-2 py-1.5"/>
                         <button className="p-3 bg-black text-white rounded-4xl w-30 
                         transition-all duration-300
                         hover:cursor-pointer active:scale-[0.96]">Aplicar</button>
                     </div>
-                    <label className="block text-lg font-semibold">Resumo</label>
-                    <div className="flex flex-row justify-between mr-10 font-semibold">
-                        <label className="text-md">{cart.cartPrice.toFixed(2).replace(".", ",")} BRL</label>
-                        <label className="text-md">Total: </label>
+                    <div className="px-10">
+                        <label className="block text-lg font-semibold">Resumo</label>
+                        <div className="flex flex-row justify-between mr-10 mt-1 font-semibold">
+                            <label className="text-md">Total: </label>
+                            <label className="text-md">{cart.cartPrice.toFixed(2).replace(".", ",")} BRL</label>
+                        </div>
+                    </div>
+                    <div className="sticky bottom-0 bg-white flex justify-center w-full pb-5 border-t border-t-black/10">
+                        <button className="bg-black text-white w-80 p-4 rounded-4xl mt-8
+                        hover:cursor-pointer active:scale-[0.97] transition-all duration-150">Comprar</button>
                     </div>
                 </div>
             </Dialog.Panel>
