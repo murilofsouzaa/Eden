@@ -1,7 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
-import {createContext, useContext, useState, useEffect} from 'react'
+import {createContext, useContext, useMemo, useState, useEffect} from 'react'
 import type {Product}  from '../context/ProductContext'
-import useProduct from './ProductContext'
 import {api} from '../services/api'
 
 export type Cart={
@@ -37,11 +36,8 @@ export function CartProvider({children}:{readonly children: React.ReactNode}){
 
     const [cart, setCart] = useState<(Cart | null)>(null)
     const [items, setItems ] = useState<CartItem[]>([]);
-    const [totalItems, setTotalItems] = useState<number>(0);
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [cartPrice, setCartPrice] = useState<number>(0);
-
-    const { variants } = useProduct({children: null});
+    
 
     useEffect(() => {
         api.get("/cart")
@@ -91,13 +87,15 @@ export function CartProvider({children}:{readonly children: React.ReactNode}){
 
 
 
-    useEffect(() => {
-        const nextTotalItems = items.reduce((acc, item) => acc + item.quantity, 0);
-        const nextCartPrice = items.reduce((acc, item) => acc + (item.unitPrice * item.quantity), 0);
+    const totalItems = useMemo(
+        () => items.reduce((acc, item) => acc + item.quantity, 0),
+        [items]
+    );
 
-        setTotalItems(nextTotalItems)
-        setCartPrice(nextCartPrice)
-    }, [items]);
+    const cartPrice = useMemo(
+        () => items.reduce((acc, item) => acc + (item.unitPrice * item.quantity), 0),
+        [items]
+    );
     
     
     return ( 

@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom'
 import './Header.css';
-import {Cart} from '../Cart/Cart';
 import logoHeader from '../../../public/logo/logo.png';
 import userIcon from '../../../public/icons/user.png';
 import shoppingBag from '../../../public/icons/shopping-bag.png';
@@ -33,7 +32,6 @@ export function Header(){
     // 1 + 0 % 3 -> 1 % 3 = 1, pois 1/3 o quociente fica 0 e o resto será 1
 
     const cart = useCart();
-    const isOpen = cart.isOpen;
     const cartQuantity = cart.totalItems;
     const toggleCart = cart.toggleCart;
 
