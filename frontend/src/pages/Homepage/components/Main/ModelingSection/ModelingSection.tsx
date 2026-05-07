@@ -53,13 +53,20 @@ export function Promotion({
                                             <p className="mt-2 text-md">{product.title}</p>
                                             {variantToShow?.price != null && (
                                                 <div>
-                                                    {product.discountPercentage > 0 && (
-                                                        <div className="flex justify-center items-center gap-3">
-                                                            <label className="text-lg text-black/50 line-through">R$ {variantToShow.price.toFixed(2).toString().replace(".", ",")}</label>
-                                                            <PriceOffLabel defaultVariant={variantToShow} selectedProduct={product}/>
-                                                        </div>
-                                                    )}
-                                            </div>
+                                                    <div>
+                                                        {product.discountPercentage > 0 ? (
+                                                            <p className={`mt-1  text-black/50 line-through `}>R${variantToShow?.price.toFixed(2)}</p>
+                                                        ):
+                                                            <p className={`font-semibold mt-1 text-black`}>R${variantToShow?.price.toFixed(2)}</p>
+                                                        }
+                                                        {product.discountPercentage > 0 && (
+                                                            <div className="flex justify-center items-center gap-3">
+                                                                <label className="text-md font-semibold text-green-600">R$ { (variantToShow.price - (variantToShow.price * product.discountPercentage/100)).toFixed(2).toString().replace(".", ",")}</label>
+                                                                <PriceOffLabel defaultVariant={variantToShow} selectedProduct={product}/>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
                                             )}
                                     </div>
                                 )}

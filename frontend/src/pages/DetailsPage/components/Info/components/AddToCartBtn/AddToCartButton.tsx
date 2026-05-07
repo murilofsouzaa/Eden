@@ -13,8 +13,8 @@ const AddToCartButton = ({isOutOfStock, selectedProduct, selectedSize}:AddToCart
     return ( 
         <button
             className={`text-white text-sm font-bold bg-black p-4 w-100 
-            hover:cursor-pointer hover:scale-[1.01]
-            transition-all duration-300 active:scale-[0.99]`}
+            hover:cursor-pointer
+            transition-all duration-300 active:scale-[0.96]`}
             disabled={isOutOfStock}
             onClick={() => {
                 console.log(`Adding ${selectedProduct.title} in size ${selectedSize}`);
