@@ -13,11 +13,11 @@ export default function Home() {
     const slideImages = [blackWhiteSmoke, freepikBlackWhite, ulfMeier];
     
     return(
-        <>
+        <div className="">
             <Header/>
             <Slider images={slideImages} />
             <Main products={products} />
             <Footer />
-        </>
+        </div>
     )
 }
