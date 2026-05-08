@@ -162,9 +162,9 @@ export function Main({ products }: MainProps) {
 
         return(
 		<div className="mx-4 mt-10 mb-10 lg:m-16">
-            <h2 className="text-center text-5xl font-bold mb-6">{selectedBundle?.name ?? 'NOVIDADES'}</h2>
-            <h3 className="text-center mb-6">A <span className="font-semibold">versatilidade</span> do lifestyle <span className="font-semibold">californiano</span> unida à tecnologia de ponta: conheça o caimento que redefiniu o conceito de essencial.</h3>
-            <section>
+            <section className="mt-20">
+                <h2 className="text-center text-5xl font-bold mb-6">{selectedBundle?.name ?? 'NOVIDADES'}</h2>
+                <h3 className="text-center mb-6">A <span className="font-semibold">versatilidade</span> do lifestyle <span className="font-semibold">californiano</span> unida à tecnologia de ponta: conheça o caimento que redefiniu o conceito de essencial.</h3>
                 <ReleaseSection
                     products={displayedProducts}
                     translateValue={translateValue}
@@ -175,7 +175,7 @@ export function Main({ products }: MainProps) {
                 />
             </section>
 
-            <section className="mt-20">
+            <section className="mt-40">
                 <h2 className="text-center text-4xl font-bold mb-3">Oversized</h2>
                 <h3 className="text-center mb-6">Tecidos de <span className="font-semibold">alto padrão</span>, corte impecável e a essência pioneira que <span className="font-semibold">transformou</span> o cenário Oversized no fitness nacional.</h3>
                 <Promotion
