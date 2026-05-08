@@ -40,7 +40,7 @@ export function Cart() {
                                         : null;
                                     return (
                                         <div key={item.key} className="flex justify-center items-start border-b w-auto mt-10  h-50 border-b-black/10">
-                                            <img src={`/${product.imageUrl}`} alt={product.title} className="w-26 h-34"/>
+                                            <img src={`/${product.imageUrl}`} alt={product.title} className="w-30 h-34"/>
                                             <div className="flex flex-col items-start ml-4 w-full">
                                                 <p className="font-normal text-[16px] font-medium mb-2 w-[80%]">{product.title}</p>
                                                 <p className="text-[16px] text-gray-600 font-medium">{size}</p>
@@ -79,7 +79,7 @@ export function Cart() {
                         </div>
                 </div>  
                 {cartProducts.length > 0 && (
-                    <div className="fixed bottom-0">
+                    <div className="block fixed bottom-0">
                         <div className="flex flex-col gap-2 mt-2 bg-white border-t border-t-gray-300
                         w-full">
                             <div className="flex items-center gap-4 px-10 py-5">
