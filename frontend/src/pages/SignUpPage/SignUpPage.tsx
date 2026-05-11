@@ -13,7 +13,7 @@ const SignUpPage = () => {
     const [birthDate, setBirthDate] = useState<Date | null>(null);
 
     useEffect(() => {
-            document.title = "Sign Up | Eden"
+            document.title = "Cadastro | Eden"
         }, [window]);
 
     return (
