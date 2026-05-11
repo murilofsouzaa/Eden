@@ -88,7 +88,7 @@ export function Header(){
                         </div>
                         <div className="flex justify-between items-center gap-3">
                             <div className="flex gap-3">
-                                <Link to="/login">
+                                <Link to="/u/login">
                                     <div className="hover:-translate-y-2.5 ease-in-out duration-300 py-5 w-full hover:cursor-pointer">
                                         <img src={userIcon} alt="user-icon" className="h-10 w-auto object-contain"></img>
                                     </div>

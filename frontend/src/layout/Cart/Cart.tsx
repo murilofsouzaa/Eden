@@ -14,14 +14,16 @@ export function Cart() {
 
     const panel = isOpen ? (
         <Dialog open={isOpen} onClose={cart.toggleCart}>
-            <div className="fixed inset-0 z-10 bg-black/50 backdrop-blur-[0.6px]" />
-            <Dialog.Panel className="fixed bottom-0 right-0 z-40 h-[85vh] overflow-y-scroll
-            cart-div rounded-xl bg-gray-50 shadow-lg
+            <div className="fixed inset-0 z-10 bg-black/50 backdrop-blur-[0.6px] " />
+            <Dialog.Panel className={`fixed bottom-0 right-0 z-40 h-[85vh] overflow-y-scroll
+                cart-div rounded-xl bg-gray-50 shadow-lg
                 overflow-x-hidden w-full
                 md:rounded-none lg:rounded-none xl:rounded-none
                 md:h-full md:w-[45%] md:right-0 md:top-0
                 lg:h-full lg:w-[33%] lg:right-0 lg:top-0
-                xl:h-full xl:w-[26%] xl:right-0 xl:top-0">
+                xl:h-full xl:w-[26%] xl:right-0 xl:top-0
+                ${isOpen ? "translate-0 opacity-100" : " translate-x-20 opacity-0"} duration-300 transition-all`}>
+                
                 <div className="">
                         <div className="sticky top-0 flex items-center justify-between z-30 px-6 py-4 bg-gray-50 border-b border-b-gray-300 w-full">
                             <h2 className="inline-flex text-xl font-medium p-4">Seu Carrinho</h2>
