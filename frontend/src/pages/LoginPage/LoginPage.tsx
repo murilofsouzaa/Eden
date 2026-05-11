@@ -1,10 +1,15 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import edenLogo from '../../../public/logo/logo.png'
 import {Eye, EyeClosed} from 'lucide-react'
 
 
 const LoginPage = () => {
+
+    useEffect(() => {
+        document.title = "Log In | Eden"
+    }, [window]);
+
     const [active, setActive] = useState(false);
     return ( 
         <div className="flex flex-col justify-center items-center h-screen"> 

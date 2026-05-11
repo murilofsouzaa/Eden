@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import edenLogo from '../../../public/logo/logo.png'
 import { Eye, EyeClosed } from 'lucide-react'
@@ -11,6 +11,10 @@ registerLocale('pt-BR', ptBR);
 const SignUpPage = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [birthDate, setBirthDate] = useState<Date | null>(null);
+
+    useEffect(() => {
+            document.title = "Sign Up | Eden"
+        }, [window]);
 
     return (
         <div className="flex flex-col justify-center items-center min-h-screen p-4">

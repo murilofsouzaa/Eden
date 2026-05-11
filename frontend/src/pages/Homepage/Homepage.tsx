@@ -1,3 +1,4 @@
+import {useEffect, useState} from 'react'
 import { Header }  from '../../layout/Header/Header';
 import { Main } from './components/Main/Main';
 import { Footer }  from '../../layout/Footer/Footer';
@@ -11,6 +12,25 @@ export default function Home() {
     const products = useProducts();
     
     const slideImages = [blackWhiteSmoke, freepikBlackWhite, ulfMeier];
+    const titles = ["Compre AGORA sua oversized! | EDEN", "Tá barato pô, compra ai | EDEN"]
+
+    const [currentIndex, setCurrentIndex] = useState<number>(0);
+    
+    useEffect(() => {
+
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % titles.length)
+        }, 2000);
+    
+        return () =>{
+            clearInterval(interval);
+        }
+    }, []);
+
+    useEffect(() => {
+      document.title=titles[currentIndex]
+    }, [currentIndex]);
+
     
     return(
         <div className="">
