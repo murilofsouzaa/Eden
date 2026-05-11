@@ -9,8 +9,8 @@ import "react-datepicker/dist/react-datepicker.css";
 registerLocale('pt-BR', ptBR);
 
 const SignUpPage = () => {
-    const [showPassword, setShowPassword] = useState(false);
-    const [birthDate, setBirthDate] = useState(null);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [birthDate, setBirthDate] = useState<Date | null>(null);
 
     return (
         <div className="flex flex-col justify-center items-center min-h-screen p-4">
@@ -36,7 +36,7 @@ const SignUpPage = () => {
                     <div className="border border-black/10 py-3 px-4 focus-within:border-black transition-colors">
                         <DatePicker
                             selected={birthDate}
-                            onChange={(date) => setBirthDate(date)}
+                            onChange={(date:Date | null) => setBirthDate(date)}
                             locale="pt-BR"
                             dateFormat="dd/MM/yyyy"
                             peekNextMonth
