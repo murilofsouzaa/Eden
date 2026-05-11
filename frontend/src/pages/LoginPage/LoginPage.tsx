@@ -1,7 +1,7 @@
 import {useState} from 'react'
+import {Link} from 'react-router-dom'
 import edenLogo from '../../../public/logo/logo.png'
-import {Eye} from 'lucide-react'
-import {EyeClosed} from 'lucide-react'
+import {Eye, EyeClosed} from 'lucide-react'
 
 
 const LoginPage = () => {
@@ -9,7 +9,7 @@ const LoginPage = () => {
 
     return ( 
         <div className="flex flex-col justify-center items-center h-screen"> 
-            <img src={edenLogo} alt="Eden" className="h-22 w-auto mb-10" />
+            <Link to="/"><img src={edenLogo} alt="Eden" className="h-22 w-auto mb-10" /></Link>
             <div className="flex flex-col justify-center items-center">   
                 <h2 className=" text-2xl font-bold">EDEN LOGIN</h2>
                 <p className="text-sm text-black/70 mb-5 mt-1">Compre seus estilos e treine conosco.</p>

@@ -50,14 +50,15 @@ export function Header(){
                         <li><a href="#">Explorar</a></li>
                     </ul>
                     
-                    <div className="hidden flex justify-center items-center mr-70 lg:inline">
+                    <div className="hidden lg:flex lg:justify-center lg:items-center">
                         <Link to="/"><img src={ logoHeader} alt="eden-logo-header" className="lg:w-13 lg:h-13" /></Link>
                     </div>
-                    <div className="flex items-center justify-between w-full md:justify-between md:w-full lg:flex lg:justify-center lg:items-center lg:gap-3 lg:w-auto">
+                    <div className="flex items-center justify-between w-full md:justify-between md:w-full lg:gap-10 lg:w-auto">
                         <img src={hamburgerIcon} className="w-8 h-8 lg:hidden"></img>
-                        <button className="hidden cursor-pointer lg:block hover:translate-y-[-10px] ease-in-out duration-300 py-5 hover:cursor-pointer">
-                            <Search className="h-[20px] w-auto text-[#242424] "></Search>
-                        </button>
+                        <div className="hidden lg:flex lg:justify-between lg:gap-4 lg:bg-gray-100 rounded-3xl px-12 lg:py-2.5 ease-in-out duration-300 hover:cursor-pointer">
+                            <Search className="h-[20px] w-auto text-black/60"></Search>
+                            <input type="text" id="search" name="search" placeholder="O que procura para hoje?" className="outline-0"></input>
+                        </div>
                         <div className="flex justify-start gap-2 border-b p-2 w-[50%] lg:hidden">
                             <Search className="h-4 text-[#242424]"></Search>
                             <input type="text" name="" id="" placeholder="Buscar o que procura..."
