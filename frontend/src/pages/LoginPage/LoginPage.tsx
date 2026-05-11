@@ -5,7 +5,8 @@ import {Eye, EyeClosed} from 'lucide-react'
 
 
 const LoginPage = () => {
-    const [active, setActive] = useState(false)
+    const [active, setActive] = useState(false);
+    const [showPassword, setShowPassword] = useState(false); 
 
     return ( 
         <div className="flex flex-col justify-center items-center h-screen"> 
@@ -19,17 +20,15 @@ const LoginPage = () => {
                     className="outline-0 border border-black/10 py-3 px-4"/>
                     <div>
                         <div className="flex border border-black/10">
-                            <input type="password" id="password" className="outline-0 py-3 px-6" placeholder="Senha*"/>
-                            <div onClick={() => setActive((prev) => !prev)}
+                            <input type={active ? `text` : `password`} id="password" className="outline-0 py-3 px-6" placeholder="Senha*"/>
+                            <button type="button" onClick={() => setActive((prev) => !prev)}
                             className="flex justify-center items-center py-3 px-6 hover:cursor-pointer hover:bg-gray-100">
-                                <button type="button" className="hover:cursor-pointer">
-                                    {active == true ? (
-                                        <EyeClosed className="text-black/40 h-5 w-auto hover:text-black/60"></EyeClosed>
-                                    ) : (
-                                        <Eye className="text-black/40 h-5 w-auto hover:text-black/60"></Eye>
-                                    )}
-                                </button>
-                            </div>
+                                {active == true ? (
+                                    <EyeClosed className="text-black/40 h-5 w-auto hover:text-black/60"></EyeClosed>
+                                ) : (
+                                    <Eye className="text-black/40 h-5 w-auto hover:text-black/60"></Eye>
+                                )}
+                            </button>
                         </div> 
                     </div>
                     <div className="flex flex-col justify-center items-center">

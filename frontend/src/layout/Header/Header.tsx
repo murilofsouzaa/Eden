@@ -16,7 +16,7 @@ const labels : React.ReactNode[] = [
 
 export function Header(){
     
-    const [currentIndex, setCurrentIndex] = useState(0);   
+    const [currentIndex, setCurrentIndex] = useState(0);  
     const [showSlider, setShowSlider] = useState(true);
     const hideSliderAt = 40;
     const showSliderAt = 12;
