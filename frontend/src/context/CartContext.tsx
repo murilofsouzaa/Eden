@@ -10,6 +10,7 @@ export type Cart={
 }
 
 export type CartItem={
+    id:number;
     key:string;
     product: Product;
     size: string;
@@ -26,6 +27,8 @@ export type CartContextType = {
     totalItems:number;
     cartPrice:number;  
     removeItemFromCart: (item:CartItem) => void;
+    increaseQuantity: (item: CartItem) => void;
+    decreaseQuantity: (item: CartItem) => void;
 
 }
 
@@ -37,7 +40,6 @@ export function CartProvider({children}:{readonly children: React.ReactNode}){
     const [cart, setCart] = useState<(Cart | null)>(null)
     const [items, setItems ] = useState<CartItem[]>([]);
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    
 
     useEffect(() => {
         api.get("/cart")
@@ -82,7 +84,7 @@ export function CartProvider({children}:{readonly children: React.ReactNode}){
     }
 
     const removeItemFromCart = (item:CartItem) => {
-        setItems((prev) => prev.filter((currentItem) => currentItem.key !== item.key));
+        setItems((prev) => prev.filter((currentItem) => currentItem.id !== item.id));
     }
 
 
@@ -96,11 +98,32 @@ export function CartProvider({children}:{readonly children: React.ReactNode}){
         () => items.reduce((acc, item) => acc + (item.unitPrice * item.quantity), 0),
         [items]
     );
-    
+
+    const increaseQuantity = (itemToIncrease: CartItem) => {
+        setItems((prev) =>
+            prev.map((item) =>
+                item.key === itemToIncrease.key
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
+            )
+        );
+    };
+
+    const decreaseQuantity = (itemToDecrease: CartItem) => {
+        setItems((prev) =>
+            prev.map((item) => {
+                if (item.key === itemToDecrease.key) {
+                    const newQuantity = item.quantity > 1 ? item.quantity - 1 : 1;
+                    return { ...item, quantity: newQuantity };
+                }
+                return item;
+            })
+        );
+    };
     
     return ( 
         <CartContext.Provider value={{cart ,items, addItemCart, isOpen, toggleCart,
-         totalItems, cartPrice, removeItemFromCart}}>
+         totalItems, cartPrice, removeItemFromCart, increaseQuantity, decreaseQuantity}}>
             {children}
         </CartContext.Provider>
      );

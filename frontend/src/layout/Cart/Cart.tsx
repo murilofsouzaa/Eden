@@ -11,6 +11,9 @@ export function Cart() {
     const cart = useCart();
     const isOpen = cart.isOpen;
     const cartProducts = cart.items;
+    const increaseQuantity = cart.increaseQuantity;
+    const decreaseQuantity = cart.decreaseQuantity;
+    
 
     const panel = isOpen ? (
         <Dialog open={isOpen} onClose={cart.toggleCart}>
@@ -41,7 +44,7 @@ export function Cart() {
                                         ? unitPrice
                                         : null;
                                     return (
-                                        <div key={item.key} className="flex justify-center items-start border-b w-auto mt-10  h-50 border-b-black/10">
+                                        <div key={item.id} className="flex justify-center items-start border-b w-auto mt-10  h-50 border-b-black/10">
                                             <img src={`/${product.imageUrl}`} alt={product.title} className="w-30 h-34"/>
                                             <div className="flex flex-col items-start ml-4 w-full">
                                                 <p className="font-normal text-[16px] font-medium mb-2 w-[80%]">{product.title}</p>
@@ -64,9 +67,13 @@ export function Cart() {
                                                     </button>
                                                     <div className="flex justify-center items-center gap-5 border border-black/20 px-4 h-9
                                                     hover:bg-gray-100 hover:cursor-pointer">
-                                                        <button className="text-3xl hover:cursor-pointer">-</button>
-                                                        <label className="">{quantity}</label>
-                                                        <button className="text-xl hover:cursor-pointer">+</button>
+                                                        <button 
+                                                            onClick={() => decreaseQuantity(item)}
+                                                            className="text-3xl hover:cursor-pointer">-</button>
+                                                        <label className="">{item.quantity}</label>
+                                                        <button 
+                                                            onClick={() => increaseQuantity(item)}
+                                                            className="text-xl hover:cursor-pointer">+</button>
                                                     </div>
                                                 </div>
                                             </div>
