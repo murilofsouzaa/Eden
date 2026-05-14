@@ -30,7 +30,7 @@ export function ReleaseSection({
                 <div className="flex justify-center items-center m-10">
                         <div className="bg-gray-100 p-4 flex flex-col justify-center items-center items-center rounded-4xl lg:w-[40%]">
                             <img src={emptyBox} alt="empty-box.png" className="opacity-20 h-30 w-auto"></img>
-                            <p className="p-4 text-sm text-center w-full text-gray-500">Nenhum produto em promoção</p>
+                            <p className="p-4 text-sm text-center w-full text-gray-500">Nenhum produto em novidades</p>
                         </div>
                     </div>
             ):(

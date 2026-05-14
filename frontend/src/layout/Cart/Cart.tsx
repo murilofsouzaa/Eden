@@ -4,7 +4,7 @@ import {useCart} from '../../context/CartContext';
 import {X, Trash} from 'lucide-react';
 import {Dialog} from '@headlessui/react'
 import { createPortal } from 'react-dom'
-
+import emptyShoppingBag from '../../../public/icons/empty-shopping-bag-removebg-preview.png'
 
 export function Cart() {
 
@@ -81,7 +81,8 @@ export function Cart() {
                                     )
                                 })
                             ) : (
-                                <div className="flex justify-center items-center h-[75vh] w-full">
+                                <div className="flex  flex-col justify-center items-center h-[75vh] w-full">
+                                    <img src={emptyShoppingBag} className="opacity-20"></img>
                                     <p>Seu carrinho está vazio</p>
                                 </div>
                             )}
