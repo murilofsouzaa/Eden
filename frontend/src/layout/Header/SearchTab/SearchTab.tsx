@@ -60,7 +60,7 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
                                     <div key ={product.id}>                                    
                                         <Link  to={`/product/${product.id}`}>
                                         <div className="flex flex-col gap-4 w-[140px]">
-                                            <img src={product.imageUrl} alt={product.title} className="h-50 w-auto object-cover"></img>
+                                            <img src={product.imageUrl} alt={product.title} className="h-60 w-auto object-cover"></img>
                                             <div className="h-20">
                                                 <h2 className="text-sm text-center">{(product.title).slice(0,22)}...</h2>
                                             </div>
