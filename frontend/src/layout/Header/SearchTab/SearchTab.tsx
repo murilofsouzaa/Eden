@@ -26,15 +26,15 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
                                 cart-div rounded-xl bg-gray-50 shadow-lg
                                 overflow-x-hidden w-full p-10
                                 md:rounded-none lg:rounded-none xl:rounded-none
-                                lg:max-h-[480px] lg:top-0
-                                lg:max-h-[480px] lg:top-0
-                                md:max-h-[480px] md:top-0
-                                xl:max-h-[480px] xl:top-0
+                                lg:max-h-[720px] lg:top-0
+                                lg:max-h-[720px] lg:top-0
+                                md:max-h-[720px] md:top-0
+                                xl:max-h-[720px] xl:top-0
                                 ${isActive ? "translate-0 opacity-100" : " translate-x-20 opacity-0"} duration-100 transition-all`}>
                     
-                    <div className="flex flex-col justify-center items-center p-4 overflow-y-hidden">
-                        <div className="flex justify-center p-10 w-full mt-5">
-                            <div className="hidden bg-gray-100 lg:flex lg:w-[40%] lg:justify-center lg:items-center lg:gap-4 rounded-3xl ease-in-out duration-300 hover:cursor-pointer">
+                    <div className="flex flex-col justify-center items-center p-4 overflow-y-hidden w-full h-full">
+                        <div className="flex justify-center p-10 h-full w-full mt-5">
+                            <div className="hidden bg-gray-100 lg:flex lg:w-[400px] lg:justify-center lg:items-center lg:gap-4 rounded-3xl ease-in-out duration-300 hover:cursor-pointer">
                                 <div className="flex items-center pl-4">
                                     <Search className="h-5 w-auto text-black/60"></Search>
                                 </div>
@@ -62,13 +62,13 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
                             </div>
                         </div>
 
-                        <div className="flex justify-center items-center flex-wrap gap-4 z-10 h-full w-full">
+                        <div className="flex justify-center flex-wrap gap-10 z-10 h-full w-full">
                             {products.some((product) => termMatches(product, term)) == true ? (
-                                products.filter((product) => product.title.toUpperCase().includes(term.toUpperCase())).slice(0,9).map((product:Product) => (
+                                products.filter((product) => product.title.toUpperCase().includes(term.toUpperCase())).slice(0,4).map((product:Product) => (
                                     <div key ={product.id}>                                    
                                         <Link  to={`/product/${product.id}`}>
-                                        <div className="flex flex-col gap-4 w-[140px]">
-                                            <img src={product.imageUrl} alt={product.title} className="h-60 w-auto object-cover"></img>
+                                        <div className="flex flex-col gap-4 w-full">
+                                            <img src={product.imageUrl} alt={product.title} className="h-[400px] w-[280px] object-cover"></img>
                                             <div className="h-20">
                                                 <h2 className="text-sm text-center">{(product.title).slice(0,22)}...</h2>
                                             </div>
