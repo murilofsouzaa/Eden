@@ -51,8 +51,14 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
                                 <div className="flex items-center">
                                     <Search className="h-4 text-[#242424]"></Search>
                                 </div>
-                                <input type="text" name="" id="" placeholder="Tá procurando que tipo de estilo..."
-                                className= "w-full outline-0 p-2"/>
+                                <input 
+                                    type="text" 
+                                    name="" 
+                                    id="" 
+                                    value={term}
+                                    onChange={(e) => setTerm(e.target.value)}
+                                    placeholder="Tá procurando que tipo de estilo..."
+                                    className= "w-full outline-0 p-2"/>
                             </div>
                         </div>
 
