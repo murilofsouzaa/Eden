@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight } from 'react-feather';
 import type { MutableRefObject } from 'react';
 import type {Product} from '../../../../../context/ProductContext';
 import PriceOffLabel from '../../../../../components/ui/PriceOffLabel'
+import emptyBox from '../../../../../../public/icons/empty-box.png'
 
 type ReleaseSectionProps = {
     readonly products: Product[];
@@ -26,7 +27,12 @@ export function ReleaseSection({
     return (
         <section className="relative">
             {products.length == 0 ? (
-                <div className="p-4 text-sm text-gray-500">Nenhum produto em novidades</div>
+                <div className="flex justify-center items-center m-10">
+                        <div className="bg-gray-100 p-4 flex flex-col justify-center items-center items-center rounded-4xl lg:w-[40%]">
+                            <img src={emptyBox} alt="empty-box.png" className="opacity-20 h-30 w-auto"></img>
+                            <p className="p-4 text-sm text-center w-full text-gray-500">Nenhum produto em promoção</p>
+                        </div>
+                    </div>
             ):(
                 <div>
                     <div className="overflow-hidden" ref={viewportRef}>

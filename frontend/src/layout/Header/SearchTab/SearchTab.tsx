@@ -22,18 +22,19 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
     return ( 
         <Dialog open={isActive} onClose={toggleSearch}>
             <div className="fixed inset-0 z-10 bg-black/50 backdrop-blur-[0.6px]">
-                <Dialog.Panel className={`fixed flex justify-center bottom-0 z-40 h-full overflow-y-scroll
-                                cart-div rounded-xl bg-gray-50 shadow-lg
-                                overflow-x-hidden w-full p-10
-                                md:rounded-none lg:rounded-none xl:rounded-none
-                                lg:max-h-[720px] lg:top-0
-                                lg:max-h-[720px] lg:top-0
-                                md:max-h-[720px] md:top-0
-                                xl:max-h-[720px] xl:top-0
-                                ${isActive ? "translate-0 opacity-100" : " translate-x-20 opacity-0"} duration-100 transition-all`}>
-                    
+                <Dialog.Panel className={`fixed flex justify-center items-center bottom-0 z-40 
+                    w-full h-full overflow-y-scroll
+                    cart-div rounded-xl bg-gray-50 shadow-lg
+                    overflow-x-hidden
+                    md:rounded-none lg:rounded-none xl:rounded-none
+                    lg:max-h-[720px] lg:top-0
+                    lg:max-h-[720px] lg:top-0
+                    md:max-h-[720px] md:top-0
+                    xl:max-h-[720px] xl:top-0
+                    ${isActive ? "translate-0 opacity-100" : " translate-x-20 opacity-0"} duration-100 transition-all`}>
+        
                     <div className="flex flex-col justify-center items-center p-4 overflow-y-hidden w-full h-full">
-                        <div className="flex justify-center p-10 h-full w-full mt-5">
+                        <div className="flex justify-center w-full">
                             <div className="hidden bg-gray-100 lg:flex lg:w-[400px] lg:justify-center lg:items-center lg:gap-4 rounded-3xl ease-in-out duration-300 hover:cursor-pointer">
                                 <div className="flex items-center pl-4">
                                     <Search className="h-5 w-auto text-black/60"></Search>
@@ -62,20 +63,22 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
                             </div>
                         </div>
 
-                        <div>
-                            <h2>Products</h2>
+                        <div className="flex flex-col">
                             <div className="flex justify-center flex-wrap gap-10 z-10 h-full w-full">
+                                <h2>Products</h2>   
                                 {products.some((product) => termMatches(product, term)) == true ? (
                                     products.filter((product) => product.title.toUpperCase().includes(term.toUpperCase())).slice(0,4).map((product:Product) => (
                                         <div key ={product.id}>
-                                            <Link  to={`/product/${product.id}`}>
-                                            <div className="flex flex-col gap-4 w-full">
-                                                <img src={product.imageUrl} alt={product.title} className="h-[400px] w-[280px] object-cover"></img>
-                                                <div className="h-20">
-                                                    <h2 className="text-sm text-center">{(product.title)}</h2>
+                                            <div>
+                                                <Link  to={`/product/${product.id}`}>
+                                                <div className="flex flex-col gap-4 w-full">
+                                                    <img src={product.imageUrl} alt={product.title} className="h-[360px] w-[260px] object-cover"></img>
+                                                    <div className="h-20">
+                                                        <h2 className="text-sm">{(product.title)}</h2>
+                                                    </div>
                                                 </div>
+                                                </Link>
                                             </div>
-                                            </Link>
                                         </div>
                                     ))) : (
                                         <p>Nenhum produto encontrado</p>
