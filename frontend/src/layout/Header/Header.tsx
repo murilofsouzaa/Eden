@@ -7,6 +7,8 @@ import shoppingBag from '../../../public/icons/shopping-bag.png';
 import hamburgerIcon from '../../../public/icons/hamburguer.png';
 import {Search} from 'lucide-react'
 import {useCart} from '../../context/CartContext'
+import SearchTab from './SearchTab/SearchTab'
+import useProducts from '../../../hooks/useProducts'
 
 const labels : React.ReactNode[] = [
     <span key={1} className="text-sm"><span className="font-bold">FRETE GRÁTIS</span> EM COMPRAS ACIMA DE R$299</span>,
@@ -16,8 +18,10 @@ const labels : React.ReactNode[] = [
 
 export function Header(){
     
-    const [currentIndex, setCurrentIndex] = useState(0);  
-    const [showSlider, setShowSlider] = useState(true);
+    const [currentIndex, setCurrentIndex] = useState<number>(0);  
+    const [showSlider, setShowSlider] = useState<boolean>(true);
+    const [isActive, setIsActive] = useState<boolean>(false);
+
     const hideSliderAt = 40;
     const showSliderAt = 12;
     
@@ -55,6 +59,12 @@ export function Header(){
     const cartQuantity = cart.totalItems;
     const toggleCart = cart.toggleCart;
 
+    const products = useProducts();
+
+    const toggleSearch = () =>{
+        setIsActive((prev) => !prev);
+    }
+
     return (
         <div className="sticky top-0 z-10 bg-white border-b-2 border-b-black/10">
             <div className="flex flex-col m-0 p-0">
@@ -77,14 +87,16 @@ export function Header(){
                     </div>
                     <div className="flex items-center justify-between w-full md:justify-between md:w-full lg:gap-10 lg:w-auto">
                         <img src={hamburgerIcon} className="w-8 h-8 lg:hidden"></img>
-                        <div className="hidden lg:flex lg:justify-between lg:gap-4 lg:bg-gray-100 rounded-3xl px-12 lg:py-2.5 ease-in-out duration-300 hover:cursor-pointer">
-                            <Search className="h-5 w-auto text-black/60"></Search>
-                            <input type="text" id="search" name="search" placeholder="O que procura para hoje?" className="outline-0"></input>
-                        </div>
-                        <div className="flex justify-start gap-2 border-b p-2 w-[50%] lg:hidden">
-                            <Search className="h-4 text-[#242424]"></Search>
-                            <input type="text" name="" id="" placeholder="Buscar o que procura..."
-                            className="outline-0"/>
+                        <div onClick={toggleSearch}>
+                            <div className="hidden lg:flex lg:justify-between lg:gap-4 lg:bg-gray-100 rounded-3xl px-12 lg:py-2.5 ease-in-out duration-300 hover:cursor-pointer">
+                                <Search className="h-5 w-auto text-black/60"></Search>
+                                <input type="text" id="search" name="search" placeholder="O que procura para hoje?" className="caret-transparent outline-0"></input>
+                            </div>
+                            <div className="flex justify-start gap-2 border-b p-2 w-[50%] lg:hidden">
+                                <Search className="h-4 text-[#242424]"></Search>
+                                <input type="text" name="" id="" placeholder="Buscar o que procura..."
+                                className="caret- outline-0"/>
+                            </div>
                         </div>
                         <div className="flex justify-between items-center gap-3">
                             <div className="flex gap-3">
@@ -104,6 +116,9 @@ export function Header(){
                         </div>
                     </div>
                 </nav>
+            </div>
+            <div>
+                <SearchTab products={products} isActive={isActive} toggleSearch={toggleSearch}></SearchTab>
             </div>
         </div>
     )

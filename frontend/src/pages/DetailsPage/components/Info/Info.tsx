@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {useParams} from 'react-router-dom';
 import  '../../../../index.css'
 import useProducts from '../../../../../hooks/useProducts'
@@ -30,7 +30,10 @@ const Info = () => {
         ) : undefined;
         const isOutOfStock = !selectedVariant || (selectedVariant?.stock ?? 0) === 0;
 
-        
+        useEffect(() => {
+            // eslint-disable-next-line react-hooks/immutability
+            document.title = selectedProduct == undefined ? "EDEN" : (selectedProduct.title).slice(0, 20) + "...";
+        }, []);
 
     return (
         <>

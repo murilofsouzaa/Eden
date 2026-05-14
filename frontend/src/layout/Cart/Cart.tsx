@@ -39,7 +39,7 @@ export function Cart() {
                         <div className=" flex flex-col px-10">
                             {cartProducts && cartProducts.length > 0 ? (
                                 cartProducts.map((item: CartItem) => {
-                                    const {product, size, quantity, unitPrice} = item;
+                                    const {product, quantity, size, unitPrice} = item;
                                     const discountedUnitPrice = product.discountPercentage > 0
                                         ? unitPrice
                                         : null;
@@ -70,7 +70,7 @@ export function Cart() {
                                                         <button 
                                                             onClick={() => decreaseQuantity(item)}
                                                             className="text-3xl hover:cursor-pointer">-</button>
-                                                        <label className="">{item.quantity}</label>
+                                                        <label className="">{quantity}</label>
                                                         <button 
                                                             onClick={() => increaseQuantity(item)}
                                                             className="text-xl hover:cursor-pointer">+</button>
