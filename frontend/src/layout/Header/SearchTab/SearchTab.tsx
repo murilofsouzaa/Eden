@@ -50,7 +50,13 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
                                         onChange={(e) => setTerm(e.target.value)}
                                         name="search"
                                         placeholder="O que mandas meu nobre?"
-                                        className="pr-4 py-3 outline-0 w-full"></input>
+                                        className="pr-4 py-3 outline-0 w-full">
+                                    </input>
+                                    <button
+                                        onClick={() => setTerm("")}
+                                        className="mx-4 hover:cursor-pointer">
+                                        <p className="text-sm h-full rounded-2xl">Limpar</p>
+                                    </button>
                                 </div>
                                 <div className="flex justify-start gap-2 w-full p-1 focus-within:outline-1
                                   bg-gray-100 rounded-2xl md:w-[60%] lg:w-[60%] lg:hidden">
@@ -67,11 +73,11 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
                                         className= "w-full outline-0 p-2 focus:outline-1"/>
                                 </div>
                             </div>
-                            <div 
+                            <button 
                                 onClick={toggleSearch}
-                                className="flex justify-center lg:w-[2%] hover:cursor-pointer hover:translate-y-[4px] transition-all duration-300">
+                                className="flex justify-center lg:w-[2%] hover:cursor-pointer hover:translate-y-1 transition-all duration-300 bg-transparent border-none">
                                     <X className="h-20"></X>
-                            </div>
+                            </button>
                         </div>
 
                         <div className="flex flex-col mt-10">
@@ -87,7 +93,7 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
                                                     <div className="flex">
                                                         <Link  to={`/product/${product.id}`}>
                                                         <div className="flex flex-col gap-4 w-full">
-                                                            <img src={product.imageUrl} alt={product.title} className="h-[360px] w-[260px] object-cover"></img>
+                                                                <img src={`/${product.imageUrl}`} alt={product.title} className="h-[360px] w-[260px] object-cover"></img>
                                                             <div className="flex flex-col gap-1 h-20">
                                                                 <h2 className="text-[14px]">{(product.title)}</h2>
                                                                 <p className="capitalize text-sm text-gray-500">{(product.variants[0].gender).toLowerCase()}</p>
