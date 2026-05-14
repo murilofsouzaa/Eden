@@ -62,22 +62,25 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
                             </div>
                         </div>
 
-                        <div className="flex justify-center flex-wrap gap-10 z-10 h-full w-full">
-                            {products.some((product) => termMatches(product, term)) == true ? (
-                                products.filter((product) => product.title.toUpperCase().includes(term.toUpperCase())).slice(0,4).map((product:Product) => (
-                                    <div key ={product.id}>                                    
-                                        <Link  to={`/product/${product.id}`}>
-                                        <div className="flex flex-col gap-4 w-full">
-                                            <img src={product.imageUrl} alt={product.title} className="h-[400px] w-[280px] object-cover"></img>
-                                            <div className="h-20">
-                                                <h2 className="text-sm text-center">{(product.title).slice(0,22)}...</h2>
+                        <div>
+                            <h2>Products</h2>
+                            <div className="flex justify-center flex-wrap gap-10 z-10 h-full w-full">
+                                {products.some((product) => termMatches(product, term)) == true ? (
+                                    products.filter((product) => product.title.toUpperCase().includes(term.toUpperCase())).slice(0,4).map((product:Product) => (
+                                        <div key ={product.id}>
+                                            <Link  to={`/product/${product.id}`}>
+                                            <div className="flex flex-col gap-4 w-full">
+                                                <img src={product.imageUrl} alt={product.title} className="h-[400px] w-[280px] object-cover"></img>
+                                                <div className="h-20">
+                                                    <h2 className="text-sm text-center">{(product.title)}</h2>
+                                                </div>
                                             </div>
+                                            </Link>
                                         </div>
-                                        </Link>
-                                    </div>
-                                ))) : (
-                                    <p>Nenhum produto encontrado</p>
-                                ) }
+                                    ))) : (
+                                        <p>Nenhum produto encontrado</p>
+                                    ) }
+                            </div>
                         </div>
                     </div>
                 </Dialog.Panel>
