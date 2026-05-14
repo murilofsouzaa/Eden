@@ -22,19 +22,19 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
     return ( 
         <Dialog open={isActive} onClose={toggleSearch}>
             <div className="fixed inset-0 z-10 bg-black/50 backdrop-blur-[0.6px]">
-                <Dialog.Panel className={`fixed flex justify-center bottom-0 z-40 h-[220p] overflow-y-scroll
+                <Dialog.Panel className={`fixed flex justify-center bottom-0 z-40 h-full overflow-y-scroll
                                 cart-div rounded-xl bg-gray-50 shadow-lg
-                                overflow-x-hidden w-full
+                                overflow-x-hidden w-full p-10
                                 md:rounded-none lg:rounded-none xl:rounded-none
-                                lg:max-h-[460px] lg:top-0
-                                lg:max-h-[460px] lg:top-0
-                                md:max-h-[460px] md:top-0
-                                xl:max-h-[460px] xl:top-0
+                                lg:max-h-[480px] lg:top-0
+                                lg:max-h-[480px] lg:top-0
+                                md:max-h-[480px] md:top-0
+                                xl:max-h-[480px] xl:top-0
                                 ${isActive ? "translate-0 opacity-100" : " translate-x-20 opacity-0"} duration-100 transition-all`}>
                     
-                    <div className="flex flex-col justify-center items-center p-4">
-                        <div className="p-10">
-                            <div className="hidden lg:flex lg:justify-between lg:gap-4 lg:bg-gray-100 rounded-3xl ease-in-out duration-300 hover:cursor-pointer">
+                    <div className="flex flex-col justify-center items-center p-4 overflow-y-hidden">
+                        <div className="flex justify-center p-10 w-full mt-5">
+                            <div className="hidden bg-gray-100 lg:flex lg:w-[40%] lg:justify-center lg:items-center lg:gap-4 rounded-3xl ease-in-out duration-300 hover:cursor-pointer">
                                 <div className="flex items-center pl-4">
                                     <Search className="h-5 w-auto text-black/60"></Search>
                                 </div>
@@ -45,16 +45,18 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
                                     onChange={(e) => setTerm(e.target.value)}
                                     name="search" 
                                     placeholder="O que mandas meu nobre?" 
-                                    className="pr-4 py-3 outline-0"></input>
+                                    className="pr-4 py-3 outline-0 w-full"></input>
                             </div>
-                            <div className="flex justify-start gap-2 border-b w-[full] lg:hidden">
-                                <Search className="h-4 text-[#242424]"></Search>
-                                <input type="text" name="" id="" placeholder="Buscar o que procura..."
-                                className= " outline-0"/>
+                            <div className="flex justify-start gap-2 w-full p-1  bg-gray-100 rounded-2xl md:w-[60%] lg:w-[60%] lg:hidden">
+                                <div className="flex items-center">
+                                    <Search className="h-4 text-[#242424]"></Search>
+                                </div>
+                                <input type="text" name="" id="" placeholder="Tá procurando que tipo de estilo..."
+                                className= "w-full outline-0 p-2"/>
                             </div>
                         </div>
 
-                        <div className="flex justify-center items-center gap-4 z-10 h-full w-full">
+                        <div className="flex justify-center items-center flex-wrap gap-4 z-10 h-full w-full">
                             {products.some((product) => termMatches(product, term)) == true ? (
                                 products.filter((product) => product.title.toUpperCase().includes(term.toUpperCase())).slice(0,9).map((product:Product) => (
                                     <div key ={product.id}>                                    

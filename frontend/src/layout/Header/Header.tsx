@@ -92,9 +92,9 @@ export function Header(){
                                 <Search className="h-5 w-auto text-black/60"></Search>
                                 <input type="text" id="search" name="search" placeholder="O que procura para hoje?" className="caret-transparent outline-0"></input>
                             </div>
-                            <div className="flex justify-start gap-2 border-b p-2 w-[50%] lg:hidden">
+                            <div className="flex justify-start gap-2 border-b p-2 w-[100%] lg:hidden">
                                 <Search className="h-4 text-[#242424]"></Search>
-                                <input type="text" name="" id="" placeholder="Buscar o que procura..."
+                                <input type="text" name="" id="" placeholder="O que buscas meu caro..."
                                 className="caret- outline-0"/>
                             </div>
                         </div>
