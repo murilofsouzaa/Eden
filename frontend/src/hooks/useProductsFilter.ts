@@ -17,7 +17,7 @@ interface UseProductsFilterProps {
 export function useProductsFilter({
     products,
     filter,
-    limit = 7,
+    limit = 14,
 }: UseProductsFilterProps): UseProductsFilterReturn {
     const filteredProducts = useMemo(() => {
         return products.filter(filter);

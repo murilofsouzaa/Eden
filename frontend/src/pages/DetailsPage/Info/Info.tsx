@@ -11,7 +11,7 @@ import AddToCartButton from './components/AddToCartBtn/AddToCartButton'
 import PromotionsGreenLabel from './components/PromotionsGreenLabel/PromotionsGreenLabel'
 import ProductDetails from './components/ProductDetails/ProductDetails'
 import PriceOffLabel from '../../../components/ui/PriceOffLabel'
-import {ProductSuggestion} from '../ProductSuggestion/ProductSuggestion'
+import {ProductSuggestion} from './components/ProductSuggestion/ProductSuggestion'
 
 const Info = () => {
 
@@ -37,6 +37,12 @@ const Info = () => {
         const defaultVariant = selectedProductVariants.length > 0 
             ? (selectedProductVariants.find((product:ProductVariant) => product?.defaultVariant) ?? selectedProductVariants[0])
             : undefined;
+        const hasDiscount = (selectedProduct?.discountPercentage ?? 0) > 0;
+        const installmentPrice = ((defaultVariant?.price ?? 0) / 12).toFixed(2);
+        const discountedPrice = defaultVariant
+            ? (defaultVariant.price - (selectedProduct?.discountPercentage ?? 0) * defaultVariant.price / 100).toFixed(2)
+            : '0.00';
+        const cashbackText = '% 10 de cashback na próxima compra';
         
         const selectedVariant = defaultVariant ? (
             selectedProductVariants.find((variant: ProductVariant) => variant.size === selectedSize) ?? defaultVariant
@@ -60,13 +66,8 @@ const Info = () => {
                             <img
                                 src={`/${selectedProduct.imageUrl}`}
                                 alt={selectedProduct.title}
-                                className="
-                                w-full object-cover
-                                sm:w-auto sm:h-100 
-                                md:w-auto md:h-140
-                                lg:w-auto lg:h-195
-                                xl:w-auto xl:h-220"
-                                />
+                                className="w-full object-cover sm:w-auto sm:h-100 md:w-auto md:h-140 lg:w-auto lg:h-195 xl:w-auto xl:h-220"
+                            />
                         </div>
                     </div>
                     <div className="col-start-3 w-full">
@@ -74,13 +75,13 @@ const Info = () => {
                             <h1 className="text-lg lg:text-xl font-semibold">{selectedProduct.title}</h1>
                             {defaultVariant?.price !== undefined && (
                             <div className="flex flex-col my-4">
-                                    {selectedProduct.discountPercentage > 0 && (
+                                    {hasDiscount && (
                                         <div className="flex justify-center items-center gap-3">
                                             <label className="text-lg text-black/50 line-through">R$ {defaultVariant.price.toFixed(2).toString().replace(".", ",")}</label>
                                             <PriceOffLabel defaultVariant={defaultVariant} selectedProduct={selectedProduct}/>
                                         </div>
                                     )}
-                                <label className="text-3xl text-black font-semibold">R$ {((defaultVariant.price) - (selectedProduct.discountPercentage * defaultVariant.price/100)).toFixed(2).toString().replace(".", ",")}</label>
+                                <label className="text-3xl text-black font-semibold">R$ {discountedPrice.toString().replace(".", ",")}</label>
                             </div>
                             )}
                             <label className="text-[15px] flex gap-2 mt-1">
@@ -89,25 +90,25 @@ const Info = () => {
                                         <CreditCard className="h-5 w-auto"/>
                                     </div>
                                 </span>
-                                <span className="text-black/70">Em até</span><span className="font-semibold">12x</span><span className="text-black/70">de</span><span className="font-semibold">R${((defaultVariant?.price)/12).toFixed(2)}</span>
+                                <span className="text-black/70">Em até</span><span className="font-semibold">12x</span><span className="text-black/70">de</span><span className="font-semibold">R${installmentPrice}</span>
                             </label>
                             <div className="w-75 mt-5 ">
-                                <span className="text-center bg-green-100 text-green-600 text-sm py-2 px-4 rounded-2xl
-                                md:w-full lg:w-full"
-                                >% 10 de cashback na próxima compra</span>
+                                <span className="text-center bg-green-100 text-green-600 text-sm py-2 px-4 rounded-2xl md:w-full lg:w-full">
+                                    {cashbackText}
+                                </span>
                             </div>
                             <div className="mt-5">
-                                <SizeButtons selectedSize={selectedSize} handleSizeClick={setSelectedSize}></SizeButtons>
+                                <SizeButtons selectedSize={selectedSize} handleSizeClick={setSelectedSize} />
                             </div>
-                            <AddToCartButton selectedProduct={selectedProduct} isOutOfStock={isOutOfStock} selectedSize={selectedSize}></AddToCartButton>
+                            <AddToCartButton selectedProduct={selectedProduct} isOutOfStock={isOutOfStock} selectedSize={selectedSize} />
                             <p className="mt-4 text-sm">Frete grátis nas compras acima de R$299</p>
                         
-                            <Description selectedProduct={selectedProduct}></Description>
-                            <ProductDetails selectedProduct={selectedProduct}></ProductDetails>
+                            <Description selectedProduct={selectedProduct} />
+                            <ProductDetails selectedProduct={selectedProduct} />
                         </div>
                         </div>
                         <div className="mt-10 row-start-2 col-start-2">
-                            <PromotionsGreenLabel></PromotionsGreenLabel>
+                            <PromotionsGreenLabel />
                         </div>
                     </div>
                 
@@ -117,7 +118,8 @@ const Info = () => {
                 </div>
             )}
 
-            <div>
+            <div className="mx-20">
+                <h2 className="text-xl font-bold p-1">SUGESTÕES</h2>
                 <ProductSuggestion
                     products={suggestedProducts}
                     translateValue={suggestionCarousel.translateValue}
