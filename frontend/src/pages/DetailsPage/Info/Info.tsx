@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react'
 import {useParams} from 'react-router-dom';
-import  '../../../../index.css'
-import useProducts from '../../../../../hooks/useProducts'
-import './Info.css'
+import  './Info.css'
+import useProducts from '../../../../hooks/useProducts'
+import { useCarousel } from '../../../hooks/useCarousel'
 import SizeButtons from './components/SizeButtons/SizeButtons'
-import type {Product, ProductVariant} from '../../../../context/ProductContext'
+import type {Product, ProductVariant} from '../../../context/ProductContext'
 import {CreditCard} from 'lucide-react'
 import Description from './components/Description/Description'
 import AddToCartButton from './components/AddToCartBtn/AddToCartButton'
 import PromotionsGreenLabel from './components/PromotionsGreenLabel/PromotionsGreenLabel'
 import ProductDetails from './components/ProductDetails/ProductDetails'
-import PriceOffLabel from '../../../../components/ui/PriceOffLabel'
+import PriceOffLabel from '../../../components/ui/PriceOffLabel'
+import {ProductSuggestion} from '../ProductSuggestion/ProductSuggestion'
 
 const Info = () => {
 
@@ -18,8 +19,20 @@ const Info = () => {
         const {id} = useParams();
         const products = useProducts();
     
-        const selectedProduct = products.find((product:Product) => product.id === Number(id)) as Product | undefined;
+        const selectedProduct = products.find((product:Product) => product.id === Number(id));
+        const selectedProductId = selectedProduct?.id;
         const selectedProductVariants = selectedProduct?.variants ?? [];
+        const suggestedProducts = selectedProductId == null
+            ? []
+            : products
+                .filter((product) => product.id !== selectedProductId)
+                .slice()
+                .sort((a, b) => {
+                    const score = (value: number) => (value * 9301 + selectedProductId * 49297) % 233280;
+                    return score(a.id) - score(b.id);
+                })
+                .slice(0, 7);
+        const suggestionCarousel = useCarousel({ totalItems: suggestedProducts.length });
 
         const defaultVariant = selectedProductVariants.length > 0 
             ? (selectedProductVariants.find((product:ProductVariant) => product?.defaultVariant) ?? selectedProductVariants[0])
@@ -29,11 +42,14 @@ const Info = () => {
             selectedProductVariants.find((variant: ProductVariant) => variant.size === selectedSize) ?? defaultVariant
         ) : undefined;
         const isOutOfStock = !selectedVariant || (selectedVariant?.stock ?? 0) === 0;
+        const pageTitle = selectedProduct == undefined ? "EDEN" : `${selectedProduct.title.slice(0, 20)}...`;
 
         useEffect(() => {
-            // eslint-disable-next-line react-hooks/immutability
-            document.title = selectedProduct == undefined ? "EDEN" : (selectedProduct.title).slice(0, 20) + "...";
-        }, []);
+            const titleElement = document.querySelector('title');
+            if (titleElement) {
+                titleElement.textContent = pageTitle;
+            }
+        }, [pageTitle]);
 
     return (
         <>
@@ -45,11 +61,11 @@ const Info = () => {
                                 src={`/${selectedProduct.imageUrl}`}
                                 alt={selectedProduct.title}
                                 className="
-                                w-full h-full object-cover
+                                w-full object-cover
                                 sm:w-auto sm:h-100 
                                 md:w-auto md:h-140
                                 lg:w-auto lg:h-195
-                                xl:w-auto h-220"
+                                xl:w-auto xl:h-220"
                                 />
                         </div>
                     </div>
@@ -100,6 +116,17 @@ const Info = () => {
                     <p className="text-center text-black/60 text-xl">Produto não encontrado ou sem variantes disponíveis</p>
                 </div>
             )}
+
+            <div>
+                <ProductSuggestion
+                    products={suggestedProducts}
+                    translateValue={suggestionCarousel.translateValue}
+                    trackRef={suggestionCarousel.trackRef}
+                    viewportRef={suggestionCarousel.viewportRef}
+                    prev={suggestionCarousel.prev}
+                    next={suggestionCarousel.next}
+                />
+            </div>
         </>
     )
 }

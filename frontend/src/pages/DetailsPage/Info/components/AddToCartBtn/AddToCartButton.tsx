@@ -1,5 +1,5 @@
-import {useCart} from '../../../../../../context/CartContext'
-import type {Product} from '../../../../../../context/ProductContext'
+import {useCart} from '../../../../../context/CartContext'
+import type {Product} from '../../../../../context/ProductContext'
 
 export type AddToCartButtonProps={
     isOutOfStock:boolean;

@@ -1,6 +1,6 @@
 
 import {Header} from '../../layout/Header/Header'
-import ProductDetails from './components/Info/Info'
+import ProductDetails from './Info/Info'
 import {Footer} from '../../layout/Footer/Footer'
 
 

@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import type {Product} from '../../../../../../context/ProductContext'
+import type {Product} from '../../../../../context/ProductContext'
 import {ChevronDown} from 'lucide-react'
 
 export type DescriptionProps={
