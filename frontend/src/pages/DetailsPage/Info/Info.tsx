@@ -107,7 +107,7 @@ const Info = () => {
                             <ProductDetails selectedProduct={selectedProduct} />
                         </div>
                         </div>
-                        <div className="mt-10 row-start-2 col-start-2">
+                        <div className="mt-3 row-start-2 col-start-2">
                             <PromotionsGreenLabel />
                         </div>
                     </div>
@@ -118,16 +118,18 @@ const Info = () => {
                 </div>
             )}
 
-            <div className="mx-20">
-                <h2 className="text-xl font-bold p-1">SUGESTÕES</h2>
-                <ProductSuggestion
-                    products={suggestedProducts}
-                    translateValue={suggestionCarousel.translateValue}
-                    trackRef={suggestionCarousel.trackRef}
-                    viewportRef={suggestionCarousel.viewportRef}
-                    prev={suggestionCarousel.prev}
-                    next={suggestionCarousel.next}
-                />
+            <div className="w-full px-10 mt-10 lg:mt-0 md:px-20 lg:px-40 xl:px-40 ">
+                <h2 className="text-xl font-bold p-1 w-full">SUGESTÕES</h2>
+                <div className="border-t border-t-gray-300">
+                    <ProductSuggestion
+                        products={suggestedProducts}
+                        translateValue={suggestionCarousel.translateValue}
+                        trackRef={suggestionCarousel.trackRef}
+                        viewportRef={suggestionCarousel.viewportRef}
+                        prev={suggestionCarousel.prev}
+                        next={suggestionCarousel.next}
+                    />
+                </div>
             </div>
         </>
     )
