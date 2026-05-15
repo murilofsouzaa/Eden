@@ -37,7 +37,7 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
                     <div className="flex flex-col px-10 w-full h-full">
 
                         <div className="flex justify-center items-center gap-3 w-full border-b border-b-gray-200">
-                            <div className="flex justify-center w-[90%]">
+                            <div className="p-5 lg:p-0 flex justify-center w-[90%]">
                                 <div className="hidden bg-gray-100 focus-within:outline-1
                                  lg:flex lg:w-[400px] lg:justify-center lg:items-center lg:gap-4 rounded-3xl ease-in-out duration-300 hover:cursor-pointer">
                                     <div className="flex items-center pl-4">
@@ -76,7 +76,7 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
                             <button 
                                 onClick={toggleSearch}
                                 className="flex justify-center lg:w-[2%] hover:cursor-pointer hover:translate-y-1 transition-all bg-transparent border-none">
-                                    <X className="h-24 w-auto"></X>
+                                    <X className="lg:h-24 w-auto"></X>
                             </button>
                         </div>
 
