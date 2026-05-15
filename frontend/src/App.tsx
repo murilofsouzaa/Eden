@@ -37,7 +37,7 @@ function App() {
 
   return (
     <>
-      <Toaster position="top-right" />
+      <Toaster position="bottom-center" duration={2500} closeButton />
       <div className="">
         <Routes>
           <Route path="/" element={<Homepage></Homepage>}></Route>

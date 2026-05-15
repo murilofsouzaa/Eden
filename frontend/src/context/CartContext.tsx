@@ -53,11 +53,7 @@ export function CartProvider({children}:{readonly children: React.ReactNode}){
     return setIsOpen((prev) => !prev)
     }
 
-    const removeItemFromCart = (item:CartItem) => {
-        setItems((prev) => prev.filter((currentItem) => currentItem.id !== item.id));
-    }
     
-
     const addItemCart = (newItem:Product, quantity:number = 1, size?: string) =>{
         const defaultVariant = newItem.variants.find((variant) => variant.defaultVariant) ?? newItem.variants[0];
         const selectedSize = size ?? defaultVariant?.size ?? newItem.variants[0]?.size ?? '';
@@ -75,10 +71,11 @@ export function CartProvider({children}:{readonly children: React.ReactNode}){
                             : item
                     ));
                 }
-    
+                
                 return [
                     ...prev,
                     {
+                        id: Date.now() + Math.random(),
                         key: `${newItem.id}-${selectedSize}`,
                         product: newItem,
                         size: selectedSize,
@@ -87,16 +84,20 @@ export function CartProvider({children}:{readonly children: React.ReactNode}){
                     },
                 ];
             });
-
+            
             toggleCart();
             toast.success("Adicionado ao carrinho")
         }catch{
             toast.error('Algo deu errado!')
         }
-
+        
     }
-
-
+    
+    
+    const removeItemFromCart = (item:CartItem) => {
+        setItems((prev) => prev.filter((currentItem) => currentItem.id !== item.id));
+    }
+    
 
     const totalItems = useMemo(
         () => items.reduce((acc, item) => acc + item.quantity, 0),
