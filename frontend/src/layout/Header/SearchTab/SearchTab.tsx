@@ -54,7 +54,7 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
                                     </input>
                                     <button
                                         onClick={() => setTerm("")}
-                                        className="mx-4 hover:cursor-pointer">
+                                        className="mr-4 hover:cursor-pointer">
                                         <p className="text-sm h-full rounded-2xl">Limpar</p>
                                     </button>
                                 </div>
@@ -75,8 +75,8 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
                             </div>
                             <button 
                                 onClick={toggleSearch}
-                                className="flex justify-center lg:w-[2%] hover:cursor-pointer hover:translate-y-1 transition-all duration-300 bg-transparent border-none">
-                                    <X className="h-20"></X>
+                                className="flex justify-center lg:w-[2%] hover:cursor-pointer hover:translate-y-1 transition-all bg-transparent border-none">
+                                    <X className="h-24 w-auto"></X>
                             </button>
                         </div>
 

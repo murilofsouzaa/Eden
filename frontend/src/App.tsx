@@ -7,6 +7,10 @@ import {useCart} from './context/CartContext'
 import {Cart} from './layout/Cart/Cart'
 import LoginPage from './pages/LoginPage/LoginPage'
 import SignUpPage from './pages/SignUpPage/SignUpPage'
+import {Toaster} from 'sonner'
+
+
+
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
@@ -32,19 +36,22 @@ function App() {
 
 
   return (
-    <div className="">
-      <Routes>
-        <Route path="/" element={<Homepage></Homepage>}></Route>
-        <Route path="/product/:id" element={<ProductDetail></ProductDetail>}></Route>
-        <Route path="/u/login" element={<LoginPage></LoginPage>}></Route>
-        <Route path="/u/signup" element={<SignUpPage></SignUpPage>}></Route>
-      </Routes>
+    <>
+      <Toaster position="top-right" />
       <div className="">
-                {isOpen && (
-                    <Cart/>
-                )}
-        </div>
-    </div>
+        <Routes>
+          <Route path="/" element={<Homepage></Homepage>}></Route>
+          <Route path="/product/:id" element={<ProductDetail></ProductDetail>}></Route>
+          <Route path="/u/login" element={<LoginPage></LoginPage>}></Route>
+          <Route path="/u/signup" element={<SignUpPage></SignUpPage>}></Route>
+        </Routes>
+        <div className="">
+                  {isOpen && (
+                      <Cart/>
+                  )}
+          </div>
+      </div>
+    </>
     
   )
 }

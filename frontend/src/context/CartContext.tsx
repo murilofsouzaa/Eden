@@ -2,6 +2,7 @@
 import {createContext, useContext, useMemo, useState, useEffect} from 'react'
 import type {Product}  from '../context/ProductContext'
 import {api} from '../services/api'
+import {toast} from 'sonner'
 
 export type Cart={
     id:number;
@@ -48,6 +49,14 @@ export function CartProvider({children}:{readonly children: React.ReactNode}){
         })
     }, []);
 
+    const toggleCart = () =>{
+    return setIsOpen((prev) => !prev)
+    }
+
+    const removeItemFromCart = (item:CartItem) => {
+        setItems((prev) => prev.filter((currentItem) => currentItem.id !== item.id));
+    }
+    
 
     const addItemCart = (newItem:Product, quantity:number = 1, size?: string) =>{
         const defaultVariant = newItem.variants.find((variant) => variant.defaultVariant) ?? newItem.variants[0];
@@ -55,36 +64,36 @@ export function CartProvider({children}:{readonly children: React.ReactNode}){
         const selectedVariant = newItem.variants.find((variant) => variant.size === selectedSize) ?? defaultVariant ?? newItem.variants[0];
         const unitPrice = selectedVariant ? selectedVariant.price - (selectedVariant.price * (newItem.discountPercentage / 100)) : 0;
 
-        setItems((prev) => {
-            const existingItemIndex = prev.findIndex((item) => item.product.id === newItem.id && item.size === selectedSize);
+        try{
+            setItems((prev) => {
+                const existingItemIndex = prev.findIndex((item) => item.product.id === newItem.id && item.size === selectedSize);
+    
+                if (existingItemIndex >= 0) {
+                    return prev.map((item) => (
+                        item.product.id === newItem.id && item.size === selectedSize
+                            ? {...item, quantity: item.quantity + quantity}
+                            : item
+                    ));
+                }
+    
+                return [
+                    ...prev,
+                    {
+                        key: `${newItem.id}-${selectedSize}`,
+                        product: newItem,
+                        size: selectedSize,
+                        quantity,
+                        unitPrice,
+                    },
+                ];
+            });
 
-            if (existingItemIndex >= 0) {
-                return prev.map((item) => (
-                    item.product.id === newItem.id && item.size === selectedSize
-                        ? {...item, quantity: item.quantity + quantity}
-                        : item
-                ));
-            }
+            toggleCart();
+            toast.success("Adicionado ao carrinho")
+        }catch{
+            toast.error('Algo deu errado!')
+        }
 
-            return [
-                ...prev,
-                {
-                    key: `${newItem.id}-${selectedSize}`,
-                    product: newItem,
-                    size: selectedSize,
-                    quantity,
-                    unitPrice,
-                },
-            ];
-        });
-    }
-
-    const toggleCart = () =>{
-       return setIsOpen((prev) => !prev)
-    }
-
-    const removeItemFromCart = (item:CartItem) => {
-        setItems((prev) => prev.filter((currentItem) => currentItem.id !== item.id));
     }
 
 
