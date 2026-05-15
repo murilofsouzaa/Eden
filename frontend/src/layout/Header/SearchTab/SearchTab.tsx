@@ -90,7 +90,9 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
                                         <div className="flex justify-center flex-wrap gap-2 border-b border-b-gray-200">
                                             {products.filter((product) => product.title.toUpperCase().includes(term.toUpperCase())).slice(0,4).map((product:Product) => (
                                                 <div key={product.id}>
-                                                    <div className="flex">
+                                                    <div 
+                                                    onClick={toggleSearch}
+                                                    className="flex">
                                                         <Link  to={`/product/${product.id}`}>
                                                         <div className="flex flex-col gap-4 w-full">
                                                                 <img src={`/${product.imageUrl}`} alt={product.title} className="h-[360px] w-[260px] object-cover"></img>
