@@ -74,29 +74,17 @@ export function Header(){
                 <nav className="flex flex-col justify-center items-center m-2 mx-5
                     md:m-0 md:mx-10
                     lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-4 lg:mx-14">
-                    <ul className="hidden 
-                        lg:visible lg:flex lg:gap-7">
-                        <li><a href="#">Mulheres</a></li>
-                        <li><a href="#">Homens</a></li>
-                        <li><a href="#">Acessórios</a></li>
-                        <li><a href="#">Explorar</a></li>
-                    </ul>
-                    
-                    <div className="hidden lg:flex lg:justify-center lg:items-center">
-                        <Link to="/"><img src={ logoHeader} alt="eden-logo-header" className="lg:w-13 lg:h-13" /></Link>
-                    </div>
-                    <div className="flex items-center justify-between w-full md:justify-between md:w-full lg:gap-10 lg:w-auto">
-                        <img src={hamburgerIcon} className="w-8 h-8 lg:hidden"></img>
-                        <div onClick={toggleSearch}>
-                            <div className="hidden lg:flex lg:justify-between lg:gap-4 lg:bg-gray-100 rounded-3xl px-12 lg:py-2.5 ease-in-out duration-300 hover:cursor-pointer">
-                                <Search className="h-5 w-auto text-black/60"></Search>
-                                <input type="text" id="search" name="search" placeholder="O que procura para hoje?" className="caret-transparent outline-0"></input>
-                            </div>
-                            <div className="flex justify-start gap-2 border-b p-2 w-[100%] lg:hidden">
-                                <Search className="h-4 text-[#242424]"></Search>
-                                <input type="text" name="" id="" placeholder="O que buscas meu caro..."
-                                className="caret- outline-0"/>
-                            </div>
+                    <div className="flex items-center justify-between gap-4 w-full lg:hidden">
+                        <div className="flex justify-start gap-3">
+                            <button>
+                                <img src={hamburgerIcon} className="w-8 h-8 lg:hidden"></img>
+                            </button>
+                            <button onClick={toggleSearch} className="flex justify-center items-center">
+                                <Search className="h-6 text-[#242424]"></Search>
+                            </button>
+                        </div>
+                        <div className="flex justify-center">
+                            <Link to="/"><img src={logoHeader} alt="eden-logo-header" className="w-13 h-13" /></Link>
                         </div>
                         <div className="flex justify-between items-center gap-3">
                             <div className="flex gap-3">
@@ -105,8 +93,40 @@ export function Header(){
                                         <img src={userIcon} alt="user-icon" className="h-10 w-auto object-contain"></img>
                                     </div>
                                 </Link>
-                                <button onClick={toggleCart} className="relative cursor-pointer py-5 w-full
-                                hover:-translate-y-2.5 ease-in-out duration-300">
+                                <button onClick={toggleCart} className="relative cursor-pointer py-5 w-full hover:-translate-y-2.5 ease-in-out duration-300">
+                                    <img src={shoppingBag} alt="shopping-bag-icon" className="h-6 w-auto object-contain"></img>
+                                    <div className="absolute flex justify-center items-center top-4 left-3 text-[11px] rounded-[50%] w-4.5 h-4.5 p-2.5 bg-blue-200">
+                                        <span className="">{cartQuantity}</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="hidden lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:w-full lg:gap-6">
+                        <ul className="flex gap-7 justify-self-start">
+                            <li><a href="#">Mulheres</a></li>
+                            <li><a href="#">Homens</a></li>
+                            <li><a href="#">Acessórios</a></li>
+                            <li><a href="#">Explorar</a></li>
+                        </ul>
+
+                        <div className="justify-self-center">
+                            <Link to="/"><img src={logoHeader} alt="eden-logo-header" className="lg:w-13 lg:h-13" /></Link>
+                        </div>
+
+                        <div className="flex items-center justify-self-end gap-4">
+                            <button onClick={toggleSearch} className="flex items-center justify-between gap-4 bg-gray-100 rounded-3xl px-12 py-2.5 ease-in-out duration-300 hover:cursor-pointer">
+                                <Search className="h-5 w-auto text-black/60"></Search>
+                                <input type="text" id="search" name="search" placeholder="O que procura para hoje?" className="caret-transparent outline-0"></input>
+                            </button>
+                            <div className="flex items-center gap-3">
+                                <Link to="/u/login">
+                                    <div className="hover:-translate-y-2.5 ease-in-out duration-300 py-5 w-full hover:cursor-pointer">
+                                        <img src={userIcon} alt="user-icon" className="h-10 w-auto object-contain"></img>
+                                    </div>
+                                </Link>
+                                <button onClick={toggleCart} className="relative cursor-pointer py-5 w-full hover:-translate-y-2.5 ease-in-out duration-300">
                                     <img src={shoppingBag} alt="shopping-bag-icon" className="h-6 w-auto object-contain"></img>
                                     <div className="absolute flex justify-center items-center top-4 left-3 text-[11px] rounded-[50%] w-4.5 h-4.5 p-2.5 bg-blue-200">
                                         <span className="">{cartQuantity}</span>
