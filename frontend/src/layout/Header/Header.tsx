@@ -4,12 +4,10 @@ import './Header.css';
 import logoHeader from '../../../public/logo/logo.png';
 import userIcon from '../../../public/icons/user.png';
 import shoppingBag from '../../../public/icons/shopping-bag.png';
-import hamburgerIcon from '../../../public/icons/hamburguer.png';
 import {Search} from 'lucide-react'
 import {useCart} from '../../context/CartContext'
 import SearchTab from './SearchTab/SearchTab'
 import SearchInput from './SearchInput/SearchInput'
-import Sidebar from './Sidebar/Sidebar'
 import useProducts from '../../../hooks/useProducts'
 
 const labels : React.ReactNode[] = [
@@ -23,7 +21,6 @@ export function Header(){
     const [currentIndex, setCurrentIndex] = useState<number>(0);  
     const [showSlider, setShowSlider] = useState<boolean>(true);
     const [isSearchActive, setIsSearchActive] = useState<boolean>(false);
-    const [isSidebarActive, setIsSidebarActive] = useState<boolean>(false);
 
     const hideSliderAt = 40;
     const showSliderAt = 12;
@@ -67,10 +64,6 @@ export function Header(){
     const toggleSearch = () =>{
         setIsSearchActive((prev) => !prev);
     }
-    
-    const toggleSidebar = () =>{
-        setIsSidebarActive((prev) => !prev);
-    }
 
     return (
         <div className="sticky top-0 z-10 bg-white border-b-2 border-b-black/10">
@@ -83,9 +76,6 @@ export function Header(){
                     lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-4 lg:mx-14">
                     <div className="flex items-center justify-between gap-4 w-full lg:hidden">
                         <div className="flex justify-start gap-3">
-                            <button onClick={toggleSidebar}>
-                                <img src={hamburgerIcon} className="w-8 h-8 lg:hidden"></img>
-                            </button>
                             <button onClick={toggleSearch} className="flex justify-center items-center">
                                 <Search className="h-6 text-[#242424]"></Search>
                             </button>
@@ -144,7 +134,6 @@ export function Header(){
             <div>
                 <SearchTab products={products} isSearchActive={isSearchActive} toggleSearch={toggleSearch}></SearchTab>
             </div>
-            <div><Sidebar isSidebarActive={isSidebarActive} toggleSidebar={toggleSidebar} toggleSearch={toggleSearch}></Sidebar></div>
         </div>
     )
 }
