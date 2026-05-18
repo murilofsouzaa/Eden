@@ -45,7 +45,7 @@ export function Cart() {
                                         : null;
                                     return (
                                         <div key={item.id} className="flex justify-center items-start border-b w-auto mt-10  h-50 border-b-black/10">
-                                            <img src={`/${product.imageUrl}`} alt={product.title} className="w-30 h-34"/>
+                                            <img src={product.imageUrl} alt={product.title} className="w-30 h-34"/>
                                             <div className="flex flex-col items-start ml-4 w-full">
                                                 <p className="font-normal text-[16px] font-medium mb-2 w-[80%]">{product.title}</p>
                                                 <p className="text-[16px] text-gray-600 font-medium">{size}</p>

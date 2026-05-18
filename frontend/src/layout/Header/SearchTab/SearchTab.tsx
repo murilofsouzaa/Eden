@@ -95,7 +95,7 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
                                                     className="flex">
                                                         <Link  to={`/product/${product.id}`}>
                                                         <div className="flex flex-col gap-4 w-full">
-                                                                <img src={`/${product.imageUrl}`} alt={product.title} className="h-[360px] w-[260px] object-cover"></img>
+                                                                <img src={product.imageUrl} alt={product.title} className="h-[360px] w-[260px] object-cover"></img>
                                                             <div className="flex flex-col gap-1 h-20">
                                                                 <h2 className="text-[14px]">{(product.title)}</h2>
                                                                 <p className="capitalize text-sm text-gray-500">{(product.variants[0].gender).toLowerCase()}</p>

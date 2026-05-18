@@ -52,7 +52,7 @@ export function ReleaseSection({
                                                 <Link to={`/product/${product.id}`}>
                                                     <button type="button" className="hover:cursor-pointer">
                                                         <img
-                                                            src={`/${product.imageUrl}`}
+                                                            src={product.imageUrl}
                                                             alt={product.title}
                                                             className="product-image-catalog object-cover w-full h-96 lg:h-144"
                                                         />

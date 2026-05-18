@@ -64,7 +64,7 @@ const Info = () => {
                     <div className="col-start-2">  
                         <div className="flex justify-center items-center">
                             <img
-                                src={`/${selectedProduct.imageUrl}`}
+                                src={selectedProduct.imageUrl}
                                 alt={selectedProduct.title}
                                 className="w-full object-cover sm:w-auto sm:h-100 md:w-auto md:h-140 lg:w-auto lg:h-195 xl:w-auto xl:h-220"
                             />
