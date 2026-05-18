@@ -188,11 +188,11 @@ INSERT INTO sets (name) VALUES
 	('30-04-26 Women Set'),
 	('01-05-26 Men Set'),
 	('01-05-26 Women Set'),
-	('KORE');
+	('VUORI');
 
 UPDATE product
 SET set_id = CASE 
-	WHEN image_url LIKE '%01-05-26-(BUNDLE-KORE-VUORI)%' THEN (SELECT id FROM sets WHERE name = 'KORE')
+	WHEN image_url LIKE '%01-05-26-(BUNDLE-KORE-VUORI)%' THEN (SELECT id FROM sets WHERE name = 'VUORI')
 	WHEN title = 'Vuori Tank Navy' THEN (SELECT id FROM sets WHERE name = 'Vuori Navy Set')
 	WHEN title = 'Black White Set' THEN (SELECT id FROM sets WHERE name = 'Black White Set')
 	WHEN (image_url LIKE '%30-04-26%' AND image_url LIKE '%men%') THEN (SELECT id FROM sets WHERE name = '30-04-26 Men Set')
