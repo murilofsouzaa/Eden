@@ -20,7 +20,7 @@ export function Header(){
     
     const [currentIndex, setCurrentIndex] = useState<number>(0);  
     const [showSlider, setShowSlider] = useState<boolean>(true);
-    const [isActive, setIsActive] = useState<boolean>(false);
+    const [isSearchActive, setIsSearchActive] = useState<boolean>(false);
 
     const hideSliderAt = 40;
     const showSliderAt = 12;
@@ -62,7 +62,7 @@ export function Header(){
     const products = useProducts();
 
     const toggleSearch = () =>{
-        setIsActive((prev) => !prev);
+        setIsSearchActive((prev) => !prev);
     }
 
     return (
@@ -138,7 +138,7 @@ export function Header(){
                 </nav>
             </div>
             <div>
-                <SearchTab products={products} isActive={isActive} toggleSearch={toggleSearch}></SearchTab>
+                <SearchTab products={products} isSearchActive={isSearchActive} toggleSearch={toggleSearch}></SearchTab>
             </div>
         </div>
     )

@@ -8,11 +8,11 @@ import {X} from 'lucide-react'
 
 export type SearchTabProps={
     products:Product[];
-    isActive:boolean;
+    isSearchActive:boolean;
     toggleSearch: () => void;
 }
 
-const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
+const SearchTab = ({products, isSearchActive, toggleSearch}: SearchTabProps) => {
 
     const [term, setTerm] = useState<string>("");
     
@@ -21,7 +21,7 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
     }
 
     return ( 
-        <Dialog open={isActive} onClose={toggleSearch}>
+        <Dialog open={isSearchActive} onClose={toggleSearch}>
             <div className="fixed inset-0 z-10 bg-black/50 backdrop-blur-[0.6px]">
                 <Dialog.Panel className={`fixed flex justify-center items-center bottom-0 z-40 
                     w-full h-full overflow-y-scroll
@@ -32,7 +32,7 @@ const SearchTab = ({products, isActive, toggleSearch}: SearchTabProps) => {
                     lg:max-h-[720px] lg:top-0
                     md:max-h-[720px] md:top-0
                     xl:max-h-[720px] xl:top-0
-                    ${isActive ? "translate-0 opacity-100" : " translate-x-20 opacity-0"} duration-100 transition-all`}>
+                    ${isSearchActive ? "translate-0 opacity-100" : " translate-x-20 opacity-0"} duration-100 transition-all`}>
         
                     <div className="flex flex-col px-10 w-full h-full">
 
