@@ -1,17 +1,28 @@
+import {Dialog} from '@headlessui/react'
+import {X} from 'lucide-react'
+
+import SearchInput from '../SearchInput/SearchInput'
+
 export type SidebarProps={
-    isActive:boolean;
+    isSidebarActive:boolean;
+    toggleSidebar: () => void;
+    toggleSearch: () => void;
 }
 
-const Sidebar = ({isActive}:SidebarProps) => {
+const Sidebar = ({isSidebarActive, toggleSidebar, toggleSearch}:SidebarProps) => {
     
     return ( 
-        <>
-            {isActive && (
-                <div className="inset-0 z-100 bg-white">
-
-                </div>
-            )}
-        </>
+        <Dialog open={isSidebarActive} onClose={toggleSidebar}>
+            <div className="fixed inset-0 z-100 bg-white overflow-hidden">
+                <Dialog.Panel>
+                    <div>
+                        <X></X>
+                        <SearchInput toggleSearch={toggleSearch}></SearchInput>
+                    </div>
+                    <div></div>
+                </Dialog.Panel>
+            </div>
+        </Dialog>
      );
 }
  

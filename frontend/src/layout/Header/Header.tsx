@@ -8,6 +8,8 @@ import hamburgerIcon from '../../../public/icons/hamburguer.png';
 import {Search} from 'lucide-react'
 import {useCart} from '../../context/CartContext'
 import SearchTab from './SearchTab/SearchTab'
+import SearchInput from './SearchInput/SearchInput'
+import Sidebar from './Sidebar/Sidebar'
 import useProducts from '../../../hooks/useProducts'
 
 const labels : React.ReactNode[] = [
@@ -21,6 +23,7 @@ export function Header(){
     const [currentIndex, setCurrentIndex] = useState<number>(0);  
     const [showSlider, setShowSlider] = useState<boolean>(true);
     const [isSearchActive, setIsSearchActive] = useState<boolean>(false);
+    const [isSidebarActive, setIsSidebarActive] = useState<boolean>(false);
 
     const hideSliderAt = 40;
     const showSliderAt = 12;
@@ -64,6 +67,10 @@ export function Header(){
     const toggleSearch = () =>{
         setIsSearchActive((prev) => !prev);
     }
+    
+    const toggleSidebar = () =>{
+        setIsSidebarActive((prev) => !prev);
+    }
 
     return (
         <div className="sticky top-0 z-10 bg-white border-b-2 border-b-black/10">
@@ -76,7 +83,7 @@ export function Header(){
                     lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-4 lg:mx-14">
                     <div className="flex items-center justify-between gap-4 w-full lg:hidden">
                         <div className="flex justify-start gap-3">
-                            <button>
+                            <button onClick={toggleSidebar}>
                                 <img src={hamburgerIcon} className="w-8 h-8 lg:hidden"></img>
                             </button>
                             <button onClick={toggleSearch} className="flex justify-center items-center">
@@ -116,10 +123,7 @@ export function Header(){
                         </div>
 
                         <div className="flex items-center justify-self-end gap-4">
-                            <button onClick={toggleSearch} className="flex items-center justify-between gap-4 bg-gray-100 rounded-3xl px-12 py-2.5 ease-in-out duration-300 hover:cursor-pointer">
-                                <Search className="h-5 w-auto text-black/60"></Search>
-                                <input type="text" id="search" name="search" placeholder="O que procura para hoje?" className="caret-transparent outline-0"></input>
-                            </button>
+                            <SearchInput toggleSearch={toggleSearch}></SearchInput>
                             <div className="flex items-center gap-3">
                                 <Link to="/u/login">
                                     <div className="hover:-translate-y-2.5 ease-in-out duration-300 py-5 w-full hover:cursor-pointer">
@@ -140,6 +144,7 @@ export function Header(){
             <div>
                 <SearchTab products={products} isSearchActive={isSearchActive} toggleSearch={toggleSearch}></SearchTab>
             </div>
+            <div><Sidebar isSidebarActive={isSidebarActive} toggleSidebar={toggleSidebar} toggleSearch={toggleSearch}></Sidebar></div>
         </div>
     )
 }
