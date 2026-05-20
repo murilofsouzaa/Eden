@@ -61,7 +61,7 @@ export function FilteredProducts({
                                                 <div>
                                                     <div>
                                                         {product.discountPercentage > 0 ? (
-                                                            <p className={`mt-1  text-black/50 line-through `}>R${variantToShow?.price.toFixed(2)}</p>
+                                                            <p className={`mt-1 text-black/50 line-through `}>R${variantToShow?.price.toFixed(2)}</p>
                                                         ):
                                                             <p className={`font-semibold mt-1 text-black`}>R${variantToShow?.price.toFixed(2)}</p>
                                                         }

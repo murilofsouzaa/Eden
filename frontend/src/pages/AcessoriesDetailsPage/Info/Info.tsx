@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom';
 import {CreditCard} from 'lucide-react';
 import {api} from '../../../services/api';
 import type {Accessory} from '../../../context/AccessoriesContext';
+import PriceOffLabel from '../../../components/ui/PriceOffLabel';
 
 const formatPrice = (value: number) => value.toFixed(2).replace('.', ',');
 
@@ -72,7 +73,7 @@ const AccessoryInfo = () => {
                         {hasDiscount ? (
                             <div className="flex justify-center items-center gap-3">
                                 <label className="text-lg text-black/50 line-through">R$ {formatPrice(accessory.price)}</label>
-                                <span className="bg-green-500 px-2 text-[12px] font-semibold text-white">{accessory.discountPercentage}% OFF</span>
+                                <PriceOffLabel discountPercentage={accessory.discountPercentage} />
                             </div>
                         ) : null}
                         <label className="text-3xl text-black font-semibold">R$ {formatPrice(hasDiscount ? discountedPrice : accessory.price)}</label>

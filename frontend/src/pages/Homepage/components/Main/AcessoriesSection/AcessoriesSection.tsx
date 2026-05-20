@@ -3,6 +3,7 @@ import emptyBox from '../../../../../../public/icons/empty-box.png';
 import { Link } from 'react-router-dom'
 import { ChevronLeft, ChevronRight } from 'react-feather';
 import {useEffect, useRef} from 'react';
+import PriceOffLabel from '../../../../../components/ui/PriceOffLabel'
 
 export function AcessoriesSection() {
     const accessories = useAccessories();
@@ -69,7 +70,7 @@ export function AcessoriesSection() {
                                                 {accessory.discountPercentage > 0 && (
                                                     <div className="flex items-center gap-3">
                                                         <label className="text-md font-semibold text-green-600">R$ {formatPrice(accessory.price - (accessory.price * accessory.discountPercentage / 100))}</label>
-                                                        <span className="bg-green-600 text-white text-xs px-2 py-1 rounded">{accessory.discountPercentage}% OFF</span>
+                                                        <PriceOffLabel discountPercentage={accessory.discountPercentage} />
                                                     </div>
                                                 )}
                                             </div>
