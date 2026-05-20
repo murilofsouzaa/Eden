@@ -1,4 +1,3 @@
-import React from 'react'
 import type {CartItem} from '../../context/CartContext';
 import {useCart} from '../../context/CartContext';
 import {X, Trash} from 'lucide-react';
