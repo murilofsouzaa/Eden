@@ -21,6 +21,40 @@ INSERT INTO order_address (user_id, street, number, neighborhood, city, state, c
     ((SELECT id FROM users WHERE email = 'lara.costa@eden.com'), 'Rua das Palmeiras', 120, 'Jardins', 'São Paulo', 'SP', 'Brasil', '01425-000'),
     ((SELECT id FROM users WHERE email = 'diego.martins@eden.com'), 'Rua Professor Jesuino Arruda', 45, 'Itaim Bibi', 'São Paulo', 'SP', 'Brasil', '04532-081');
 
+-- Acessories catalog (based on frontend/public/acessories)
+INSERT INTO acessories (title, stock, material, weight, brand, price, discount_percentage) VALUES
+    ('Lifting Essentials', 42, 'Nylon', 350, 'Gymshark', 129.90, 10),
+    ('Gym FZS AN07', 28, 'Poliester', 420, 'Gymshark', 89.90, 0),
+    ('Black Strap', 36, 'Elastano', 180, 'Gymshark', 59.90, 15),
+    ('Prada Water Bottle', 20, 'Aluminio', 450, 'Prada', 149.90, 0),
+    ('Tornozeleira Bala', 25, 'Aco e Neoprene', 500, 'Eden', 79.90, 20),
+    ('Wrist Wraps HB', 30, 'Algodao e Elastano', 220, 'Gymshark', 69.90, 5);
+
+-- Backfill to keep the seed idempotent even if the rows already exist
+UPDATE acessories
+SET price = 129.90, discount_percentage = 10
+WHERE title = 'Lifting Essentials';
+
+UPDATE acessories
+SET price = 89.90, discount_percentage = 0
+WHERE title = 'Gym FZS AN07';
+
+UPDATE acessories
+SET price = 59.90, discount_percentage = 15
+WHERE title = 'Black Strap';
+
+UPDATE acessories
+SET price = 149.90, discount_percentage = 0
+WHERE title = 'Prada Water Bottle';
+
+UPDATE acessories
+SET price = 79.90, discount_percentage = 20
+WHERE title = 'Tornozeleira Bala';
+
+UPDATE acessories
+SET price = 69.90, discount_percentage = 5
+WHERE title = 'Wrist Wraps HB';
+
 -- Products (image paths reference files inside frontend/public)
 INSERT INTO product (title, description, image_url, modeling, weight, material, created_at, updated_at) VALUES
     ('Black Compression Tee', 'Camiseta de compressão com tecido respirável para treinos intensos.',
@@ -71,8 +105,6 @@ INSERT INTO product (title, description, image_url, modeling, weight, material, 
      '/clothes/women/gymshark-set-brown-women.jpeg', 'Fitted', '228g/m²', '80% Nylon, 20% Elastano', TIMESTAMP '2025-09-24 14:25:00', NULL),
     ('Black Oversized Tee', 'Camiseta oversized feminina preta com logo discreto e ombro deslocado.',
      '/clothes/women/gymshark-woman-oversized-black.jpeg', 'Oversized', '280g/m²', '100% Algodão', TIMESTAMP '2025-08-28 16:15:00', NULL),
-    ('Prada Hydrate Bottle', 'Garrafa térmica em alumínio escovado com tampa rosqueável.',
-     '/acessories/prada-water-bottle.jpeg', 'One Size', '450g', 'Alumínio Anodizado', TIMESTAMP '2025-07-22 15:15:00', NULL),
     ('Gym King Vest', 'Regata esportiva preta com recortes lineares e ajuste respirável.',
      '/clothes/men/30-04-26-Gym-King-Energy-Linear-Vest-Black.jpeg', 'Regular', '165g/m²', '86% Poliéster, 14% Elastano', TIMESTAMP '2026-04-30 08:00:00', NULL),
     ('Shark Hoodie Black', 'Moletom preto com capuz e visual streetwear para treino e uso casual.',
@@ -234,7 +266,6 @@ INSERT INTO product_variant (product_id, sku, color, size, price, stock, categor
     ((SELECT id FROM product WHERE title = 'Red Wine Pants'), 'SKU-0023', 'RED', 'S', 169.90, 19, 'PANTS', 'FEMININE', 'AVAILABLE', TRUE),
     ((SELECT id FROM product WHERE title = 'Brown Lounge Set'), 'SKU-0024', 'BROWN', 'S', 229.90, 21, 'SET', 'FEMININE', 'AVAILABLE', TRUE),
     ((SELECT id FROM product WHERE title = 'Black Oversized Tee'), 'SKU-0025', 'BLACK', 'S', 129.90, 28, 'SHIRTS', 'FEMININE', 'AVAILABLE', TRUE),
-    ((SELECT id FROM product WHERE title = 'Prada Hydrate Bottle'), 'SKU-0026', 'STEEL', 'ONE', 59.90, 55, 'WATER_BOTTLE', 'UNISSEX', 'AVAILABLE', TRUE),
     ((SELECT id FROM product WHERE title = 'Gym King Vest'), 'SKU-0027', 'BLACK', 'M', 99.90, 26, 'REGATTA', 'MASCULINE', 'AVAILABLE', TRUE),
     ((SELECT id FROM product WHERE title = 'Shark Hoodie Black'), 'SKU-0028', 'BLACK', 'M', 249.90, 16, 'SWEATSHIRTS', 'MASCULINE', 'AVAILABLE', TRUE),
     ((SELECT id FROM product WHERE title = 'Shark Hoodie White'), 'SKU-0029', 'WHITE', 'M', 249.90, 14, 'SWEATSHIRTS', 'MASCULINE', 'AVAILABLE', TRUE),
@@ -284,8 +315,6 @@ INSERT INTO shopping_cart (user_id, status, created_at) VALUES
 INSERT INTO shopping_cart_item (cart_id, variant_id, quantity, unit_price) VALUES
     ((SELECT id FROM shopping_cart WHERE user_id = (SELECT id FROM users WHERE email = 'lara.costa@eden.com')),
      (SELECT pv.id FROM product_variant pv JOIN product p ON p.id = pv.product_id WHERE p.title = 'Black Compression Tee' AND pv.is_default = TRUE), 2, 129.90),
-    ((SELECT id FROM shopping_cart WHERE user_id = (SELECT id FROM users WHERE email = 'lara.costa@eden.com')),
-     (SELECT pv.id FROM product_variant pv JOIN product p ON p.id = pv.product_id WHERE p.title = 'Prada Hydrate Bottle' AND pv.is_default = TRUE), 1, 59.90),
     ((SELECT id FROM shopping_cart WHERE user_id = (SELECT id FROM users WHERE email = 'diego.martins@eden.com')),
      (SELECT pv.id FROM product_variant pv JOIN product p ON p.id = pv.product_id WHERE p.title = 'Blue Oversized Hoodie' AND pv.is_default = TRUE), 1, 229.90),
     ((SELECT id FROM shopping_cart WHERE user_id = (SELECT id FROM users WHERE email = 'diego.martins@eden.com')),
@@ -308,8 +337,6 @@ INSERT INTO orders (user_id, shopping_cart_id, order_address_id, status, created
 INSERT INTO order_item (order_id, variant_id, quantity, unit_price) VALUES
     ((SELECT id FROM orders WHERE user_id = (SELECT id FROM users WHERE email = 'lara.costa@eden.com')),
      (SELECT pv.id FROM product_variant pv JOIN product p ON p.id = pv.product_id WHERE p.title = 'Black Compression Tee' AND pv.is_default = TRUE), 2, 129.90),
-    ((SELECT id FROM orders WHERE user_id = (SELECT id FROM users WHERE email = 'lara.costa@eden.com')),
-     (SELECT pv.id FROM product_variant pv JOIN product p ON p.id = pv.product_id WHERE p.title = 'Prada Hydrate Bottle' AND pv.is_default = TRUE), 1, 59.90),
     ((SELECT id FROM orders WHERE user_id = (SELECT id FROM users WHERE email = 'diego.martins@eden.com')),
      (SELECT pv.id FROM product_variant pv JOIN product p ON p.id = pv.product_id WHERE p.title = 'Blue Oversized Hoodie' AND pv.is_default = TRUE), 1, 229.90),
     ((SELECT id FROM orders WHERE user_id = (SELECT id FROM users WHERE email = 'diego.martins@eden.com')),

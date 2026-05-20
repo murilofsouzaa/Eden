@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS product_tags CASCADE;
 DROP TABLE IF EXISTS tags CASCADE;
 DROP TABLE IF EXISTS product_image CASCADE;
 DROP TABLE IF EXISTS product_variant CASCADE;
+DROP TABLE IF EXISTS acessories CASCADE;
 DROP TABLE IF EXISTS address CASCADE;
 DROP TABLE IF EXISTS product CASCADE;
 DROP TABLE IF EXISTS sets CASCADE;
@@ -41,6 +42,17 @@ CREATE TABLE address (
 CREATE TABLE sets (
 	id          BIGSERIAL PRIMARY KEY,
 	name        VARCHAR(120)
+);
+
+CREATE TABLE acessories (
+	id       SERIAL PRIMARY KEY,
+	title    VARCHAR(40) NOT NULL,
+	stock    INT4 NOT NULL CHECK (stock >= 0),
+	material VARCHAR(40) NOT NULL,
+	weight   INT4 NOT NULL CHECK (weight >= 0),
+	brand    VARCHAR(40) NOT NULL,
+	price    NUMERIC(12,2) NOT NULL DEFAULT 0,
+	discount_percentage INTEGER NOT NULL DEFAULT 0
 );
 
 CREATE TABLE product (
