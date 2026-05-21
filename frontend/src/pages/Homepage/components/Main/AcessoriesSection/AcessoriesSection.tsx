@@ -42,7 +42,7 @@ export function AcessoriesSection() {
             <section className="relative">
                 <div
                     ref={viewportRef}
-                    className="overflow-x-auto scroll-smooth"
+                    className="overflow-x-auto scroll-smooth border-y border-y-gray-300 py-10"
                     style={{scrollbarWidth: 'none'}}
                 >
                     <div className="flex flex-nowrap gap-5 pb-2">
@@ -80,6 +80,10 @@ export function AcessoriesSection() {
                             </div>
                         ))}
                     </div>
+
+                    <button className="w-full">
+                        <p className="text-end mt-4 font-semibold underline hover:cursor-pointer mr-10">Ver todos</p>
+                    </button>
 
                     {accessories.length === 0 && (
                         <div className="flex justify-center items-center m-10">

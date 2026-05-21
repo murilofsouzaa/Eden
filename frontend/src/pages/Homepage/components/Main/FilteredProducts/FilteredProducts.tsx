@@ -29,7 +29,7 @@ export function FilteredProducts({
 
     return (
         <section className="relative">
-            <div className="overflow-hidden" ref={viewportRef}>
+            <div className="overflow-hidden border-b border-b-gray-300 py-10" ref={viewportRef}>
                 <div
                     ref={trackRef}
                     className="flex flex-nowrap gap-5 transition-transform duration-500 ease-out"
@@ -80,6 +80,11 @@ export function FilteredProducts({
                         );
                     })}
                 </div>
+
+                <button className="w-full">
+                        <p className="text-end mt-10 font-semibold underline hover:cursor-pointer">Ver todos</p>
+                </button>
+
                 {totalItems === 0 && (
                     <div className="flex justify-center items-center m-10">
                         <div className="bg-gray-100 p-4 flex flex-col justify-center items-center rounded-4xl lg:w-[40%]">

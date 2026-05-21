@@ -59,7 +59,9 @@ export function Main({ products }: MainProps) {
                 <VideoSection />
             </section>
 
-            <AcessoriesSection />
+            <section>
+                <AcessoriesSection />
+            </section>
 
             <section className="overflow-hidden mt-20 flex justify-center items-center">
                 <Newsletter></Newsletter>

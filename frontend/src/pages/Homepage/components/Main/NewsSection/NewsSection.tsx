@@ -25,7 +25,7 @@ export function ReleaseSection({
     const totalItems = products.length;
 
     return (
-        <section className="relative">
+        <section className="relative border-y border-y-gray-300 py-10">
             {products.length == 0 ? (
                 <div className="flex justify-center items-center m-10">
                         <div className="bg-gray-100 p-4 flex flex-col justify-center items-center items-center rounded-4xl lg:w-[40%]">
@@ -35,7 +35,7 @@ export function ReleaseSection({
                     </div>
             ):(
                 <div>
-                    <div className="overflow-hidden" ref={viewportRef}>
+                    <div className="overflow-hidden " ref={viewportRef}>
                         <div
                             ref={trackRef}
                             className="flex flex-nowrap gap-5 transition-transform duration-500 ease-out"
@@ -77,6 +77,11 @@ export function ReleaseSection({
                             })}
                         </div>
                     </div>
+
+                    <button className="w-full">
+                        <p className="text-end mt-10 font-semibold underline hover:cursor-pointer">Ver todos</p>
+                    </button>
+
                     <div>
                         {totalItems > 0 && (
                             <div className="pointer-events-none absolute inset-0 flex items-center justify-between p-4">
