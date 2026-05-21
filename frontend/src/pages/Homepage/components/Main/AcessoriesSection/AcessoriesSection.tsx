@@ -81,12 +81,6 @@ export function AcessoriesSection() {
                         ))}
                     </div>
 
-                    <div className="w-full">
-                        <Link to="/products?type=accessories" className="block w-full">
-                            <p className="text-end mt-4 font-semibold underline hover:cursor-pointer mr-10">Ver todos</p>
-                        </Link>
-                    </div>
-
                     {accessories.length === 0 && (
                         <div className="flex justify-center items-center m-10">
                             <div className="bg-gray-100 p-4 flex flex-col justify-center items-center rounded-4xl lg:w-[40%]">

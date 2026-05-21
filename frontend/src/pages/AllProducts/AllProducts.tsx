@@ -16,6 +16,7 @@ type ProductItem = {
     title: string;
     description: string;
     modeling?: string;
+    category?: string;
     imageUrl: string;
     discountPercentage: number;
     variants?: ProductVariant[];
@@ -74,6 +75,26 @@ function getPageInfo(searchParams: URLSearchParams) {
     }
 }
 
+function filterByQuery(products: ProductItem[], searchParams: URLSearchParams) {
+    const type = (searchParams.get('type') ?? 'all') as FilterType;
+    const value = searchParams.get('value') ?? '';
+
+    if (type === 'modeling') {
+        return products.filter((product) => product.modeling?.toLowerCase() === value.toLowerCase());
+    }
+
+    if (type === 'accessories') {
+        const accessoryCategories = new Set(['BAGS', 'CAPS', 'BELTS', 'HATS', 'WATER_BOTTLE', 'ACCESSORY']);
+        return products.filter((product) => accessoryCategories.has((product.category ?? '').toUpperCase()));
+    }
+
+    if (type === 'category') {
+        return products.filter((product) => (product.category ?? '').toLowerCase() === value.toLowerCase());
+    }
+
+    return products;
+}
+
 export default function AllProducts() {
     const [searchParams] = useSearchParams();
     const {title, endpoint} = useMemo(() => getPageInfo(searchParams), [searchParams]);
@@ -94,9 +115,16 @@ export default function AllProducts() {
                     setProducts(response.data);
                 }
             } catch {
-                if (isMounted) {
-                    setProducts([]);
-                    setError('Não foi possível carregar os produtos.');
+                try {
+                    const fallbackResponse = await api.get<ProductItem[]>('/api/products');
+                    if (isMounted) {
+                        setProducts(filterByQuery(fallbackResponse.data, searchParams));
+                    }
+                } catch {
+                    if (isMounted) {
+                        setProducts([]);
+                        setError('Não foi possível carregar os produtos.');
+                    }
                 }
             } finally {
                 if (isMounted) {
@@ -110,7 +138,7 @@ export default function AllProducts() {
         return () => {
             isMounted = false;
         };
-    }, [endpoint]);
+    }, [endpoint, searchParams]);
 
     return (
         <div>

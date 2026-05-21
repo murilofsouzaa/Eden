@@ -102,10 +102,10 @@ export function Header(){
 
                     <div className="hidden lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:w-full lg:gap-6">
                         <ul className="flex gap-7 justify-self-start">
-                            <li><a href="#">Mulheres</a></li>
-                            <li><a href="#">Homens</a></li>
-                            <li><a href="#">Acessórios</a></li>
-                            <li><a href="#">Explorar</a></li>
+                            <li><Link to='/'>Mulheres</Link></li>
+                            <li><Link to='/'>Homens</Link></li>
+                            <li><Link to='/'>Acessórios</Link></li>
+                            <li><Link to=''>Explorar</Link></li>
                         </ul>
 
                         <div className="justify-self-center">
