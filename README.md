@@ -4,7 +4,7 @@
 
 # Eden
 
-The Eden project is an **online shop focused on gym clothing**. The goal is to give users a fast and simple way to browse items, check details, and place orders. The interface stays clear, the product list stays organised, and the system connects the frontend and backend to keep everything stable and safe. It also lets the team manage stock, prices, and updates without trouble.
+The Eden project is an **online shop focused on gym clothing**. The goal is to give users a fast and simple way to browse items and check details. The interface stays clear, the product list stays organised, and the system connects the frontend and backend to keep everything stable and safe.
 
 **It works like a good workout plan: steady, clear, and built to help you move forward.**
 
