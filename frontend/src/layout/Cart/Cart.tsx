@@ -39,9 +39,11 @@ export function Cart() {
                             {cartProducts && cartProducts.length > 0 ? (
                                 cartProducts.map((item: CartItem) => {
                                     const {product, quantity, size, unitPrice} = item;
-                                    const discountedUnitPrice = product.discountPercentage > 0
-                                        ? unitPrice
-                                        : null;
+                                    const hasDiscount = product.discountPercentage > 0;
+                                    const originalUnitPrice = hasDiscount
+                                        ? unitPrice / (1 - (product.discountPercentage / 100))
+                                        : unitPrice;
+                                    const hasDifferentPrices = hasDiscount && Math.abs(originalUnitPrice - unitPrice) > 0.01;
                                     return (
                                         <div key={item.id} className="flex justify-center items-start border-b w-auto mt-10  h-50 border-b-black/10">
                                             <img src={product.imageUrl} alt={product.title} className="w-30 h-34"/>
@@ -49,12 +51,16 @@ export function Cart() {
                                                 <p className="font-normal text-[16px] font-medium mb-2 w-[80%]">{product.title}</p>
                                                 <p className="text-[16px] text-gray-600 font-medium">{size}</p>
                                                 <div className="flex gap-3 mt-2">
-                                                    {discountedUnitPrice !== null && (
-                                                    <p className="font-semibold text-[16px]">R${discountedUnitPrice.toFixed(2)}</p>
-                                                    )}
-                                                    {item.unitPrice !== null && (
-                                                        <p className={`${product.discountPercentage ? 'text-red-600 line-through' : 'text-black font-semibold'} text-[16px]`}>
-                                                            R${item.unitPrice.toFixed(2)}
+                                                    {hasDifferentPrices ? (
+                                                        <>
+                                                            <p className="font-semibold text-[16px]">R${unitPrice.toFixed(2)}</p>
+                                                            <p className="text-red-600 line-through text-[16px]">
+                                                                R${originalUnitPrice.toFixed(2)}
+                                                            </p>
+                                                        </>
+                                                    ) : (
+                                                        <p className="text-black font-semibold text-[16px]">
+                                                            R${unitPrice.toFixed(2)}
                                                         </p>
                                                     )}
                                                 </div>

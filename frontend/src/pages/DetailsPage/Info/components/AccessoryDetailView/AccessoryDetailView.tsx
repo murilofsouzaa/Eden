@@ -1,9 +1,13 @@
 import {CreditCard} from 'lucide-react';
 import type {Accessory} from '../../../../../context/AccessoriesContext';
 import PriceOffLabel from '../../../../../components/ui/PriceOffLabel';
+import AddToCartButton from '../AddToCartBtn/AddToCartButton'
+import Description from '../Description/Description';
+import ProductDetails from '../ProductDetails/ProductDetails';
 import PromotionsGreenLabel from '../PromotionsGreenLabel/PromotionsGreenLabel';
 import DetailSuggestions, {type CarouselControls} from '../DetailSuggestions/DetailSuggestions';
 import type {SuggestionItem} from '../ProductSuggestion/ProductSuggestion';
+import type {Product} from '../../../../../context/ProductContext';
 
 type AccessoryDetailViewProps = Readonly<{
     accessory: Accessory;
@@ -22,6 +26,32 @@ export default function AccessoryDetailView({
     accessorySuggestions,
     accessoryCarousel,
 }: AccessoryDetailViewProps) {
+    const accessoryAsProduct: Product = {
+        id: accessory.id,
+        title: accessory.title,
+        description: `Acessório da marca ${accessory.brand}.`,
+        material: accessory.material,
+        modeling: accessory.brand,
+        weight: `${accessory.weight}g`,
+        discountPercentage: accessory.discountPercentage,
+        bundleId: null,
+        imageUrl: accessory.imageUrl,
+        variants: [
+            {
+                id: accessory.id,
+                productId: accessory.id,
+                price: accessory.price,
+                defaultVariant: true,
+                size: '',
+                category: 'accessory',
+                gender: 'unisex',
+                stock: accessory.stock,
+                description: accessory.title,
+            },
+        ],
+        tags: accessory.brand,
+    };
+
     return (
         <>
             <div className="overflow-x-hidden p-5 lg:grid lg:grid-cols-4 lg:col-start-2 lg:p-5 lg:flex-row">
@@ -67,8 +97,15 @@ export default function AccessoryDetailView({
                         <div className="mt-5 w-full text-sm text-black/70 space-y-1">
                             <p><span className="font-semibold">Marca:</span> {accessory.brand}</p>
                             <p><span className="font-semibold">Material:</span> {accessory.material}</p>
-                            <p><span className="font-semibold">Peso:</span> {accessory.weight}165g/m²</p>
+                            <p><span className="font-semibold">Peso:</span> {accessory.weight}g</p>
                         </div>
+
+                        <div className="mt-5">
+                            <AddToCartButton selectedProduct={accessoryAsProduct} isOutOfStock={accessory.stock === 0} selectedSize="" />
+                        </div>
+
+                        <Description selectedProduct={accessoryAsProduct} />
+                        <ProductDetails selectedProduct={accessoryAsProduct} />
                     </div>
                 </div>
             </div>
