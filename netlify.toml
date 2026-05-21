@@ -1,0 +1,21 @@
+# Netlify configuration for EDEN frontend
+# Branch to deploy: set to 'main' in Netlify UI
+
+[build]
+  base = "frontend"
+  publish = "dist"
+  command = "npm ci && npm run build"
+
+[build.environment]
+  # Example: set Node version if needed
+  NODE_VERSION = "18"
+
+[functions]
+  directory = "netlify/functions"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Note: Backend (Spring Boot) must be hosted separately. Define VITE_API_URL (or your env var) in Netlify site settings.
