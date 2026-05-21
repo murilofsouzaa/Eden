@@ -22,13 +22,14 @@ INSERT INTO order_address (user_id, street, number, neighborhood, city, state, c
     ((SELECT id FROM users WHERE email = 'diego.martins@eden.com'), 'Rua Professor Jesuino Arruda', 45, 'Itaim Bibi', 'São Paulo', 'SP', 'Brasil', '04532-081');
 
 -- Acessories catalog (based on frontend/public/acessories)
-INSERT INTO acessories (title, stock, material, weight, brand, price, discount_percentage) VALUES
-    ('Lifting Essentials', 42, 'Nylon', 350, 'Gymshark', 129.90, 10),
-    ('Gym FZS AN07', 28, 'Poliester', 420, 'Gymshark', 89.90, 0),
-    ('Black Strap', 36, 'Elastano', 180, 'Gymshark', 59.90, 15),
-    ('Prada Water Bottle', 20, 'Aluminio', 450, 'Prada', 149.90, 0),
-    ('Tornozeleira Bala', 25, 'Aco e Neoprene', 500, 'Eden', 79.90, 20),
-    ('Wrist Wraps HB', 30, 'Algodao e Elastano', 220, 'Gymshark', 69.90, 5);
+-- Added description column: seed description set to the brand name for each accessory
+INSERT INTO acessories (title, stock, material, weight, description, brand, price, discount_percentage) VALUES
+    ('Lifting Essentials', 42, 'Nylon', 350, 'Gymshark', 'Gymshark', 129.90, 10),
+    ('Gym FZS AN07', 28, 'Poliester', 420, 'Gymshark', 'Gymshark', 89.90, 0),
+    ('Black Strap', 36, 'Elastano', 180, 'Gymshark', 'Gymshark', 59.90, 15),
+    ('Prada Water Bottle', 20, 'Aluminio', 450, 'Prada', 'Prada', 149.90, 0),
+    ('Tornozeleira Bala', 25, 'Aco e Neoprene', 500, 'Generic', 'Generic', 79.90, 20),
+    ('Wrist Wraps HB', 30, 'Algodao e Elastano', 220, 'Gymshark', 'Gymshark', 69.90, 5);
 
 -- Backfill to keep the seed idempotent even if the rows already exist
 UPDATE acessories
@@ -36,7 +37,15 @@ SET price = 129.90, discount_percentage = 10
 WHERE title = 'Lifting Essentials';
 
 UPDATE acessories
+SET description = 'Gymshark'
+WHERE title = 'Lifting Essentials';
+
+UPDATE acessories
 SET price = 89.90, discount_percentage = 0
+WHERE title = 'Gym FZS AN07';
+
+UPDATE acessories
+SET description = 'Gymshark'
 WHERE title = 'Gym FZS AN07';
 
 UPDATE acessories
@@ -44,7 +53,15 @@ SET price = 59.90, discount_percentage = 15
 WHERE title = 'Black Strap';
 
 UPDATE acessories
+SET description = 'Gymshark'
+WHERE title = 'Black Strap';
+
+UPDATE acessories
 SET price = 149.90, discount_percentage = 0
+WHERE title = 'Prada Water Bottle';
+
+UPDATE acessories
+SET description = 'Prada'
 WHERE title = 'Prada Water Bottle';
 
 UPDATE acessories
@@ -52,7 +69,15 @@ SET price = 79.90, discount_percentage = 20
 WHERE title = 'Tornozeleira Bala';
 
 UPDATE acessories
+SET description = 'Generic', brand = 'Generic'
+WHERE title = 'Tornozeleira Bala';
+
+UPDATE acessories
 SET price = 69.90, discount_percentage = 5
+WHERE title = 'Wrist Wraps HB';
+
+UPDATE acessories
+SET description = 'Gymshark'
 WHERE title = 'Wrist Wraps HB';
 
 -- Products (image paths reference files inside frontend/public)

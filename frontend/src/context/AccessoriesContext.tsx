@@ -9,6 +9,7 @@ export type Accessory = {
     material: string;
     weight: number;
     brand: string;
+    description?: string;
     imageUrl: string;
     price: number;
     discountPercentage: number;

@@ -50,6 +50,7 @@ CREATE TABLE acessories (
 	stock    INT4 NOT NULL CHECK (stock >= 0),
 	material VARCHAR(40) NOT NULL,
 	weight   INT4 NOT NULL CHECK (weight >= 0),
+	description TEXT,
 	brand    VARCHAR(40) NOT NULL,
 	price    NUMERIC(12,2) NOT NULL DEFAULT 0,
 	discount_percentage INTEGER NOT NULL DEFAULT 0

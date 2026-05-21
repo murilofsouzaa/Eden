@@ -27,6 +27,9 @@ public class Accessory {
     @Column(nullable = false)
     private Integer weight;
 
+    @Column
+    private String description;
+
     @Column(nullable = false)
     private String brand;
 
@@ -74,6 +77,14 @@ public class Accessory {
 
     public void setWeight(Integer weight) {
         this.weight = weight;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getBrand() {

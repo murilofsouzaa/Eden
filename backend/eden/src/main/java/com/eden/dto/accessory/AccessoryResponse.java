@@ -6,6 +6,7 @@ public record AccessoryResponse(
         Integer stock,
         String material,
         Integer weight,
+        String description,
         String brand,
         String imageUrl,
         java.math.BigDecimal price,

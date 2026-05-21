@@ -29,7 +29,7 @@ export default function AccessoryDetailView({
     const accessoryAsProduct: Product = {
         id: accessory.id,
         title: accessory.title,
-        description: `Acessório da marca ${accessory.brand}.`,
+        description: accessory.description ?? `Acessório da marca ${accessory.brand}.`,
         material: accessory.material,
         modeling: accessory.brand,
         weight: `${accessory.weight}g`,

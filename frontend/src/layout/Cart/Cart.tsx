@@ -35,7 +35,7 @@ export function Cart() {
                                 </button>
                             </div>
                         </div>
-                        <div className=" flex flex-col px-10">
+                        <div className=" flex flex-col px-10 pb-48">
                             {cartProducts && cartProducts.length > 0 ? (
                                 cartProducts.map((item: CartItem) => {
                                     const {product, quantity, size, unitPrice} = item;
@@ -94,7 +94,7 @@ export function Cart() {
                         </div>
                 </div>  
                 {cartProducts.length > 0 && (
-                    <div className="block fixed bottom-0">
+                    <div className="block sticky bottom-0">
                         <div className="flex flex-col gap-2 mt-2 bg-white border-t border-t-gray-300
                         w-full">
                             <div className="flex items-center gap-4 px-10 py-5">
