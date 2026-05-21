@@ -3,7 +3,6 @@ import {useEffect} from 'react'
 import './App.css'
 import Homepage  from './pages/Homepage/Homepage.tsx';
 import ProductDetail from './pages/DetailsPage/DetailsPage.tsx'
-import AcessoriesDetailPage from './pages/AcessoriesDetailsPage/AcessoriesDetailsPage.tsx'
 import {useCart} from './context/CartContext'
 import {Cart} from './layout/Cart/Cart'
 import LoginPage from './pages/LoginPage/LoginPage'
@@ -43,7 +42,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage></Homepage>}></Route>
           <Route path="/product/:id" element={<ProductDetail></ProductDetail>}></Route>
-          <Route path="/acessories/:id" element={<AcessoriesDetailPage></AcessoriesDetailPage>}></Route>
+          <Route path="/acessories/:id" element={<ProductDetail></ProductDetail>}></Route>
           <Route path="/u/login" element={<LoginPage></LoginPage>}></Route>
           <Route path="/u/signup" element={<SignUpPage></SignUpPage>}></Route>
         </Routes>

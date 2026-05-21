@@ -2,17 +2,31 @@ import {Link} from 'react-router-dom'
 import { ChevronLeft, ChevronRight } from 'react-feather';
 import { useRef } from 'react';
 import type { RefObject } from 'react';
-import type {Product} from '../../../../../context/ProductContext';
 import PriceOffLabel from '../../../../../components/ui/PriceOffLabel'
 import emptyBox from '../../../../../../public/icons/empty-box.png'
 
+type SuggestionVariant = {
+    price: number;
+    stock: number;
+    defaultVariant?: boolean;
+};
+
+export type SuggestionItem = {
+    id: number;
+    title: string;
+    imageUrl: string;
+    discountPercentage: number;
+    variants?: SuggestionVariant[];
+};
+
 type ProductSuggestionProps = {
-    readonly products?: Product[];
+    readonly products?: SuggestionItem[];
     readonly translateValue?: number;
     readonly trackRef?: RefObject<HTMLDivElement | null>;
     readonly viewportRef?: RefObject<HTMLDivElement | null>;
     readonly prev?: () => void;
     readonly next?: () => void;
+    readonly getHref?: (id: number) => string;
 };
 
 export function ProductSuggestion({
@@ -22,6 +36,7 @@ export function ProductSuggestion({
     viewportRef,
     prev,
     next,
+    getHref = (id: number) => `/product/${id}`,
 }: ProductSuggestionProps) {
     const localTrackRef = useRef<HTMLDivElement | null>(null);
     const localViewportRef = useRef<HTMLDivElement | null>(null);
@@ -46,7 +61,7 @@ export function ProductSuggestion({
                             className="flex flex-nowrap gap-3 py-5 mb-5 transition-transform duration-500 ease-out"
                             style={{transform: `translateX(${translateValue}px)`}}
                         >
-                            {products.map((product: Product) => {
+                            {products.map((product) => {
                                 const variants = product.variants ?? [];
                                 const defaultVariant = variants.find((variant) => variant.defaultVariant);
                                 const variantToShow = defaultVariant ?? variants[0];
@@ -54,7 +69,7 @@ export function ProductSuggestion({
                                     <div key={product.id} data-slide="true">
                                         {variantToShow && variantToShow?.stock > 0 && (
                                             <div className="flex flex-col justify-start items-start w-50 lg:w-70">
-                                                <Link to={`/product/${product.id}`}>
+                                                <Link to={getHref(product.id)}>
                                                     <button type="button" className="hover:cursor-pointer">
                                                         <img
                                                             src={product.imageUrl}

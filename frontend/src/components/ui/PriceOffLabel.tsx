@@ -1,5 +1,3 @@
-import React from 'react'
-
 type PriceOffLabelProps = {
     price?: number
     discountPercentage?: number
@@ -10,9 +8,7 @@ type PriceOffLabelProps = {
 }
 
 const PriceOffLabel = ({
-    price,
     discountPercentage,
-    defaultVariant,
     selectedProduct,
     className = '',
 }: PriceOffLabelProps) => {

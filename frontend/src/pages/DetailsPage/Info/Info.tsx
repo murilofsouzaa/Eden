@@ -1,138 +1,157 @@
-import { useState, useEffect } from 'react'
-import {useParams} from 'react-router-dom';
-import  './Info.css'
-import useProducts from '../../../../hooks/useProducts'
-import { useCarousel } from '../../../hooks/useCarousel'
-import SizeButtons from './components/SizeButtons/SizeButtons'
-import type {Product, ProductVariant} from '../../../context/ProductContext'
-import {CreditCard} from 'lucide-react'
-import Description from './components/Description/Description'
-import AddToCartButton from './components/AddToCartBtn/AddToCartButton'
-import PromotionsGreenLabel from './components/PromotionsGreenLabel/PromotionsGreenLabel'
-import ProductDetails from './components/ProductDetails/ProductDetails'
-import PriceOffLabel from '../../../components/ui/PriceOffLabel'
-import {ProductSuggestion} from './components/ProductSuggestion/ProductSuggestion'
+import {useEffect, useMemo, useState} from 'react';
+import {useLocation, useParams} from 'react-router-dom';
+import './Info.css';
+import useProducts from '../../../../hooks/useProducts';
+import useAccessories from '../../../../hooks/useAccessories';
+import {useCarousel} from '../../../hooks/useCarousel';
+import type {Product, ProductVariant} from '../../../context/ProductContext';
+import type {Accessory} from '../../../context/AccessoriesContext';
+import type {SuggestionItem} from './components/ProductSuggestion/ProductSuggestion';
+import ProductDetailView from './components/ProductDetailView/ProductDetailView';
+import AccessoryDetailView from './components/AccessoryDetailView/AccessoryDetailView';
+
+const formatPrice = (value: number) => value.toFixed(2).replace('.', ',');
+
+const productToSuggestionItem = (product: Product): SuggestionItem => ({
+    id: product.id,
+    title: product.title,
+    imageUrl: product.imageUrl,
+    discountPercentage: product.discountPercentage,
+    variants: product.variants,
+});
+
+const accessoryToSuggestionItem = (accessory: Accessory): SuggestionItem => ({
+    id: accessory.id,
+    title: accessory.title,
+    imageUrl: accessory.imageUrl,
+    discountPercentage: accessory.discountPercentage,
+    variants: [{
+        price: accessory.price,
+        stock: accessory.stock,
+        defaultVariant: true,
+    }],
+});
 
 const Info = () => {
+    const [selectedSize, setSelectedSize] = useState<string>('P');
+    const {id} = useParams();
+    const {pathname} = useLocation();
+    const products = useProducts();
+    const accessories = useAccessories();
 
-        const [selectedSize, setSelectedSize] = useState<string>("P");
-        const {id} = useParams();
-        const products = useProducts();
-    
-        const selectedProduct = products.find((product:Product) => product.id === Number(id));
-        const selectedProductId = selectedProduct?.id;
-        const selectedProductVariants = selectedProduct?.variants ?? [];
-        const suggestedProducts = selectedProductId == null
-            ? []
-            : products
-                .filter((product) => product.id !== selectedProductId)
-                .slice()
-                .sort((a, b) => {
-                    const score = (value: number) => (value * 9301 + selectedProductId * 49297) % 233280;
-                    return score(a.id) - score(b.id);
-                })
-                .slice(0, 7);
-        const suggestionCarousel = useCarousel({ totalItems: suggestedProducts.length });
+    const isAccessoryRoute = pathname.startsWith('/acessories/');
+    const selectedProduct = !isAccessoryRoute && id
+        ? products.find((product: Product) => product.id === Number(id))
+        : undefined;
+    const selectedAccessory = isAccessoryRoute && id
+        ? accessories.find((accessory: Accessory) => accessory.id === Number(id))
+        : undefined;
 
-        const defaultVariant = selectedProductVariants.length > 0 
-            ? (selectedProductVariants.find((product:ProductVariant) => product?.defaultVariant) ?? selectedProductVariants[0])
-            : undefined;
-        const hasDiscount = (selectedProduct?.discountPercentage ?? 0) > 0;
-        const installmentPrice = ((defaultVariant?.price ?? 0) / 12).toFixed(2);
-        const discountedPrice = defaultVariant
-            ? (defaultVariant.price - (selectedProduct?.discountPercentage ?? 0) * defaultVariant.price / 100).toFixed(2)
-            : '0.00';
-        const cashbackText = '% 10 de cashback na próxima compra';
-        
-        const selectedVariant = defaultVariant ? (
-            selectedProductVariants.find((variant: ProductVariant) => variant.size === selectedSize) ?? defaultVariant
-        ) : undefined;
-        const isOutOfStock = !selectedVariant || (selectedVariant?.stock ?? 0) === 0;
-        const pageTitle = selectedProduct == undefined ? "EDEN" : `${selectedProduct.title.slice(0, 20)}...`;
+    const selectedProductId = selectedProduct?.id;
+    const selectedProductVariants = selectedProduct?.variants ?? [];
+    const suggestedProducts = selectedProductId == null
+        ? []
+        : products
+            .filter((product) => product.id !== selectedProductId)
+            .slice()
+            .sort((a, b) => {
+                const score = (value: number) => (value * 9301 + selectedProductId * 49297) % 233280;
+                return score(a.id) - score(b.id);
+            })
+            .slice(0, 7)
+            .map(productToSuggestionItem);
+    const suggestionCarousel = useCarousel({ totalItems: suggestedProducts.length });
 
-        useEffect(() => {
-            const titleElement = document.querySelector('title');
-            if (titleElement) {
-                titleElement.textContent = pageTitle;
-            }
-        }, [pageTitle]);
+    const accessorySuggestions: SuggestionItem[] = useMemo(() => {
+        if (!selectedAccessory) return [];
 
-    return (
-        <>
-            {selectedProduct && defaultVariant ? (
-                <div className="overflow-x-hidden p-5 lg:grid lg:grid-cols-4 lg:col-start-2 lg:p-5 lg:flex-row">
-                    <div className="col-start-2">  
-                        <div className="flex justify-center items-center">
-                            <img
-                                src={selectedProduct.imageUrl}
-                                alt={selectedProduct.title}
-                                className="w-full object-cover sm:w-auto sm:h-100 md:w-auto md:h-140 lg:w-auto lg:h-195 xl:w-auto xl:h-220"
-                            />
-                        </div>
-                    </div>
-                    <div className="col-start-3 w-full">
-                        <div className="flex flex-col justify-center items-center mt-6 p-5 lg:justify-baseline lg:items-start lg:mx-18 w-full">
-                            <h1 className="text-lg lg:text-xl font-semibold">{selectedProduct.title}</h1>
-                            {defaultVariant?.price !== undefined && (
-                            <div className="flex flex-col my-4">
-                                    {hasDiscount && (
-                                        <div className="flex justify-center items-center gap-3">
-                                            <label className="text-lg text-black/50 line-through">R$ {defaultVariant.price.toFixed(2).toString().replace(".", ",")}</label>
-                                            <PriceOffLabel defaultVariant={defaultVariant} selectedProduct={selectedProduct}/>
-                                        </div>
-                                    )}
-                                <label className="text-3xl text-black font-semibold">R$ {discountedPrice.toString().replace(".", ",")}</label>
-                            </div>
-                            )}
-                            <label className="text-[15px] flex gap-2 mt-1">
-                                <span className="text-black/70">
-                                    <div className="flex justify-center items-center">
-                                        <CreditCard className="h-5 w-auto"/>
-                                    </div>
-                                </span>
-                                <span className="text-black/70">Em até</span><span className="font-semibold">12x</span><span className="text-black/70">de</span><span className="font-semibold">R${installmentPrice}</span>
-                            </label>
-                            <div className="w-75 mt-5 ">
-                                <span className="text-center bg-green-100 text-green-600 text-sm py-2 px-4 rounded-2xl md:w-full lg:w-full">
-                                    {cashbackText}
-                                </span>
-                            </div>
-                            <div className="mt-5">
-                                <SizeButtons selectedSize={selectedSize} handleSizeClick={setSelectedSize} />
-                            </div>
-                            <AddToCartButton selectedProduct={selectedProduct} isOutOfStock={isOutOfStock} selectedSize={selectedSize} />
-                            <p className="mt-4 text-sm">Frete grátis nas compras acima de R$299</p>
-                        
-                            <Description selectedProduct={selectedProduct} />
-                            <ProductDetails selectedProduct={selectedProduct} />
-                        </div>
-                        </div>
-                        <div className="mt-3 row-start-2 col-start-2">
-                            <PromotionsGreenLabel />
-                        </div>
-                    </div>
-                
-            ) : (
+        return accessories
+            .filter((accessory: Accessory) => accessory.id !== selectedAccessory.id)
+            .slice()
+            .sort((a: Accessory, b: Accessory) => {
+                const score = (value: number) => (value * 9301 + selectedAccessory.id * 49297) % 233280;
+                return score(a.id) - score(b.id);
+            })
+            .slice(0, 7)
+            .map(accessoryToSuggestionItem);
+    }, [accessories, selectedAccessory]);
+    const accessorySuggestionCarousel = useCarousel({ totalItems: accessorySuggestions.length });
+
+    const defaultVariant = selectedProductVariants.length > 0
+        ? (selectedProductVariants.find((product: ProductVariant) => product?.defaultVariant) ?? selectedProductVariants[0])
+        : undefined;
+    const hasDiscount = (selectedProduct?.discountPercentage ?? 0) > 0;
+    const installmentPrice = ((defaultVariant?.price ?? 0) / 12).toFixed(2);
+    const discountedPrice = defaultVariant
+        ? (defaultVariant.price - (selectedProduct?.discountPercentage ?? 0) * defaultVariant.price / 100).toFixed(2)
+        : '0.00';
+    const cashbackText = '% 10 de cashback na próxima compra';
+
+    const selectedVariant = defaultVariant
+        ? (selectedProductVariants.find((variant: ProductVariant) => variant.size === selectedSize) ?? defaultVariant)
+        : undefined;
+    const isOutOfStock = !selectedVariant || (selectedVariant?.stock ?? 0) === 0;
+
+    const accessoryHasDiscount = (selectedAccessory?.discountPercentage ?? 0) > 0;
+    const accessoryDiscountedPrice = useMemo(() => {
+        if (selectedAccessory?.price == null) return 0;
+        return selectedAccessory.price - (selectedAccessory.price * selectedAccessory.discountPercentage / 100);
+    }, [selectedAccessory]);
+    const accessoryInstallmentPrice = useMemo(() => {
+        if (selectedAccessory?.price == null) return '0,00';
+        return formatPrice(selectedAccessory.price / 12);
+    }, [selectedAccessory]);
+
+    const currentTitle = selectedAccessory?.title ?? selectedProduct?.title;
+    const pageTitle = currentTitle == undefined ? 'EDEN' : `${currentTitle.slice(0, 20)}...`;
+
+    useEffect(() => {
+        const titleElement = document.querySelector('title');
+        if (titleElement) {
+            titleElement.textContent = pageTitle;
+        }
+    }, [pageTitle]);
+
+    if (isAccessoryRoute) {
+        if (!selectedAccessory) {
+            return (
                 <div className="flex justify-center items-center p-40">
-                    <p className="text-center text-black/60 text-xl">Produto não encontrado ou sem variantes disponíveis</p>
+                    <p className="text-center text-black/60 text-xl">Acessório não encontrado</p>
                 </div>
-            )}
+            );
+        }
 
-            <div className="w-full px-10 mt-10 lg:mt-0 md:px-20 lg:px-40 xl:px-40 ">
-                <h2 className="text-xl font-bold p-1 w-full">SUGESTÕES</h2>
-                <div className="border-t border-t-gray-300">
-                    <ProductSuggestion
-                        products={suggestedProducts}
-                        translateValue={suggestionCarousel.translateValue}
-                        trackRef={suggestionCarousel.trackRef}
-                        viewportRef={suggestionCarousel.viewportRef}
-                        prev={suggestionCarousel.prev}
-                        next={suggestionCarousel.next}
-                    />
-                </div>
-            </div>
-        </>
-    )
+        return (
+            <AccessoryDetailView
+                accessory={selectedAccessory}
+                accessoryHasDiscount={accessoryHasDiscount}
+                accessoryDiscountedPrice={accessoryDiscountedPrice}
+                accessoryInstallmentPrice={accessoryInstallmentPrice}
+                accessorySuggestions={accessorySuggestions}
+                accessoryCarousel={accessorySuggestionCarousel}
+            />
+        );
+    }
+
+    return selectedProduct && defaultVariant ? (
+        <ProductDetailView
+            product={selectedProduct}
+            defaultVariant={defaultVariant}
+            hasDiscount={hasDiscount}
+            discountedPrice={discountedPrice}
+            installmentPrice={installmentPrice}
+            cashbackText={cashbackText}
+            selectedSize={selectedSize}
+            onSelectSize={setSelectedSize}
+            isOutOfStock={isOutOfStock}
+            suggestions={suggestedProducts}
+            carousel={suggestionCarousel}
+        />
+    ) : (
+        <div className="flex justify-center items-center p-40">
+            <p className="text-center text-black/60 text-xl">Produto não encontrado ou sem variantes disponíveis</p>
+        </div>
+    );
 }
  
 export default Info;
