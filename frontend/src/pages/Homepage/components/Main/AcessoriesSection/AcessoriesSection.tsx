@@ -81,9 +81,11 @@ export function AcessoriesSection() {
                         ))}
                     </div>
 
-                    <button className="w-full">
-                        <p className="text-end mt-4 font-semibold underline hover:cursor-pointer mr-10">Ver todos</p>
-                    </button>
+                    <div className="w-full">
+                        <Link to="/products?type=accessories" className="block w-full">
+                            <p className="text-end mt-4 font-semibold underline hover:cursor-pointer mr-10">Ver todos</p>
+                        </Link>
+                    </div>
 
                     {accessories.length === 0 && (
                         <div className="flex justify-center items-center m-10">

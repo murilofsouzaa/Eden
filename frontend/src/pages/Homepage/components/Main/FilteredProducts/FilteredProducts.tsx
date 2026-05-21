@@ -81,9 +81,11 @@ export function FilteredProducts({
                     })}
                 </div>
 
-                <button className="w-full">
+                <div className="w-full">
+                    <Link to="/products?type=modeling&value=Oversized" className="block w-full">
                         <p className="text-end mt-10 font-semibold underline hover:cursor-pointer">Ver todos</p>
-                </button>
+                    </Link>
+                </div>
 
                 {totalItems === 0 && (
                     <div className="flex justify-center items-center m-10">

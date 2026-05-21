@@ -6,41 +6,40 @@ export function CategorySection() {
 
     const [gender, setGender] = useState<'female' | 'male'>('female');
     
+    const categories = gender === 'male'
+        ? [
+            { id: 1, name: 'Camisetas', image: '/clothes/men/gymshark-black-oversized-masculine.jpeg', href: '/products?type=category&value=shirts' },
+            { id: 2, name: 'Calças', image: '/clothes/men/white-pants-masculine-front.jpeg', href: '/products?type=category&value=pants' },
+            { id: 3, name: 'Shorts', image: '/clothes/men/gymshark-black-short-masculine.jpeg', href: '/products?type=category&value=shorts' },
+            { id: 4, name: 'Tênis', image: '/clothes/men/nike-shite-shoes.jpeg', href: '/products?type=category&value=shoes' },
+        ]
+        : [
+            { id: 5, name: 'Leggings', image: '/clothes/women/gymshark-green-legging.jpeg', href: '/products?type=category&value=legging' },
+            { id: 6, name: 'Conjuntos', image: '/clothes/women/gymshark-grey-set-women.jpeg', href: '/products?type=category&value=set' },
+            { id: 7, name: 'Oversized', image: '/clothes/women/gymshark-woman-oversized-black.jpeg', href: '/products?type=modeling&value=Oversized' },
+            { id: 8, name: 'Tênis', image: '/clothes/women/new-balance-shoes-female.jpeg', href: '/products?type=category&value=shoes' },
+        ];
+
     return(
         <>
         <h2 className="text-2xl font-bold mb-6">CONHEÇA AS CATEGORIAS</h2>
                 <GenderButton gender={gender} onChangeGender={setGender} />
 
-                <Link to='/category/:category'>
-                    <div
-                        className="flex flex-nowrap gap-5 mt-5 overflow-x-auto pb-2">
-                            {(gender === 'male'
-                                ? [
-                                        { id: 1, name: 'Camisetas', image: '/clothes/men/gymshark-black-oversized-masculine.jpeg' },
-                                        { id: 2, name: 'Calças', image: '/clothes/men/white-pants-masculine-front.jpeg' },
-                                        { id: 3, name: 'Shorts', image: '/clothes/men/gymshark-black-short-masculine.jpeg' },
-                                        { id: 4, name: 'Tênis', image: '/clothes/men/nike-shite-shoes.jpeg' },
-                                    ]
-                                    : [
-                                                    { id: 5, name: 'Leggings', image: '/clothes/women/gymshark-green-legging.jpeg' },
-                                                    { id: 6, name: 'Conjuntos', image: '/clothes/women/gymshark-grey-set-women.jpeg' },
-                                                    { id: 7, name: 'Oversized', image: '/clothes/women/gymshark-woman-oversized-black.jpeg' },
-                                                    { id: 8, name: 'Tênis', image: '/clothes/women/new-balance-shoes-female.jpeg' },
-                                                ]
-                        ).map((category) => (
+                <div
+                    className="flex flex-nowrap gap-5 mt-5 overflow-x-auto pb-2">
+                        {categories.map((category) => (
                             <div key={category.id} className="shrink-0 w-64 sm:w-72 md:w-80">
-                                <button className="flex flex-col justify-center w-full text-left hover:cursor-pointer">
+                                <Link to={category.href} className="flex flex-col justify-center w-full text-left hover:cursor-pointer">
                                     <img
                                         src={category.image}
                                         alt={category.name}
                                         className="product-image-catalog object-cover w-full h-[24rem] lg:h-[36rem]"
                                     />
                                     <p className="text-xl font-light mt-4">{category.name}</p>
-                                </button>
+                                </Link>
                             </div>
                         ))}
-                    </div>
-                </Link>
+                </div>
         </>
     )
 }

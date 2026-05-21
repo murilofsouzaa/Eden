@@ -78,9 +78,11 @@ export function ReleaseSection({
                         </div>
                     </div>
 
-                    <button className="w-full">
-                        <p className="text-end mt-10 font-semibold underline hover:cursor-pointer">Ver todos</p>
-                    </button>
+                    <div className="w-full">
+                        <Link to="/products?type=all" className="block w-full">
+                            <p className="text-end mt-10 font-semibold underline hover:cursor-pointer">Ver todos</p>
+                        </Link>
+                    </div>
 
                     <div>
                         {totalItems > 0 && (
