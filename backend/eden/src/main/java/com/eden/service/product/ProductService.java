@@ -132,6 +132,11 @@ public class ProductService <T>{
         return ProductMapper.toResponseList(products);
     }
 
+    public List<ProductResponse> getAllProductsByModeling(String modeling) {
+        List<Product> products = productRepository.findAllByModelingIgnoreCase(modeling);
+        return ProductMapper.toResponseList(products);
+    }
+
     public List<ProductResponse> getAllProductsBetweenPrice (BigDecimal minPrice, BigDecimal maxPrice){
        List<Product> products = productRepository.findAllByVariantPriceBetween(minPrice, maxPrice);
         return ProductMapper.toResponseList(products);
