@@ -54,23 +54,23 @@ function getPageInfo(searchParams: URLSearchParams) {
         case 'category':
             return {
                 title: categoryLabels[value] ?? value.toUpperCase(),
-                endpoint: `/api/products/category/${value}`,
+                endpoint: `/products/category/${value}`,
             };
         case 'modeling':
             return {
                 title: value || 'Modelagem',
-                endpoint: `/api/products/modeling/${value || 'Oversized'}`,
+                endpoint: `/products/modeling/${value || 'Oversized'}`,
             };
         case 'accessories':
             return {
                 title: 'Acessórios',
-                endpoint: '/api/products/acessories',
+                endpoint: '/products/acessories',
             };
         case 'all':
         default:
             return {
                 title: 'Todos os produtos',
-                endpoint: '/api/products',
+                endpoint: '/products',
             };
     }
 }
@@ -116,7 +116,7 @@ export default function AllProducts() {
                 }
             } catch {
                 try {
-                    const fallbackResponse = await api.get<ProductItem[]>('/api/products');
+                        const fallbackResponse = await api.get<ProductItem[]>('/products');
                     if (isMounted) {
                         setProducts(filterByQuery(fallbackResponse.data, searchParams));
                     }

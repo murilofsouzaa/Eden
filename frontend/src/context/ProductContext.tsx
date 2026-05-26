@@ -52,7 +52,7 @@ export function ProductProvider({children}: ProductProviderProps){
     const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
-            api.get("/api/products")
+            api.get("/products")
             .then((response) => {
                 setProducts(response.data)
             })

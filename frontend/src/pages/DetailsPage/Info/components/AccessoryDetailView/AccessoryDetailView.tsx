@@ -88,16 +88,10 @@ export default function AccessoryDetailView({
                             <span className="text-black/70">Em até</span><span className="font-semibold">12x</span><span className="text-black/70">de</span><span className="font-semibold">R${accessoryInstallmentPrice}</span>
                         </label>
 
-                        <div className="mt-5 ">
+                        <div className="m-5 ">
                             <span className="text-center bg-green-100 text-green-600 text-sm py-2 px-4 rounded-2xl md:w-full lg:w-full">
                                 Frete grátis nas compras acima de R$299
                             </span>
-                        </div>
-
-                        <div className="mt-5 w-full text-sm text-black/70 space-y-1">
-                            <p><span className="font-semibold">Marca:</span> {accessory.brand}</p>
-                            <p><span className="font-semibold">Material:</span> {accessory.material}</p>
-                            <p><span className="font-semibold">Peso:</span> {accessory.weight}g</p>
                         </div>
 
                         <div className="mt-5">
