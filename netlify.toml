@@ -7,8 +7,10 @@
   command = "npm ci && npm run build"
 
 [build.environment]
-  # Example: set Node version if needed
-  NODE_VERSION = "18"
+  # Set Node version to match Vite requirement
+  NODE_VERSION = "20.19.0"
+  # Ensure build uses the frontend folder and publishes the dist output
+  VITE_API_URL = "/api"
 
 [functions]
   directory = "netlify/functions"
