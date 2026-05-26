@@ -31,9 +31,9 @@ export function AccessoriesProvider({children}: AccessoriesProviderProps) {
     const [accessories, setAccessories] = useState<Accessory[]>([]);
 
     useEffect(() => {
-        api.get<Accessory[]>('/acessories')
+        api.get('/acessories')
             .then((response) => {
-                setAccessories(response.data);
+                setAccessories(ensureArray(response.data));
             })
             .catch(() => {
                 setAccessories([]);

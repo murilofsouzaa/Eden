@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import {createContext, useState, useEffect} from 'react'
 import { api } from '../services/api';
+import { ensureArray } from '../services/responseUtils';
 
 export type Product = {
     id: number;
@@ -54,7 +55,7 @@ export function ProductProvider({children}: ProductProviderProps){
     useEffect(() => {
             api.get("/products")
             .then((response) => {
-                setProducts(response.data)
+                setProducts(ensureArray(response.data))
             })
         }, []);
     //Não colocar products na dependência pois o axios.get vai retornar um novo array na memória, o que a dependência

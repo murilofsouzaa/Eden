@@ -112,13 +112,17 @@ export default function AllProducts() {
             try {
                 const response = await api.get<ProductItem[]>(endpoint);
                 if (isMounted) {
-                    setProducts(response.data);
+                    // normalize response to array in case backend/edge returns a wrapper or an error page
+                    const data = response.data as any;
+                    setProducts(Array.isArray(data) ? data : (data?.content ?? []));
                 }
             } catch {
                 try {
                         const fallbackResponse = await api.get<ProductItem[]>('/products');
                     if (isMounted) {
-                        setProducts(filterByQuery(fallbackResponse.data, searchParams));
+                        const fallbackData = fallbackResponse.data as any;
+                        const arr = Array.isArray(fallbackData) ? fallbackData : (fallbackData?.content ?? []);
+                        setProducts(filterByQuery(arr, searchParams));
                     }
                 } catch {
                     if (isMounted) {
