@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import {createContext, useEffect, useState} from 'react';
 import {api} from '../services/api';
+import { ensureArray } from '../services/responseUtils';
 
 export type Accessory = {
     id: number;
