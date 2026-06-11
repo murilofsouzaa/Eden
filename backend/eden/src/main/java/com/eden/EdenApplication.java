@@ -19,16 +19,24 @@ public class EdenApplication {
 	@Bean
 	public ApplicationRunner runner(){
 		return args ->{
-			 Path baseDir = Path.of(System.getProperty("user.dir"))
-                   .getParent()
-                   .getParent();
+			try {
+				Path current = Path.of(System.getProperty("user.dir"));
+				Path parent = current.getParent();
+				Path grandParent = parent != null ? parent.getParent() : null;
 
-			Path clothesDir = baseDir.resolve("frontend")
-                         .resolve("public")
-                         .resolve("clothes");
-
-			System.out.println(baseDir);
-			System.out.println(clothesDir);
+				if (grandParent != null) {
+					Path clothesDir = grandParent.resolve("frontend").resolve("public").resolve("clothes");
+					System.out.println(grandParent);
+					System.out.println(clothesDir);
+				} else {
+					// Running in an environment where the expected parent directories
+					// are not present (for example, inside a container). Skip this
+					// startup-only filesystem check.
+					System.out.println("Base directory not available; skipping filesystem checks.");
+				}
+			} catch (Exception ex) {
+				System.out.println("Exception while computing baseDir: " + ex.getMessage());
+			}
 			 
 		};
 	}
