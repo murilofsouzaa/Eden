@@ -1,4 +1,5 @@
-// Spring Web imports
+package com.eden.config;
+
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,12 +16,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-// Custom project imports (Adjust these package paths to match your project structure)
-
+import com.eden.config.JwtTokenProvider;
+import com.eden.dto.login.JwtAuthenticationResponse;
+import com.eden.dto.login.LoginRequest;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:3000") // Allow React to connect
+@CrossOrigin(origins = "http://localhost:3000") 
 public class AuthController {
 
     @Autowired
@@ -34,8 +36,8 @@ public class AuthController {
         // 1. Authenticate the user
         Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(
-                loginRequest.getUsername(),
-                loginRequest.getPassword()
+                loginRequest.username(),
+                loginRequest.password()
             )
         );
 
