@@ -1,20 +1,60 @@
-import { useState, useEffect} from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import edenLogo from '../../../public/logo/logo.png'
 import { Eye, EyeClosed } from 'lucide-react'
 import { DatePicker, registerLocale } from  "react-datepicker";
 import {ptBR} from 'date-fns/locale/pt-BR';
 import "react-datepicker/dist/react-datepicker.css";
+import { toast } from 'sonner'
+import { api } from '../../services/api'
 
 registerLocale('pt-BR', ptBR);
 
 const SignUpPage = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [birthDate, setBirthDate] = useState<Date | null>(null);
+    const [form, setForm] = useState({ name: '', lastName: '', email: '', password: '' });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
-            document.title = "Cadastro | Eden"
-        }, [window]);
+        document.title = "Cadastro | Eden"
+    }, []);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
+    }
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+
+        if (!birthDate) {
+            toast.error('Escolha sua data de nascimento');
+            setIsSubmitting(false);
+            return;
+        }
+
+        const payload = {
+            name: `${form.name} ${form.lastName}`.trim(),
+            birthDay: birthDate.toISOString().slice(0,10),
+            email: form.email,
+            password: form.password
+        };
+
+        try {
+            await api.post('/users', payload);
+            toast.success('Conta criada com sucesso — faça login.');
+            navigate('/u/login');
+        } catch (err) {
+            const message = typeof err === 'object' && err !== null && 'response' in err
+                ? ((err as { response?: { data?: { message?: string } } }).response?.data?.message ?? 'Erro ao criar conta')
+                : 'Erro de conexão ao criar conta';
+            toast.error(message);
+        } finally {
+            setIsSubmitting(false);
+        }
+    }
 
     return (
         <div className="flex flex-col justify-center items-center min-h-screen p-4">
@@ -28,13 +68,13 @@ const SignUpPage = () => {
                     Crie sua conta fácil e rápido.
                 </p>
 
-                <form className="flex flex-col gap-4 w-full">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
                     <div className="border border-black/10 py-3 px-4 focus-within:border-black transition-colors">
-                        <input type="text" name="name" id="name" placeholder="Nome*" className="outline-0 w-full" />
+                        <input required type="text" name="name" id="name" placeholder="Nome*" className="outline-0 w-full" value={form.name} onChange={handleChange} />
                     </div>
 
                     <div className="border border-black/10 py-3 px-4 focus-within:border-black transition-colors">
-                        <input type="text" name="lastName" id="lastName" placeholder="Sobrenome*" className="outline-0 w-full" />
+                        <input required type="text" name="lastName" id="lastName" placeholder="Sobrenome*" className="outline-0 w-full" value={form.lastName} onChange={handleChange} />
                     </div>
 
                     <div className="border border-black/10 py-3 px-4 focus-within:border-black transition-colors">
@@ -55,15 +95,19 @@ const SignUpPage = () => {
                     </div>
 
                     <div className="border border-black/10 py-3 px-4 focus-within:border-black transition-colors">
-                        <input type="email" name="email" id="email" placeholder="Email*" className="outline-0 w-full" />
+                        <input required type="email" name="email" id="email" placeholder="Email*" className="outline-0 w-full" value={form.email} onChange={handleChange} />
                     </div>
 
                     <div className="flex border border-black/10 focus-within:border-black transition-colors">
                         <input 
+                            required
                             type={showPassword ? "text" : "password"} 
-                            id="password" 
+                            id="password"
+                            name="password"
                             className="outline-0 py-3 px-4 flex-1" 
                             placeholder="Senha*" 
+                            value={form.password}
+                            onChange={handleChange}
                         />
                         <button 
                             type="button" 
@@ -79,9 +123,9 @@ const SignUpPage = () => {
                     </div>
 
                     <div className="flex flex-col justify-center items-center mt-4">
-                        <button type="submit" className="text-md font-bold text-white bg-black rounded-full py-3.5 w-full
-                        cursor-pointer active:scale-[0.97] hover:bg-black/90 transition-all shadow-lg">
-                            CRIAR CONTA
+                        <button type="submit" disabled={isSubmitting} className="text-md font-bold text-white bg-black rounded-full py-3.5 w-full
+                        cursor-pointer active:scale-[0.97] hover:bg-black/90 transition-all shadow-lg disabled:opacity-70">
+                            {isSubmitting ? 'CRIANDO...' : 'CRIAR CONTA'}
                         </button>
                         
                         <p className="text-sm text-black/80 mt-6">

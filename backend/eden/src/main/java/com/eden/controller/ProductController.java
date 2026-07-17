@@ -31,7 +31,7 @@ import jakarta.validation.Valid;
 //Se der erro ele sequer entra no método
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/products")
 public class ProductController {
 
     private final ProductService productService;

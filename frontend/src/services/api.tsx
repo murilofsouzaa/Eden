@@ -1,11 +1,25 @@
 import axios from 'axios';
 
-const apiBaseURL = (import.meta.env.VITE_API_URL ?? '/api').replace(/\/$/, '');
+
+const apiBaseURL = import.meta.env.VITE_API_URL ?? '/api';
 
 const api = axios.create({
-    baseURL: apiBaseURL
-})
+    baseURL: apiBaseURL,
+});
 
-//api.get não aceita somente "localhost:"
+// Interceptor para injetar o token JWT automaticamente em rotas protegidas
+api.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('token');
+        
+        if (token && config.headers) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
 
-export {api} ;
+export { api };

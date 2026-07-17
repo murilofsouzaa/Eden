@@ -1,11 +1,13 @@
 import {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import './Header.css';
 import logoHeader from '../../../public/logo/logo.png';
 import userIcon from '../../../public/icons/user.png';
 import shoppingBag from '../../../public/icons/shopping-bag.png';
 import {Search} from 'lucide-react'
 import {useCart} from '../../context/CartContext'
+import { toast } from 'sonner'
 import SearchTab from './SearchTab/SearchTab'
 import SearchInput from './SearchInput/SearchInput'
 import useProducts from '../../../hooks/useProducts'
@@ -58,6 +60,29 @@ export function Header(){
     const cart = useCart();
     const cartQuantity = cart.totalItems;
     const toggleCart = cart.toggleCart;
+    const navigate = useNavigate();
+
+    const [isLogged, setIsLogged] = useState<boolean>(!!localStorage.getItem('token'));
+
+    useEffect(() => {
+        const onAuth = () => setIsLogged(!!localStorage.getItem('token'));
+        window.addEventListener('authChanged', onAuth);
+        window.addEventListener('storage', onAuth);
+        return () => {
+            window.removeEventListener('authChanged', onAuth);
+            window.removeEventListener('storage', onAuth);
+        };
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        setIsLogged(false);
+        void cart.fetchCart();
+        toast.success('Desconectado');
+        navigate('/');
+        // notify other components
+        window.dispatchEvent(new Event('authChanged'));
+    }
 
     const products = useProducts();
 
@@ -85,11 +110,15 @@ export function Header(){
                         </div>
                         <div className="flex justify-between items-center gap-3">
                             <div className="flex gap-3">
-                                <Link to="/u/login">
-                                    <div className="hover:-translate-y-2.5 ease-in-out duration-300 py-5 w-full hover:cursor-pointer">
-                                        <img src={userIcon} alt="user-icon" className="h-10 w-auto object-contain"></img>
-                                    </div>
-                                </Link>
+                                {isLogged ? (
+                                    <button onClick={handleLogout} className="hover:-translate-y-2.5 ease-in-out duration-300 py-5 w-full hover:cursor-pointer text-sm font-bold">Sair</button>
+                                ) : (
+                                    <Link to="/u/login">
+                                        <div className="hover:-translate-y-2.5 ease-in-out duration-300 py-5 w-full hover:cursor-pointer">
+                                            <img src={userIcon} alt="user-icon" className="h-10 w-auto object-contain"></img>
+                                        </div>
+                                    </Link>
+                                )}
                                 <button onClick={toggleCart} className="relative cursor-pointer py-5 w-full hover:-translate-y-2.5 ease-in-out duration-300">
                                     <img src={shoppingBag} alt="shopping-bag-icon" className="h-6 w-auto object-contain"></img>
                                     <div className="absolute flex justify-center items-center top-4 left-3 text-[11px] rounded-[50%] w-4.5 h-4.5 p-2.5 bg-blue-200">
@@ -115,11 +144,15 @@ export function Header(){
                         <div className="flex items-center justify-self-end gap-4">
                             <SearchInput toggleSearch={toggleSearch}></SearchInput>
                             <div className="flex items-center gap-3">
-                                <Link to="/u/login">
-                                    <div className="hover:-translate-y-2.5 ease-in-out duration-300 py-5 w-full hover:cursor-pointer">
-                                        <img src={userIcon} alt="user-icon" className="h-10 w-auto object-contain"></img>
-                                    </div>
-                                </Link>
+                                {isLogged ? (
+                                    <button onClick={handleLogout} className="hover:-translate-y-2.5 ease-in-out duration-300 py-5 w-full hover:cursor-pointer text-sm font-bold">Sair</button>
+                                ) : (
+                                    <Link to="/u/login">
+                                        <div className="hover:-translate-y-2.5 ease-in-out duration-300 py-5 w-full hover:cursor-pointer">
+                                            <img src={userIcon} alt="user-icon" className="h-10 w-auto object-contain"></img>
+                                        </div>
+                                    </Link>
+                                )}
                                 <button onClick={toggleCart} className="relative cursor-pointer py-5 w-full hover:-translate-y-2.5 ease-in-out duration-300">
                                     <img src={shoppingBag} alt="shopping-bag-icon" className="h-6 w-auto object-contain"></img>
                                     <div className="absolute flex justify-center items-center top-4 left-3 text-[11px] rounded-[50%] w-4.5 h-4.5 p-2.5 bg-blue-200">

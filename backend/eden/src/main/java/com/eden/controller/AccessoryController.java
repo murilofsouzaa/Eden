@@ -11,7 +11,7 @@ import com.eden.dto.accessory.AccessoryResponse;
 import com.eden.service.accessory.AccessoryService;
 
 @RestController
-@RequestMapping("/acessories")
+@RequestMapping("/api/acessories")
 public class AccessoryController {
 
     private final AccessoryService accessoryService;

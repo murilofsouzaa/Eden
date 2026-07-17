@@ -11,7 +11,7 @@ import com.eden.dto.product.BundleResponse;
 import com.eden.service.product.BundleService;
 
 @RestController
-@RequestMapping("/bundles")
+@RequestMapping("/api/bundles")
 public class BundleController {
 
     private final BundleService bundleService;

@@ -11,7 +11,10 @@ import com.eden.dto.user.UpdateUserRequest;
 import com.eden.dto.user.UserResponse;
 import com.eden.mapper.UserMapper;
 import com.eden.model.shopping_cart.ShoppingCart;
+import com.eden.model.user.Gender;
 import com.eden.model.user.User;
+import com.eden.model.user.UserRole;
+import com.eden.model.user.UserStatus;
 import com.eden.repository.UserRepository;
 import com.eden.service.cart.ShoppingCartService;
 
@@ -20,10 +23,13 @@ public class UserService {
 
     final private UserRepository userRepository;
     final private ShoppingCartService shoppingCartService;
+    final private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, @Lazy ShoppingCartService shoppingCartService){
+    public UserService(UserRepository userRepository, @Lazy ShoppingCartService shoppingCartService,
+                       org.springframework.security.crypto.password.PasswordEncoder passwordEncoder){
         this.userRepository = userRepository;
         this.shoppingCartService = shoppingCartService;
+        this.passwordEncoder = passwordEncoder;
     }
        
 
@@ -32,10 +38,13 @@ public class UserService {
         User newUser = new User();
         newUser.setName(userRequest.name());
         newUser.setEmail(userRequest.email());
-        newUser.setGender(userRequest.gender());
+        newUser.setGender(userRequest.gender() != null ? userRequest.gender() : Gender.OTHER);
         newUser.setBirthDay(userRequest.birthDay());
-        newUser.setPassword(userRequest.password());
-        newUser.setRole(userRequest.role());
+        // Encode the password before saving so Spring Security can authenticate correctly
+        String encoded = passwordEncoder.encode(userRequest.password());
+        newUser.setPassword(encoded);
+        newUser.setRole(userRequest.role() != null ? userRequest.role() : UserRole.USER);
+        newUser.setStatus(UserStatus.ACTIVE);
         newUser.setCreatedAt(LocalDateTime.now());
         
         userRepository.save(newUser);
