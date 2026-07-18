@@ -52,12 +52,25 @@ public class SecurityConfig {
             .cors(Customizer.withDefaults())
             
             .authorizeHttpRequests(auth -> auth
+            .requestMatchers(
+                // Rotas de produtos (com e sem /api, com e sem sub-rotas)
+                "/products", "/products/**", 
+                "/api/products", "/api/products/**",
+                
+                // Rotas de acessórios (com e sem /api, cobrindo erros de digitação c vs cc)
+                "/acessories", "/acessories/**", 
+                "/api/acessories", "/api/acessories/**",
+                "/accessories", "/accessories/**", 
+                "/api/accessories/**",
+                
+                // Autenticação e usuários
+                "/api/auth/**", 
+                "/api/users", "/api/users/**"
+            ).permitAll()
             
-                .requestMatchers("/products/**").permitAll()
-                .requestMatchers("/acessories/**").permitAll()      
-                .requestMatchers("/api/auth/**", "/api/products/**", "/api/acessories/**", "/api/users", "/api/users/**").permitAll()
-                .anyRequest().authenticated()
-            )
+            // Qualquer outra rota exige token
+            .anyRequest().authenticated()
+        )
             
             // Tell Spring not to create HTTP sessions (we are stateless)
             .sessionManagement(session -> session
