@@ -77,7 +77,7 @@ mvn install
 ```
 ### Running Frontend (React)
 ```
-cd src/frontend
+cd frontend
 npm install
 npm run dev
 ```

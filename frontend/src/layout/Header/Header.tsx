@@ -80,7 +80,6 @@ export function Header(){
         void cart.fetchCart();
         toast.success('Desconectado');
         navigate('/');
-        // notify other components
         window.dispatchEvent(new Event('authChanged'));
     }
 
@@ -111,7 +110,7 @@ export function Header(){
                         <div className="flex justify-between items-center gap-3">
                             <div className="flex gap-3">
                                 {isLogged ? (
-                                    <button onClick={handleLogout} className="hover:-translate-y-2.5 ease-in-out duration-300 py-5 w-full hover:cursor-pointer text-sm font-bold">Sair</button>
+                                    <button onClick={handleLogout} className="py-5 w-full hover:cursor-pointer text-sm font-normal">Sair</button>
                                 ) : (
                                     <Link to="/u/login">
                                         <div className="hover:-translate-y-2.5 ease-in-out duration-300 py-5 w-full hover:cursor-pointer">
@@ -145,7 +144,7 @@ export function Header(){
                             <SearchInput toggleSearch={toggleSearch}></SearchInput>
                             <div className="flex items-center gap-3">
                                 {isLogged ? (
-                                    <button onClick={handleLogout} className="hover:-translate-y-2.5 ease-in-out duration-300 py-5 w-full hover:cursor-pointer text-sm font-bold">Sair</button>
+                                    <button onClick={handleLogout} className="py-5 w-full hover:cursor-pointer text-sm font-normal">Sair</button>
                                 ) : (
                                     <Link to="/u/login">
                                         <div className="hover:-translate-y-2.5 ease-in-out duration-300 py-5 w-full hover:cursor-pointer">
