@@ -20,7 +20,7 @@ import com.eden.dto.login.LoginRequest;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:4173", "http://localhost:3000"}) 
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:4173", "http://localhost:3000", "https://edenclothing.vercel.app"}) 
 public class AuthController {
 
     @Autowired

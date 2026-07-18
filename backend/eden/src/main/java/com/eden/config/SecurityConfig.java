@@ -72,6 +72,7 @@ public class SecurityConfig {
         configuration.addAllowedOrigin("http://localhost:5173");
         configuration.addAllowedOrigin("http://localhost:4173");
         configuration.addAllowedOrigin("http://localhost:3000");
+        configuration.addAllowedOrigin("https://edenclothing.vercel.app");
         configuration.addAllowedMethod("GET");
         configuration.addAllowedMethod("POST");
         configuration.addAllowedMethod("PUT");
