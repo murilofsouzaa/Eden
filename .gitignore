@@ -27,3 +27,9 @@ build/
 
 # Logs
 *.log
+
+# Environment files
+.env
+frontend/.env
+frontend/.env.*
+
