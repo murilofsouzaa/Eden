@@ -39,6 +39,10 @@ export function Cart() {
                             {cartProducts && cartProducts.length > 0 ? (
                                 cartProducts.map((item: CartItem) => {
                                     const {product, quantity, size, unitPrice} = item;
+                                    if (!product) {
+                                        return null;
+                                    }
+
                                     const hasDiscount = product.discountPercentage > 0;
                                     const originalUnitPrice = hasDiscount
                                         ? unitPrice / (1 - (product.discountPercentage / 100))
