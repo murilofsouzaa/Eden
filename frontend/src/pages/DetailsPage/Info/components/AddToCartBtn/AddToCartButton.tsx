@@ -12,7 +12,7 @@ const AddToCartButton = ({isOutOfStock, selectedProduct, selectedSize}:AddToCart
     const {addItemCart} = useCart();
     return ( 
         <button
-            className={`text-white text-sm font-bold bg-black p-4 w-100 
+            className={`text-white text-sm font-bold bg-black p-4 w-70 
             hover:cursor-pointer
             transition-all duration-300 active:scale-[0.96]`}
             disabled={isOutOfStock}
