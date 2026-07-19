@@ -22,7 +22,7 @@ export function Main({ products }: MainProps) {
     const promoCarousel = useCarousel({ totalItems: displayedOversizedProducts.length });
 
         return(
-		<div className="mx-4 mt-10 mb-10 lg:m-16">
+		<div className="mx-4 mt-10 mb-10 overflow-x-hidden lg:m-16">
             <section className="mt-20">
                 <h2 className="text-center text-6xl font-bold mb-6">NOVIDADES</h2>
                 <h3 className="text-center mb-6">A <span className="font-semibold">versatilidade</span> do lifestyle <span className="font-semibold">californiano</span> unida à tecnologia de ponta: conheça o caimento que redefiniu o conceito de essencial.</h3>
@@ -63,7 +63,7 @@ export function Main({ products }: MainProps) {
                 <AcessoriesSection />
             </section>
 
-            <section className="overflow-hidden mt-20 flex justify-center items-center">
+            <section className="mt-20 flex w-full items-center justify-center overflow-x-hidden">
                 <Newsletter></Newsletter>
             </section>
 

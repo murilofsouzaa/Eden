@@ -20,6 +20,8 @@ import com.eden.service.cart.ShoppingCartService;
 
 import jakarta.validation.Valid;
 
+@CrossOrigin(origins = {"https://edenclothing.vercel.app", "https://eden-927f-hidbs269m-murilofsouzaas-projects.vercel.app"})
+
 @RestController
 @RequestMapping("/api/cart")
 public class ShoppingCartController {

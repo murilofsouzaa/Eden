@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.eden.dto.product.BundleResponse;
 import com.eden.service.product.BundleService;
 
+@CrossOrigin(origins = {"https://edenclothing.vercel.app", "https://eden-927f-hidbs269m-murilofsouzaas-projects.vercel.app"})
+
 @RestController
 @RequestMapping("/api/bundles")
 public class BundleController {

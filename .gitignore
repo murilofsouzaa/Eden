@@ -1,7 +1,5 @@
 # Images
-frontend/public/clothes/
-frontend/src/assets/clothes/
-backend/eden/src/main/resources/static/clothes/
+
 
 # Compiled files
 target/

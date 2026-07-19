@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.eden.dto.accessory.AccessoryResponse;
 import com.eden.service.accessory.AccessoryService;
 
+@CrossOrigin(origins = {"https://edenclothing.vercel.app", "https://eden-927f-hidbs269m-murilofsouzaas-projects.vercel.app"})
+
 @RestController
 @RequestMapping("/api/acessories")
 public class AccessoryController {

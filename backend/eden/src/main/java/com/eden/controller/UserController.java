@@ -19,6 +19,8 @@ import com.eden.dto.user.UserResponse;
 import com.eden.model.user.User;
 import com.eden.service.user.UserService;
 
+@CrossOrigin(origins = {"https://edenclothing.vercel.app", "https://eden-927f-hidbs269m-murilofsouzaas-projects.vercel.app"})
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {

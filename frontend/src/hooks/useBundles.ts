@@ -2,11 +2,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { api } from '../services/api';
 import type { Product } from '../context/ProductContext';
 
-//TODO DIVIDA TECNICA
-
 export type Bundle = {
-    id: number;
-    name: string;
+    id: number
+    name: string
 };
 
 export interface UseBundlesReturn {

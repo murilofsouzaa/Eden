@@ -30,6 +30,8 @@ import jakarta.validation.Valid;
 //O @Valid dispara a validação
 //Se der erro ele sequer entra no método
 
+@CrossOrigin(origins = {"https://edenclothing.vercel.app", "https://eden-927f-hidbs269m-murilofsouzaas-projects.vercel.app"})
+
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
