@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import {Link} from 'react-router-dom'
 import {useNavigate} from 'react-router-dom'
 import './Header.css';
@@ -23,6 +23,8 @@ export function Header(){
     const [currentIndex, setCurrentIndex] = useState<number>(0);  
     const [showSlider, setShowSlider] = useState<boolean>(true);
     const [isSearchActive, setIsSearchActive] = useState<boolean>(false);
+    const lastScrollYRef = useRef<number>(0);
+    const tickingRef = useRef<boolean>(false);
 
     const hideSliderAt = 40;
     const showSliderAt = 12;
@@ -44,18 +46,32 @@ export function Header(){
         const handleScroll = () => {
             const scrollY = window.scrollY;
 
-            setShowSlider((current) => {
-                if (scrollY > hideSliderAt) return false;
-                if (scrollY < showSliderAt) return true;
-                return current;
-            });
+            if (scrollY > hideSliderAt && showSlider) {
+                setShowSlider(false);
+            }
+
+            if (scrollY < showSliderAt && !showSlider) {
+                setShowSlider(true);
+            }
+
+            lastScrollYRef.current = scrollY;
+            tickingRef.current = false;
         };
 
         handleScroll();
-        window.addEventListener('scroll', handleScroll, { passive: true });
+        const onScroll = () => {
+            if (tickingRef.current) {
+                return;
+            }
 
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+            tickingRef.current = true;
+            window.requestAnimationFrame(handleScroll);
+        };
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        return () => window.removeEventListener('scroll', onScroll);
+    }, [showSlider]);
 
     const cart = useCart();
     const cartQuantity = cart.totalItems;
@@ -98,16 +114,16 @@ export function Header(){
                 <nav className="flex flex-col justify-center items-center m-2 mx-5
                     md:m-0 md:mx-10
                     lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-4 lg:mx-14">
-                    <div className="flex items-center justify-between gap-4 w-full lg:hidden">
-                        <div className="flex justify-start gap-3">
+                    <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center gap-4 lg:hidden">
+                        <div className="flex justify-start gap-3 justify-self-start">
                             <button onClick={toggleSearch} className="flex justify-center items-center">
                                 <Search className="h-6 text-[#242424]"></Search>
                             </button>
                         </div>
-                        <div className="flex justify-center">
+                        <div className="justify-self-center">
                             <Link to="/"><img src={logoHeader} alt="eden-logo-header" className="w-13 h-13" /></Link>
                         </div>
-                        <div className="flex justify-between items-center gap-3">
+                        <div className="flex justify-end items-center gap-3 justify-self-end">
                             <div className="flex gap-3">
                                 {isLogged ? (
                                     <button onClick={handleLogout} className="py-5 w-full hover:cursor-pointer text-sm font-normal">Sair</button>
