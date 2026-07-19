@@ -34,7 +34,7 @@ export function AcessoriesSection() {
 
     return (
         <section className="mt-20">
-            <h2 className="text-center text-6xl font-bold mb-3">Acessórios</h2>
+            <h2 className="text-center text-5xl font-bold mb-3">Acessórios</h2>
             <h3 className="text-center mb-6">
                 Os detalhes que completam o visual com a mesma curadoria dos nossos demais produtos.
             </h3>
