@@ -22,7 +22,7 @@ export function Main({ products }: MainProps) {
     const promoCarousel = useCarousel({ totalItems: displayedOversizedProducts.length });
 
         return(
-		<div className="mx-4 mt-10 mb-10 overflow-x-hidden lg:m-16">
+		<div className=" mt-10 mb-10 overflow-x-hidden lg:m-6">
             <section className="mt-20">
                 <h2 className="text-center text-6xl font-bold mb-6">NOVIDADES</h2>
                 <h3 className="text-center mb-6">A <span className="font-semibold">versatilidade</span> do lifestyle <span className="font-semibold">californiano</span> unida à tecnologia de ponta: conheça o caimento que redefiniu o conceito de essencial.</h3>
@@ -36,7 +36,7 @@ export function Main({ products }: MainProps) {
                 />
             </section>
 
-            <section className="mt-20">
+            <section className="mt-20 mx-4">
                 <h2 className="text-center text-6xl font-bold mb-3">OVERSIZED</h2>
                 <h3 className="text-center mb-6">Tecidos de <span className="font-semibold">alto padrão</span>, corte impecável e a essência pioneira que <span className="font-semibold">transformou</span> o cenário Oversized no fitness nacional.</h3>
                 <FilteredProducts
@@ -50,20 +50,21 @@ export function Main({ products }: MainProps) {
                 ></FilteredProducts>
             </section>
             
-            <section className="mt-20">
+            <section className="mt-20 mx-4">
                 <CategorySection />
             </section>
 
 
-            <section className="mt-20 -mx-4 lg:-mx-16">
+
+            <section className="mt-20 w-screen mx-0">
                 <VideoSection />
             </section>
 
-            <section>
+            <section className="mx-4">
                 <AcessoriesSection />
             </section>
 
-            <section className="mt-20 flex w-full items-center justify-center overflow-x-hidden">
+            <section className="mt-20 px-4 flex w-full items-center justify-center overflow-x-hidden">
                 <Newsletter></Newsletter>
             </section>
 
