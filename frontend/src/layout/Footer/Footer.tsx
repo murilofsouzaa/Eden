@@ -40,7 +40,7 @@ export function Footer(){
                     </div>
                     <div>
                         <p className="text-white">Este projeto utiliza imagens de terceiros, podendo estar protegidas por direitos autorais. Não reivindico qualquer direito sobre elas e, caso haja solicitação, removo imediatamente.</p>
-                        <p className="text-white mt-4" >O site está com o backend hospedado em uma plataforma de terceiros de maneira gratuita, por isso a demora ao carregar as imagens.</p>
+                        <p className="text-white mt-4" >O site está com o backend hospedado em uma plataforma de terceiros de maneira gratuita, por isso a demora ao carregar as produtos.</p>
                     </div>
                     <div>
                         <h2 className="font-bold text-white">Desenvolvido por Murilo Freitas de Souza</h2>
