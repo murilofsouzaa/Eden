@@ -48,6 +48,7 @@ export function Footer(){
                             <li><a href="https://www.instagram.com/murilofsouza_/" target="on_blank"><img src={instagramIconWhite} alt="instagram-icon" className="footer-icon"/></a></li>
                             <li><a href="https://www.linkedin.com/in/murilofsouzaa/?locale=en_US" target="on_blank"><img src={linkedinIconWhite} alt="linkedin-icon" className="footer-icon"/></a></li>
                         </ul>
+                        <h1>CAIO GAy</h1>
                     </div>
                 </div>
             </div>
