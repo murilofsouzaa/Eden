@@ -3,7 +3,7 @@ name: Deploy na VPS
 on:
   push:
     branches:
-      - main # Dispara o deploy sempre que houver push na branch main
+      - production
 
 jobs:
   deploy:
@@ -22,13 +22,13 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           script: |
             # Entra no diretório do projeto na VPS
-            cd ~/projects/eden
+            cd ~/projects/eden-staging
 
             # Baixa as alterações do repositório
-            git pull origin main
+            git pull origin production
 
             # Força o rebuild do frontend sem reaproveitar cache antigo do Docker
-            docker compose build --no-cache eden-frontend
+            docker compose build --no-cache homolog-frontend
 
             # Recompila os serviços e sobe os containers atualizados
             docker compose up -d --build
