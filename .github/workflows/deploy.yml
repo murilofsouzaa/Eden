@@ -3,7 +3,7 @@ name: Deploy na VPS
 on:
   push:
     branches:
-      - main # Dispara o deploy sempre que houver push na branch main
+      - main
 
 jobs:
   deploy:
