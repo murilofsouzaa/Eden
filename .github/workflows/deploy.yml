@@ -3,7 +3,7 @@ name: Deploy na VPS
 on:
   push:
     branches:
-      - production # Dispara o deploy sempre que houver push na branch main
+      - main # Dispara o deploy sempre que houver push na branch main
 
 jobs:
   deploy:
@@ -25,7 +25,7 @@ jobs:
             cd ~/projects/eden-staging
 
             # Baixa as alterações do repositório
-            git pull origin production
+            git pull origin main
 
             # Força o rebuild do frontend sem reaproveitar cache antigo do Docker
             docker compose build --no-cache homolog-frontend
