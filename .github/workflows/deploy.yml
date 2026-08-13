@@ -28,7 +28,7 @@ jobs:
             git pull origin production
 
             # Força o rebuild do frontend sem reaproveitar cache antigo do Docker
-            docker compose build --no-cache eden-frontend
+            docker compose build --no-cache homolog-frontend
 
             # Recompila os serviços e sobe os containers atualizados
             docker compose up -d --build
