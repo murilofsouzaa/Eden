@@ -4,7 +4,6 @@ import PriceOffLabel from '../../../../../components/ui/PriceOffLabel';
 import SizeButtons from '../SizeButtons/SizeButtons';
 import Description from '../Description/Description';
 import AddToCartButton from '../AddToCartBtn/AddToCartButton';
-import PromotionsGreenLabel from '../PromotionsGreenLabel/PromotionsGreenLabel';
 import ProductDetails from '../ProductDetails/ProductDetails';
 import DetailSuggestions, {type CarouselControls} from '../DetailSuggestions/DetailSuggestions';
 import type {SuggestionItem} from '../ProductSuggestion/ProductSuggestion';

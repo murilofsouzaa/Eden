@@ -6,8 +6,8 @@ import edenLogo from '../../../public/logo/logo-inverted-removebg.png'
 
 export function Footer(){
     return (
-        <div className="bg-black">
-            <div className="flex flex-col gap-10 px-6 py-10 lg:flex-row lg:justify-center lg:items-center">
+        <div className="bg-black ">
+            <div className="flex flex-col gap-10 px-6 py-10 lg:flex-row lg:justify-center lg:items-center lg:py-40 lg:px-30">
                 <div className="flex gap-10 lg:flex-row lg:w-full lg:h-full lg:gap-20 lg:ml-10">
                     <div>
                         <h2 className="footer-h2">Coisas Chatas</h2>
@@ -29,7 +29,7 @@ export function Footer(){
                 </div>
 
 
-                <div className="flex flex-col items-start gap-6 lg:items-start lg:w-auto lg:m-20">
+                <div className="flex flex-col items-start gap-6 lg:items-start lg:w-auto">
                     <div>
                         <h2 className="footer-h2">Atendimento</h2>
                         <ul className="footer-info lg:flex lg:flex-col lg:gap-0.5 lg:mt-1">

@@ -2,7 +2,7 @@ const edenLogo = '/logo/logo-inverted-removebg.png';
 
 export function Newsletter() {
     return(
-        <div className="mx-auto flex w-full min-w-0 max-w-4xl flex-col items-center justify-center gap-5 rounded-2xl bg-black/90 px-6 py-12 text-white sm:px-10 sm:py-14 md:px-14 lg:px-16">
+        <div className="mx-auto flex w-full min-w-0 max-w-4xl flex-col items-center justify-center gap-5 rounded-2xl bg-black/95 px-6 py-12 mb-10 text-white sm:px-10 sm:py-14 md:px-14 lg:px-32 ">
             <div className="flex justify-center">
                 <img src={edenLogo} className="w-auto h-20"></img>
             </div>

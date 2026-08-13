@@ -22,8 +22,8 @@ export function Main({ products }: MainProps) {
     const promoCarousel = useCarousel({ totalItems: displayedOversizedProducts.length });
 
         return(
-		<div className=" mt-10 mb-10 overflow-x-hidden ">
-            <section className="mt-20 mx-4 lg:mx-10">
+		<div className="mt-10 mb-10 overflow-x-hidden ">
+            <section className="mt-20 mx-4 lg:mx-30 ">
                 <h2 className="text-center text-9xl font-bold mb-6">NOVIDADES</h2>
                 <h3 className="text-center mb-6">A <span className="font-semibold">versatilidade</span> do lifestyle <span className="font-semibold">californiano</span> unida à tecnologia de ponta: conheça o caimento que redefiniu o conceito de essencial.</h3>
                 <ReleaseSection
@@ -36,7 +36,7 @@ export function Main({ products }: MainProps) {
                 />
             </section>
 
-            <section className="mt-20 mx-4 lg:mx-10">
+            <section className="mt-20 mx-4 lg:mx-30 ">
                 <h2 className="text-center text-7xl font-bold mb-3">OVERSIZED</h2>
                 <h3 className="text-center mb-6">Tecidos de <span className="font-semibold">alto padrão</span>, corte impecável e a essência pioneira que <span className="font-semibold">transformou</span> o cenário Oversized no fitness nacional.</h3>
                 <FilteredProducts
@@ -50,7 +50,7 @@ export function Main({ products }: MainProps) {
                 ></FilteredProducts>
             </section>
             
-            <section className="mt-20 mx-4 lg:mx-10">
+            <section className="mt-20 mx-4 lg:mx-30 ">
                 <CategorySection />
             </section>
 
@@ -60,7 +60,7 @@ export function Main({ products }: MainProps) {
                 <VideoSection />
             </section>
 
-            <section className="mx-4 lg:mx-10">
+            <section className="mx-4 lg:mx-30 ">
                 <AcessoriesSection />
             </section>
 
