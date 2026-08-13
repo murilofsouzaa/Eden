@@ -225,3 +225,95 @@ The Eden production setup consists of:
 - Automated deployment via GitHub Actions
 
 This architecture provides a reliable, stable, and production-ready foundation for a real web application.
+
+## CI/CD with GitHub Actions
+
+This repository uses GitHub Actions for continuous integration (CI) and continuous deployment (CD). The typical setup includes separate workflows for:
+
+- CI (build & test) for backend and frontend on pull requests and pushes.
+- CD (deploy) to the VPS on pushes to the main branch (already present in this file above).
+
+Suggested CI workflow examples (create under `.github/workflows/`):
+
+1) Backend CI - `.github/workflows/ci-backend.yml`
+
+```yaml
+name: CI - Backend
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+      - name: Build and test
+        run: |
+          cd backend/eden
+          mvn -B -DskipTests=false clean test
+
+      - name: Package
+        if: success()
+        run: |
+          cd backend/eden
+          mvn -B -DskipTests=true package
+```
+
+2) Frontend CI - `.github/workflows/ci-frontend.yml`
+
+```yaml
+name: CI - Frontend
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm ci
+      - name: Run tests
+        run: |
+          cd frontend
+          npm run test -- --watchAll=false
+      - name: Build
+        run: |
+          cd frontend
+          npm run build
+```
+
+Notes and best practices
+- Store sensitive values and deployment credentials in GitHub Secrets (for example: `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`, `VPS_PORT`).
+- Use protected branches (e.g., `main`) and require that CI checks pass before merging.
+- Add status badges to the `README.md` once workflows are created to show build status. Example badge URL:
+
+  - Backend CI badge:
+    `https://github.com/<owner>/<repo>/actions/workflows/ci-backend.yml/badge.svg`
+  - Frontend CI badge:
+    `https://github.com/<owner>/<repo>/actions/workflows/ci-frontend.yml/badge.svg`
+
+- For deployment, the existing `Deploy to VPS` workflow connects via SSH; ensure the SSH key in `VPS_SSH_KEY` has the correct permissions and the VPS user can run `docker compose`.
+
+If you want, I can add the workflow files under `.github/workflows/` and create status badges in this README — tell me if you want me to create those files now.

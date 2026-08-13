@@ -38,13 +38,13 @@ export default function ProductDetailView({
 }: ProductDetailViewProps) {
     return (
         <>
-            <div className="overflow-x-hidden p-5 lg:grid lg:grid-cols-4 lg:col-start-2 lg:p-5 lg:flex-row">
+            <div className="overflow-x-hidden mb-10 p-5 lg:grid lg:grid-cols-4 lg:col-start-2 lg:p-5 lg:flex-row">
                 <div className="col-start-2">
                     <div className="flex justify-center items-center">
                         <img
                             src={product.imageUrl}
                             alt={product.title}
-                            className="w-full object-cover sm:w-auto sm:h-100 md:w-auto md:h-140 lg:w-auto lg:h-195 xl:w-auto xl:h-220"
+                            className="w-full object-cover rounded-2xl sm:w-auto sm:h-100 md:w-auto md:h-140 lg:w-auto lg:h-195 xl:w-auto xl:h-220"
                         />
                     </div>
                 </div>
@@ -60,7 +60,7 @@ export default function ProductDetailView({
                                     <PriceOffLabel defaultVariant={defaultVariant} selectedProduct={product} />
                                 </div>
                             )}
-                            <label className="text-3xl text-black font-semibold">R$ {discountedPrice.toString().replace('.', ',')}</label>
+                            <label className="text-3xl rounded-sm mt-2 font-semibold">R$ {discountedPrice.toString().replace('.', ',')}</label>
                         </div>
 
                         <label className="text-[15px] flex gap-2 mt-1">
@@ -88,10 +88,6 @@ export default function ProductDetailView({
                         <Description selectedProduct={product} />
                         <ProductDetails selectedProduct={product} />
                     </div>
-                </div>
-
-                <div className="mt-3 row-start-2 col-start-2">
-                    <PromotionsGreenLabel />
                 </div>
             </div>
 
