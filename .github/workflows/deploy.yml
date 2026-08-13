@@ -10,9 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do Código
-        uses: actions/checkout@v4
-
       - name: Executar Deploy via SSH na VPS
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -21,20 +18,27 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT }}
           script: |
-            # Entra no diretório do projeto na VPS
+            set -e
+
             cd ~/projects/eden-staging
 
-            # Baixa as alterações do repositório
-            git pull origin main
+            echo "===== GIT ====="
+            git fetch origin main
+            git reset --hard origin/main
+            git log -1 --oneline
 
-            # Força o rebuild do frontend sem reaproveitar cache antigo do Docker
+            echo "===== BUILD FRONTEND ====="
             docker compose build --no-cache frontend
 
-            # Recompila os serviços e sobe os containers atualizados
-            docker compose up -d --build
+            echo "===== SUBINDO FRONTEND ====="
+            docker compose up -d --force-recreate frontend
 
-            # Limpa imagens antigas/sem tag para liberar espaço
+            echo "===== IMAGEM ====="
+            docker compose images frontend
+
+            echo "===== CONTAINER ====="
+            docker compose ps frontend
+
+            echo "===== LIMPEZA ====="
             docker image prune -f
-            
-            # Limpa o cache acumulado pelo --no-cache (o verdadeiro vilão dos 16 GB)
             docker builder prune -af
