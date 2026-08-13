@@ -42,7 +42,7 @@ export function Footer(){
                         <p className="text-white">Este projeto utiliza imagens de terceiros, podendo estar protegidas por direitos autorais. Não reivindico qualquer direito sobre elas e, caso haja solicitação, removo imediatamente.</p>
                     </div>
                     <div>
-                        <h2 className="font-bold text-white">Desenvolvido por Murilo Freitas de Souza</h2>
+                        <h2 className="font-bold text-white">Desenvolvido por Murilo Freitas de Souzafsdsd</h2>
                         <ul className="flex gap-4 mt-2">
                             <li><a href="https://github.com/murilofsouzaa" target="on_blank"><img src={githubIconWhite} alt="email-icon" className="footer-icon"/></a></li>
                             <li><a href="https://www.instagram.com/murilofsouza_/" target="on_blank"><img src={instagramIconWhite} alt="instagram-icon" className="footer-icon"/></a></li>
