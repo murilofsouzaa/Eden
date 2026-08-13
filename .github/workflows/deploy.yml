@@ -22,7 +22,7 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           script: |
             # Entra no diretório do projeto na VPS
-            cd ~/projects/eden-staging
+            cd ~/projects/eden
 
             # Baixa as alterações do repositório
             git pull origin production
