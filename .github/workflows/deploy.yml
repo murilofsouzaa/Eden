@@ -35,3 +35,6 @@ jobs:
 
             # Limpa imagens antigas/sem tag para liberar espaço
             docker image prune -f
+            
+            # Limpa o cache acumulado pelo --no-cache (o verdadeiro vilão dos 16 GB)
+            docker builder prune -af
