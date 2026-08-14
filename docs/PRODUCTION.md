@@ -17,7 +17,7 @@ O fluxo de execução em produção consiste em:
 1. O backend fica acessível internamente na porta `8080`.
 2. O frontend é compilado em build estático e servido por NGINX dentro do container na porta `8080`.
 3. O NGINX do host (servidor da VPS) recebe tráfego seguro nas portas `80` e `443` (HTTPS).
-4. O NGINX do host encaminha as requisições do frontend para `127.0.0.1:3000`.
+4. O NGINX do host encaminha as requisições do frontend para a porta publicada do serviço frontend no host, normalmente `127.0.0.1:3000`.
 5. O frontend consome a API do backend através das rotas `/api`.
 
 Esse modelo separa a aplicação web do servidor de entrada, permitindo:
@@ -36,7 +36,7 @@ server {
     server_name seu-dominio.com.br;
 
     location / {
-        proxy_pass [http://127.0.0.1:3000](http://127.0.0.1:3000);
+        proxy_pass http://127.0.0.1:3000;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';

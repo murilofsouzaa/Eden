@@ -1,7 +1,6 @@
 services:
   db:
     image: postgres:16-alpine
-    container_name: homolog-eden-db
     restart: unless-stopped
     env_file:
       - .env
@@ -12,13 +11,12 @@ services:
     volumes:
       - eden_db_data:/var/lib/postgresql/data
     ports:
-      - "5433:5432"
+      - "${DB_HOST_PORT:-5433}:5432"
 
   backend:
     build:
       context: ./backend/eden
       dockerfile: Dockerfile
-    container_name: homolog-backend
     restart: unless-stopped
     depends_on:
       - db
@@ -32,11 +30,7 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       JWT_EXPIRATION_MS: ${JWT_EXPIRATION_MS:-3600000}
     ports:
-      - "8081:8080"
-    networks:
-      default:
-        aliases:
-          - homolog-backend
+      - "${BACKEND_HOST_PORT:-8081}:8080"
 
   frontend:
     build:
@@ -44,12 +38,11 @@ services:
       dockerfile: Dockerfile
       args:
         VITE_API_URL: /api
-    container_name: homolog-frontend
     restart: unless-stopped
     depends_on:
       - backend
     ports:
-      - "3001:8080"
+      - "${FRONTEND_HOST_PORT:-3000}:8080"
 
 volumes:
   eden_db_data:

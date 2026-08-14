@@ -191,20 +191,30 @@ jobs:
 
       - name: Execute Deploy via SSH on VPS
         uses: appleboy/ssh-action@v1.0.3
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT }}
+          envs: BRANCH_NAME
           script: |
+            set -euo pipefail
+
             cd ~/projects/eden
-            git pull origin main
-            docker compose down
-            docker compose up -d --build
+            git fetch origin "${BRANCH_NAME}"
+            git reset --hard "origin/${BRANCH_NAME}"
+            git clean -fd
+
+            export COMPOSE_PROJECT_NAME="eden-${BRANCH_NAME}"
+
+            docker compose build --no-cache backend frontend
+            docker compose up -d --force-recreate backend frontend
             docker system prune -f
 ```
 
-This strategy enables automated publishing of new versions while keeping the application running on a live server.
+This strategy enables automated publishing of new versions while keeping the application running on a live server. The same workflow now supports both `main` and `production`, so the active branch is the one that gets deployed.
 
 ### Important Notes
 
@@ -231,7 +241,7 @@ This architecture provides a reliable, stable, and production-ready foundation f
 This repository uses GitHub Actions for continuous integration (CI) and continuous deployment (CD). The typical setup includes separate workflows for:
 
 - CI (build & test) for backend and frontend on pull requests and pushes.
-- CD (deploy) to the VPS on pushes to the main branch (already present in this file above).
+- CD (deploy) to the VPS on pushes to the `main` and `production` branches (already present in this file above).
 
 Suggested CI workflow examples (create under `.github/workflows/`):
 
