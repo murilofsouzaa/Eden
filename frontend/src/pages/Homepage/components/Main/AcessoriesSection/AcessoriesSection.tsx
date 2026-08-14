@@ -1,13 +1,19 @@
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect ,useLayoutEffect, useRef } from 'react';
+
 import useAccessories from '../../../../../../hooks/useAccessories';
 import emptyBox from '../../../../../../public/icons/empty-box.png';
 import { Link } from 'react-router-dom'
 import { ChevronLeft, ChevronRight } from 'react-feather';
-import {useEffect, useRef} from 'react';
 import PriceOffLabel from '../../../../../components/ui/PriceOffLabel'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export function AcessoriesSection() {
     const accessories = useAccessories();
     const viewportRef = useRef<HTMLDivElement | null>(null);
+    const acessoriesSectionRef = useRef<HTMLDivElement>(null);
 
     const formatPrice = (price: number) => price.toFixed(2).replace('.', ',');
 
@@ -32,6 +38,26 @@ export function AcessoriesSection() {
         });
     };
 
+    useLayoutEffect(() => { //Somente roda o código abaixo, quando estiver tudo renderizado
+    if (!accessories || accessories.length === 0) return; 
+    // Usa o contexto do GSAP para limpar automaticamente animações ao desmontar
+    const ctx = gsap.context(() => {
+        gsap.to(acessoriesSectionRef.current, {
+            x: 0,
+            opacity: 1,
+            scrollTrigger: {
+                trigger: acessoriesSectionRef.current,
+                markers: true,
+                end: "bottom 100%",
+                scrub: 2.0
+
+            }
+        })
+    }, acessoriesSectionRef);
+
+        return () => ctx.revert(); // Cleanup limpo para React
+    }, [accessories]);
+
     return (
         <section className="mt-20">
             <h2 className="text-center text-5xl lg:text-7xl font-bold mb-3">ACESSÓRIOS</h2>
@@ -39,7 +65,7 @@ export function AcessoriesSection() {
                 Os detalhes que completam o visual com a mesma curadoria dos nossos demais produtos.
             </h3>
 
-            <section className="relative">
+            <section ref={acessoriesSectionRef} className="relative opacity-0 translate-x-[400px]">
                 <div
                     ref={viewportRef}
                     className="overflow-x-auto scroll-smooth border-y border-y-gray-300 py-10"
@@ -49,7 +75,7 @@ export function AcessoriesSection() {
                         {accessories.map((accessory) => (
                             <div key={accessory.id} data-slide="true" className="shrink-0 w-64 sm:w-72 md:w-80">
                                 <div className="flex flex-col justify-start items-start">
-                                    <Link to={`/acessories/${accessory.id}`} className="hover:cursor-pointer block w-full">
+                                    <Link to={`/accessories/${accessory.id}`} className="hover:cursor-pointer block w-full">
                                         <img
                                             src={accessory.imageUrl}
                                             alt={accessory.title}

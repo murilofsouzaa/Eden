@@ -24,7 +24,6 @@ export function Main({ products }: MainProps) {
     const mainRef = useRef<HTMLDivElement>(null)
     const releaseSectionRef = useRef<HTMLDivElement>(null);
     const oversizedSectionRef = useRef<HTMLDivElement>(null);
-    const acessoriesSectionRef = useRef<HTMLDivElement>(null);
 
     const displayedProducts = products;
     const displayedOversizedProducts = products.filter(p => p.modeling === 'Oversized');
@@ -42,7 +41,7 @@ export function Main({ products }: MainProps) {
                 ease: "power2.out",
                 scrollTrigger: {
                     trigger: releaseSectionRef.current,
-                    start: "top 80%", 
+                    start: "top 90%", 
                     end: "top 20%",
                     scrub: 2.5
                 }
@@ -59,18 +58,6 @@ export function Main({ products }: MainProps) {
                     scrub: 3
                 }
             })
-            
-            gsap.to(acessoriesSectionRef.current, {
-                x: 0,
-                opacity: 1,
-                scrollTrigger: {
-                    trigger: acessoriesSectionRef.current,
-                    markers: true,
-                    end: "bottom 100%",
-                    scrub: 2.0
-    
-                }
-            })
         }, mainRef);
 
         return () => ctx.revert(); // Cleanup limpo para React
@@ -79,46 +66,48 @@ export function Main({ products }: MainProps) {
 
     return (
         <div ref={mainRef} className="mt-10 mb-10 overflow-x-hidden">
-            <section ref={releaseSectionRef} className="release-section mx-4 lg:mx-30 opacity-[20%] translate-y-[60px]">
+            <section className="release-section mx-4 lg:mx-30 ">
                 <h2 className="text-center text-6xl lg:text-9xl font-bold mb-6">NOVIDADES</h2>
                 <h3 className="text-center mb-6">
                     A <span className="font-semibold">versatilidade</span> do lifestyle <span className="font-semibold">californiano</span> unida à tecnologia de ponta: conheça o caimento que redefiniu o conceito de essencial.
                 </h3>
-                <ReleaseSection
-                    products={displayedProducts}
-                    translateValue={newsCarousel.translateValue}
-                    trackRef={newsCarousel.trackRef}
-                    viewportRef={newsCarousel.viewportRef}
-                    next={newsCarousel.next}
-                    prev={newsCarousel.prev}
-                />
+                <div ref={releaseSectionRef} className="opacity-[20%] translate-y-[100px]">
+                    <ReleaseSection
+                        products={displayedProducts}
+                        translateValue={newsCarousel.translateValue}
+                        trackRef={newsCarousel.trackRef}
+                        viewportRef={newsCarousel.viewportRef}
+                        next={newsCarousel.next}
+                        prev={newsCarousel.prev}
+                    />
+                </div>
             </section>
 
-            <section ref={oversizedSectionRef} className="mt-20 mx-4 lg:mx-30 opacity-0 translate-x-[-400px]">
+            <section className="mt-20 mx-4 lg:mx-30 ">
                 <h2 className="text-center text-5xl lg:text-7xl font-bold mb-3">OVERSIZED</h2>
                 <h3 className="text-center mb-6">Tecidos de <span className="font-semibold">alto padrão</span>, corte impecável e a essência pioneira que <span className="font-semibold">transformou</span> o cenário Oversized no fitness nacional.</h3>
-                <FilteredProducts
-                    products={displayedOversizedProducts}
-                    translateValue={promoCarousel.translateValue}
-                    trackRef={promoCarousel.trackRef}
-                    viewportRef={promoCarousel.viewportRef}
-                    next={promoCarousel.next}
-                    prev={promoCarousel.prev}
-                    filterType="oversized"
-                ></FilteredProducts>
+                <div ref={oversizedSectionRef}  className="opacity-0 translate-x-[-400px]">
+                    <FilteredProducts
+                        products={displayedOversizedProducts}
+                        translateValue={promoCarousel.translateValue}
+                        trackRef={promoCarousel.trackRef}
+                        viewportRef={promoCarousel.viewportRef}
+                        next={promoCarousel.next}
+                        prev={promoCarousel.prev}
+                        filterType="oversized"
+                    ></FilteredProducts>
+                </div>
             </section>
             
             <section className="mt-20 mx-4 lg:mx-30 ">
                 <CategorySection />
             </section>
 
-
-
             <section className="mt-20 w-screen mx-0">
                 <VideoSection />
             </section>
 
-            <section ref={acessoriesSectionRef} className="mx-4 lg:mx-30 opacity-0 translate-x-[400px]">
+            <section className="mx-4 lg:mx-30 ">
                 <AcessoriesSection />
             </section>
 
