@@ -16,19 +16,24 @@ I'm developing this project to learn concepts such as: Domain-Driven Design, Des
 
 **Backend:** Java, Spring Boot
 
-**Frontend:** React, TypeScript, TailwindCSS
+**Frontend:** React, TypeScript, Tailwind CSS
 
 **Database:** PostgreSQL
 
-**Build**: Maven (backend), Vite + TypeScript (frontend)
+**Build Tools:** Maven (Backend), Vite + TypeScript (Frontend)
 
-**Infra**: Docker
+**Infrastructure:** Docker, Docker Compose
 
-**Architecture: Layers**
+**Proxy / Reverse Proxy:** NGINX
+
+**CI/CD / Automation:** GitHub Actions
+
+**Architecture:** Layered Architecture
 
 ## Dependencies
 
 ### Backend (Maven)
+
 - `org.springframework.boot:spring-boot-starter-data-jpa`
 - `org.springframework.boot:spring-boot-starter-web`
 - `org.springframework.boot:spring-boot-starter-validation`
@@ -39,13 +44,16 @@ I'm developing this project to learn concepts such as: Domain-Driven Design, Des
 - `org.mockito:mockito-core` (test)
 
 ### Frontend (npm)
+
 **Dependencies**
+
 - `axios`
 - `lucide-react`
 - `react-router`
 - `react-feather`
 
 **Dev Dependencies**
+
 - `@eslint/js`
 - `@tailwindcss/vite`
 - `@types/node`
@@ -70,12 +78,15 @@ git clone https://github.com/murilofsouzaa/Eden.git
 ```
 
 ### Running Backend (Spring Boot)
+
 ```bash
 cd eden/backend/eden
 mvn install
 ./mvnw spring-boot:run
 ```
+
 ### Running Frontend (React)
+
 ```bash
 cd frontend
 npm install
@@ -86,16 +97,6 @@ npm run dev
 
 This project uses a simple and robust architecture for real environments, featuring a clear separation between application services and a reverse proxy web server.
 
-### Infrastructure Overview
-
-- **Database:** PostgreSQL running in a container
-- **Backend:** Spring Boot running in a container
-- **Frontend:** Static React build served by NGINX
-- **Production Server:** Host-level NGINX acting as a reverse proxy
-- **Deployment:** Automated via GitHub Actions to a VPS
-
-### Production Workflow
-
 The production execution flow operates as follows:
 
 1. The backend is accessible internally on port `8080`.
@@ -105,6 +106,7 @@ The production execution flow operates as follows:
 5. The frontend consumes the backend API through `/api` routes.
 
 This model separates the web application from the ingress server, enabling:
+
 - Better management of SSL/TLS certificates
 - HTTP caching and compression
 - Centralized routing
@@ -117,7 +119,7 @@ Example base structure for the Reverse Proxy on the server:
 ```nginx
 server {
     listen 80;
-    server_name your-domain.com;
+    server_name i put my domain here;
 
     location / {
         proxy_pass http://127.0.0.1:3000;
@@ -171,7 +173,7 @@ This model is suited for a real server environment, spinning up the Java applica
 
 ### Automated Deployment to VPS
 
-The deployment pipeline uses GitHub Actions to connect via SSH to the VPS, pull the latest code, and spin up the containers:
+The deployment pipeline uses GitHub Actions to connect via SSH to the VPS, pull the latest code, and spin up the containers. All connection details are pulled from **GitHub Secrets** — nothing sensitive is hardcoded in the workflow file:
 
 ```yaml
 name: Deploy to VPS
@@ -180,15 +182,12 @@ on:
   push:
     branches:
       - main
+      - production
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
       - name: Execute Deploy via SSH on VPS
         uses: appleboy/ssh-action@v1.0.3
         env:
@@ -201,131 +200,42 @@ jobs:
           envs: BRANCH_NAME
           script: |
             set -euo pipefail
+            case "${BRANCH_NAME}" in
+              production)
+                DEPLOY_DIR="${APP_PATH_PRODUCTION}"
+                COMPOSE_PROJECT_NAME="eden"
+                FRONTEND_HOST_PORT="3000"
+                ;;
+              main)
+                DEPLOY_DIR="${APP_PATH_STAGING}"
+                COMPOSE_PROJECT_NAME="eden-staging"
+                FRONTEND_HOST_PORT="3001"
+                ;;
+              *)
+                echo "Branch not allowed: ${BRANCH_NAME}"
+                exit 1
+                ;;
 
-            cd ~/projects/eden
+            esac
+
+            cd "${DEPLOY_DIR}"
+
             git fetch origin "${BRANCH_NAME}"
-            git reset --hard "origin/${BRANCH_NAME}"
-            git clean -fd
+            git checkout -B "${BRANCH_NAME}" "origin/${BRANCH_NAME}"
 
-            docker ps -aq --filter "name=eden" | xargs -r docker rm -f
-            docker ps -aq --filter "publish=3000" | xargs -r docker rm -f
-            docker compose down --remove-orphans || true
+            export COMPOSE_PROJECT_NAME
+            export FRONTEND_HOST_PORT
 
             docker compose build --no-cache backend frontend
-            docker compose up -d --build --force-recreate --remove-orphans backend frontend
-            docker system prune -f
+            docker compose up -d --build --force-recreate --remove-orphans
+            docker image prune -f
 ```
 
 This strategy enables automated publishing of new versions while keeping the application running on a live server. The same workflow now supports both `main` and `production`, so the active branch is the one that gets deployed.
-
-### Important Notes
-
-- The local environment can be run using `docker compose` for development and testing.
-- The live production environment requires a server with open `80`/`443` ports and a domain pointing to the VPS.
-- It is recommended to configure SSL using Let's Encrypt or another provider to ensure HTTPS.
-- The external NGINX must remain responsible for ingress routing, while containers remain internal with ports mapped only as needed.
-
-### Summary
-
-The Eden production setup consists of:
-
-- PostgreSQL for persistence
-- Spring Boot for the API
-- React compiled into static files
-- NGINX serving the frontend
-- Host-level NGINX acting as a reverse proxy on a real VPS
-- Automated deployment via GitHub Actions
-
-This architecture provides a reliable, stable, and production-ready foundation for a real web application.
 
 ## CI/CD with GitHub Actions
 
 This repository uses GitHub Actions for continuous integration (CI) and continuous deployment (CD). The typical setup includes separate workflows for:
 
-- CI (build & test) for backend and frontend on pull requests and pushes.
-- CD (deploy) to the VPS on pushes to the `main` and `production` branches (already present in this file above).
-
-Suggested CI workflow examples (create under `.github/workflows/`):
-
-1) Backend CI - `.github/workflows/ci-backend.yml`
-
-```yaml
-name: CI - Backend
-
-on:
-  push:
-    branches: [ main, develop ]
-  pull_request:
-    branches: [ main, develop ]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '21'
-      - name: Build and test
-        run: |
-          cd backend/eden
-          mvn -B -DskipTests=false clean test
-
-      - name: Package
-        if: success()
-        run: |
-          cd backend/eden
-          mvn -B -DskipTests=true package
-```
-
-2) Frontend CI - `.github/workflows/ci-frontend.yml`
-
-```yaml
-name: CI - Frontend
-
-on:
-  push:
-    branches: [ main, develop ]
-  pull_request:
-    branches: [ main, develop ]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - name: Install dependencies
-        run: |
-          cd frontend
-          npm ci
-      - name: Run tests
-        run: |
-          cd frontend
-          npm run test -- --watchAll=false
-      - name: Build
-        run: |
-          cd frontend
-          npm run build
-```
-
-Notes and best practices
-- Store sensitive values and deployment credentials in GitHub Secrets (for example: `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`, `VPS_PORT`).
-- Use protected branches (e.g., `main`) and require that CI checks pass before merging.
-- Add status badges to the `README.md` once workflows are created to show build status. Example badge URL:
-
-  - Backend CI badge:
-    `https://github.com/<owner>/<repo>/actions/workflows/ci-backend.yml/badge.svg`
-  - Frontend CI badge:
-    `https://github.com/<owner>/<repo>/actions/workflows/ci-frontend.yml/badge.svg`
-
-- For deployment, the existing `Deploy to VPS` workflow connects via SSH; ensure the SSH key in `VPS_SSH_KEY` has the correct permissions and the VPS user can run `docker compose`.
-
-If you want, I can add the workflow files under `.github/workflows/` and create status badges in this README — tell me if you want me to create those files now.
+- **CI (build & test)** for backend and frontend on pull requests and pushes.
+- **CD (deploy)** to the VPS on pushes to the `main` and `production` branches (already documented above).
