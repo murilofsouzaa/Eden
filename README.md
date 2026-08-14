@@ -208,6 +208,7 @@ jobs:
             git clean -fd
 
             docker ps -aq --filter "name=eden" | xargs -r docker rm -f
+            docker ps -aq --filter "publish=3000" | xargs -r docker rm -f
             docker compose down --remove-orphans || true
 
             docker compose build --no-cache backend frontend
