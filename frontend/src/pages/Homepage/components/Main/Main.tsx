@@ -67,7 +67,7 @@ export function Main({ products }: MainProps) {
     return (
         <div ref={mainRef} className="mt-10 mb-10 overflow-x-hidden">
             <section className="release-section mx-3 lg:mx-30">
-                <h2 className="text-center text-4xl lg:text-9xl font-bold mb-6">NOVIDADES</h2>
+                <h2 className="text-center text-5xl lg:text-9xl font-bold mb-6">NOVIDADES</h2>
                 <h3 className="text-center mb-6 text-sm lg:text-lg">
                     A <span className="font-semibold">versatilidade</span> do lifestyle <span className="font-semibold">californiano</span> unida à tecnologia de ponta: conheça o caimento que redefiniu o conceito de essencial.
                 </h3>
