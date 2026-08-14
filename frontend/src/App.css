@@ -1,7 +1,17 @@
+html,
 body {
 	overflow-x: hidden;
+	max-width: 100%;
 }
 
 #root {
 	min-height: 100vh;
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
 }

@@ -64,13 +64,13 @@ export function AcessoriesSection() {
                 Os detalhes que completam o visual com a mesma curadoria dos nossos demais produtos.
             </h3>
 
-            <section ref={acessoriesSectionRef} className="relative opacity-0 translate-x-[400px]">
+            <section ref={acessoriesSectionRef} className="relative opacity-0 translate-x-6 lg:translate-x-100 ">
                 <div
                     ref={viewportRef}
                     className="overflow-x-auto scroll-smooth border-y border-y-gray-300 py-10"
                     style={{scrollbarWidth: 'none'}}
                 >
-                    <div className="flex flex-nowrap gap-5 pb-2">
+                    <div className="flex flex-nowrap gap-5 pb-2 ">
                         {accessories.map((accessory) => (
                             <div key={accessory.id} data-slide="true" className="shrink-0 w-64 sm:w-72 md:w-80">
                                 <div className="flex flex-col justify-start items-start">

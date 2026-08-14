@@ -66,12 +66,12 @@ export function Main({ products }: MainProps) {
 
     return (
         <div ref={mainRef} className="mt-10 mb-10 overflow-x-hidden">
-            <section className="release-section mx-4 lg:mx-30 ">
-                <h2 className="text-center text-6xl lg:text-9xl font-bold mb-6">NOVIDADES</h2>
-                <h3 className="text-center mb-6">
+            <section className="release-section mx-3 lg:mx-30">
+                <h2 className="text-center text-4xl lg:text-9xl font-bold mb-6">NOVIDADES</h2>
+                <h3 className="text-center mb-6 text-sm lg:text-lg">
                     A <span className="font-semibold">versatilidade</span> do lifestyle <span className="font-semibold">californiano</span> unida à tecnologia de ponta: conheça o caimento que redefiniu o conceito de essencial.
                 </h3>
-                <div ref={releaseSectionRef} className="opacity-[20%] translate-y-[100px]">
+                <div ref={releaseSectionRef} className="opacity-20 translate-y-25">
                     <ReleaseSection
                         products={displayedProducts}
                         translateValue={newsCarousel.translateValue}
@@ -84,9 +84,9 @@ export function Main({ products }: MainProps) {
             </section>
 
             <section className="mt-20 mx-4 lg:mx-30 ">
-                <h2 className="text-center text-5xl lg:text-7xl font-bold mb-3">OVERSIZED</h2>
+                <h2 className="text-center text-4xl lg:text-7xl font-bold mb-3">OVERSIZED</h2>
                 <h3 className="text-center mb-6">Tecidos de <span className="font-semibold">alto padrão</span>, corte impecável e a essência pioneira que <span className="font-semibold">transformou</span> o cenário Oversized no fitness nacional.</h3>
-                <div ref={oversizedSectionRef}  className="opacity-0 translate-x-[-400px]">
+                <div ref={oversizedSectionRef} className="opacity-0 translate-x-0 lg:-translate-x-100">
                     <FilteredProducts
                         products={displayedOversizedProducts}
                         translateValue={promoCarousel.translateValue}
@@ -103,7 +103,7 @@ export function Main({ products }: MainProps) {
                 <CategorySection />
             </section>
 
-            <section className="mt-20 w-screen mx-0">
+            <section className="mt-20 w-full mx-0">
                 <VideoSection />
             </section>
 
