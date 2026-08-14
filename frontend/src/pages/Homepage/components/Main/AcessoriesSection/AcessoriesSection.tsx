@@ -47,7 +47,6 @@ export function AcessoriesSection() {
             opacity: 1,
             scrollTrigger: {
                 trigger: acessoriesSectionRef.current,
-                markers: true,
                 end: "bottom 100%",
                 scrub: 2.0
 
