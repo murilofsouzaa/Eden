@@ -169,12 +169,12 @@ export default function AllProducts() {
                             <Link
                                 key={product.id}
                                 to={`/product/${product.id}`}
-                                className="group block overflow-hidden border border-black/10 bg-white shadow-sm transition-transform duration-200 hover:-translate-y-1"
+                                className="group block overflow-hidden bg-white shadow-sm transition-transform duration-200 hover:-translate-y-1"
                             >
                                 <img
                                     src={product.imageUrl}
                                     alt={product.title}
-                                    className="h-96 w-full object-cover"
+                                    className="h-186 w-full object-cover"
                                 />
                                 <div className="p-4">
                                     <p className="text-lg font-medium">{product.title}</p>
