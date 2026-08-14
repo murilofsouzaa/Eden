@@ -35,13 +35,15 @@ jobs:
             git clean -fd
             git log -1 --oneline
 
-            export COMPOSE_PROJECT_NAME="eden-${BRANCH_NAME}"
+            echo "===== CLEANUP ====="
+            docker ps -aq --filter "name=eden" | xargs -r docker rm -f
+            docker compose down --remove-orphans || true
 
             echo "===== BUILD ====="
             docker compose build --no-cache backend frontend
 
             echo "===== SUBINDO SERVIÇOS ====="
-            docker compose up -d --force-recreate backend frontend
+            docker compose up -d --build --force-recreate --remove-orphans backend frontend
 
             echo "===== IMAGEM ====="
             docker compose images backend frontend

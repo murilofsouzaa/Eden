@@ -207,10 +207,11 @@ jobs:
             git reset --hard "origin/${BRANCH_NAME}"
             git clean -fd
 
-            export COMPOSE_PROJECT_NAME="eden-${BRANCH_NAME}"
+            docker ps -aq --filter "name=eden" | xargs -r docker rm -f
+            docker compose down --remove-orphans || true
 
             docker compose build --no-cache backend frontend
-            docker compose up -d --force-recreate backend frontend
+            docker compose up -d --build --force-recreate --remove-orphans backend frontend
             docker system prune -f
 ```
 
