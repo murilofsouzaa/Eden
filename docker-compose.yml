@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
-      - eden_db_data:/var/lib/postgresql/data
+      - ${DB_VOLUME_NAME:-eden_db_data}:/var/lib/postgresql/data
 
   backend:
     build:
@@ -42,3 +42,4 @@ services:
 
 volumes:
   eden_db_data:
+  eden_staging_db_data:
