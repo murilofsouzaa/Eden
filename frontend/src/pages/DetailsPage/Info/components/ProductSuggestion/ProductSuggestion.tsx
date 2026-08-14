@@ -55,10 +55,10 @@ export function ProductSuggestion({
                     </div>
             ):(
                 <div>
-                    <div className="overflow-hidden" ref={resolvedViewportRef}>
+                    <div className="overflow-hidden mb-40" ref={resolvedViewportRef}>
                         <div
                             ref={resolvedTrackRef}
-                            className="flex flex-nowrap gap-3 py-5 mb-5 transition-transform duration-500 ease-out"
+                            className="flex flex-nowrap gap-3 py-5 transition-transform duration-500 ease-out"
                             style={{transform: `translateX(${translateValue}px)`}}
                         >
                             {products.map((product) => {
@@ -68,7 +68,7 @@ export function ProductSuggestion({
                                 return (
                                     <div key={product.id} data-slide="true">
                                         {variantToShow && variantToShow?.stock > 0 && (
-                                            <div className="flex flex-col justify-start items-start w-50 lg:w-70">
+                                            <div className="flex flex-col justify-start items-start w-50 lg:w-60">
                                                 <Link to={getHref(product.id)}>
                                                     <button type="button" className="hover:cursor-pointer">
                                                         <img

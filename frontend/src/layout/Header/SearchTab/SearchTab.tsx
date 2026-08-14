@@ -1,7 +1,8 @@
-import {useState} from 'react';
+import {useState, useLayoutEffect, useRef} from 'react';
 import type {Product} from '../../../context/ProductContext'
 import {Dialog} from '@headlessui/react'
 import {Link} from 'react-router-dom'
+import {gsap} from 'gsap'
 import {Search} from 'lucide-react'
 import {X} from 'lucide-react'
 
@@ -14,11 +15,27 @@ export type SearchTabProps={
 
 const SearchTab = ({products, isSearchActive, toggleSearch}: SearchTabProps) => {
 
+    const searchProducts = useRef<HTMLDivElement>(null);
+
     const [term, setTerm] = useState<string>("");
     
     const termMatches = (product:Product, term:string) =>{
         return product.title.toUpperCase().includes(term.toUpperCase());
     }
+
+    useLayoutEffect(() => {
+        if(!products || products.length == 0) return;
+
+            const ctx = gsap.context(()=>{
+                gsap.to(searchProducts.current, {
+                    opacity: 1,
+                    scrub: 0.5
+                })
+            return () => ctx.revert();
+        })
+        
+
+    })
 
     return ( 
         <Dialog open={isSearchActive} onClose={toggleSearch}>
@@ -80,7 +97,7 @@ const SearchTab = ({products, isSearchActive, toggleSearch}: SearchTabProps) => 
                             </button>
                         </div>
 
-                        <div className="flex flex-col mt-10">
+                        <div ref={searchProducts} className="flex flex-col mt-10 opacity-0">
                             <div className="flex justify-center flex-wrap gap-10 z-10 h-full w-full">
                                 {products.some((product) => termMatches(product, term)) == true ? (
                                     <div>
@@ -95,7 +112,7 @@ const SearchTab = ({products, isSearchActive, toggleSearch}: SearchTabProps) => 
                                                     className="flex">
                                                         <Link  to={`/product/${product.id}`}>
                                                         <div className="flex flex-col gap-4 w-full">
-                                                                <img src={product.imageUrl} alt={product.title} className="h-[360px] w-[260px] object-cover"></img>
+                                                                <img src={product.imageUrl} alt={product.title} className="h-[360px] w-[260px] object-cover  hover:scale-[1.03] ease-in-out duration-500"></img>
                                                             <div className="flex flex-col gap-1 h-20">
                                                                 <h2 className="text-[14px]">{(product.title)}</h2>
                                                                 <p className="capitalize text-sm text-gray-500">{(product.variants[0].gender).toLowerCase()}</p>
