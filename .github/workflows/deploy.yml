@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Executar Deploy via SSH na VPS
+      - name: Executar deploy via SSH na VPS
         uses: appleboy/ssh-action@v1.0.3
         env:
           BRANCH_NAME: ${{ github.ref_name }}
@@ -24,35 +24,48 @@ jobs:
           script: |
             set -euo pipefail
 
-            echo "===== BRANCH ====="
-            echo "Deploying branch: ${BRANCH_NAME}"
+            case "${BRANCH_NAME}" in
+              production)
+                DEPLOY_DIR="$HOME/projects/eden"
+                COMPOSE_PROJECT_NAME="eden"
+                FRONTEND_HOST_PORT="3000"
+                ;;
+              main)
+                DEPLOY_DIR="$HOME/projects/eden-staging"
+                COMPOSE_PROJECT_NAME="eden-staging"
+                FRONTEND_HOST_PORT="3001"
+                ;;
+              *)
+                echo "Branch não permitida: ${BRANCH_NAME}"
+                exit 1
+                ;;
+            esac
 
-            cd ~/projects/eden
-            cd ~/projects/eden
+            echo "===== DEPLOY ====="
+            echo "Branch: ${BRANCH_NAME}"
+            echo "Diretório: ${DEPLOY_DIR}"
+            echo "Projeto Docker: ${COMPOSE_PROJECT_NAME}"
+            echo "Porta do frontend: ${FRONTEND_HOST_PORT}"
+
+            cd "${DEPLOY_DIR}"
 
             echo "===== GIT ====="
             git fetch origin "${BRANCH_NAME}"
-            git reset --hard "origin/${BRANCH_NAME}"
-            git clean -fd
+            git checkout -B "${BRANCH_NAME}" "origin/${BRANCH_NAME}"
             git log -1 --oneline
 
-            echo "===== CLEANUP ====="
-            docker ps -aq --filter "name=eden" | xargs -r docker rm -f
-            docker ps -aq --filter "publish=3000" | xargs -r docker rm -f
-            docker compose down --remove-orphans || true
+            export COMPOSE_PROJECT_NAME
+            export FRONTEND_HOST_PORT
 
             echo "===== BUILD ====="
             docker compose build --no-cache backend frontend
 
             echo "===== SUBINDO SERVIÇOS ====="
-            docker compose up -d --build --force-recreate --remove-orphans backend frontend
+            docker compose up -d --build --force-recreate --remove-orphans
 
-            echo "===== IMAGEM ====="
-            docker compose images backend frontend
+            echo "===== STATUS ====="
+            docker compose ps
+            docker compose images
 
-            echo "===== CONTAINER ====="
-            docker compose ps backend frontend
-
-            echo "===== LIMPEZA ====="
+            echo "===== LIMPEZA DE IMAGENS ====="
             docker image prune -f
-            docker builder prune -af
