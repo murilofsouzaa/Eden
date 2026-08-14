@@ -54,6 +54,20 @@ jobs:
             git checkout -B "${BRANCH_NAME}" "origin/${BRANCH_NAME}"
             git log -1 --oneline
 
+            # Escreve/Garante as variáveis no .env da pasta para o Docker Compose ler com 100% de certeza
+            echo "COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME}" > .env.runtime
+            echo "FRONTEND_HOST_PORT=${FRONTEND_HOST_PORT}" >> .env.runtime
+
+            # Unifica o .env original (se existir) com as variáveis de runtime
+            if [ -f .env ]; then
+              grep -v '^FRONTEND_HOST_PORT=' .env | grep -v '^COMPOSE_PROJECT_NAME=' > .env.tmp || true
+              mv .env.tmp .env
+              cat .env.runtime >> .env
+              rm -f .env.runtime
+            else
+              mv .env.runtime .env
+            fi
+
             export COMPOSE_PROJECT_NAME
             export FRONTEND_HOST_PORT
 
