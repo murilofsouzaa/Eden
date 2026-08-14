@@ -29,11 +29,13 @@ jobs:
                 DEPLOY_DIR="$HOME/projects/eden"
                 COMPOSE_PROJECT_NAME="eden"
                 FRONTEND_HOST_PORT="3000"
+                DB_VOLUME_NAME="eden_db_data"
                 ;;
               main)
                 DEPLOY_DIR="$HOME/projects/eden-staging"
                 COMPOSE_PROJECT_NAME="eden-staging"
                 FRONTEND_HOST_PORT="3001"
+                DB_VOLUME_NAME="eden_staging_db_data"
                 ;;
               *)
                 echo "Branch não permitida: ${BRANCH_NAME}"
@@ -46,6 +48,7 @@ jobs:
             echo "Diretório: ${DEPLOY_DIR}"
             echo "Projeto Docker: ${COMPOSE_PROJECT_NAME}"
             echo "Porta do frontend: ${FRONTEND_HOST_PORT}"
+            echo "Volume do banco: ${DB_VOLUME_NAME}"
 
             cd "${DEPLOY_DIR}"
 
@@ -54,8 +57,22 @@ jobs:
             git checkout -B "${BRANCH_NAME}" "origin/${BRANCH_NAME}"
             git log -1 --oneline
 
+            echo "COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME}" > .env.runtime
+            echo "FRONTEND_HOST_PORT=${FRONTEND_HOST_PORT}" >> .env.runtime
+            echo "DB_VOLUME_NAME=${DB_VOLUME_NAME}" >> .env.runtime
+
+            if [ -f .env ]; then
+              grep -v '^FRONTEND_HOST_PORT=' .env | grep -v '^COMPOSE_PROJECT_NAME=' | grep -v '^DB_VOLUME_NAME=' > .env.tmp || true
+              mv .env.tmp .env
+              cat .env.runtime >> .env
+              rm -f .env.runtime
+            else
+              mv .env.runtime .env
+            fi
+
             export COMPOSE_PROJECT_NAME
             export FRONTEND_HOST_PORT
+            export DB_VOLUME_NAME
 
             echo "===== BUILD ====="
             docker compose build --no-cache backend frontend
