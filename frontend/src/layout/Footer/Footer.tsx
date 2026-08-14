@@ -49,7 +49,7 @@ export function Footer(){
                     </div>
 
                 <div>
-                    <p className="lg:flex w-100 text-white my-6 ">Não detenho os direitos autorais sobre as imagens utilizadas neste conteúdo. Todos os direitos pertencem aos seus respectivos proprietários. Este material é utilizado apenas para fins educativos. Se você é o proprietário dos direitos e deseja a sua remoção, entre em contato via email que o conteúdo será removido imediatamente.</p>
+                    <p className="lg:flex text-white my-6 mx-0 text-wrap sm:w-[100%] lg:w-100 text-justify">Não detenho os direitos autorais sobre as imagens utilizadas neste conteúdo. Todos os direitos pertencem aos seus respectivos proprietários. Este material é utilizado apenas para fins educativos. Se você é o proprietário dos direitos e deseja a sua remoção, entre em contato via email que o conteúdo será removido imediatamente.</p>
                 </div>
                 </div>
             </div>
