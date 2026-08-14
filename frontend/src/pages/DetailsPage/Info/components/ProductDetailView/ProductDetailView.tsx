@@ -37,7 +37,7 @@ export default function ProductDetailView({
 }: ProductDetailViewProps) {
     return (
         <>
-            <div className="overflow-x-hidden mb-10 p-5 lg:grid lg:grid-cols-4 lg:col-start-2 lg:p-5 lg:flex-row">
+            <div className="overflow-x-hidden mb-10 mt-30 p-5 lg:grid lg:grid-cols-4 lg:col-start-2 lg:p-5 lg:flex-row">
                 <div className="col-start-2">
                     <div className="flex justify-center items-center">
                         <img
