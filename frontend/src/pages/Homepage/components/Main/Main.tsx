@@ -1,19 +1,30 @@
 import './Main.css';
-import {CategorySection} from './CategorySection/CategorySection';
-import {VideoSection} from './VideoSection/VideoSection';
-import {ReleaseSection} from './NewsSection/NewsSection';
-import {Newsletter} from './Newsletter/Newsletter'
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLayoutEffect, useRef } from 'react';
+
+import { CategorySection } from './CategorySection/CategorySection';
+import { VideoSection } from './VideoSection/VideoSection';
+import { ReleaseSection } from './NewsSection/NewsSection';
+import { Newsletter } from './Newsletter/Newsletter';
 import { useCarousel } from '../../../../hooks/useCarousel';
-import {FilteredProducts} from './FilteredProducts/FilteredProducts'
-import {AcessoriesSection} from './AcessoriesSection/AcessoriesSection'
+import { FilteredProducts } from './FilteredProducts/FilteredProducts';
+import { AcessoriesSection } from './AcessoriesSection/AcessoriesSection';
 
 import type { Product } from '../../../../context/ProductContext';
+
+// Registre o plugin fora do componente
+gsap.registerPlugin(ScrollTrigger);
 
 type MainProps = {
     readonly products: Product[];
 };
 
 export function Main({ products }: MainProps) {
+    const mainRef = useRef<HTMLDivElement>(null)
+    const releaseSectionRef = useRef<HTMLDivElement>(null);
+    const oversizedSectionRef = useRef<HTMLDivElement>(null);
+    const acessoriesSectionRef = useRef<HTMLDivElement>(null);
 
     const displayedProducts = products;
     const displayedOversizedProducts = products.filter(p => p.modeling === 'Oversized');
@@ -21,11 +32,58 @@ export function Main({ products }: MainProps) {
     const newsCarousel = useCarousel({ totalItems: displayedProducts.length });
     const promoCarousel = useCarousel({ totalItems: displayedOversizedProducts.length });
 
-        return(
-		<div className="mt-10 mb-10 overflow-x-hidden ">
-            <section className="mt-20 mx-4 lg:mx-30 ">
+    useLayoutEffect(() => { //Somente roda o código abaixo, quando estiver tudo renderizado
+        if (!products || products.length === 0) return; 
+        // Usa o contexto do GSAP para limpar automaticamente animações ao desmontar
+        const ctx = gsap.context(() => {
+            gsap.to(releaseSectionRef.current, {
+                y: 0,
+                opacity: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: releaseSectionRef.current,
+                    start: "top 80%", 
+                    end: "top 20%",
+                    scrub: 2.5
+                }
+            });
+
+            gsap.to(oversizedSectionRef.current, {
+                x: 0,
+                opacity: 1,
+                ease: "power2.out",
+                scrollTrigger:{
+                    trigger: oversizedSectionRef.current,
+                    start: "top 80%",
+                    end: "top 20%",
+                    scrub: 3
+                }
+            })
+            
+            gsap.to(acessoriesSectionRef.current, {
+                x: 0,
+                opacity: 1,
+                scrollTrigger: {
+                    trigger: acessoriesSectionRef.current,
+                    markers: true,
+                    end: "bottom 100%",
+                    scrub: 2.0
+    
+                }
+            })
+        }, mainRef);
+
+        return () => ctx.revert(); // Cleanup limpo para React
+    }, [products]);
+
+
+    return (
+        <div ref={mainRef} className="mt-10 mb-10 overflow-x-hidden">
+            <section ref={releaseSectionRef} className="release-section mx-4 lg:mx-30 opacity-[20%] translate-y-[60px]">
                 <h2 className="text-center text-6xl lg:text-9xl font-bold mb-6">NOVIDADES</h2>
-                <h3 className="text-center mb-6">A <span className="font-semibold">versatilidade</span> do lifestyle <span className="font-semibold">californiano</span> unida à tecnologia de ponta: conheça o caimento que redefiniu o conceito de essencial.</h3>
+                <h3 className="text-center mb-6">
+                    A <span className="font-semibold">versatilidade</span> do lifestyle <span className="font-semibold">californiano</span> unida à tecnologia de ponta: conheça o caimento que redefiniu o conceito de essencial.
+                </h3>
                 <ReleaseSection
                     products={displayedProducts}
                     translateValue={newsCarousel.translateValue}
@@ -36,7 +94,7 @@ export function Main({ products }: MainProps) {
                 />
             </section>
 
-            <section className="mt-20 mx-4 lg:mx-30 ">
+            <section ref={oversizedSectionRef} className="mt-20 mx-4 lg:mx-30 opacity-0 translate-x-[-400px]">
                 <h2 className="text-center text-5xl lg:text-7xl font-bold mb-3">OVERSIZED</h2>
                 <h3 className="text-center mb-6">Tecidos de <span className="font-semibold">alto padrão</span>, corte impecável e a essência pioneira que <span className="font-semibold">transformou</span> o cenário Oversized no fitness nacional.</h3>
                 <FilteredProducts
@@ -60,7 +118,7 @@ export function Main({ products }: MainProps) {
                 <VideoSection />
             </section>
 
-            <section className="mx-4 lg:mx-30 ">
+            <section ref={acessoriesSectionRef} className="mx-4 lg:mx-30 opacity-0 translate-x-[400px]">
                 <AcessoriesSection />
             </section>
 

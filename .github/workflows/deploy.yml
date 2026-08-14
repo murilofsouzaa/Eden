@@ -28,6 +28,7 @@ jobs:
             echo "Deploying branch: ${BRANCH_NAME}"
 
             cd ~/projects/eden
+            cd ~/projects/eden
 
             echo "===== GIT ====="
             git fetch origin "${BRANCH_NAME}"
