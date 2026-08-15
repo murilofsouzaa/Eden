@@ -106,7 +106,9 @@ export function Header(){
         <>
             <div className="fixed w-full top-0 left-0 z-50 bg-white border-b-2 border-b-black/10">
                 <div className="flex flex-col">
-                    <div className={`invert bg-gray-200 text-center overflow-hidden duration-300 ease-in-out ${showSlider ? 'max-h-14 py-3 opacity-100' : 'max-h-0 py-0 opacity-0'}`}>
+                    <div className={`invert bg-gray-200 text-center overflow-hidden duration-300 ease-in-out ${
+                        showSlider ? 'max-h-20 py-2 px-4 opacity-100' : 'max-h-0 py-0 opacity-0'
+                    }`}>
                         {labels[currentIndex]}
                     </div>
                     <nav className="flex flex-col justify-center items-center mx-3
