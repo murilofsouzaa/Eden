@@ -7,7 +7,7 @@ import edenLogo from '../../../public/logo/logo-inverted-removebg.png';
 
 export function Footer() {
     return (
-        <div className="bg-black">
+        <div className="bg-black ">
             <div className="flex flex-col gap-10 px-6 py-10 lg:flex-row lg:justify-between lg:items-center lg:py-10 lg:px-20">
                 
                 <div className="flex gap-10 lg:flex-row lg:gap-20">
