@@ -26,3 +26,24 @@ ul > li > a:hover{
     color: black;
     font-weight: 500;
 }
+
+.header-spacer {
+    transition: height 300ms ease;
+    height: 105px;
+}
+
+@media (min-width: 1024px) {
+    .header-spacer {
+        height: 115px;
+    }
+}
+
+.header-spacer--collapsed {
+    height: 60px;
+}
+
+@media (min-width: 1024px) {
+    .header-spacer--collapsed {
+        height: 68px;
+    }
+}
