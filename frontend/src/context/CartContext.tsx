@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useMemo, useState, useEffect, useCallback } from 'react';
+import { ProductContext } from '../context/ProductContext';
 import type { Product } from '../context/ProductContext';
 import { api } from '../services/api';
 import { toast } from 'sonner';
@@ -8,6 +9,25 @@ export type Cart = {
     id: number;
     userId: number;
     status: boolean;
+};
+
+type CartItemApiResponse = {
+    productId: number;
+    variantId: number;
+    productName: string;
+    color?: string | null;
+    size?: string | null;
+    quantity: number;
+    unitPrice: number;
+    subtotal: number;
+};
+
+type CartApiResponse = {
+    id: number;
+    status: boolean;
+    totalCartPrice: number;
+    items?: CartItemApiResponse[];
+    createdAt: string;
 };
 
 export type CartItem = {
@@ -39,6 +59,22 @@ export function CartProvider({ children }: { readonly children: React.ReactNode 
     const [cart, setCart] = useState<Cart | null>(null);
     const [items, setItems] = useState<CartItem[]>([]);
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const { products } = useContext(ProductContext);
+
+    const resolveProductById = useCallback((productId: number) => {
+        return products.find((product) => product.id === productId);
+    }, [products]);
+
+    const mapApiItemsToCartItems = useCallback((apiItems: CartItemApiResponse[]): CartItem[] => {
+        return apiItems.map((item) => ({
+            id: item.variantId,
+            key: `${item.productId}-${item.variantId}-${item.size ?? ''}`,
+            product: resolveProductById(item.productId),
+            size: item.size ?? '',
+            quantity: item.quantity,
+            unitPrice: item.unitPrice,
+        }));
+    }, [resolveProductById]);
 
     // Busca o carrinho do banco de dados de forma segura e protegida
     const fetchCart = useCallback(async () => {
@@ -52,18 +88,22 @@ export function CartProvider({ children }: { readonly children: React.ReactNode 
         }
 
         try {
-            const response = await api.get('/cart');
-            setCart(response.data); 
+            const response = await api.get<CartApiResponse>('/cart');
+            setCart({
+                id: response.data.id,
+                userId: 0,
+                status: response.data.status,
+            });
             
             // Se o seu backend já trouxer a lista de itens acoplada ao carrinho:
             if (response.data?.items) {
-                setItems(response.data.items);
+                setItems(mapApiItemsToCartItems(response.data.items));
             }
         } catch {
             setCart(null);
             setItems([]);
         }
-    }, []);
+    }, [mapApiItemsToCartItems]);
 
     // Dispara a busca automática apenas se houver um usuário ativo no sistema
     useEffect(() => {
@@ -78,14 +118,22 @@ export function CartProvider({ children }: { readonly children: React.ReactNode 
         setIsOpen((prev) => !prev);
     };
 
-    const addItemCart = (newItem: Product, quantity: number = 1, size?: string) => {
+    const addItemCart = async (newItem: Product, quantity: number = 1, size?: string) => {
         const defaultVariant = newItem.variants.find((variant) => variant.defaultVariant) ?? newItem.variants[0];
         const selectedSize = size ?? defaultVariant?.size ?? newItem.variants[0]?.size ?? '';
         const selectedVariant = newItem.variants.find((variant) => variant.size === selectedSize) ?? defaultVariant ?? newItem.variants[0];
         const unitPrice = selectedVariant ? selectedVariant.price - (selectedVariant.price * (newItem.discountPercentage / 100)) : 0;
+        const token = localStorage.getItem('token');
 
         try {
-            setItems((prev) => {
+            if (token && cart?.id && selectedVariant) {
+                await api.post(`/cart/${cart.id}/items`, {
+                    variantId: selectedVariant.id,
+                    quantity,
+                });
+                await fetchCart();
+            } else {
+                setItems((prev) => {
                 const itemKey = `${newItem.id}-${selectedSize}`;
                 const existingItemIndex = prev.findIndex((item) => item.key === itemKey);
     
@@ -108,7 +156,8 @@ export function CartProvider({ children }: { readonly children: React.ReactNode 
                         unitPrice,
                     },
                 ];
-            });
+                });
+            }
             
             toggleCart();
             toast.success("Adicionado ao carrinho");
