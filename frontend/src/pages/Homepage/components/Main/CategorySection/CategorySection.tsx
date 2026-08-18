@@ -5,19 +5,20 @@ import {GenderButton} from './components/GenderButton';
 export function CategorySection() {
 
     const [gender, setGender] = useState<'female' | 'male'>('female');
+    const genderQueryValue = gender === 'male' ? 'male' : 'female';
     
     const categories = gender === 'male'
         ? [
-            { id: 1, name: 'Camisetas', image: '/clothes/men/gymshark-black-oversized-masculine.jpeg', href: '/products?type=category&value=shirts' },
-            { id: 2, name: 'Calças', image: '/clothes/men/white-pants-masculine-front.jpeg', href: '/products?type=category&value=pants' },
-            { id: 3, name: 'Shorts', image: '/clothes/men/gymshark-black-short-masculine.jpeg', href: '/products?type=category&value=shorts' },
-            { id: 4, name: 'Tênis', image: '/clothes/men/nike-shite-shoes.jpeg', href: '/products?type=category&value=shoes' },
+            { id: 1, name: 'Camisetas', image: '/clothes/men/gymshark-black-oversized-masculine.jpeg', href: `/products?type=category&value=shirts&gender=${genderQueryValue}` },
+            { id: 2, name: 'Calças', image: '/clothes/men/white-pants-masculine-front.jpeg', href: `/products?type=category&value=pants&gender=${genderQueryValue}` },
+            { id: 3, name: 'Shorts', image: '/clothes/men/gymshark-black-short-masculine.jpeg', href: `/products?type=category&value=shorts&gender=${genderQueryValue}` },
+            { id: 4, name: 'Tênis', image: '/clothes/men/nike-shite-shoes.jpeg', href: `/products?type=category&value=shoes&gender=${genderQueryValue}` },
         ]
         : [
-            { id: 5, name: 'Leggings', image: '/clothes/women/gymshark-green-legging.jpeg', href: '/products?type=category&value=legging' },
-            { id: 6, name: 'Conjuntos', image: '/clothes/women/gymshark-grey-set-women.jpeg', href: '/products?type=category&value=set' },
+            { id: 5, name: 'Leggings', image: '/clothes/women/gymshark-green-legging.jpeg', href: `/products?type=category&value=legging&gender=${genderQueryValue}` },
+            { id: 6, name: 'Conjuntos', image: '/clothes/women/gymshark-grey-set-women.jpeg', href: `/products?type=category&value=set&gender=${genderQueryValue}` },
             { id: 7, name: 'Oversized', image: '/clothes/women/gymshark-woman-oversized-black.jpeg', href: '/products?type=modeling&value=Oversized' },
-            { id: 8, name: 'Tênis', image: '/clothes/women/new-balance-shoes-female.jpeg', href: '/products?type=category&value=shoes' },
+            { id: 8, name: 'Tênis', image: '/clothes/women/new-balance-shoes-female.jpeg', href: `/products?type=category&value=shoes&gender=${genderQueryValue}` },
         ];
 
     return(

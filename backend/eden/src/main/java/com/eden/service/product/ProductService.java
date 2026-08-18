@@ -127,8 +127,16 @@ public class ProductService <T>{
         return ProductMapper.toResponseList(products);
     }
 
-    public List<ProductResponse> getAllProductsByCategory(ProductCategories category){
-        List<Product> products = productRepository.findAllByVariantCategory(category);
+    public List<ProductResponse> getAllProductsByCategory(ProductCategories category, String gender){
+        List<Product> products;
+
+        if (gender != null && !gender.isBlank()) {
+            ProductGender enumGender = resolveGender(gender);
+            products = productRepository.findAllByVariantCategoryAndGender(category, enumGender);
+        } else {
+            products = productRepository.findAllByVariantCategory(category);
+        }
+
         return ProductMapper.toResponseList(products);
     }
 
@@ -256,6 +264,17 @@ public class ProductService <T>{
         if (!hasDefault && !product.getVariants().isEmpty()) {
             product.getVariants().iterator().next().setDefaultVariant(true);
         }
+    }
+
+    private ProductGender resolveGender(String gender) {
+        String normalized = gender.trim().toUpperCase();
+
+        return switch (normalized) {
+            case "MALE", "MASCULINE" -> ProductGender.MASCULINE;
+            case "FEMALE", "FEMININE" -> ProductGender.FEMININE;
+            case "UNISSEX", "UNISEX" -> ProductGender.UNISSEX;
+            default -> throw new IllegalArgumentException("Invalid gender: " + gender);
+        };
     }
 }
 

@@ -57,9 +57,11 @@ public class ProductController {
     }
 
     @GetMapping("/category/{category}")
-    public ResponseEntity<List<ProductResponse>> getAllProductsByCategory(@PathVariable String category){
+    public ResponseEntity<List<ProductResponse>> getAllProductsByCategory(
+            @PathVariable String category,
+            @RequestParam(required = false) String gender){
         ProductCategories enumCategory = ProductCategories.valueOf(category.toUpperCase());
-        return ResponseEntity.ok(productService.getAllProductsByCategory(enumCategory));
+        return ResponseEntity.ok(productService.getAllProductsByCategory(enumCategory, gender));
     }
 
     @GetMapping("/modeling/{modeling}")

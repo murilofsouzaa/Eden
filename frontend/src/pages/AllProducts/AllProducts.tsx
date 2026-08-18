@@ -9,6 +9,7 @@ type ProductVariant = {
     price: number;
     stock: number;
     defaultVariant?: boolean;
+    gender?: string;
 };
 
 type ProductItem = {
@@ -49,12 +50,15 @@ function formatPrice(price: number) {
 function getPageInfo(searchParams: URLSearchParams) {
     const type = (searchParams.get('type') ?? 'all') as FilterType;
     const value = searchParams.get('value') ?? '';
+    const gender = searchParams.get('gender') ?? '';
 
     switch (type) {
         case 'category':
             return {
                 title: categoryLabels[value] ?? value.toUpperCase(),
-                endpoint: `/products/category/${value}`,
+                endpoint: gender
+                    ? `/products/category/${value}?gender=${gender}`
+                    : `/products/category/${value}`,
             };
         case 'modeling':
             return {
@@ -78,6 +82,7 @@ function getPageInfo(searchParams: URLSearchParams) {
 function filterByQuery(products: ProductItem[], searchParams: URLSearchParams) {
     const type = (searchParams.get('type') ?? 'all') as FilterType;
     const value = searchParams.get('value') ?? '';
+    const gender = searchParams.get('gender') ?? '';
 
     if (type === 'modeling') {
         return products.filter((product) => product.modeling?.toLowerCase() === value.toLowerCase());
@@ -89,10 +94,42 @@ function filterByQuery(products: ProductItem[], searchParams: URLSearchParams) {
     }
 
     if (type === 'category') {
-        return products.filter((product) => (product.category ?? '').toLowerCase() === value.toLowerCase());
+        return products.filter((product) => {
+            const matchesCategory = (product.category ?? '').toLowerCase() === value.toLowerCase();
+            let expectedGender = '';
+            const normalizedGender = gender.toLowerCase();
+
+            if (normalizedGender === 'male') {
+                expectedGender = 'masculine';
+            } else if (normalizedGender === 'female') {
+                expectedGender = 'feminine';
+            }
+
+            const matchesGender = expectedGender
+                ? (product.variants ?? []).some((variant) => {
+                    const variantGender = (variant.gender ?? '').toLowerCase();
+                    return variantGender.startsWith(expectedGender);
+                })
+                : true;
+
+            return matchesCategory && matchesGender;
+        });
     }
 
     return products;
+}
+
+function normalizeProductsResponse(data: unknown): ProductItem[] {
+    if (Array.isArray(data)) {
+        return data as ProductItem[];
+    }
+
+    if (typeof data === 'object' && data !== null && 'content' in data) {
+        const content = (data as { content?: unknown }).content;
+        return Array.isArray(content) ? (content as ProductItem[]) : [];
+    }
+
+    return [];
 }
 
 export default function AllProducts() {
@@ -112,16 +149,14 @@ export default function AllProducts() {
             try {
                 const response = await api.get<ProductItem[]>(endpoint);
                 if (isMounted) {
-                    // normalize response to array in case backend/edge returns a wrapper or an error page
-                    const data = response.data as any;
-                    setProducts(Array.isArray(data) ? data : (data?.content ?? []));
+                    const arr = normalizeProductsResponse(response.data);
+                    setProducts(filterByQuery(arr, searchParams));
                 }
             } catch {
                 try {
-                        const fallbackResponse = await api.get<ProductItem[]>('/products');
+                    const fallbackResponse = await api.get<ProductItem[]>('/products');
                     if (isMounted) {
-                        const fallbackData = fallbackResponse.data as any;
-                        const arr = Array.isArray(fallbackData) ? fallbackData : (fallbackData?.content ?? []);
+                        const arr = normalizeProductsResponse(fallbackResponse.data);
                         setProducts(filterByQuery(arr, searchParams));
                     }
                 } catch {

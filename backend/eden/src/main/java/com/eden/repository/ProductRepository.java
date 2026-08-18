@@ -34,6 +34,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAllByVariantCategory(@Param("category") ProductCategories category);
 
     @EntityGraph(attributePaths = {"variants", "images"})
+    @Query("SELECT DISTINCT p FROM Product p JOIN p.variants v WHERE v.category = :category AND v.gender = :gender")
+    List<Product> findAllByVariantCategoryAndGender(@Param("category") ProductCategories category, @Param("gender") ProductGender gender);
+
+    @EntityGraph(attributePaths = {"variants", "images"})
     @Query("SELECT DISTINCT p FROM Product p WHERE LOWER(p.modeling) = LOWER(:modeling)")
     List<Product> findAllByModelingIgnoreCase(@Param("modeling") String modeling);
 
