@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import com.eden.dto.product.CreateProductRequest;
 import com.eden.dto.product.ProductResponse;
 import com.eden.dto.product.ProductVariantResponse;
@@ -29,8 +28,6 @@ import jakarta.validation.Valid;
 //Converte para User
 //O @Valid dispara a validação
 //Se der erro ele sequer entra no método
-
-@CrossOrigin(origins = {"https://edenclothing.vercel.app", "https://eden-927f-hidbs269m-murilofsouzaas-projects.vercel.app"})
 
 @RestController
 @RequestMapping("/api/products")
