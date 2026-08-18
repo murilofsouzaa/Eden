@@ -39,7 +39,7 @@ const Info = () => {
     const products = useProducts();
     const accessories = useAccessories();
 
-    const isAccessoryRoute = pathname.startsWith('/acessories/');
+    const isAccessoryRoute = pathname.startsWith('/accessories/');
     const selectedProduct = !isAccessoryRoute && id
         ? products.find((product: Product) => product.id === Number(id))
         : undefined;

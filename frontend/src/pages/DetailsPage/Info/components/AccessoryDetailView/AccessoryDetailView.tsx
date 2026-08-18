@@ -111,7 +111,7 @@ export default function AccessoryDetailView({
             <DetailSuggestions
                 suggestions={accessorySuggestions}
                 carousel={accessoryCarousel}
-                getHref={(itemId) => `/acessories/${itemId}`}
+                getHref={(itemId) => `/accessories/${itemId}`}
             />
         </>
     );
