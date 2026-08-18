@@ -62,10 +62,6 @@ export function CartProvider({ children }: { readonly children: React.ReactNode 
         } catch {
             setCart(null);
             setItems([]);
-            if (localStorage.getItem('token')) {
-                localStorage.removeItem('token');
-                window.dispatchEvent(new Event('authChanged'));
-            }
         }
     }, []);
 

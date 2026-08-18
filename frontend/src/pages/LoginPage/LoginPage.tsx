@@ -49,7 +49,7 @@ const LoginPage: React.FC = () => {
             });
 
             localStorage.setItem('token', response.data.accessToken);
-            await fetchCart();
+            void fetchCart();
             // notify UI about auth change (Header listens for this event)
             window.dispatchEvent(new Event('authChanged'));
             toast.success('Login efetuado com sucesso!');
