@@ -16,15 +16,21 @@ export function Cart() {
 
     const panel = isOpen ? (
         <Dialog open={isOpen} onClose={cart.toggleCart}>
-            <div className="fixed inset-0 z-10 bg-black/50 backdrop-blur-[0.6px] " />
-            <Dialog.Panel className={`fixed bottom-0 right-0 z-40 h-[85vh] overflow-y-scroll
+            <div
+                className="fixed inset-0 bg-black/50 backdrop-blur-[0.6px]"
+                style={{ zIndex: 60 }}
+            />
+            <Dialog.Panel
+                className={`fixed bottom-0 right-0 h-[85vh] overflow-y-scroll
                 cart-div rounded-xl bg-gray-50 shadow-lg
                 overflow-x-hidden w-full
                 md:rounded-none lg:rounded-none xl:rounded-none
                 md:h-full md:w-[45%] md:right-0 md:top-0
                 lg:h-full lg:w-[33%] lg:right-0 lg:top-0
                 xl:h-full xl:w-[26%] xl:right-0 xl:top-0
-                ${isOpen ? "translate-0 opacity-100" : " translate-x-20 opacity-0"} duration-300 transition-all`}>
+                ${isOpen ? "translate-0 opacity-100" : " translate-x-20 opacity-0"} duration-300 transition-all`}
+                style={{ zIndex: 70 }}
+            >
                 
                 <div className="">
                         <div className="sticky top-0 flex items-center justify-between z-30 px-6 py-4 bg-gray-50 border-b border-b-gray-300 w-full">
@@ -52,7 +58,7 @@ export function Cart() {
                                         <div key={item.id} className="flex justify-center items-start border-b w-auto mt-10  h-50 border-b-black/10">
                                             <img src={product.imageUrl} alt={product.title} className="w-30 h-34"/>
                                             <div className="flex flex-col items-start ml-4 w-full">
-                                                <p className="font-normal text-[16px] font-medium mb-2 w-[80%]">{product.title}</p>
+                                                <p className="font-medium text-[16px] mb-2 w-[80%]">{product.title}</p>
                                                 <p className="text-[16px] text-gray-600 font-medium">{size}</p>
                                                 <div className="flex gap-3 mt-2">
                                                     {hasDifferentPrices ? (
