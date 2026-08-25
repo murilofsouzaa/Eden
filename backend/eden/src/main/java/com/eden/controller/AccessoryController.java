@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.eden.dto.accessory.AccessoryResponse;
@@ -25,7 +26,7 @@ public class AccessoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AccessoryResponse> getAccessoryById(@org.springframework.web.bind.annotation.PathVariable Long id) {
+    public ResponseEntity<AccessoryResponse> getAccessoryById(@PathVariable Long id) {
         return ResponseEntity.ok(accessoryService.getAccessoryById(id));
     }
 }
