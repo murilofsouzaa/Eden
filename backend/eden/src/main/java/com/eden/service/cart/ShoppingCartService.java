@@ -2,146 +2,23 @@ package com.eden.service.cart;
 
 import java.util.List;
 
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Service;
-
 import com.eden.dto.shopping_cart.ShoppingCartResponse;
 import com.eden.dto.shopping_cart.cart_item.AddItemCartRequest;
 import com.eden.dto.shopping_cart.cart_item.ItemCartResponse;
-import com.eden.mapper.ItemCartMapper;
-import com.eden.mapper.ShoppingCartMapper;
-import com.eden.model.product.ProductVariant;
-import com.eden.model.shopping_cart.ItemCart;
 import com.eden.model.shopping_cart.ShoppingCart;
 import com.eden.model.user.User;
-import com.eden.repository.ProductVariantRepository;
-import com.eden.repository.ShoppingCartRepository;
-import com.eden.repository.UserRepository;
 
-import jakarta.transaction.Transactional;
+public interface ShoppingCartService {
 
-@Service
-public class ShoppingCartService {
+    ShoppingCart createCart(User user);
 
-    private final ShoppingCartRepository shoppingCartRepository;
-    private final ProductVariantRepository productVariantRepository;
+    ItemCartResponse addItem(Long cartId, AddItemCartRequest request);
 
-    @Lazy
-    private final UserRepository userRepository;
+    ShoppingCartResponse getCart(Long cartId);
 
-    public ShoppingCartService( ShoppingCartRepository shoppingCartRepository, @Lazy UserRepository userRepository,
-        ProductVariantRepository productVariantRepository){
-        
-        this.shoppingCartRepository = shoppingCartRepository;
-        this.productVariantRepository = productVariantRepository;
-        this.userRepository = userRepository;
-    }
+    ShoppingCartResponse getCartByUsername(String username, Long cartId);
 
-    @Transactional(rollbackOn = Exception.class)
-    public ShoppingCart createCart(User user) {
-        isUserNull(user);
+    ShoppingCartResponse getCartByUserEmail(String email);
 
-        ShoppingCart cart = new ShoppingCart();
-        cart.setUser(user);
-        return shoppingCartRepository.save(cart);
-    }
-
-    @Transactional(rollbackOn = Exception.class)
-    public ItemCartResponse addItem(Long cartId, AddItemCartRequest request) {
-
-        isCartNullOrWithoutId(cartId);
-
-        ShoppingCart cart = shoppingCartRepository.findById(cartId)
-            .orElseThrow(() -> new RuntimeException("Cart not found"));
-
-        ProductVariant variant = productVariantRepository.findById(request.variantId())
-            .orElseThrow(() -> new RuntimeException("Product variant not found"));
-
-        ItemCart existingItem = cart.getItems()
-                .stream()
-                .filter(item -> item.getVariant().getId().equals(variant.getId()))
-                .findFirst()
-                .orElse(null);
-
-        ItemCart item;
-
-        if (existingItem != null) {
-            existingItem.setQuantity(
-                    existingItem.getQuantity() + request.quantity()
-            );
-            item = existingItem;
-
-        } else {
-            item = new ItemCart();
-            item.setCart(cart);
-            item.setVariant(variant);
-            item.setQuantity(request.quantity());
-            item.setUnitPrice(variant.getPrice());
-
-            cart.getItems().add(item);
-        }
-
-        shoppingCartRepository.save(cart);
-
-        return ItemCartMapper.toResponse(item);
-    }
-
-    public ShoppingCartResponse getCart(Long cartId){
-        isCartNullOrWithoutId(cartId);
-
-        ShoppingCart cart = shoppingCartRepository.findShoppingCartById(cartId);
-        return ShoppingCartMapper.toResponse(cart);
-    }
-
-    public ShoppingCartResponse getCartByUsername(String username, Long cartId){
-
-        isCartNullOrWithoutId(cartId);
-        isUsernameIsEmptyOrNull(username);
-
-        User user = userRepository.findUserByName(username);
-        ShoppingCart cart = user.getCart();
-        cart.setId(cartId);
-        cart.setUser(user);
-
-        return ShoppingCartMapper.toResponse(cart);
-    }
-
-    public List<ItemCartResponse> getCartItems(Long cartId){
-        isCartNullOrWithoutId(cartId);
-
-        ShoppingCart cart = shoppingCartRepository.findShoppingCartById(cartId);
-        return cart.getItems()
-                .stream()
-                .map(ItemCartMapper::toResponse)
-                .toList();
-    }
-
-    private Long isCartNullOrWithoutId(Long cartId){
-        if(cartId == null){
-            throw new IllegalArgumentException("Cart ID cannot be null");
-        }else if (cartId.toString().equals("")) {
-            throw new IllegalArgumentException("The Id cannot be empty");
-        }
-        else{
-            return cartId;
-        }
-    }
-
-    private String isUsernameIsEmptyOrNull(String username){
-        if(username == null){
-            throw new IllegalArgumentException("The username cannot be null");
-        }else if(username.equals("")){
-            throw new IllegalArgumentException("The username cannot be empty");
-        }else{
-            return username;
-        }
-    }
-
-    private User isUserNull(User user){
-        if(user == null){
-            throw new IllegalArgumentException("The user cannot be null");
-        }else{
-            return user;
-        }
-    }
+    List<ItemCartResponse> getCartItems(Long cartId);
 }
