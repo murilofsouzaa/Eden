@@ -93,8 +93,6 @@ public class OrderServiceImpl implements OrderService {
         order.setCreatedAt(LocalDateTime.now());
         order.setShoppingCart(shoppingCart);
 
-        orderRepository.save(order);
-
         List<OrderItem> orderItems = new ArrayList<>();
         for (ItemCart cartItem : shoppingCart.getItems()) {
             OrderItem orderItem = new OrderItem();

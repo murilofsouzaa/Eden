@@ -90,7 +90,11 @@ public class ProductServiceTest {
                 "Oversized",
                 "300g",
                 "100% Cotton",
+                0,
                 null,
+                List.of("http://example.com/image.jpg"),
+                ProductCategories.T_SHIRTS,
+                ProductGender.UNISSEX,
                 List.of(variantReq)
         );
 
@@ -113,7 +117,11 @@ public class ProductServiceTest {
                 "Modeling",
                 "Weight",
                 "Material",
+                0,
                 null,
+                List.of(),
+                ProductCategories.T_SHIRTS,
+                ProductGender.UNISSEX,
                 List.of()
         );
 
@@ -149,6 +157,8 @@ public class ProductServiceTest {
                 null,
                 null,
                 null,
+                null,
+                0,
                 null,
                 null,
                 null

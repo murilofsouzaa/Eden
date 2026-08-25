@@ -20,7 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.eden.dto.order.CreateOrderRequest;
 import com.eden.dto.order.OrderResponse;
-import com.eden.dto.order.order_address.OrderAddressRequest;
+import com.eden.dto.order.order_address.OrderAddressResponse;
 import com.eden.exception.BusinessException;
 import com.eden.exception.ResourceNotFoundException;
 import com.eden.model.order.Order;
@@ -99,7 +99,8 @@ public class OrderServiceTest {
         testCart = new ShoppingCart();
         testCart.setId(20L);
         testCart.setUser(testUser);
-        ItemCart cartItem = new ItemCart(1L, testCart, variant, 2, BigDecimal.valueOf(80.00));
+        ItemCart cartItem = new ItemCart(testCart, variant, 2, BigDecimal.valueOf(80.00));
+        cartItem.setId(1L);
         testCart.getItems().add(cartItem);
     }
 
@@ -127,10 +128,10 @@ public class OrderServiceTest {
         when(shoppingCartRepository.findById(20L)).thenReturn(Optional.of(testCart));
         when(orderRepository.save(any(Order.class))).thenReturn(testOrder);
 
-        OrderAddressRequest addressRequest = new OrderAddressRequest(
+        OrderAddressResponse addressResponse = new OrderAddressResponse(
                 "Main St", 123, "Downtown", "Metropolis", "NY", "USA", "10001"
         );
-        CreateOrderRequest request = new CreateOrderRequest(1L, addressRequest, 20L);
+        CreateOrderRequest request = new CreateOrderRequest(1L, 20L, addressResponse, LocalDateTime.now());
 
         OrderResponse response = orderService.createOrder(request);
 
