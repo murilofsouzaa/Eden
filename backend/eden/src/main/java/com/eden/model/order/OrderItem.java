@@ -87,6 +87,14 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
     public BigDecimal getUnit_price() {
         return unitPrice;
     }

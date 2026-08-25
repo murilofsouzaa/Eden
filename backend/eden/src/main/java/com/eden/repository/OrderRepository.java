@@ -6,17 +6,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query("SELECT o FROM Order o JOIN o.items i WHERE i.id = :itemId")
-    Order findOrderByItemId(@Param("itemId") Long itemId);
+    Optional<Order> findOrderByItemId(@Param("itemId") Long itemId);
 
-    @Query("SELECT o FROM Order o JOIN o.items i WHERE i.id = :addressId")
-    Order findOrderByAddressId(@Param("addressId") Long addressId);
+    @Query("SELECT o FROM Order o WHERE o.orderAddress.id = :addressId")
+    Optional<Order> findOrderByAddressId(@Param("addressId") Long addressId);
 
-    @Query("SELECT o FROM OrderAddress o WHERE o.number = :number")
-    Order findOrderByAddressNumber(@Param("number") int number);
-
-
+    @Query("SELECT o FROM Order o WHERE o.orderAddress.number = :number")
+    Optional<Order> findOrderByAddressNumber(@Param("number") int number);
 }
