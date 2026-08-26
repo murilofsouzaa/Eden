@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.eden.dto.user.CreateUserRequest;
 import com.eden.dto.user.UpdateUserRequest;
 import com.eden.dto.user.UserResponse;
+import com.eden.exception.BusinessException;
 import com.eden.exception.ResourceNotFoundException;
 import com.eden.mapper.UserMapper;
 import com.eden.model.shopping_cart.ShoppingCart;
@@ -41,10 +42,27 @@ public class UserServiceImpl implements UserService {
         if (userRequest == null) {
             throw new IllegalArgumentException("CreateUserRequest cannot be null");
         }
+        if (userRequest.name() == null || userRequest.name().isBlank()) {
+            throw new IllegalArgumentException("Name cannot be empty or null");
+        }
+        if (userRequest.email() == null || userRequest.email().isBlank()) {
+            throw new IllegalArgumentException("Email cannot be empty or null");
+        }
+        if (userRequest.password() == null || userRequest.password().isBlank()) {
+            throw new IllegalArgumentException("Password cannot be empty or null");
+        }
+        if (userRequest.birthDay() == null) {
+            throw new IllegalArgumentException("BirthDay cannot be null");
+        }
+
+        String normalizedEmail = userRequest.email().trim().toLowerCase();
+        if (userRepository.findByEmail(normalizedEmail).isPresent()) {
+            throw new BusinessException("User already exists with email: " + normalizedEmail);
+        }
 
         User newUser = new User();
-        newUser.setName(userRequest.name());
-        newUser.setEmail(userRequest.email());
+        newUser.setName(userRequest.name().trim());
+        newUser.setEmail(normalizedEmail);
         newUser.setGender(userRequest.gender() != null ? userRequest.gender() : Gender.OTHER);
         newUser.setBirthDay(userRequest.birthDay());
 

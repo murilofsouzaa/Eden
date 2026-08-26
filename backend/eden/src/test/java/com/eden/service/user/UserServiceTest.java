@@ -68,6 +68,7 @@ public class UserServiceTest {
                 UserRole.USER
         );
 
+        when(userRepository.findByEmail("john@example.com")).thenReturn(Optional.empty());
         when(passwordEncoder.encode("secret123")).thenReturn("encodedPassword");
         when(userRepository.save(any(User.class))).thenReturn(testUser);
         when(shoppingCartService.createCart(any(User.class))).thenReturn(new ShoppingCart());

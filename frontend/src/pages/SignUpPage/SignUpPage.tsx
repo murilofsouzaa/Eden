@@ -35,10 +35,15 @@ const SignUpPage = () => {
             return;
         }
 
+        const year = birthDate.getFullYear();
+        const month = String(birthDate.getMonth() + 1).padStart(2, '0');
+        const day = String(birthDate.getDate()).padStart(2, '0');
+        const birthDayStr = `${year}-${month}-${day}`;
+
         const payload = {
             name: `${form.name} ${form.lastName}`.trim(),
-            birthDay: birthDate.toISOString().slice(0,10),
-            email: form.email,
+            birthDay: birthDayStr,
+            email: form.email.trim(),
             password: form.password
         };
 
