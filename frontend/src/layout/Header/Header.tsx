@@ -157,7 +157,7 @@ export function Header(){
                                 <li><Link to='/'>Mulheres</Link></li>
                                 <li><Link to='/'>Homens</Link></li>
                                 <li><Link to='/'>Acessórios</Link></li>
-                                <li><Link to=''>Explorar</Link></li>
+                                <li><Link to='/products'>Explorar</Link></li>
                             </ul>
 
                             <div className="justify-self-center">
