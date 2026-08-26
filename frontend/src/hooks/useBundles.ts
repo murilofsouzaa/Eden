@@ -18,7 +18,7 @@ export function useBundles(products: Product[]): UseBundlesReturn {
     const [bundles, setBundles] = useState<Bundle[]>([]);
 
     useEffect(() => {
-        api.get<Bundle[]>('/api/bundles')
+        api.get<Bundle[]>('/bundles')
             .then((response) => {
                 setBundles(response.data);
             })

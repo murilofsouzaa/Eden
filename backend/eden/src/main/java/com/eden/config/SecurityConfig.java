@@ -19,6 +19,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.eden.service.security.CustomUserDetailsService;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -50,6 +52,15 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable()) 
             .cors(Customizer.withDefaults())
+            .httpBasic(httpBasic -> httpBasic.disable())
+            .formLogin(formLogin -> formLogin.disable())
+            .exceptionHandling(exceptions -> exceptions
+                .authenticationEntryPoint((request, response, authException) -> {
+                    response.setContentType("application/json;charset=UTF-8");
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    response.getWriter().write("{\"status\":401,\"error\":\"Unauthorized\",\"message\":\"Authentication required\",\"path\":\"" + request.getRequestURI() + "\"}");
+                })
+            )
             
             .authorizeHttpRequests(auth -> auth
             .requestMatchers(
@@ -62,9 +73,14 @@ public class SecurityConfig {
                 "/api/acessories", "/api/acessories/**",
                 "/accessories", "/accessories/**", 
                 "/api/accessories/**",
+
+                // Rotas de bundles / sets
+                "/bundles", "/bundles/**",
+                "/api/bundles", "/api/bundles/**",
                 
                 // Autenticação e usuários
-                "/api/auth/**", 
+                "/auth/**", "/api/auth/**", 
+                "/users", "/users/**",
                 "/api/users", "/api/users/**"
             ).permitAll()
             
